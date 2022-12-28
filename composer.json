@@ -1,0 +1,48 @@
+{
+    "name": "laraxot/module_ui",
+    "description": "",
+    "authors": [{
+        "name": "Marco Xot",
+        "email": "marco.sottana@gmail.com"
+    }],
+    "require": {
+        "laraxot/module_xot": "dev-master",
+        "laravelcollective/html": "^6.3"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\UI\\Providers\\UIServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\UI\\": ""
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php vendor/bin/testbench package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate"
+        ],
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "./vendor/bin/pest --no-coverage",
+        "test-coverage": "vendor/bin/pest --coverage-html coverage",
+        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true,
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
