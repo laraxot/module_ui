@@ -396,7 +396,7 @@ class ThemeService {
             }
         )->all();
 
-        return view()->make('theme::services.style')->with('styles', $styles);
+        return view()->make('ui::services.style')->with('styles', $styles);
     }
 
     /**
