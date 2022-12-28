@@ -5,25 +5,25 @@ declare(strict_types=1);
 namespace Modules\UI\Services;
 
 use Exception;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Modules\Xot\Traits\Getter;
-use Modules\UI\Datas\FieldData;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
-use Modules\Xot\Services\FileService;
-use Modules\Xot\Services\StubService;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
+use Modules\Cms\Contracts\PanelContract;
 use Modules\Cms\Services\PanelService;
 use Modules\Cms\Services\RouteService;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Request;
-use Modules\Cms\Contracts\PanelContract;
-use Modules\Xot\Services\ArtisanService;
 use Modules\Tenant\Services\TenantService;
-use Illuminate\Contracts\Support\Renderable;
+use Modules\UI\Datas\FieldData;
+use Modules\Xot\Services\ArtisanService;
+use Modules\Xot\Services\FileService;
+use Modules\Xot\Services\StubService;
+use Modules\Xot\Traits\Getter;
 
 // ---------CSS------------
 
@@ -406,7 +406,7 @@ class ThemeService {
         /**
          * @phpstan-var view-string
          */
-        $view = 'theme::metatags';
+        $view = 'ui::metatags';
 
         return (string) view($view)->render();
     }
@@ -888,7 +888,7 @@ class ThemeService {
             'items' => $items,
             'last_item' => last($items),
             'routename' => $routename,
-            //'page' => new Objects\PageObject(), deprecated
+            // 'page' => new Objects\PageObject(), deprecated
             'modal' => $modal,
         ];
 
@@ -1131,8 +1131,8 @@ class ThemeService {
         return $panel;
     }
 
-    public static function inputFreeze(FieldData $field,Model $row): Renderable {
-        return FormService::inputFreeze($field,$row);
+    public static function inputFreeze(FieldData $field, Model $row): Renderable {
+        return FormService::inputFreeze($field, $row);
     }
 
     /**
