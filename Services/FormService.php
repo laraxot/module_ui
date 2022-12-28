@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace Modules\UI\Services;
 
+use Collective\Html\FormFacade as Form;
 use Exception;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
+// ---- services ---
+use Illuminate\Database\Eloquent\Relations\MorphOneOrMany;
+use Illuminate\Database\Eloquent\Relations\MorphPivot;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Modules\UI\Datas\FieldData;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
-// ---- services ---
+use Illuminate\Support\Str;
 use Modules\Cms\Services\RouteService;
-use Collective\Html\FormFacade as Form;
-use Illuminate\Database\Eloquent\Model;
-use Modules\Xot\Services\PolicyService;
-use Modules\UI\Contracts\FieldContract;
-use Illuminate\Contracts\Support\Renderable;
 use Modules\UI\Actions\GetCollectiveComponents;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphPivot;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Database\Eloquent\Relations\MorphOneOrMany;
+use Modules\UI\Contracts\FieldContract;
+use Modules\UI\Datas\FieldData;
+use Modules\Xot\Services\PolicyService;
 
 /**
  * Class FormService.
@@ -46,7 +46,6 @@ class FormService {
     thus the element cannot be edited. If persistant freeze is set,
     then hidden field containing the element value will be output, too.
     */
-
 
     /**
      * @param BelongsTo|HasManyThrough|HasOneOrMany|BelongsToMany|MorphOneOrMany|MorphPivot|MorphTo|MorphToMany $rows
@@ -73,43 +72,39 @@ class FormService {
         return $fields_exclude;
     }
 
-    public static function getCollectiveComponents():array{
+    public static function getCollectiveComponents(): array {
         $view_path = __DIR__.'/../Resources/views/collective/fields';
         $prefix = 'theme::';
 
         return app(GetCollectiveComponents::class)->execute($view_path, $prefix);
     }
 
-   
     public static function inputFreeze(FieldData $field, Model $row): Renderable {
-        
-
         $field->name_dot = bracketsToDotted($field->name);
 
-        //if (\in_array('value', array_keys($params), true)) {
+        // if (\in_array('value', array_keys($params), true)) {
         //    $field->value = $params['value'];
-        //} else {
-            try {
-                $field->value = Arr::get($row, $field->name_dot);
-                if (null === $field->value) {
-                    $field->value = Arr::get((array) $row, $field->name_dot);
-                }
-                // $field->value = $row->{$field->name_dot};
-                // $field->value = 'test['.$field->name_dot.']'.Arr::get($row, 'nome_diri');
-            } catch (\Exception $e) {
-                $field->value = '---['.$field->name_dot.']['.$e->getMessage().']['.__LINE__.'-'.basename(__FILE__).']['.$row->{$field->name_dot}.']--';
+        // } else {
+        try {
+            $field->value = Arr::get($row, $field->name_dot);
+            if (null === $field->value) {
+                $field->value = Arr::get((array) $row, $field->name_dot);
             }
-        //}
+            // $field->value = $row->{$field->name_dot};
+            // $field->value = 'test['.$field->name_dot.']'.Arr::get($row, 'nome_diri');
+        } catch (\Exception $e) {
+            $field->value = '---['.$field->name_dot.']['.$e->getMessage().']['.__LINE__.'-'.basename(__FILE__).']['.$row->{$field->name_dot}.']--';
+        }
+        // }
 
         // return '['.__LINE__.__FILE__.']';
 
-        //if (isset($label)) {
+        // if (isset($label)) {
         //    $field->label = $label;
-        //}
+        // }
 
         $tmp = Str::snake($field->type);
 
-        
         /**
          * --- da fare contratto etc etc (interface).
          *
@@ -127,6 +122,9 @@ class FormService {
             return view()->make('theme::components.alert.error', ['msg' => $msg]);
         }
 
+        /**
+         * @phpstan-var view-string
+         */
         $view = Str::beforeLast((string) $comp_field->view, '.field').'.freeze';
         if (! View::exists($view)) {
             return view()->make('theme::components.alert.error', ['msg' => '['.$view.'] NOT EXISTS !!']);
@@ -189,9 +187,9 @@ class FormService {
                 // dddx($rows);
                 $pivot_class = $rows->getPivotClass();
                 if (! Str::startsWith($pivot_class, 'Modules\\')) {
-                    $get_related_class=get_class($rows->getRelated());
-                    if($get_related_class==false){
-                        throw new Exception('['.__LINE__.']['.__FILE__.']');
+                    $get_related_class = get_class($rows->getRelated());
+                    if (false == $get_related_class) {
+                        throw new \Exception('['.__LINE__.']['.__FILE__.']');
                     }
                     $pivot1 = implode('\\', \array_slice(explode('\\', $get_related_class), 0, -1)).'\\';
                     $pivot1 .= Str::studly(Str::singular($rows->getTable()));

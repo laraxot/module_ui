@@ -1,1 +1,1 @@
-[{"class_name":"FlashMessage","comp_name":"flash-message","comp_ns":"Modules\\UI\\View\\Components\\FlashMessage"}]
+[{"class_name":"FlashMessage","comp_name":"flash-message","comp_ns":"Modules\\UI\\View\\Components\\FlashMessage"},{"class_name":"Input","comp_name":"input","comp_ns":"Modules\\UI\\View\\Components\\Input"},{"class_name":"Input\\Group","comp_name":"input.group","comp_ns":"Modules\\UI\\View\\Components\\Input\\Group"},{"class_name":"Input\\Label","comp_name":"input.label","comp_ns":"Modules\\UI\\View\\Components\\Input\\Label"}]

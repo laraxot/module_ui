@@ -62,17 +62,12 @@ class Menu extends Model {
         return self::where('name', '=', $name)->first();
     }
 
-    /**
-     * Undocumented function.
-     *
-     * @return HasMany<MenuItem>
-     */
-    public function items(): HasMany {
-        return $this->hasMany(MenuItem::class, 'menu')
-            ->with('child')
-            ->where(function ($query) {
-                $query->where('parent', 0)->orWhere('parent', null);
-            })
-            ->orderBy('sort', 'ASC');
-    }
+    // public function items(): HasMany {
+    //     return $this->hasMany(MenuItem::class, 'menu')
+    //         ->with('child')
+    //         ->where(function ($query) {
+    //             $query->where('parent', 0)->orWhere('parent', null);
+    //         })
+    //         ->orderBy('sort', 'ASC');
+    // }
 }
