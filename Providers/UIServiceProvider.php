@@ -4,24 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\UI\Providers;
 
-use Exception;
 // ---- bases ----
-use Modules\Xot\Datas\XotData;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Pagination\Paginator;
 // --- services ---
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\View;
-use Modules\UI\Services\ThemeService;
-use Modules\Xot\Services\FileService;
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Config;
-use Modules\Xot\Services\BladeService;
+use Illuminate\Support\Facades\File;
 use Modules\Tenant\Services\TenantService;
-
-use Modules\UI\Actions\RegisterCollectiveMacros;
-use Modules\UI\Http\View\Composers\ThemeComposer;
-use Modules\Xot\Providers\XotBaseServiceProvider;
 use Modules\UI\Actions\RegisterCollectiveComponents;
+use Modules\UI\Actions\RegisterCollectiveMacros;
+use Modules\UI\Services\ThemeService;
+use Modules\Xot\Datas\XotData;
+use Modules\Xot\Providers\XotBaseServiceProvider;
+use Modules\Xot\Services\BladeService;
+use Modules\Xot\Services\FileService;
 
 /**
  * Class UIServiceProvider.
@@ -46,8 +42,6 @@ class UIServiceProvider extends XotBaseServiceProvider {
      * Undocumented function.
      */
     public function bootCallback(): void {
-       
-        
         $this->xot = XotData::from(config('xra'));
 
         $this->commands(
@@ -56,18 +50,14 @@ class UIServiceProvider extends XotBaseServiceProvider {
             ]
         );
 
-        
-
-        BladeService::registerComponents($this->module_dir.'/../View/Components', 'Modules\\Theme');
+        BladeService::registerComponents($this->module_dir.'/../View/Components', 'Modules\\UI');
 
         $this->registerCollective();
-
 
         Paginator::useBootstrap();
     }
 
     public function registerCollective(): void {
-       
         app(RegisterCollectiveComponents::class)->execute(
             $this->module_dir.'/../Resources/views/collective/fields',
             $this->module_name.'::'
@@ -82,8 +72,8 @@ class UIServiceProvider extends XotBaseServiceProvider {
      * @return void
      */
     public function bootThemeProvider(string $theme_type) {
-        //$xot = $this->getXot();
-        
+        // $xot = $this->getXot();
+
         $theme = $this->xot->{$theme_type};
         /*
         if (! File::exists(base_path('Themes/'.$theme))) {
@@ -94,7 +84,7 @@ class UIServiceProvider extends XotBaseServiceProvider {
         */
         $provider = 'Themes\\'.$theme.'\Providers\\'.$theme.'ServiceProvider';
         if (! class_exists($provider)) {
-            throw new Exception('class not exists ['.$provider.']['.__LINE__.']['.basename(__FILE__).']');
+            throw new \Exception('class not exists ['.$provider.']['.__LINE__.']['.basename(__FILE__).']');
         }
 
         $provider = new $provider();
@@ -110,8 +100,6 @@ class UIServiceProvider extends XotBaseServiceProvider {
      * @return void
      */
     public function registerNamespaces(string $theme_type) {
-       
-
         $theme = $this->xot->{$theme_type};
 
         $resource_path = 'Themes/'.$theme.'/Resources';
@@ -124,7 +112,6 @@ class UIServiceProvider extends XotBaseServiceProvider {
     }
 
     public function registerThemeConfig(string $theme_type): void {
-        
         $theme = $this->xot->{$theme_type};
 
         $config_path = base_path('Themes/'.$theme.'/Config');
@@ -147,6 +134,4 @@ class UIServiceProvider extends XotBaseServiceProvider {
         $loader = AliasLoader::getInstance();
         $loader->alias('Theme', 'Modules\UI\Services\ThemeService');
     }
-
-    
 }
