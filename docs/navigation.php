@@ -52,6 +52,7 @@ return [
     'Componenti Blade' => [
         'url' => 'docs/blade-components',
         'children' => [
+            'Flash Message' => 'docs/blade_components/flashmessage',
             'Accordion' => 'docs/blade_components/accordion',
             'Card' => 'docs/blade_components/card',
             'Button' => 'docs/blade_components/button',

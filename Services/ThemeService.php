@@ -351,7 +351,7 @@ class ThemeService {
         /**
          * @phpstan-var view-string
          */
-        $view = 'theme::services.script';
+        $view = 'ui::services.script';
 
         $view_params = [
             'view' => $view,
