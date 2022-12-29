@@ -6,17 +6,22 @@ namespace Modules\UI\View\Components;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
+use Modules\UI\Services\ThemeService;
 
 /**
- * Class Logout.
+ * Class Hero.
  */
-class Logout extends Component {
+class Hero extends Component {
+    public string $type;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct(?string $type = 'hero') {
+        $this->type = $type;
+        // ThemeService::make()->add('theme::View/Components/Card/rows.scss');
     }
 
     /**
@@ -26,9 +31,10 @@ class Logout extends Component {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.logout';
-
-        $view_params = [];
+        $view = 'ui::components.hero.'.$this->type;
+        $view_params = [
+            'view' => $view,
+        ];
 
         return view()->make($view, $view_params);
     }
