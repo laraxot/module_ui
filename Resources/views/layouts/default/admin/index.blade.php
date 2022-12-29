@@ -2,14 +2,14 @@
 @section('content')
     {!! $_panel->indexNav() !!}
     {!! Theme::include('inner_page', [], get_defined_vars()) !!}
-    @component('ui::components.crud', get_defined_vars())
+    @component('theme::components.crud', get_defined_vars())
         @slot('content')
             {!! Theme::include('topbar', [], get_defined_vars()) !!}
             @php
-                $fields = $_panel->getFields(['act' => 'index']);
+            $fields = $_panel->getFields(['act' => 'index']);
             @endphp
             <x-pagination :rows="$rows" />
-            <x-ui::component type="table">
+            <x-theme::component type="table">
                 @foreach ($rows as $row)
                     @php
                         $row_panel = $_panel->newPanel($row);
@@ -28,7 +28,7 @@
                     <tr>
                         @foreach ($row_panel->getFields(['act' => 'index']) as $field)
                             <td>
-                                {!! Theme::inputFreeze($field,$row) !!}
+                                {!! Theme::inputFreeze(['row' => $row, 'field' => $field]) !!}
                                 @if ($loop->first)
                                     @if ($row_panel->itemActions()->count() > 5)
                                         <div class="dropdown">
@@ -58,7 +58,7 @@
                         </x-slot>
                     @endif
                 @endforeach
-            </x-ui::component>
+            </x-theme::component>
 
             <x-pagination :rows="$rows" />
             {{-- @if (view()->exists('adm_theme::layouts.partials.pagination'))

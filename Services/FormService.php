@@ -74,7 +74,7 @@ class FormService {
 
     public static function getCollectiveComponents(): array {
         $view_path = __DIR__.'/../Resources/views/collective/fields';
-        $prefix = 'theme::';
+        $prefix = 'ui::';
 
         return app(GetCollectiveComponents::class)->execute($view_path, $prefix);
     }
@@ -116,6 +116,7 @@ class FormService {
                 return $item->name === 'bs'.$field->type;
             }
         );
+        
         if (null === $comp_field) {
             $msg = 'not registered component [bs'.$field->type.']';
 
@@ -127,7 +128,7 @@ class FormService {
          */
         $view = Str::beforeLast((string) $comp_field->view, '.field').'.freeze';
         if (! View::exists($view)) {
-            return view()->make('ui::components.alert.error', ['msg' => '['.$view.'] NOT EXISTS !!']);
+            return view('ui::components.alert.error', ['msg' => '['.$view.'] NOT EXISTS !!!']);
         }
 
         $view_params = [];

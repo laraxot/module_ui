@@ -3,6 +3,7 @@
 namespace Modules\UI\Datas;
 
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\DataCollection;
 
 class FieldData extends Data {
     public string $name;
@@ -18,4 +19,9 @@ class FieldData extends Data {
      * @phpstan-var view-string
      */
     public string $view;
+
+    /** 
+     * @var DataCollection<FieldData> 
+     */
+    public DataCollection $fields;
 }

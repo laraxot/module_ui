@@ -1,0 +1,1 @@
+@include('theme::layouts.partials.breadcrumb')
