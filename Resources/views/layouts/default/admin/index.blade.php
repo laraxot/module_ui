@@ -28,7 +28,7 @@
                     <tr>
                         @foreach ($row_panel->getFields(['act' => 'index']) as $field)
                             <td>
-                                {!! Theme::inputFreeze(['row' => $row, 'field' => $field]) !!}
+                                {!! Theme::inputFreeze($field,$row) !!}
                                 @if ($loop->first)
                                     @if ($row_panel->itemActions()->count() > 5)
                                         <div class="dropdown">
