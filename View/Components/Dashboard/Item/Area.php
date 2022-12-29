@@ -31,25 +31,15 @@ class Area extends Component {
      * Undocumented function.
      */
     public function render(): Renderable {
-        /*
-        try {
-            $module = Module::find($this->area->area_define_name);
-        } catch (Exception $e) {
-            dddx($e);
-        }
-        */
-        /**
-         * @phpstan-var view-string
-         */
         $area_define_name = $this->area->area_define_name;
 
         $ns = strtolower($area_define_name);
-        // $view = 'theme::components.dashboard.item.area';
+        
         /**
          * @phpstan-var view-string
          */
         $view = $ns.'::admin.dashboard.item';
-        FileService::viewCopy('ui::layouts.default.admin.dashboard.item', $view);
+        FileService::viewCopy('ui::admin.dashboard.item', $view);
 
         $view_params = [
             'view' => $view,
