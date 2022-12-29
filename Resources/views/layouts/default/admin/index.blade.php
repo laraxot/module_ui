@@ -2,7 +2,7 @@
 @section('content')
     {!! $_panel->indexNav() !!}
     {!! Theme::include('inner_page', [], get_defined_vars()) !!}
-    @component('theme::components.crud', get_defined_vars())
+    @component('ui::components.crud', get_defined_vars())
         @slot('content')
             {!! Theme::include('topbar', [], get_defined_vars()) !!}
             @php
