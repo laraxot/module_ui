@@ -2,7 +2,9 @@
 	$fields=$attributes['fields'];
 	$model=Form::getModel();
 	$disabled=isset($attributes['disabled'])?'disabled':'';
+	/*
 	$fields=collect($fields)->filter(function($item) {
+		dddx($item);
 		if(!isset($item->except)) $item->except=[];
 		return (
 			//!in_array($item->type,['Password']) &&
@@ -10,6 +12,7 @@
 			//&& !in_array($item->name,$excepts)
 		);
 	})->all();
+	*/
 	if($disabled){
 		$fields=collect($fields)->map(function($item){
 			if(!isset($item->attributes)) $item->attributes=[];
@@ -24,7 +27,7 @@
     <legend class="col-form-label col-sm-2 pt-0 w-auto"><h4>{{ $name }}</h4></legend>
 	<div class="row">
     @foreach($fields as $k=>$field)
-    	{!! Theme::inputHtml(['row'=>$model,'field'=>$field]) !!}
+    	{!! Theme::inputHtml($field,$model) !!}
     @endforeach
 	</div>
 </fieldset>

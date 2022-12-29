@@ -27,12 +27,14 @@ $test=route('admin.item.update',$parz);
         @slot('content')
             {{--!! Theme::include('topbar', [], get_defined_vars()) !!--}}
             <x-include-view view="topbar" />
-            <x-theme::alerts.error :errors="$errors" />
-            {{-- <x-theme::forms.panel :panel="$_panel" action="update"> --}}
+            {{--
+            <x-alerts.error :errors="$errors" />
+            --}}
+            {{-- <x-forms.panel :panel="$_panel" action="update"> --}}
             {!! Form::bsOpenPanel($_panel, 'update') !!}
             <div class="row">
                 @foreach ($fields as $field)
-                    {!! Theme::inputHtml(['row' => $row, 'field' => $field]) !!}
+                    {!! Theme::inputHtml($field,$row) !!}
                 @endforeach
             </div>
             {{--
@@ -40,7 +42,7 @@ $test=route('admin.item.update',$parz);
             --}}
             {{ Form::bsSubmit('Modifica') }}
             {!! Form::close() !!}
-            {{-- </x-theme::forms.panel> --}}
+            {{-- </x-forms.panel> --}}
         @endslot
     @endcomponent
 @endsection

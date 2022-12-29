@@ -7,7 +7,7 @@ $fields = $_panel->getFields(['act' => 'create']);
 {!! Form::bsOpenPanel($_panel, 'store') !!}
 <div class="row">
     @foreach ($fields as $field)
-        {!! Theme::inputHtml(['row' => $row, 'field' => $field]) !!}
+        {!! Theme::inputHtml($field,$row) !!}
     @endforeach
 </div>
 {{ Form::bsSubmit('Save') }}

@@ -18,6 +18,7 @@ class RegisterCollectiveMacros {
 
     public function execute(string $macros_dir):void {
         $files = glob($macros_dir.'/*.php');
+        //dddx(['dir'=>$macros_dir,'files'=>$files]);
         if (false === $files) {
             $files = [];
         }
@@ -36,7 +37,7 @@ class RegisterCollectiveMacros {
             )
             ->each(
                 function ($macro, $path): void {
-                    $class = '\\Modules\\Theme\\Macros\\'.$macro;
+                    $class = '\\Modules\\UI\\Macros\\'.$macro;
                     if ('BaseFormBtnMacro' !== $macro && \is_string($macro)) {
                         Form::macro('bs'.Str::studly($macro), app($class)());
                     }

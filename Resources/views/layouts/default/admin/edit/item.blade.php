@@ -9,7 +9,7 @@ $fields = $_panel->getFields(['act' => 'edit']);
 {!! Form::bsOpenPanel($_panel, 'update') !!}
 <div class="row">
     @foreach ($fields as $field)
-        {!! Theme::inputHtml(['row' => $row, 'field' => $field]) !!}
+        {!! Theme::inputHtml($field,$row) !!}
     @endforeach
 </div>
 

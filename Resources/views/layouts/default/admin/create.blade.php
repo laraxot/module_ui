@@ -13,11 +13,13 @@ $fields = $_panel->getFields(['act' => 'edit']);
             <x-include-view view="topbar" />
             {{-- prima di rimettere sto schifo spiegatemelo
             <h1>Crea {{ $_panel_name }}</h1> --}}
-            <x-theme::alerts.error :errors="$errors" />
+            {{--
+            <x-alerts.error :errors="$errors" />
+            --}}
             {!! Form::bsOpenPanel($_panel, 'store') !!}
             <div class="row">
                 @foreach ($fields as $field)
-                    {!! Theme::inputHtml(['row' => $row, 'field' => $field]) !!}
+                    {!! Theme::inputHtml($field,$row) !!}
                 @endforeach
             </div>
             {{ Form::bsSubmit('Salva') }}

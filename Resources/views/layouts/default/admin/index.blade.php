@@ -9,7 +9,7 @@
             $fields = $_panel->getFields(['act' => 'index']);
             @endphp
             <x-pagination :rows="$rows" />
-            <x-theme::component type="table">
+            <x-component type="table">
                 @foreach ($rows as $row)
                     @php
                         $row_panel = $_panel->newPanel($row);
@@ -58,7 +58,7 @@
                         </x-slot>
                     @endif
                 @endforeach
-            </x-theme::component>
+            </x-component>
 
             <x-pagination :rows="$rows" />
             {{-- @if (view()->exists('adm_theme::layouts.partials.pagination'))

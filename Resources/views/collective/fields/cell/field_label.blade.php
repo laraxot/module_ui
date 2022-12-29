@@ -32,7 +32,7 @@ if ($disabled) {
     </legend>
     <div class="row">
         @foreach ($fields as $k => $field)
-            {!! Theme::inputHtml(['row' => $model, 'field' => $field]) !!}
+            {!! Theme::inputHtml($field,$model) !!}
         @endforeach
     </div>
 </fieldset>

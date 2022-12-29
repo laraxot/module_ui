@@ -1140,8 +1140,8 @@ class ThemeService {
      *
      * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Support\HtmlString
      */
-    public static function inputHtml(array $params) {
-        return FormService::inputHtml($params);
+    public static function inputHtml(FieldData $field,Model $row) {
+        return FormService::inputHtml($field,$row);
     }
 
     public static function getAdminJsonMenu(): void {

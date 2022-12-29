@@ -21,5 +21,5 @@
         </form>
     </div>
     {{-- qui volevo usare il componente, o meglio ancora il componente livewire --}}
-    {{-- <x-theme::lis.logoutclass="dropdown-item">Logout</x-theme::lis.logout> --}}
+    {{-- <x-lis.logoutclass="dropdown-item">Logout</x-lis.logout> --}}
 </li>

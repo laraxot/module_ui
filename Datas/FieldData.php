@@ -7,21 +7,21 @@ use Spatie\LaravelData\DataCollection;
 
 class FieldData extends Data {
     public string $name;
-    public string $label;
-    public string $name_dot;
+    public ?string $label=null;
+    public ?string $name_dot=null;
     public string $type;
-    public array $rules;
+    public array $rules=[];
     public mixed $value;
     
     public ?string $method=null;
 
     /**
-     * @phpstan-var view-string
+     * @phpstan-var view-string|null
      */
-    public string $view;
+    public ?string $view=null;
 
     /** 
      * @var DataCollection<FieldData> 
      */
-    public DataCollection $fields;
+    public ?DataCollection $fields;
 }

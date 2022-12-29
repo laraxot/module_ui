@@ -35,7 +35,7 @@ if ($disabled) {
     {{-- <div class="card card-body"> --}}
 
     @foreach ($fields as $k => $field)
-        {!! Theme::inputHtml(['row' => $model, 'field' => $field]) !!}
+        {!! Theme::inputHtml($field,$model) !!}
     @endforeach
     {{-- </div> --}}
 </div>

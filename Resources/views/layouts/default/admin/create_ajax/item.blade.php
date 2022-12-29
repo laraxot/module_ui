@@ -18,7 +18,7 @@ $fields = $_panel->getFields(['act' => 'create']);
 	<div class="col-sm-{{ isset($field->col_size)?$field->col_size:12 }}">
 	{!! Form::$input($input_name,$input_value) !!}
 	</div> --}}
-        {!! Theme::inputHtml(['row' => $row, 'field' => $field]) !!}
+        {!! Theme::inputHtml($field,$row) !!}
     @endforeach
 </div>
 
