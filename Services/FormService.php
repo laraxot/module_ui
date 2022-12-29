@@ -119,7 +119,7 @@ class FormService {
         if (null === $comp_field) {
             $msg = 'not registered component [bs'.$field->type.']';
 
-            return view()->make('theme::components.alert.error', ['msg' => $msg]);
+            return view()->make('ui::components.alert.error', ['msg' => $msg]);
         }
 
         /**
@@ -127,7 +127,7 @@ class FormService {
          */
         $view = Str::beforeLast((string) $comp_field->view, '.field').'.freeze';
         if (! View::exists($view)) {
-            return view()->make('theme::components.alert.error', ['msg' => '['.$view.'] NOT EXISTS !!']);
+            return view()->make('ui::components.alert.error', ['msg' => '['.$view.'] NOT EXISTS !!']);
         }
 
         $view_params = [];

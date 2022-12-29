@@ -12,7 +12,7 @@ use Illuminate\View\Component;
  * Class Pagination.
  */
 class Pagination extends Component {
-    public string $type;
+    public ?string $type;
     public LengthAwarePaginator $rows;
 
     /**
@@ -20,7 +20,7 @@ class Pagination extends Component {
      *
      * @return void
      */
-    public function __construct(LengthAwarePaginator $rows,?string $type='v1') {
+    public function __construct(LengthAwarePaginator $rows, ?string $type = 'v1') {
         $this->rows = $rows;
         $this->type = $type;
     }

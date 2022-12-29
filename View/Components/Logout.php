@@ -11,13 +11,14 @@ use Illuminate\View\Component;
  * Class Logout.
  */
 class Logout extends Component {
-    public string $type;
+    public ?string $type;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(?string $type='v1') {
+    public function __construct(?string $type = 'v1') {
         $this->type = $type;
     }
 
