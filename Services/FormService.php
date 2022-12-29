@@ -257,12 +257,8 @@ class FormService {
      *
      * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Support\HtmlString
      */
-    public static function inputHtml(array $params) {
-        extract($params);
-        if (! isset($field)) {
-            throw new \Exception('field is missing');
-        }
-
+    public static function inputHtml(FieldData $field, Model $row) {
+        
         $input_type = 'bs'.Str::studly($field->type);
         if (isset($field->sub_type)) {
             $input_type .= Str::studly($field->sub_type);

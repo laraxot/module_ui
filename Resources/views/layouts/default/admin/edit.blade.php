@@ -23,8 +23,10 @@ $test=route('admin.item.update',$parz);
 @endphp
 
 @section('content')
+    {{--
     @component('theme::components.crud', get_defined_vars())
         @slot('content')
+    --}}
             {{--!! Theme::include('topbar', [], get_defined_vars()) !!--}}
             <x-include-view view="topbar" />
             {{--
@@ -43,6 +45,8 @@ $test=route('admin.item.update',$parz);
             {{ Form::bsSubmit('Modifica') }}
             {!! Form::close() !!}
             {{-- </x-forms.panel> --}}
+        {{--
         @endslot
     @endcomponent
+    --}}
 @endsection

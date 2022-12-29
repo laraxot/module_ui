@@ -5,7 +5,7 @@ if ($src == '') {
     $src = asset('/img/nophoto.jpg');
 }
 //Theme::add('/dist/laravel-filemanager/js/stand-alone-button.js');
-Theme::add('theme::js/uploadimgv2.js');
+Theme::add('ui::js/uploadimgv2.js');
 $field->attributes['id'] = 'post_image_src';
 //dddx(get_defined_vars());
 @endphp

@@ -7,7 +7,7 @@
 //strani errori jquery
 $field = transFields(get_defined_vars());
 
-Theme::addScript('theme::js/multiselect.js');
+Theme::addScript('ui::js/multiselect.js');
 
 //dddx(get_defined_vars());
 if(isset($options['field'])){

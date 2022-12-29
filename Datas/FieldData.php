@@ -24,4 +24,7 @@ class FieldData extends Data {
      * @var DataCollection<FieldData> 
      */
     public ?DataCollection $fields;
+
+
+    public array $options=[];
 }

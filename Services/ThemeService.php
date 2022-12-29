@@ -203,7 +203,7 @@ class ThemeService {
                 self::add('theme/bc/select2-bootstrap4-theme/dist/select2-bootstrap4.css');
                 self::add('theme/bc/popper.js/dist/popper.min.js');
                 self::add('theme/bc/select2/dist/js/select2.full.min.js');
-                self::add('theme::js/select2ajax.js');
+                self::add('ui::js/select2ajax.js');
             break;
             case 1:
                 //* librerin in cdn
@@ -216,7 +216,7 @@ class ThemeService {
                 //mix , non va aggiunto nulla
             break;
         }
-        self::add('theme::js/select2ajax.js');
+        self::add('ui::js/select2ajax.js');
     }
     */
     /* deprecated
