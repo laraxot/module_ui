@@ -631,9 +631,9 @@ class ThemeService {
         if (! isset($act)) {
             $act = RouteService::getAct();
         }
-        $view_extend = 'theme::layouts.default.'.$act;
+        $view_extend = 'ui::layouts.default.'.$act;
         if (inAdmin()) {
-            $view_extend = 'theme::layouts.default.admin.'.$act;
+            $view_extend = 'ui::layouts.default.admin.'.$act;
         }
 
         return self::getViewWithFormat($view_extend);
