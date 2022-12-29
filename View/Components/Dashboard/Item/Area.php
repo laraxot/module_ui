@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\UI\View\Components\Dashboard\Item;
 
-use Exception;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
 use Modules\LU\Models\Area as ModelArea;
@@ -31,10 +30,13 @@ class Area extends Component {
      * Undocumented function.
      */
     public function render(): Renderable {
+        /**
+         * @phpstan-var view-string
+         */
         $area_define_name = $this->area->area_define_name;
 
         $ns = strtolower($area_define_name);
-        
+
         /**
          * @phpstan-var view-string
          */
