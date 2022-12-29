@@ -11,12 +11,14 @@ use Illuminate\View\Component;
  * Class Logout.
  */
 class Logout extends Component {
+    public string $type;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct(?string $type='v1') {
+        $this->type = $type;
     }
 
     /**
@@ -26,7 +28,7 @@ class Logout extends Component {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.logout';
+        $view = 'ui::components.logout.'.$this->type;
 
         $view_params = [];
 
