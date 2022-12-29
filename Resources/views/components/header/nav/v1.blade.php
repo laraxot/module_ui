@@ -1,3 +1,7 @@
+@props([
+    'adv'=>false,
+])
+
 <header class="header">
     <!-- Navbar-->
     <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
@@ -37,7 +41,9 @@
     <!-- /Navbar -->
 </header>
 @push('modals')
+    {{--
     <livewire:modal.body-view show="false" id="elastic_advanced_search" title="Advanced Search" subtitle=""
         bodyView="theme::livewire.elastic.filter.v2">
     </livewire:modal.body-view>
+    --}}
 @endpush

@@ -30,7 +30,7 @@ class Nav extends Component {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.header.nav'.$this->type;
+        $view = 'ui::components.header.nav.'.$this->type;
 
         $view_params = [
             'view' => $view,
