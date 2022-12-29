@@ -10,17 +10,8 @@ parent_id: 5
 
 # Card {#card}
 
-```php
-<x-card-simple>
-    <x-slot name="title">Job Status</x-slot>
-    <x-slot name="txt">
-        <x-input.group type="select" name="conn" :options="['sync' => 'sync', 'database' => 'database']" />
-    </x-slot>
-    <x-slot name="footer">
-        <button class="btn btn-secondary" wire:click="dummyAction()">1000 Dummy Action</button>
-    </x-slot>
-</x-card-simple>
-```
+Il componente Modules\UI\View\Components\Card.php crea un semplice card.
+Esempio di utilizzo:
 
 ```php
 <x-card>
@@ -28,5 +19,10 @@ parent_id: 5
     <x-slot name="txt">
         txt
     </x-slot>
+    <x-slot name="footer">
+        footer
+    </x-slot>
 </x-card>
 ```
+
+E' possibile inserire anche una proprietà **type** per richiamare una differnte blade. Di default la blade richiamata è UI\Resources\views\components\card\card.blade.php.
