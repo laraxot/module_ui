@@ -13,11 +13,14 @@ use Livewire\Component;
 class Arr extends Component {
     public string $type;
     public string $name;
-    public string $label;
+    public ?string $label;
     public array $form_data;
-    public array $value = [];
+    public ?array $value = [];
     public ?int $model_id;
 
+    /**
+     * @var array<string, string>
+     */
     protected $listeners = ['addArr' => 'addArr'];
 
     /**
@@ -77,14 +80,14 @@ class Arr extends Component {
         }
     }
 
-    public function updatedFormData(string $value, string $key) {
+    public function updatedFormData(string $value, string $key): void {
         if (isset($this->model_id)) {
             $this->form_data['model_id'] = $this->model_id;
             $this->emit('updatedFormDataEvent', $this->form_data);
         }
     }
 
-    public function set(string $value, $key) {
+    public function set(string $value, string $key): void {
         $this->form_data[$key] = $value;
     }
 }

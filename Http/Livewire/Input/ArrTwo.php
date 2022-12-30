@@ -13,11 +13,14 @@ use Livewire\Component;
 class ArrTwo extends Component {
     public string $type;
     public string $name;
-    public string $label;
+    public ?string $label;
     public array $form_data;
-    public array $value = [];
+    public ?array $value = [];
     public ?int $model_id;
 
+    /**
+     * @var array<string, string>
+     */
     protected $listeners = ['addArr' => 'addArr'];
 
     /**
