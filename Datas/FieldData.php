@@ -12,7 +12,10 @@ class FieldData extends Data {
     public ?string $label = null;
     public ?string $name_dot = null;
     public string $type;
-    public array|string $rules = [];
+    /**
+     * @property array|string $rules
+     */
+    public $rules;
     public mixed $value;
 
     public ?string $method = null;
