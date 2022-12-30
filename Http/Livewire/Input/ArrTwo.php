@@ -17,6 +17,8 @@ class ArrTwo extends Component {
     public array $form_data;
     public ?array $value = [];
     public ?int $model_id;
+    public string $normal_search_data;
+    public array $advanced_search_data;
 
     /**
      * @var array<string, string>
@@ -55,7 +57,7 @@ class ArrTwo extends Component {
         $this->advanced_search_data = $this->advancedSearch();
     }
 
-    public function normalSearch() {
+    public function normalSearch(): string {
         $normal_search_data = '';
 
         if (isset($this->form_data) && isset($this->form_data['filter']) && isset($this->form_data['filter'][0]) && 'query_string_query' === $this->form_data['filter'][0]['criteria']) {
@@ -66,7 +68,7 @@ class ArrTwo extends Component {
         return $normal_search_data;
     }
 
-    public function advancedSearch() {
+    public function advancedSearch(): array {
         return $this->form_data;
     }
 
@@ -99,14 +101,14 @@ class ArrTwo extends Component {
         }
     }
 
-    public function updatedFormData(string $value, string $key) {
+    public function updatedFormData(string $value, string $key): void {
         if (isset($this->model_id)) {
             $this->form_data['model_id'] = $this->model_id;
             $this->emit('updatedFormDataEvent', $this->form_data);
         }
     }
 
-    public function set(string $value, $key) {
+    public function set(string $value, string $key): void {
         $this->form_data[$key] = $value;
     }
 }
