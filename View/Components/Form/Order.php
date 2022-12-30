@@ -27,8 +27,11 @@ class Order extends Component {
         $this->qs = collect(request()->query())
                     ->except(['sort'])
                     ->all();
-
-        $this->options = array_combine($panel->orderBy(), $panel->orderBy());
+        if (! is_null($panel)) {
+            $this->options = array_combine($panel->orderBy(), $panel->orderBy());
+        } else {
+            throw new \Exception('['.__LINE__.']['.__FILE__.'], panel is null');
+        }
         $this->input_attrs = ['placeholder' => 'Ordinamento', 'label' => ' '];
         switch ($type) {
             case 'inline':

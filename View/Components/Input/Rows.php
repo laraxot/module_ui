@@ -16,7 +16,7 @@ class Rows extends Component {
     public string $name;
     public ?string $label;
     public Collection $rows;
-    public Collection $value;
+    public ?Collection $value;
 
     /**
      * Create a new component instance.

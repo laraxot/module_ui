@@ -30,7 +30,9 @@ class IncludeView extends Component {
             }
         );
 
-        // dddx($views);
+        /**
+         * @phpstan-var view-string|null
+         */
         $view_work = $views->first(
             function ($view_check) {
                 return View::exists($view_check);
@@ -39,7 +41,12 @@ class IncludeView extends Component {
 
         if (null === $view_work) {
             if (\in_array($view_tpl, ['topbar', 'bottombar', 'inner_page'], true)) {
-                return view('ui:empty');
+                /**
+                 * @phpstan-var view-string
+                 */
+                $view = 'ui:empty';
+
+                return view($view);
                 // throw new \Exception('$view_work is null');
             }
 

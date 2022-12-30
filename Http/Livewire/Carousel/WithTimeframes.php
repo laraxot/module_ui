@@ -12,10 +12,11 @@ use Livewire\Component;
  */
 class WithTimeframes extends Component {
     public int $press_id;
-    public string $type = 'v1';
+    public ?string $type;
     public array $items;
     public int $i = 0;
-    public bool $showBtnLink;
+    public ?bool $showBtnLink;
+    public string $component_id;
 
     /**
      * Undocumented function.
@@ -43,11 +44,11 @@ class WithTimeframes extends Component {
         return view()->make($view, $view_params);
     }
 
-    public function next() {
+    public function next(): void {
         ++$this->i;
     }
 
-    public function prev() {
+    public function prev(): void {
         --$this->i;
     }
 }

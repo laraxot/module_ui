@@ -32,7 +32,9 @@ class Single extends Component {
         $this->modelId = $model->getKey();
 
         $this->options = $options;
-        $this->status = $model->status;
+        if (property_exists($model, 'status')) {
+            $this->status = $model->status;
+        }
 
         // dddx($model->status);
     }

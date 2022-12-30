@@ -23,7 +23,11 @@ class Lang extends Component {
         $this->current_locale = LaravelLocalization::getCurrentLocaleName();
         $this->supported_locale = LaravelLocalization::getSupportedLocales();
         $panel = PanelService::make()->getRequestPanel();
-        $this->show = $panel->hasLang();
+        if (! is_null($panel)) {
+            $this->show = $panel->hasLang();
+        } else {
+            throw new \Exception('['.__LINE__.']['.__FILE__.'], panel is null');
+        }
     }
 
     public function render(): Renderable {

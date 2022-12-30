@@ -10,16 +10,22 @@ use Illuminate\View\Component;
 class Search extends Component {
     public ?string $type;
     public array $qs = [];
-    public ?string $class;
 
     public array $attrs = [];
 
-    public function __construct(string $type = 'v1', string $class = 'd-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search float-right') {
+    public array $form_attrs = ['method' => 'get'];
+
+    public function __construct(string $type = 'v1') {
         $this->type = $type;
         $this->qs = collect(request()->query())
             ->except(['q'])
             ->all();
-        $this->class = $class;
+
+        switch ($type) {
+            case 'inline':
+                $this->form_attrs['class'] = 'd-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search float-right';
+                break;
+        }
     }
 
     public function render(): Renderable {
