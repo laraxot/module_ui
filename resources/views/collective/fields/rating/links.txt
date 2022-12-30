@@ -1,0 +1,20 @@
+mostra 10 stelle in linea
+https://www.imdb.com/title/tt4154664/
+
+se vai sopra le stelle compare box con dettaglio
+https://www.amazon.it/dp/B005EP9KIE/ref=sbl_tw_a
+
+https://www.opentable.com/r/valentino-vintage-milan?corrid=cfbb3acb-3636-4841-8124-445e0c474f79
+
+
+componente star rating google amp
+https://amp.dev/documentation/examples/interactivity-dynamic-content/star_rating/
+
+-- tirano gdpr ?
+https://it.wordpress.org/plugins/rating-widget/
+
+??
+https://docs.sencha.com/extjs/6.5.2/modern/Ext.ux.rating.Picker.html
+
+-- mobile ??
+https://demo.mobiscroll.com/v3/jquery/rating/stars#theme=ios&display=bubble

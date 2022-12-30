@@ -1,0 +1,11 @@
+http://neilj.github.io/Squire/
+
+
+//-- molto pieno ma abbandonato
+https://github.com/fex-team/ueditor
+
+https://www.slatejs.org/examples/richtext
+
+
+TINYMCE
+https://gitee.com/cyourai/vue-tinymce/blob/master/src/components/TinymceVue.vue
