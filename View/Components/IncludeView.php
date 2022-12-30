@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\View;
 use Modules\UI\Services\ThemeService;
+use Illuminate\Contracts\Support\Renderable;
 
 /**
  * Undocumented class.
@@ -19,7 +20,7 @@ class IncludeView extends Component {
         $this->view = $view;
     }
 
-    public function render() {
+    public function render():Renderable {
         $views = ThemeService::getDefaultViewArray();
 
         $view_tpl = $this->view;
@@ -39,7 +40,7 @@ class IncludeView extends Component {
 
         if (null === $view_work) {
             if (\in_array($view_tpl, ['topbar', 'bottombar', 'inner_page'], true)) {
-                return null;
+                return view('ui:empty');
                 // throw new \Exception('$view_work is null');
             }
 
@@ -50,6 +51,6 @@ class IncludeView extends Component {
             throw new Exception('$view_work is null');
         }
 
-        return view()->make($view_work);
+        return view($view_work);
     }
 }

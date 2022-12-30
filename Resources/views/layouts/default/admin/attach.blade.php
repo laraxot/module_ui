@@ -2,7 +2,7 @@
 @section('content')
     <div class="widget">
         <div class="widget-body">
-            @include('theme::includes.flash')
+            <x-flash-message />
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <ul>

@@ -1,6 +1,6 @@
 @extends('adm_theme::layouts.app')
 @section('content')
-    @include('theme::includes.flash')
+    <x-flash-message />
     <a class="btn btn-primary" href="{!! $_panel->url('create') !!}">
         <i class="fas fa-plus"></i> Crea Nuovo
     </a>
@@ -15,6 +15,4 @@
             <x-button :attrs="get_object_vars($tab)" class="btn"></x-button>
         @endforeach
     </div>
-
-
 @endsection

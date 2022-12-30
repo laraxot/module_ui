@@ -1,7 +1,7 @@
 @extends('adm_theme::layouts.app')
 @section('page_heading',$params['module'])
 @section('content')
-@include('theme::includes.flash')
+<x-flash-message />
 @include('theme::modal_ajax')
 @php
 	if(!is_object($row)) return ;

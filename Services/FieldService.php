@@ -122,7 +122,7 @@ class FieldService extends BaseFieldService {
      */
     public function getView(): string {
         $type = Str::snake($this->type);
-        $start = 'theme::livewire.fields.';
+        $start = 'ui::livewire.fields.';
         $views = [];
         $pieces = explode('_', $type);
         $pieces_count = \count($pieces);
@@ -175,10 +175,10 @@ class FieldService extends BaseFieldService {
          *
          * @phpstan-var view-string
 
-        $view = 'theme::livewire.fields.'.$this->type.'.field';
+        $view = 'ui::livewire.fields.'.$this->type.'.field';
          */
         $type = Str::snake($this->type);
-        $start = 'theme::livewire.fields.';
+        $start = 'ui::livewire.fields.';
         $views = [];
         $pieces = explode('_', $type);
         $pieces_count = \count($pieces);
