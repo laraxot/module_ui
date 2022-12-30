@@ -1,4 +1,4 @@
-<form class="{{ $class }}" method="get">
+<form {{ $attributes->merge($form_attrs) }}>
     <div class="input-group">
         <input name="q" type="text" class="form-control {{-- bg-light border-0 --}}  small" placeholder="Search for..."
             aria-label="Search" aria-describedby="basic-addon2" value="{{ Request::input('q') }}">
