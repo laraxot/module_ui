@@ -10,7 +10,7 @@
 
                 <td>
                     {{-- {{ $row->{$v->name} }} --}}
-                    {!! Theme::inputFreeze(['row' => $row, 'field' => $v]) !!}
+                    {!! Theme::inputFreeze($v, $row) !!}
                 </td>
             </tr>
         @endforeach

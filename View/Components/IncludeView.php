@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\UI\View\Components;
 
-use Exception;
-use Illuminate\View\Component;
-use Illuminate\Support\Facades\View;
-use Modules\UI\Services\ThemeService;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\View;
+use Illuminate\View\Component;
+use Modules\UI\Services\ThemeService;
 
 /**
  * Undocumented class.
@@ -20,7 +19,7 @@ class IncludeView extends Component {
         $this->view = $view;
     }
 
-    public function render():Renderable {
+    public function render(): Renderable {
         $views = ThemeService::getDefaultViewArray();
 
         $view_tpl = $this->view;
@@ -48,7 +47,7 @@ class IncludeView extends Component {
         }
 
         if (null === $view_work) {
-            throw new Exception('$view_work is null');
+            throw new \Exception('$view_work is null');
         }
 
         return view($view_work);

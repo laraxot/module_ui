@@ -1,16 +1,16 @@
 @php
-// nella lista la password e conferma password posso ometterle
-/*
+    // nella lista la password e conferma password posso ometterle
+    /*
 $fields=collect($_panel->fields())->filter(function($item){
 return !in_array($item->type,['Password']);
 })->all();
 */
-
-$fields = $_panel->getFields(['act' => 'index']);
-//$row_panel=$_panel;
-$row_panel = Panel::make()->get($row);
-$row_panel->setParent($_panel->getParent());
-//dddx([$_panel,$row_panel]);
+    
+    $fields = $_panel->getFields(['act' => 'index']);
+    //$row_panel=$_panel;
+    $row_panel = Panel::make()->get($row);
+    $row_panel->setParent($_panel->getParent());
+    //dddx([$_panel,$row_panel]);
 @endphp
 @if ($loop->first)
     <table>
@@ -27,7 +27,7 @@ $row_panel->setParent($_panel->getParent());
 <tr>
     @foreach ($fields as $field)
         <td>
-            {!! Theme::inputFreeze(['row' => $row, 'field' => $field]) !!}
+            {!! Theme::inputFreeze($field, $row) !!}
 
             @if ($loop->first)
                 @foreach ($row_panel->itemActions() as $act)

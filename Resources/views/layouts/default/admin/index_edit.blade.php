@@ -38,7 +38,7 @@
                 <tr>
                     @foreach ($fields as $field)
                         <td>
-                            {!! Theme::inputFreeze(['row' => $row, 'field' => $field]) !!}
+                            {!! Theme::inputFreeze($field, $row) !!}
 
                             @if ($loop->first)
                                 @foreach ($row_panel->itemActions() as $act)

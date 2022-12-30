@@ -1,17 +1,17 @@
 @php
-	$fields=$_panel->fields();
+    $fields = $_panel->fields();
 @endphp
 <table>
-@foreach($fields as $k=>$v)
-	<tr>
-	  <td>{{ $v->name}}</td>
+    @foreach ($fields as $k => $v)
+        <tr>
+            <td>{{ $v->name }}</td>
 
-	  <td>
-	  	{{--
+            <td>
+                {{--
 	  	{{ $row->{$v->name} }}
 		--}}
-		{!! Theme::inputFreeze(['row'=>$row,'field'=>$v]) !!}
-	  </td>
-	</tr>
-@endforeach
+                {!! Theme::inputFreeze($v, $row) !!}
+            </td>
+        </tr>
+    @endforeach
 </table>
