@@ -1,6 +1,6 @@
 ---
-title: Modulo Theme
-description: Modulo Theme
+title: Modulo UI
+description: Modulo UI
 extends: _layouts.documentation
 section: content
 lang: it
@@ -8,13 +8,12 @@ id: 1
 parent_id: 0
 ---
 
-# Modulo Theme {#modulo-theme}
+# Modulo UI {#modulo-theme}
 
+Il modulo UI è uno dei moduli principali.
 
-Il repository Git laraxot/module_theme sembra essere un pacchetto o un modulo per Laravel che fornisce funzionalità di gestione dei temi. Puoi aggiungere questo pacchetto al tuo progetto Laravel eseguendo il seguente comando:
+Esso non ha nessuna dipendenza con altri moduli, solo col modulo Xot.
 
 ```php
-composer require laraxot/module_theme
+composer require laraxot/module_ui
 ```
-
-Questo comando aggiungerà il pacchetto laraxot/module_theme come dipendenza nel file composer.json del tuo progetto Laravel e installerà il pacchetto sul tuo sistema. Puoi quindi utilizzare le classi e le funzioni del pacchetto nel tuo progetto Laravel per gestire e passare da un tema all'altro nella tua applicazione.
