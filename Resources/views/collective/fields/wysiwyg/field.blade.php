@@ -1,12 +1,12 @@
 @php
-//funzionante, da mettere in documentazione!!!
-
-//ps: però come si installa???
-
-Theme::add('theme::dist/js/app.js');
-Theme::add('theme::dist/css/app.css');
-$field = transFields(get_defined_vars());
-$field->attributes['class'] = 'form-control tinymce';
+    //funzionante, da mettere in documentazione!!!
+    
+    //ps: però come si installa???
+    
+    Theme::add('ui::dist/js/app.js');
+    Theme::add('ui::dist/css/app.css');
+    $field = transFields(get_defined_vars());
+    $field->attributes['class'] = 'form-control tinymce';
 @endphp
 @component($blade_component, get_defined_vars())
     @slot('label')

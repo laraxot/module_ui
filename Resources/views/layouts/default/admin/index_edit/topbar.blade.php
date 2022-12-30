@@ -1,5 +1,5 @@
 @php
-//dddx(get_defined_vars());
+    //dddx(get_defined_vars());
 @endphp
 <div class="row text-dark" style="background-color: #e9ecef; padding:5px; ">
     {{-- {!! Form::bsBtnCreateAttach(['row'=>$row]) !!} --}}
@@ -20,6 +20,6 @@
         </p>
     </div>
 
-    @include('theme::includes.components.form_complete.search')
-    @include('theme::includes.components.form_complete.order_by')
+    @include('ui::includes.components.form_complete.search')
+    @include('ui::includes.components.form_complete.order_by')
 </div>

@@ -24,7 +24,7 @@ class FieldService extends BaseFieldService {
 
     protected bool $array_sortable = false;
 
-    protected string $input_component = 'theme::components.label_input.default';
+    protected string $input_component = 'ui::components.label_input.default';
 
     protected int $col_size = 12;
 
@@ -108,7 +108,7 @@ class FieldService extends BaseFieldService {
     }
 
     public function setInputComponent(string $input_component): self {
-        $this->input_component = 'theme::components.label_input.'.$input_component;
+        $this->input_component = 'ui::components.label_input.'.$input_component;
 
         return $this;
     }

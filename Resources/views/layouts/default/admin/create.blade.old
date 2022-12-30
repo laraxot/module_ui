@@ -1,6 +1,6 @@
 @extends('adm_theme::layouts.app')
 @section('content')
-    @component('theme::components.crud', get_defined_vars())
+    @component('ui::components.crud', get_defined_vars())
         @slot('content')
             {{-- @livewire('create',['model'=>$_panel->getRow()]) --}}
             @if (count($errors) > 0)

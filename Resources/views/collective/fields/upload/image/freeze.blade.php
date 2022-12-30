@@ -5,7 +5,7 @@
         $src = asset($src);
     }
     if (is_null($src)) {
-        $src = Theme::asset('theme::views/skeleton/images/nophoto.png');
+        $src = Theme::asset('ui::views/skeleton/images/nophoto.png');
     }
 @endphp
 <img src="{{ $src }}" width="100" height="100" />

@@ -1,15 +1,15 @@
 @extends('adm_theme::layouts.app')
 @section('content')
     @php
-    $last_item = last($items);
-    $last_container = last($containers);
-    $types = Str::camel(Str::plural($last_container));
-    $field = (object) [
-        'name' => 'areas',
-        'type' => 'PivotFields',
-    ];
+        $last_item = last($items);
+        $last_container = last($containers);
+        $types = Str::camel(Str::plural($last_container));
+        $field = (object) [
+            'name' => 'areas',
+            'type' => 'PivotFields',
+        ];
     @endphp
-    @component('theme::components.crud', get_defined_vars())
+    @component('ui::components.crud', get_defined_vars())
         @slot('content')
             {!! Theme::include('topbar', [], get_defined_vars()) !!}
 
@@ -55,7 +55,6 @@
                     </tbody>
                     </table>
                 @endif
-
             @endforeach
             {{ $rows->links() }}
         @endslot

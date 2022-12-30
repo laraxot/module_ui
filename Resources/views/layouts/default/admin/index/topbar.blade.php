@@ -1,7 +1,7 @@
 @php
-if ($rows == null) {
-    dddx($rows_err);
-}
+    if ($rows == null) {
+        dddx($rows_err);
+    }
 @endphp
 <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #e9ecef; padding:5px; ">
     @foreach ($_panel->containerActions() as $act)
@@ -29,11 +29,17 @@ if ($rows == null) {
         <div class="col">
         </div>
         @if ($_panel->hasLang())
-            @include('theme::includes.components.form_complete.lang',['form_class'=>'form-inline my-2 my-lg-0'])
+            @include('ui::includes.components.form_complete.lang', [
+                'form_class' => 'form-inline my-2 my-lg-0',
+            ])
         @endif
-        @include('theme::includes.components.form_complete.search',['form_class'=>'form-inline my-2 my-lg-0'])
+        @include('ui::includes.components.form_complete.search', [
+            'form_class' => 'form-inline my-2 my-lg-0',
+        ])
         {{-- ORDINAMENTO DA RIVEDERE --}}
-        @include('theme::includes.components.form_complete.order_by',['form_class'=>'form-inline my-2 my-lg-0'])
+        @include('ui::includes.components.form_complete.order_by', [
+            'form_class' => 'form-inline my-2 my-lg-0',
+        ])
         {{-- <form method="get" class="form-inline my-2 my-lg-0">
 			<div class="input-group">
 				<select id="sort[by]" name="sort[by]" class="form-control">

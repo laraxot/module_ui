@@ -592,7 +592,7 @@ class ThemeService {
 
         // ------------ CASI PARTICOLARI -----------
         // if ('pub_theme::translation.index' == $view) {
-        //    return 'theme::translation.index';
+        //    return 'ui::translation.index';
         // }
         // ---------------Panel Actions --------------------------
         /*

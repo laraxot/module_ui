@@ -65,7 +65,7 @@ class Label extends Component {
 
         /*
         $theme = inAdmin() ? 'adm_theme' : 'pub_theme';
-        FileService::viewCopy('theme::components.input.label', $theme.'::components.input.label');
+        FileService::viewCopy('ui::components.input.label', $theme.'::components.input.label');
 
         $view = $theme.'::components.input.label';
         if (null === $this->field) {

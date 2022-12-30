@@ -1,9 +1,9 @@
-@extends('theme::layouts.app_ajax')
+@extends('ui::layouts.app_ajax')
 @section('content')
     {{--
 
 <x-flash-message />
-@include('theme::modal_ajax')
+@include('ui::modal_ajax')
 {!! Theme::include('header',['edit_type'=>$row_type],get_defined_vars() ) !!}
 --}}
     <section class="restaurants-page">
@@ -12,7 +12,7 @@
                 {{--
 			{!! Theme::include($view_body,[],get_defined_vars() ) !!}
 			--}}
-                @include('theme::layouts.default.common.' . $_layout->view_body)
+                @include('ui::layouts.default.common.' . $_layout->view_body)
             </div>
         </div>
     </section>

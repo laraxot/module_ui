@@ -1,7 +1,7 @@
 @php
-	//non funziona, da aggiustare
-    Theme::add('theme::plugins/summernote/summernote-bs4.css');
-    Theme::add('theme::plugins/summernote/summernote-bs4.min.js');
+    //non funziona, da aggiustare
+    Theme::add('ui::plugins/summernote/summernote-bs4.css');
+    Theme::add('ui::plugins/summernote/summernote-bs4.min.js');
 @endphp
 
 {{--
@@ -17,30 +17,28 @@
 	</div>
 </div>
    --}}
-   aaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaa
 <textarea id="summernote" name="editordata"></textarea>
 bbbbbbbbbbbbbbbbb
 
 @push('scripts')
-
-
     <script>
-      (function ( $ ) {
-        $.noConflict();
-      $('#summernote').summernote({
-        placeholder: 'Hello stand alone ui',
-        tabsize: 2,
-        height: 120,
-        toolbar: [
-          ['style', ['style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['color']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture', 'video']],
-          ['view', ['fullscreen', 'codeview', 'help']]
-        ]
-      });
-   }( jQuery ));
+        (function($) {
+            $.noConflict();
+            $('#summernote').summernote({
+                placeholder: 'Hello stand alone ui',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+        }(jQuery));
     </script>
 @endpush

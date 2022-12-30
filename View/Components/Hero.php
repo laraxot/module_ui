@@ -21,7 +21,7 @@ class Hero extends Component {
      */
     public function __construct(?string $type = 'hero') {
         $this->type = $type;
-        // ThemeService::make()->add('theme::View/Components/Card/rows.scss');
+        // ThemeService::make()->add('ui::View/Components/Card/rows.scss');
     }
 
     /**

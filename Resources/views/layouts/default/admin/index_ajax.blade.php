@@ -1,1 +1,1 @@
-@include('theme::layouts.default.admin.common.action_ajax')
+@include('ui::layouts.default.admin.common.action_ajax')

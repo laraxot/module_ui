@@ -1,1 +1,1 @@
-@include('theme::layouts.default.admin.common.action')
+@include('ui::layouts.default.admin.common.action')

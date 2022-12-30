@@ -1,1 +1,1 @@
-@include('theme::layouts.partials.breadcrumb')
+@include('ui::layouts.partials.breadcrumb')

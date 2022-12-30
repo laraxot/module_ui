@@ -1,7 +1,7 @@
 @php
-//non funziona, da aggiustare
-Theme::add('theme::plugins/summernote/summernote-bs4.css');
-Theme::add('theme::plugins/summernote/summernote-bs4.min.js');
+    //non funziona, da aggiustare
+    Theme::add('ui::plugins/summernote/summernote-bs4.css');
+    Theme::add('ui::plugins/summernote/summernote-bs4.min.js');
 @endphp
 
 {{-- <div id=summernote>
@@ -20,8 +20,6 @@ aaaaaaaaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbbb
 
 @push('scripts')
-
-
     <script>
         (function($) {
             $.noConflict();

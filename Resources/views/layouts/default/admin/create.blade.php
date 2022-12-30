@@ -1,14 +1,14 @@
 @extends('adm_theme::layouts.app')
 @php
-//dddx(get_defined_vars());
-$last_container = last($containers);
-if (!is_object($row)) {
-    return '';
-}
-$fields = $_panel->getFields(['act' => 'edit']);
+    //dddx(get_defined_vars());
+    $last_container = last($containers);
+    if (!is_object($row)) {
+        return '';
+    }
+    $fields = $_panel->getFields(['act' => 'edit']);
 @endphp
 @section('content')
-    @component('theme::components.crud', get_defined_vars())
+    @component('ui::components.crud', get_defined_vars())
         @slot('content')
             <x-include-view view="topbar" />
             {{-- prima di rimettere sto schifo spiegatemelo
@@ -19,7 +19,7 @@ $fields = $_panel->getFields(['act' => 'edit']);
             {!! Form::bsOpenPanel($_panel, 'store') !!}
             <div class="row">
                 @foreach ($fields as $field)
-                    {!! Theme::inputHtml($field,$row) !!}
+                    {!! Theme::inputHtml($field, $row) !!}
                 @endforeach
             </div>
             {{ Form::bsSubmit('Salva') }}

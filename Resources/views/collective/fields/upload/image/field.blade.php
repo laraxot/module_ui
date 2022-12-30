@@ -1,13 +1,13 @@
 @php
-$field = transFields(get_defined_vars());
-$src = Form::getValueAttribute($name);
-if ($src == '') {
-    $src = asset('/img/nophoto.jpg');
-}
-//Theme::add('/dist/laravel-filemanager/js/stand-alone-button.js');
-Theme::add('ui::js/uploadimgv2.js');
-$field->attributes['id'] = 'post_image_src';
-//dddx(get_defined_vars());
+    $field = transFields(get_defined_vars());
+    $src = Form::getValueAttribute($name);
+    if ($src == '') {
+        $src = asset('/img/nophoto.jpg');
+    }
+    //Theme::add('/dist/laravel-filemanager/js/stand-alone-button.js');
+    Theme::add('ui::js/uploadimgv2.js');
+    $field->attributes['id'] = 'post_image_src';
+    //dddx(get_defined_vars());
 @endphp
 @component($blade_component, get_defined_vars())
     @slot('label')
@@ -34,7 +34,7 @@ $field->attributes['id'] = 'post_image_src';
                                 <a data-input="{{ $field->attributes['id'] }}" data-preview="holder"
                                     class="btn btn-primary text-white lfm_image">
                                     <i class="fa fa-picture-o"></i>
-                                    @lang('theme::txt.select')
+                                    @lang('ui::txt.select')
                                 </a>
                             </span>
                             {{ Form::text($name, $value, $field->attributes) }}
@@ -43,10 +43,5 @@ $field->attributes['id'] = 'post_image_src';
                 </div>
             </div>
         </div>
-
-
-
-
-
     @endslot
 @endcomponent

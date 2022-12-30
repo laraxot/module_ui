@@ -22,7 +22,7 @@ class RegisterCollectiveComponents {
             $blade_component = 'pub_theme::'.$blade_component_piece;
         }
 
-        FileService::viewCopy('theme::'.$blade_component_piece, $blade_component);
+        FileService::viewCopy('ui::'.$blade_component_piece, $blade_component);
 
 
         $comps = app(GetCollectiveComponents::class)->execute($path, $prefix);

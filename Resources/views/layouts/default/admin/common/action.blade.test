@@ -2,7 +2,7 @@
 @section('page_heading',$params['module'])
 @section('content')
 <x-flash-message />
-@include('theme::modal_ajax')
+@include('ui::modal_ajax')
 @php
 	if(!is_object($row)) return ;
     $row_panel=PanelService::make()->get($row)->setParent($_panel->getParent());
@@ -25,7 +25,7 @@
         <div class="container-fluid">
             {!! Theme::include('topbar',[],get_defined_vars() ) !!}
             <div class="row">
-                @include('theme::layouts.default.admin.common.'.$_layout->view_body)
+                @include('ui::layouts.default.admin.common.'.$_layout->view_body)
             </div>
             {!! Theme::include('bottombar',[],get_defined_vars() ) !!}
         </div>

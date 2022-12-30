@@ -80,7 +80,7 @@
 
 
 
-{{ Theme::add('theme::bc/multiselect/multiselect.min.js') }}
+{{ Theme::add('ui::bc/multiselect/multiselect.min.js') }}
 
 @push('scripts')
     <script type="text/javascript">

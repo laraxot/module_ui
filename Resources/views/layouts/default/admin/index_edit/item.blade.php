@@ -1,4 +1,4 @@
-@include('theme::layouts.default.admin.index.item')
+@include('ui::layouts.default.admin.index.item')
 {{--
 nel admin le azioni coincidono ?
 --}}
