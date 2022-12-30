@@ -37,7 +37,7 @@
                 'form_class' => 'form-inline my-2 my-lg-0',
             ])
         @endif
-        @include('ui::includes.components.form_complete.search', [
+        {{--@include('ui::includes.components.form_complete.search', [
             'form_class' => 'form-inline my-2 my-lg-0',
         ])
         
