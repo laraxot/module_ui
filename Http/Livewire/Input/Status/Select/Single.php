@@ -7,6 +7,8 @@ namespace Modules\UI\Http\Livewire\Input\Status\Select;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
+use Modules\Xot\Contracts\ModelContract;
+use Modules\Xot\Contracts\ModelWithStatusContract;
 
 /**
  * Class Single.
@@ -18,14 +20,14 @@ class Single extends Component {
     public array $options;
     public string $status = '';
 
-    public Model $model;
+    public ModelWithStatusContract $model;
 
     /**
      * Undocumented function.
      *
      * @return void
      */
-    public function mount(Model $model, array $options) {
+    public function mount(ModelWithStatusContract $model, array $options) {
         $this->model = $model;
 
         $this->modelClass = \get_class($model);
