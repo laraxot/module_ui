@@ -23,11 +23,11 @@ class Collapse extends Component {
      *
      * @return void
      */
-    public function __construct(string $menuName,string $type='v1') {
+    public function __construct(string $menuName, string $type = 'v1') {
         // $this->menus = Menu::getByName($menuName);
         $this->menu_name = $menuName;
         $this->menus = [];
-        $this->type=$type;
+        $this->type = $type;
     }
 
     /**

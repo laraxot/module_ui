@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\UI\Services;
 
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 use Modules\Tenant\Services\TenantService;
 
 // ----- Models -----
@@ -28,9 +27,9 @@ class MenuService {
         if (! isset($module)) {
             return [];
         }
-        
+
         $module_original = $module;
-        
+
         $mod = \Module::find($module_original);
         if (null === $mod) {
             throw new \Exception('module ['.$module_original.'] was not found');

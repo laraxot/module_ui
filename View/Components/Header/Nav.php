@@ -19,7 +19,7 @@ class Nav extends Component {
      *
      * @return void
      */
-    public function __construct(string $type="v1") {
+    public function __construct(string $type = 'v1') {
         $this->type = $type;
     }
 

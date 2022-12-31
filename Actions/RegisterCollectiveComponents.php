@@ -1,20 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\UI\Actions;
 
-use Modules\Xot\Services\FileService;
 use Collective\Html\FormFacade as Form;
+use Modules\Xot\Services\FileService;
 use Spatie\QueueableAction\QueueableAction;
-
 
 class RegisterCollectiveComponents {
     use QueueableAction;
 
-    public function __construct(){
-
+    public function __construct() {
     }
 
-    public function execute(string $path = '',string $prefix = ''):void {
+    public function execute(string $path = '', string $prefix = ''): void {
         $blade_component_piece = 'collective.fields.group';
         if (inAdmin()) {
             $blade_component = 'adm_theme::'.$blade_component_piece;
@@ -23,7 +23,6 @@ class RegisterCollectiveComponents {
         }
 
         FileService::viewCopy('ui::'.$blade_component_piece, $blade_component);
-
 
         $comps = app(GetCollectiveComponents::class)->execute($path, $prefix);
 

@@ -1,28 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\UI\Actions;
 
 use Exception;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Modules\Xot\Services\FileService;
 use Spatie\QueueableAction\QueueableAction;
-
 
 class GetCollectiveComponents {
     use QueueableAction;
 
-    public function __construct(){
-
+    public function __construct() {
     }
 
-    public function execute(string $view_path = '',string $prefix = ''):array {
+    public function execute(string $view_path = '', string $prefix = ''): array {
         $components_json = $view_path.'/_components.json';
         $components_json = str_replace(['/', '\\'], [\DIRECTORY_SEPARATOR, \DIRECTORY_SEPARATOR], $components_json);
 
         $exists = File::exists($components_json);
 
-        //if ($exists && ! $force_recreate) {
+        // if ($exists && ! $force_recreate) {
         if ($exists) {
             $content = File::get($components_json);
             /**
@@ -63,6 +63,5 @@ class GetCollectiveComponents {
         File::put($components_json, $content);
 
         return $comps;
-
     }
 }

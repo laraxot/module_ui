@@ -34,9 +34,10 @@ class Show extends Component {
         $view_params = [
             'view' => $view,
         ];
+
         return view()->make($view, $view_params);
     }
-    
+
     public function shouldRender(): bool {
         return Gate::allows($this->method, $this->panel);
     }

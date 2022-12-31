@@ -20,7 +20,7 @@ class User extends Component {
      *
      * @return void
      */
-    public function __construct(string $type='v1') {
+    public function __construct(string $type = 'v1') {
         $this->type = $type;
     }
 
@@ -33,7 +33,7 @@ class User extends Component {
          */
         $view = 'ui::components.header.nav.user_';
         $view .= Auth::guest() ? 'guest' : 'logged';
-        $view .='.'.$this->type;
+        $view .= '.'.$this->type;
 
         $view_params = [
             'view' => $view,

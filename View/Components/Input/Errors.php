@@ -12,11 +12,12 @@ use Illuminate\View\Component;
  */
 class Errors extends Component {
     public string $type;
+
     /**
      * Undocumented function.
      */
-    public function __construct(string $type='v1') {
-        $this->type=$type;
+    public function __construct(string $type = 'v1') {
+        $this->type = $type;
     }
 
     /**

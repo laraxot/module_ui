@@ -31,7 +31,7 @@ class Delete extends Component {
         $view_params = [
             'view' => $view,
         ];
-       
+
         return view()->make($view, $view_params);
     }
 

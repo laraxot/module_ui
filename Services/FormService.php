@@ -116,7 +116,7 @@ class FormService {
                 return $item->name === 'bs'.$field->type;
             }
         );
-        
+
         if (null === $comp_field) {
             $msg = 'not registered component [bs'.$field->type.']';
 
@@ -258,7 +258,6 @@ class FormService {
      * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Support\HtmlString
      */
     public static function inputHtml(FieldData $field, Model $row) {
-        
         $input_type = 'bs'.Str::studly($field->type);
         if (isset($field->sub_type)) {
             $input_type .= Str::studly($field->sub_type);

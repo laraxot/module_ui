@@ -22,7 +22,7 @@ class ThemeComposer {
 
         return $rows;
     }
-    
+
     public function cssInLine(string $file): string {
         $content = File::get(FileService::assetPath($file));
 
