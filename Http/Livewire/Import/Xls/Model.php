@@ -93,7 +93,7 @@ class Model extends Component {
 
         $rows = $this->data;
 
-        /**
+        /** 
          * controllo che non vengano erroneamente importati contatti con tutti campi null.
          *
          * @var Collection $rows
