@@ -32,4 +32,6 @@ class FieldData extends Data {
     public ?DataCollection $fields;
 
     public array $options = [];
+
+    public array $attributes = [];
 }

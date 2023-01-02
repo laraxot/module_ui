@@ -17,7 +17,13 @@ class Search extends Component {
 
     public function __construct(string $type = 'v1') {
         $this->type = $type;
-        $this->qs = collect(request()->query())
+
+        /**
+         * @var array
+         */
+        $query = request()->query();
+
+        $this->qs = collect($query)
             ->except(['q'])
             ->all();
 

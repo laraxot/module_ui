@@ -24,7 +24,12 @@ class Order extends Component {
     public function __construct(string $type = 'v1') {
         $panel = PanelService::make()->getRequestPanel();
         $this->type = $type;
-        $this->qs = collect(request()->query())
+
+        /**
+         * @var array
+         */
+        $query = request()->query();
+        $this->qs = collect($query)
                     ->except(['sort'])
                     ->all();
         if (! is_null($panel)) {
@@ -38,8 +43,19 @@ class Order extends Component {
                 $this->form_attrs['class'] = 'd-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search float-right';
                 break;
         }
-        $this->sort_by = Request::input('sort.by');
-        $this->sort_order = Request::input('sort.order');
+
+        /**
+         * @var string|null
+         */
+        $sort_by = Request::input('sort.by');
+
+        /**
+         * @var string|null
+         */
+        $sort_order = Request::input('sort.order');
+
+        $this->sort_by = $sort_by;
+        $this->sort_order = $sort_order;
     }
 
     // public function setSortOrderAttributes():array{

@@ -7,7 +7,6 @@ namespace Modules\UI\Http\Livewire\Input\Status\Select;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
-use Modules\Xot\Contracts\ModelContract;
 use Modules\Xot\Contracts\ModelWithStatusContract;
 
 /**
@@ -16,7 +15,7 @@ use Modules\Xot\Contracts\ModelWithStatusContract;
  */
 class Single extends Component {
     public string $modelClass;
-    public int $modelId;
+    public mixed $modelId;
     public array $options;
     public string $status = '';
 
