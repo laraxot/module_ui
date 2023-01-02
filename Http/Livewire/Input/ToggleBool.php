@@ -21,7 +21,7 @@ class ToggleBool extends Component {
      *
      * @return void
      */
-    public function mount() {
+    public function mount():void {
         // $this->model = $model;
         // $this->field = $field;
         $this->isActive = (bool) $this->model->getAttribute($this->field);
