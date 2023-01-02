@@ -12,6 +12,7 @@ class FieldData extends Data {
     public ?string $label = null;
     public ?string $name_dot = null;
     public string $type;
+    public ?int $col_size;
     /**
      * @var array|string
      */
