@@ -7,11 +7,12 @@ declare(strict_types=1);
 
 namespace Modules\UI\Http\Livewire\Import\Xls;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Collection;
 use Modules\Xot\Services\XLSService;
+use Modules\Xot\Contracts\ModelContract;
+use Illuminate\Contracts\Support\Renderable;
 
 /**
  * Class Field.
@@ -95,14 +96,13 @@ class Model extends Component {
         /**
          * controllo che non vengano erroneamente importati contatti con tutti campi null.
          *
-         * @var Collection<Collection>
+         * @var Collection $rows
          */
         $rows = $rows->filter(
-            /**
-             * @param Model $item
-             */
+            
+             /** @var ModelContract $item */
             function ($item) {
-                // Cannot call method toArray() on mixed.
+                /** @var ModelContract $item */
                 foreach ($item->toArray() as $key => $value) {
                     if (null !== $value) {
                         return $item;
