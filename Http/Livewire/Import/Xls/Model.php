@@ -102,7 +102,6 @@ class Model extends Component {
             
              /** @var ModelContract $item */
             function ($item) {
-                /** @var ModelContract $item */
                 foreach ($item->toArray() as $key => $value) {
                     if (null !== $value) {
                         return $item;
@@ -123,9 +122,9 @@ class Model extends Component {
             // dddx([$keys, $data, $values]);
             // Result of && is always true.
             // if (false !== $data && false !== $this->fields) {
-            if (false !== $data && false !== $this->fields) {
+            //if (false !== $data && false !== $this->fields) {
                 $data = array_merge($data, $this->fields);
-            }
+            //}
             $data['mobile_phone'] = strval($data['mobile_phone']);
             // dddx($data['mobile_phone']);
             // dddx(['data' => $data, 'v' => $v, 'form_data' => $this->form_data, 'keys' => $keys]);
