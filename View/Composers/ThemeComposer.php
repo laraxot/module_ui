@@ -18,9 +18,12 @@ class ThemeComposer {
         if (null === $menu) {
             return collect([]);
         }
-        $rows = $menu->items;
+        $items = $menu->items;
+        if($items == null){
+            return collect([]);
+        }
 
-        return $rows;
+        return $items;
     }
 
     public function cssInLine(string $file): string {
