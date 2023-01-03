@@ -24,4 +24,6 @@ Homestead.json
 *.lock
 *.phar
 *.log
+*.old
+
 
