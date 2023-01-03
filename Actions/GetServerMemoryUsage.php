@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\UI\Actions;
 
-use Modules\Xot\Services\FileService;
+use Exception;
 use Modules\UI\Datas\ServerMemoryUsageData;
+use Modules\Xot\Services\FileService;
 use Spatie\QueueableAction\QueueableAction;
 
 class GetServerMemoryUsage {
@@ -85,10 +86,10 @@ class GetServerMemoryUsage {
         }
 
         if (null === $memoryTotal || null === $memoryFree) {
-            throw new \Exception('Errore while getting memory data');
+            throw new Exception('Errore while getting memory data');
         }
 
-        $usage = $memoryTotal - $memoryFree;
+        $usage = intval($memoryTotal) - intval($memoryFree);
 
         return ServerMemoryUsageData::from([
             'total' => $memoryTotal,
