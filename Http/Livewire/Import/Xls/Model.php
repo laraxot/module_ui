@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @see https://sweetcode.io/import-and-export-excel-files-data-using-in-laravel/
  */
@@ -19,7 +20,8 @@ use Illuminate\Contracts\Support\Renderable;
  *
  * @property Collection $data
  */
-class Model extends Component {
+class Model extends Component
+{
     use WithFileUploads;
 
     /**
@@ -40,7 +42,8 @@ class Model extends Component {
      *
      * @return void
      */
-    public function mount(string $modelClass, ?array $fields, ?array $trans) {
+    public function mount(string $modelClass, ?array $fields, ?array $trans)
+    {
         $this->modelClass = $modelClass;
         $this->fillable = app($modelClass)->getFillable();
         $this->fillable = array_combine($this->fillable, $this->fillable);
@@ -57,14 +60,14 @@ class Model extends Component {
     /**
      * Undocumented function.
      */
-    public function getDataProperty(): Collection {
+    public function getDataProperty(): Collection
+    {
         $path = $this->myfile->getRealPath();
 
         if (false !== $path) {
             return XLSService::make()
-            ->fromFilePath($path)
-            ->getData()
-            ;
+                ->fromFilePath($path)
+                ->getData();
         } else {
             return collect([]);
         }
@@ -73,7 +76,8 @@ class Model extends Component {
     /**
      * Undocumented function.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */
@@ -88,19 +92,20 @@ class Model extends Component {
      *
      * @return void
      */
-    public function import() {
+    public function import()
+    {
         $model = app($this->modelClass);
 
+        /**
+         * 
+         * @var Collection<Collection> $rows
+         */
         $rows = $this->data;
 
         /** 
          * controllo che non vengano erroneamente importati contatti con tutti campi null.
-         *
-         * @var Collection $rows
          */
         $rows = $rows->filter(
-            
-             /** @var ModelContract $item */
             function ($item) {
                 foreach ($item->toArray() as $key => $value) {
                     if (null !== $value) {
@@ -123,7 +128,7 @@ class Model extends Component {
             // Result of && is always true.
             // if (false !== $data && false !== $this->fields) {
             //if (false !== $data && false !== $this->fields) {
-                $data = array_merge($data, $this->fields);
+            $data = array_merge($data, $this->fields);
             //}
             $data['mobile_phone'] = strval($data['mobile_phone']);
             // dddx($data['mobile_phone']);
