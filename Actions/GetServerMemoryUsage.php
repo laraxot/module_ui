@@ -15,7 +15,9 @@ class GetServerMemoryUsage {
     }
 
     public function execute(): ServerMemoryUsageData {
+        /** @var int $memoryTotal */
         $memoryTotal = null;
+        /** @var int $memoryTotal */
         $memoryFree = null;
 
         if (stristr(PHP_OS, 'win')) {
@@ -83,7 +85,7 @@ class GetServerMemoryUsage {
         }
 
         if (null === $memoryTotal || null === $memoryFree) {
-            return null;
+            throw new \Exception('Errore while getting memory data');
         }
 
         $usage = $memoryTotal - $memoryFree;
