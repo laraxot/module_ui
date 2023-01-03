@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Modules\UI\Http\Livewire\Import\Xls;
 
+use Exception;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Collection;
@@ -20,8 +21,7 @@ use Illuminate\Contracts\Support\Renderable;
  *
  * @property Collection $data
  */
-class Model extends Component
-{
+class Model extends Component {
     use WithFileUploads;
 
     /**
@@ -96,17 +96,16 @@ class Model extends Component
     {
         $model = app($this->modelClass);
 
-        /**
-         * 
-         * @var Collection<Collection> $rows
-         */
         $rows = $this->data;
 
-        /** 
+        /**
          * controllo che non vengano erroneamente importati contatti con tutti campi null.
          */
         $rows = $rows->filter(
             function ($item) {
+                if(!method_exists($item,'toArray')){
+                    throw new Exception('['.__LINE__.']['.__FILE__.']');
+                }
                 foreach ($item->toArray() as $key => $value) {
                     if (null !== $value) {
                         return $item;
