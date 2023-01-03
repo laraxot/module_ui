@@ -103,9 +103,9 @@ class Model extends Component {
          */
         $rows = $rows->filter(
             function ($item) {
-                if(!method_exists($item,'toArray')){
-                    throw new Exception('['.__LINE__.']['.__FILE__.']');
-                }
+                //if(!method_exists($item,'toArray')){
+                //    throw new Exception('['.__LINE__.']['.__FILE__.']');
+                //}
                 foreach ($item->toArray() as $key => $value) {
                     if (null !== $value) {
                         return $item;
