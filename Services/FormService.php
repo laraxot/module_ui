@@ -119,7 +119,7 @@ class FormService {
         /**
          * @phpstan-var view-string
          */
-        $error_view='ui::components.alert.error';
+        $error_view = 'ui::components.alert.error';
 
         if (null === $comp_field) {
             $msg = 'not registered component [bs'.$field->type.']';
@@ -132,8 +132,6 @@ class FormService {
          */
         $view = Str::beforeLast((string) $comp_field->view, '.field').'.freeze';
         if (! View::exists($view)) {
-
-           
             return view($error_view, ['msg' => '['.$view.'] NOT EXISTS !!!']);
         }
 

@@ -88,8 +88,8 @@ class GetServerMemoryUsage {
         /*if (null === $memoryTotal || null === $memoryFree) {
             throw new Exception('Errore while getting memory data');
         }*/
-        $memoryFree=intval($memoryFree);
-        $memoryTotal=intval($memoryTotal);
+        $memoryFree = intval($memoryFree);
+        $memoryTotal = intval($memoryTotal);
         $usage = $memoryTotal - $memoryFree;
 
         return ServerMemoryUsageData::from([

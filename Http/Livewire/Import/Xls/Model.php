@@ -9,12 +9,11 @@ declare(strict_types=1);
 namespace Modules\UI\Http\Livewire\Import\Xls;
 
 use Exception;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Collection;
 use Modules\Xot\Services\XLSService;
-use Modules\Xot\Contracts\ModelContract;
-use Illuminate\Contracts\Support\Renderable;
 
 /**
  * Class Field.
@@ -42,8 +41,7 @@ class Model extends Component {
      *
      * @return void
      */
-    public function mount(string $modelClass, ?array $fields, ?array $trans)
-    {
+    public function mount(string $modelClass, ?array $fields, ?array $trans) {
         $this->modelClass = $modelClass;
         $this->fillable = app($modelClass)->getFillable();
         $this->fillable = array_combine($this->fillable, $this->fillable);
@@ -60,8 +58,7 @@ class Model extends Component {
     /**
      * Undocumented function.
      */
-    public function getDataProperty(): Collection
-    {
+    public function getDataProperty(): Collection {
         $path = $this->myfile->getRealPath();
 
         if (false !== $path) {
@@ -76,8 +73,7 @@ class Model extends Component {
     /**
      * Undocumented function.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */
@@ -92,8 +88,7 @@ class Model extends Component {
      *
      * @return void
      */
-    public function import()
-    {
+    public function import() {
         $model = app($this->modelClass);
 
         $rows = $this->data;
@@ -103,9 +98,9 @@ class Model extends Component {
          */
         $rows = $rows->filter(
             function ($item) {
-                //if(!method_exists($item,'toArray')){
+                // if(!method_exists($item,'toArray')){
                 //    throw new Exception('['.__LINE__.']['.__FILE__.']');
-                //}
+                // }
                 foreach ($item->toArray() as $key => $value) {
                     if (null !== $value) {
                         return $item;
@@ -126,9 +121,9 @@ class Model extends Component {
             // dddx([$keys, $data, $values]);
             // Result of && is always true.
             // if (false !== $data && false !== $this->fields) {
-            //if (false !== $data && false !== $this->fields) {
+            // if (false !== $data && false !== $this->fields) {
             $data = array_merge($data, $this->fields);
-            //}
+            // }
             $data['mobile_phone'] = strval($data['mobile_phone']);
             // dddx($data['mobile_phone']);
             // dddx(['data' => $data, 'v' => $v, 'form_data' => $this->form_data, 'keys' => $keys]);

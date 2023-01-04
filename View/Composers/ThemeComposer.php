@@ -19,7 +19,7 @@ class ThemeComposer {
             return collect([]);
         }
         $items = $menu->items;
-        if($items == null){
+        if (null == $items) {
             return collect([]);
         }
 

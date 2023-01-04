@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\UI\View\Components\Info;
 
-use Illuminate\View\Component;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\View\Component;
 use Modules\UI\Actions\GetServerMemoryUsage;
 
 /**
@@ -32,8 +32,8 @@ class Server extends Component {
          * @phpstan-var view-string
          */
         $view = 'ui::components.info.server.'.$this->type;
-        $info= app(GetServerMemoryUsage::class)->execute();
-        
+        $info = app(GetServerMemoryUsage::class)->execute();
+
         $view_params = [
             'view' => $view,
             'info' => $info,

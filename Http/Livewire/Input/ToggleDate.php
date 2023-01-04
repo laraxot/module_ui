@@ -18,10 +18,8 @@ class ToggleDate extends Component {
 
     /**
      * Undocumented function.
-     *
-     * @return void
      */
-    public function mount():void {
+    public function mount(): void {
         // $this->model = $model;
         // $this->field = $field;
         $this->isActive = null !== $this->model->getAttribute($this->field);
