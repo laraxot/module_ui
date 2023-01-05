@@ -1,7 +1,7 @@
 @extends('adm_theme::layouts.app')
 @section('content')
     @php
-        $fields = $_panel->fields();
+        $fields = $_panel->getFields();
     @endphp
     <table>
         @foreach ($fields as $k => $v)
