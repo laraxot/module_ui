@@ -18,18 +18,7 @@ class Progressbar extends Component {
     public string $url = '?';
     public string $onComplete = '';
 
-    /**
-     * Undocumented function.
-     */
-    public function render(): Renderable {
-        $view = 'ui::livewire.progressbar.v1';
-        $view_params = [
-            'view' => $view,
-        ];
-
-        return view()->make($view, $view_params);
-    }
-
+   
     /**s
      * --.
      */
@@ -47,4 +36,17 @@ class Progressbar extends Component {
     public function handle(): void {
         ++$this->loop_index;
     }
+
+     /**
+     * Undocumented function.
+     */
+    public function render(): Renderable {
+        $view = 'ui::livewire.progressbar.v1';
+        $view_params = [
+            'view' => $view,
+        ];
+
+        return view()->make($view, $view_params);
+    }
+
 }

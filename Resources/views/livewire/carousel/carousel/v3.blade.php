@@ -1,5 +1,4 @@
 <div>
-    {{ dddx('qui') }}
     <p>{!! $items[$i]['txt'] ?? '' !!}</p>
     <button class="btn btn-circle btn-soft-primary btn-sm mx-2 mx-md-0"
         @if (isset($items[$i - 1])) onClick="press['{{ $component_id }}'].getFrameSecond('{{ $items[$i - 1]['start'] }}',{{ $i - 1 }},{{ $i }})" @endif
