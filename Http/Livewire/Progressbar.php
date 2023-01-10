@@ -18,7 +18,6 @@ class Progressbar extends Component {
     public string $url = '?';
     public string $onComplete = '';
 
-   
     /**s
      * --.
      */
@@ -37,7 +36,7 @@ class Progressbar extends Component {
         ++$this->loop_index;
     }
 
-     /**
+    /**
      * Undocumented function.
      */
     public function render(): Renderable {
@@ -48,5 +47,4 @@ class Progressbar extends Component {
 
         return view()->make($view, $view_params);
     }
-
 }
