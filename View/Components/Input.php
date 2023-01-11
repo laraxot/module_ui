@@ -57,7 +57,7 @@ class Input extends Component {
      * Get the view / contents that represents the component.
      */
     public function render(): Renderable {
-        // esempio Modules/Theme/Resources/views/components/input/select/field.blade.php
+        // esempio Modules/UI/Resources/views/components/input/select/field.blade.php
         /**
          * @phpstan-var view-string
          */

@@ -67,7 +67,7 @@
 <script>
 
 //var formSerialize = require('form-serialize');
-import { bsIframeModalVue } from '../../../../../../../Modules/Theme/Resources/js/components/mixins/bsIframeModalVue';
+import { bsIframeModalVue } from '../../../../../../../Modules/UI/Resources/js/components/mixins/bsIframeModalVue';
 
 
 export default {

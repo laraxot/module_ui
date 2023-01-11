@@ -12,20 +12,20 @@ use Modules\Xot\Traits\SushiConfigCrud;
 use Sushi\Sushi;
 
 /**
- * Modules\Theme\Models\MenuItem.
+ * Modules\UI\Models\MenuItem.
  *
- * @property int                             $id
- * @property string|null                     $label
- * @property string|null                     $link
- * @property int|null                        $menu
- * @property int|null                        $sort
- * @property int|null                        $parent
- * @property string|null                     $class
- * @property int|null                        $depth
- * @property int|null                        $role_id
- * @property Collection|MenuItem[]           $child
- * @property int|null                        $child_count
- * @property \Modules\Theme\Models\Menu|null $parent_menu
+ * @property int                          $id
+ * @property string|null                  $label
+ * @property string|null                  $link
+ * @property int|null                     $menu
+ * @property int|null                     $sort
+ * @property int|null                     $parent
+ * @property string|null                  $class
+ * @property int|null                     $depth
+ * @property int|null                     $role_id
+ * @property Collection|MenuItem[]        $child
+ * @property int|null                     $child_count
+ * @property \Modules\UI\Models\Menu|null $parent_menu
  *
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newQuery()
