@@ -5,7 +5,7 @@
   return !in_array($item->type,['Password']);
  })->all();
  */
-    $fields = $_panel->getFields(['act' => 'index']);
+    $fields = $_panel->getFields('index');
 @endphp
 @if ($loop->first)
     <table>

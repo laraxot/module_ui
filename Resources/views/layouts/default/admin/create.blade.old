@@ -16,7 +16,7 @@
             if (!is_object($row)) {
                 return '';
             }
-            $fields = $_panel->getFields(['act'=>'edit']);
+            $fields = $_panel->getFields('edit');
             @endphp
             {!! Form::bsOpenPanel($_panel, 'store') !!}
             @foreach ($fields as $field)
@@ -51,7 +51,7 @@
             @endif
             @php
             if(!is_object($row)) return '';
-            $fields=$_panel->getFields(['act'=>'create']);
+            $fields=$_panel->getFields('create');
             @endphp
             {!! Form::bsOpenPanel($_panel, 'store') !!}
             <div class="row">

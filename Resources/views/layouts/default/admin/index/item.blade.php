@@ -6,7 +6,7 @@ return !in_array($item->type,['Password']);
 })->all();
 */
     
-    $fields = $_panel->getFields(['act' => 'index']);
+    $fields = $_panel->getFields('index');
     //$row_panel=$_panel;
     $row_panel = Panel::make()->get($row);
     $row_panel->setParent($_panel->getParent());

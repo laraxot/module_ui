@@ -12,7 +12,7 @@ class FieldData extends Data {
     public ?string $label = null;
     public ?string $name_dot = null;
     public string $type;
-    public ?int $col_size;
+    public int $col_size = 12;
     /**
      * @var array|string
      */
@@ -34,4 +34,30 @@ class FieldData extends Data {
     public array $options = [];
 
     public array $attributes = [];
+    /*
+    public function __construct(
+        string $name, ?string $label = null, string $type, int $col_size = 12, $rules, $value, ?string $method = null, ?string $view = null,
+        ?DataCollection $fields, array $options = [], array $attributes = []) {
+        $this->name = $name;
+        $this->label = $label;
+        $this->type = $type;
+        $this->col_size = $col_size;
+        $this->method = $method;
+        $this->view = $view;
+        $this->fields = $fields;
+        $this->options = $options;
+        $this->attributes = $attributes;
+
+        // -------------------------
+        $this->name_dot = bracketsToDotted($name);
+
+        dddx($this);
+    }
+    */
+
+    public function getNameDot() {
+        $this->name_dot = bracketsToDotted($this->name);
+
+        return $this->name_dot;
+    }
 }

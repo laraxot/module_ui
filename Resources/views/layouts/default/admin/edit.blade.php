@@ -4,7 +4,7 @@
         return '';
     }
     
-    $fields = $_panel->getFields(['act' => 'edit']);
+    $fields = $_panel->getFields('edit');
 @endphp
 
 @section('content')

@@ -2,7 +2,7 @@
 if (!is_object($row)) {
     return '';
 }
-$fields = $_panel->getFields(['act' => 'create']);
+$fields = $_panel->getFields('create');
 @endphp
 
 {!! Form::bsOpen($row, 'store') !!}
