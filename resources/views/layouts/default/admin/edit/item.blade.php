@@ -2,7 +2,7 @@
 if (!is_object($row)) {
     return '';
 }
-$fields = $_panel->getFields(['act' => 'edit']);
+$fields = $_panel->getFields('edit');
 //dddx(get_defined_vars());
 //dddx($_panel);
 @endphp

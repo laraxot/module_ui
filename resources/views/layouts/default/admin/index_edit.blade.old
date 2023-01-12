@@ -14,7 +14,7 @@
 
         @foreach ($rows as $key => $row)
             @php
-                $fields = $_panel->getFields(['act' => 'index']);
+                $fields = $_panel->getFields('index');
                 $row_panel = Panel::make()->get($row);
                 $row_panel->setParent($_panel->getParent());
                 $row_panel->setName($_panel->getName());

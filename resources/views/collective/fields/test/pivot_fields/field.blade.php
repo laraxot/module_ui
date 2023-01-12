@@ -11,7 +11,7 @@ $pivot_class = $rows->getPivotClass();
 $pivot = new $pivot_class();
 $pivot_panel = Theme::panelModel($pivot);
 $pivot_panel->setRows($rows);
-$pivot_fields = $pivot_panel->getFields(['act' => 'edit']);
+$pivot_fields = $pivot_panel->getFields('edit');
 
 $val = $model->$name;
 

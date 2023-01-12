@@ -6,7 +6,7 @@
     <x-section type="crud">
         {!! Theme::include('topbar', [], get_defined_vars()) !!}
         @php
-            $fields = $_panel->getFields(['act' => 'index']);
+            $fields = $_panel->getFields('index');
         @endphp
         <x-pagination :rows="$rows" />
         <x-component type="table">
@@ -26,7 +26,7 @@
                     <x-slot name="tbody">
                 @endif
                 <tr>
-                    @foreach ($row_panel->getFields(['act' => 'index']) as $field)
+                    @foreach ($row_panel->getFields('index') as $field)
                         <td>
                             {!! Theme::inputFreeze($field, $row) !!}
                             @if ($loop->first)
