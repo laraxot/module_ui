@@ -5,8 +5,8 @@
     <span></span> <i class="fa fa-caret-down"></i>
 
     <div style="display:block">
-        <input type="hidden" name="date_from" value="{{ request('date_from',null) }}" {{-- wire:model.lazy="form_data.{{ $name }}_from" --}}>
-        <input type="hidden" name="date_to" value="{{ request('date_to',null) }}" {{-- wire:model.lazy="form_data.{{ $name }}_to" --}}>
+        <input type="hidden" name="date_from" value="{{ request('date_from', null) }}" {{-- wire:model.lazy="form_data.{{ $name }}_from" --}}>
+        <input type="hidden" name="date_to" value="{{ request('date_to', null) }}" {{-- wire:model.lazy="form_data.{{ $name }}_to" --}}>
     </div>
 
 </div>
@@ -23,7 +23,8 @@
             }
             var end = moment($('#{{ Str::slug($name) }} [name="date_to"]').val());
             if (!end.isValid()) {
-                end = moment().set('hour', 23).set('minute', 59).set('second', 59);
+                //console.log("TEST", end);
+                end = moment() /*.set('hour', 23).set('minute', 59).set('second', 59)*/ ;
                 $('#{{ Str::slug($name) }} [name="date_to"]').val(end.format('yyyy-MM-DDTHH:mm:ss'));
             }
 
