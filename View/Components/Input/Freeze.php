@@ -7,6 +7,7 @@ namespace Modules\UI\View\Components\Input;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Modules\Cms\Services\PanelService;
 use Modules\UI\Datas\FieldData;
@@ -31,7 +32,12 @@ class Freeze extends Component {
         $this->field = $field;
         $this->row = $row;
         $tmp = $row->toArray();
-        $this->value = Arr::get($tmp, $field->getNameDot());
+
+        if (Str::contains($field->getNameDot(), '.')) {
+            $this->value = Arr::get($tmp, $field->getNameDot());
+        } else {
+            $this->value = $row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
+        }
 
         /*
         if ('areas' == $field->name) {
@@ -64,6 +70,26 @@ class Freeze extends Component {
      */
     public function render(): Renderable {
         $value_type = gettype($this->value);
+        if ('object' == $value_type) {
+            $value_type = class_basename($this->value);
+        }
+        if ('Collection' == $value_type) {
+            $first = $this->value->first();
+            if ($first instanceof Model) {
+                $value_type .= '.Model';
+            }
+        }
+
+        /*
+        if (! in_array($value_type, ['integer', 'string', 'NULL', 'Collection.Model'])) {
+            dddx([
+                'value_type' => $value_type,
+                'value' => $this->value,
+                'basename' => class_basename($this->value),
+            ]);
+        }
+        */
+        $value_type = Str::lower($value_type);
         /**
          * @phpstan-var view-string
          */
