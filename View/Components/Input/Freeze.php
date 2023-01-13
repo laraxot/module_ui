@@ -38,8 +38,15 @@ class Freeze extends Component {
         } else {
             $this->value = $row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
         }
-
-        if (count($field->options) > 0) {
+        $valid_array_offset_type=(is_string($this->value) || is_integer($this->value));
+        if (count($field->options) > 0 && $valid_array_offset_type ) {
+            /*
+            dddx([
+                'field'=>$field,
+                'value'=>$this->value,
+                'row'=>$row,
+            ]);
+            */
             $this->value = collect($field->options)->get($this->value) ?? $this->value;
         }
 
