@@ -1,1 +1,0 @@
-https://codesandbox.io/s/m1epv?file=/src/VideoPlayer.js

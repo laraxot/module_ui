@@ -1,1 +1,0 @@
-$('#lfm').filemanager('image');

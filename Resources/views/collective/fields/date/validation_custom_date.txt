@@ -1,1 +1,0 @@
-http://www.expertphp.in/article/how-to-validate-custom-date-format-with-laravel-validator-
