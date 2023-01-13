@@ -39,21 +39,10 @@ class Freeze extends Component {
             $this->value = $row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
         }
 
-        /*
-        if ('areas' == $field->name) {
-            dddx(
-                [
-                    'field' => $field,
-                    'name_dot' => $field->getNameDot(),
-                    'row' => $row,
-                    'row_val' => $row->{$field->name},
-                    'value' => $this->value,
-                    'getType' => gettype($this->value),
-                    'tmp' => $tmp,
-                ]
-            );
+        if (count($field->options) > 0) {
+            $this->value = collect($field->options)->get($this->value) ?? $this->value;
         }
-        // */
+
         /*
         $this->attrs['class'] = 'form-label';
 
@@ -77,6 +66,14 @@ class Freeze extends Component {
             $first = $this->value->first();
             if ($first instanceof Model) {
                 $value_type .= '.Model';
+            }
+        }
+
+        if ('string' == $value_type && Str::contains($this->value, '.')) {
+            $info = pathinfo($this->value);
+            $ext = $info['extension'] ?? '';
+            if (in_array($ext, ['png', 'jpg'])) {
+                $value_type = 'image';
             }
         }
 
