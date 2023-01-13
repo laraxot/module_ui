@@ -1,0 +1,66 @@
+@extends('adm_theme::layouts.app')
+@section('content')
+    @component('ui::components.crud', get_defined_vars())
+        @slot('content')
+            {{-- @livewire('create',['model'=>$_panel->getRow()]) --}}
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $k => $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @php
+            if (!is_object($row)) {
+                return '';
+            }
+            $fields = $_panel->getFields('edit');
+            @endphp
+            {!! Form::bsOpenPanel($_panel, 'store') !!}
+            @foreach ($fields as $field)
+                {!! Theme::inputHtml($field,$row) !!}
+            @endforeach
+            {{ Form::bsSubmit('Salva') }}
+            {!! Form::close() !!}
+        @endslot
+    @endcomponent
+@endsection
+
+
+
+
+
+{{-- @section('content')
+    @php
+    //if(!\View::exists($view.'.form') && !\View::exists($view_default.'.form.'.$edit_type) ) {
+    // dddx('non esiste ne ['.$view.'.form'.'] ne ['.$view_default.'.form.'.$edit_type.']');
+    //}
+    @endphp
+    <div class="widget">
+        <div class="widget-body">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $k => $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @php
+            if(!is_object($row)) return '';
+            $fields=$_panel->getFields('create');
+            @endphp
+            {!! Form::bsOpenPanel($_panel, 'store') !!}
+            <div class="row">
+                @foreach ($fields as $field)
+                    {!! Theme::inputHtml($field,$row) !!}
+                @endforeach
+            </div>
+            {{ Form::bsSubmit('Save') }}
+            {!! Form::close() !!}
+        </div>
+    </div>
+@endsection --}}
