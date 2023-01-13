@@ -1,0 +1,2 @@
+{{-- dddx($field) --}}
+{{ $value }}
