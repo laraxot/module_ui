@@ -1,0 +1,10 @@
+https://preview.keenthemes.com/metronic/demo2/crud/forms/widgets/nouislider.html
+
+https://refreshless.com/nouislider/examples/
+https://refreshless.com/nouislider/more/#section-styling
+
+
+
+https://bobbyhadz.com/blog/javascript-cannot-read-property-scrollheight-of-undefined
+
+https://jackwhiting.co.uk/posts/lazy-loading-js-with-webpack-and-laravel-mix/
