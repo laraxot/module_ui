@@ -13,7 +13,7 @@ use Modules\Cms\Services\PanelService;
 use Modules\UI\Datas\FieldData;
 
 /**
- * WIP WIP WIP
+ * WIP WIP WIP.
  */
 class Field extends Component {
     public FieldData $field;
