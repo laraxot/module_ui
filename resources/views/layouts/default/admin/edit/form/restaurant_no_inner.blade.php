@@ -1,4 +1,4 @@
-{!! Form::bsOpen($row,'store',"",null,"createRestaurantForm") !!}
+{!! Form::bsOpen($row,'store',"",null,"create") !!}
 {{--
 @if (count($errors) > 0)
     <div class="alert alert-danger">
