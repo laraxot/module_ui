@@ -5,8 +5,11 @@
 
                 <div class="col-sm col-12">
                     <h1 class="h2 ls-tight">
+                        {{--
                         <span class="d-inline-block me-3">👋</span>Hi, Tahlia!
+                        --}}
                     </h1>
+                    
                 </div>
 
                 <!-- Actions -->
