@@ -1,4 +1,4 @@
-{!! Form::bsOpen($row,'store',"",null,"createRestaurantForm") !!}
+{!! Form::bsOpen($row,'store',"",null,"create") !!}
 <div class="row">
     <div class="form-group col-sm-6">
         {{ Form::bsText('first_name') }}

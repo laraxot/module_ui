@@ -1,4 +1,4 @@
-{!! Form::bsOpen($row,'store',"",null,"createRestaurantForm") !!}
+{!! Form::bsOpen($row,'store',"",null,"create") !!}
 <input type="hidden" name="_action" value="save_continue" />
 {{--
 @if (count($errors) > 0)
