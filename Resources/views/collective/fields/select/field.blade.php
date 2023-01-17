@@ -7,15 +7,15 @@
     // extract($attributes);
     // $field = transFields(get_defined_vars());
     $val = Form::getValueAttribute($field->name);
-    if(is_object($val)){
+    if (is_object($val)) {
         //dddx([$field->name,$val,]);
-        $val=$val->getKey();
+        $val = $val->getKey();
     }
 @endphp
 
 @component($blade_component, get_defined_vars())
     @slot('label')
-        {{ Form::label($name, $field->label, ['class' => 'control-label']) }}
+        {{ Form::label($name, $field->label, ['class' => 'control-label form-label']) }}
     @endslot
     @slot('input')
         {{--
