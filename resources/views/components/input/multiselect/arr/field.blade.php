@@ -14,15 +14,12 @@
     if (isJson($value)) {
         $value = json_decode($value);
     }
+    //dddx($this->form_data);
 @endphp
 
 
-<select class="form-select" name="{{ $name }}" {{ $attributes->merge($attrs) }} multiple>
-    @foreach ($options as $key => $option)
-        <option value="{{ $key }}">
-            {{ $option }}
-        </option>
+<select wire:model="form_data.times" name="{{ $name }}" class="form-select" multiple>
+    @foreach ($options as $k => $option)
+        <option wire:key="option-{{ $option }}" value="{{ $option }}">{{ $option }}</option>
     @endforeach
 </select>
-
-{{-- implode('-', $this->form_data['times']) --}}
