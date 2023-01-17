@@ -4,7 +4,7 @@
         <button type="button" class="btn btn-primary float-right" wire:click="addArr()"> Add ( + ) </button>
     </div>
 
-    {{-- laxy vuol dire che fa l'aggiornamento non ad ogni lettera che scrivi, ma ogni tot temp, per non sovraccaricare di richieste il server
+    {{-- lazy vuol dire che fa l'aggiornamento non ad ogni lettera che scrivi, ma ogni tot temp, per non sovraccaricare di richieste il server
     e anche per evitare troppi refresh in frontend (vedi doc. Livewire) --}}
     @foreach ($form_data[$name] ?? [] as $k => $v)
         <div class="input-group" :wire:key="'group-'.$model_id">
