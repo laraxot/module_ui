@@ -3,10 +3,10 @@
     <h3>{{ $label ?? 'Criteri di Ricerca' }} <a href="#" wire:click="addArr()"
             class="btn btn-circle btn-primary btn-sm"><i class="uil uil-plus"></i></a>
     </h3>
-   
+
     @foreach ($form_data[$name] ?? [] as $k => $v)
         @php
-        //es. filter bool
+            //es. filter bool
             $input_name = $name . '[' . $k . ']';
             $wire_name = 'form_data.' . $name . '.' . $k;
         @endphp
@@ -28,13 +28,13 @@
                 <a href="#" wire:click="subArr({{ $k }})" class="btn btn-circle btn-primary btn-sm">
                     <i class="uil uil-minus"></i>
                 </a>
-                <a href="#" onclick="addTilde('{{ $input_name }}[q]')"
+                <a href="#" onclick="addTilde('{{ $input_name }}[q]','advanced_search')"
                     class="btn btn-circle btn-primary btn-sm">
                     <i>~</i>
                 </a>
             </div>
         </div>
-        <div class="row">
+        <div class="row advanced_search">
             <div class=" mb-4">
                 <input type="text" placeholder="Ricerca parola" class="form-control" name="{{ $input_name }}[q]"
                     wire:model.lazy="{{ $wire_name }}.q">
@@ -49,12 +49,4 @@
             </div>
         </div>
     @endforeach
-    @push('scripts')
-        <script>
-            function addTilde(element) {
-                const el = $('[name="' + element + '"]').not('#search_search')
-                $(el).val($(el).val() + '~')
-            }
-        </script>
-    @endpush
 </div>

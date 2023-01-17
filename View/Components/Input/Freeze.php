@@ -15,7 +15,8 @@ use Modules\UI\Datas\FieldData;
 /**
  * Undocumented class.
  */
-class Freeze extends Component {
+class Freeze extends Component
+{
     public FieldData $field;
     public Model $row;
     public string $tpl;
@@ -27,7 +28,8 @@ class Freeze extends Component {
     /**
      * Undocumented function.
      */
-    public function __construct(FieldData $field, Model $row, string $tpl = 'v1') {
+    public function __construct(FieldData $field, Model $row, string $tpl = 'v1')
+    {
         $this->tpl = $tpl;
         $this->field = $field;
         $this->row = $row;
@@ -39,25 +41,23 @@ class Freeze extends Component {
             $this->value = $row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
         }
 
+
         if (count($field->options) > 0) {
-            $this->value = collect($field->options)->get($this->value) ?? $this->value;
+            if ($this->value !== null) {
+                if (!$this->value->isEmpty()) {
+                    $this->value = collect($field->options)->get($this->value) ?? $this->value;
+                }
+            } else {
+                $this->value = '';
+            }
         }
-
-        /*
-        $this->attrs['class'] = 'form-label';
-
-        $panel = PanelService::make()->getRequestPanel();
-        $this->tradKey = 'pub_theme::txt';
-        if (null !== $panel) {
-            $this->tradKey = $panel->getTradMod();
-        }
-        */
     }
 
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         $value_type = gettype($this->value);
         if ('object' == $value_type) {
             $value_type = class_basename($this->value);
@@ -90,7 +90,7 @@ class Freeze extends Component {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.input.freeze.'.$value_type.'.'.$this->tpl;
+        $view = 'ui::components.input.freeze.' . $value_type . '.' . $this->tpl;
         $view_params = [
             'view' => $view,
         ];
