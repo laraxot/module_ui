@@ -62,8 +62,12 @@
 	</div>
 	--}}
 </div>
+<<<<<<< HEAD
 @endsection
 <<<<<<< HEAD
 >>>>>>> 88c6711 (up)
 =======
 >>>>>>> 75be95a (up)
+=======
+@endsection
+>>>>>>> 88c6711 (up)
