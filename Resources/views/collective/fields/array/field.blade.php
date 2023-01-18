@@ -5,4 +5,11 @@
     
 @endphp
 {{-- dddx($field->options) --}}
-<livewire:input.arr.assoc :name="$name" :value="$val"></livewire:input.arr.assoc>
+@component($blade_component, get_defined_vars())
+    @slot('label')
+        {{ Form::label($name, $field->label, ['class' => 'control-label form-label']) }}
+    @endslot
+    @slot('input')
+        <livewire:input.arr.assoc :name="$name" :value="$val"></livewire:input.arr.assoc>
+    @endslot
+@endcomponent
