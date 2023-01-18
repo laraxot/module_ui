@@ -31,9 +31,10 @@ class FieldData extends Data {
      */
     public ?DataCollection $fields;
 
-    public array $options = [];
+    // public array $options = [];
+    public ?array $options = [];
 
-    public array $attributes = [];
+    public ?array $attributes = [];
     /*
     public function __construct(
         string $name, ?string $label = null, string $type, int $col_size = 12, $rules, $value, ?string $method = null, ?string $view = null,
