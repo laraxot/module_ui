@@ -9,7 +9,10 @@
     $val = Form::getValueAttribute($field->name);
     if (is_object($val)) {
         //dddx([$field->name,$val,]);
-        $val = $val->getKey();
+        if(method_exists($val,'getKey')){
+            $val = $val->getKey();
+        }
+        
     }
 @endphp
 
