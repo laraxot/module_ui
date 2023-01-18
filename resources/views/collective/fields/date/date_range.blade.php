@@ -6,7 +6,8 @@ if (! function_exists('formatDate')) {
     /**
      * @return bool|string|null
      */
-    function formatDate($entry, $dateFieldName) {
+    function formatDate($entry, $dateFieldName)
+    {
         $formattedDate = null;
         if (isset($entry) && ! empty($entry->{$dateFieldName})) {
             $dateField = $entry->{$dateFieldName};
