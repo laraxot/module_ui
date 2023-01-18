@@ -10,7 +10,8 @@ use Modules\Xot\Providers\XotBaseRouteServiceProvider;
 /**
  * Class RouteServiceProvider.
  */
-class RouteServiceProvider extends XotBaseRouteServiceProvider {
+class RouteServiceProvider extends XotBaseRouteServiceProvider
+{
     /**
      * The module namespace to assume when generating URLs to actions.
      */

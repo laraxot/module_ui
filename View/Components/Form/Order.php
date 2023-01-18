@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\View\Component;
 use Modules\Cms\Services\PanelService;
 
-class Order extends Component {
+class Order extends Component
+{
     public string $type;
     public array $qs;
 
@@ -21,7 +22,8 @@ class Order extends Component {
     public ?string $sort_by;
     public ?string $sort_order;
 
-    public function __construct(string $type = 'v1') {
+    public function __construct(string $type = 'v1')
+    {
         $panel = PanelService::make()->getRequestPanel();
         $this->type = $type;
 
@@ -66,7 +68,8 @@ class Order extends Component {
     //     ];
     // }
 
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */

@@ -11,7 +11,8 @@ use Modules\UI\Actions\GetServerMemoryUsage;
 /**
  * Class Server.
  */
-class Server extends Component {
+class Server extends Component
+{
     public array $attrs = [];
     public string $type;
 
@@ -20,14 +21,16 @@ class Server extends Component {
      *
      * @return void
      */
-    public function __construct(string $type = 'v1') {
+    public function __construct(string $type = 'v1')
+    {
         $this->type = $type;
     }
 
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */

@@ -10,7 +10,8 @@ use Livewire\Component;
 /**
  * Class Arr // Array is reserved.
  */
-class Arr extends Component {
+class Arr extends Component
+{
     public string $type;
     public string $name;
     public array $form_data;
@@ -22,7 +23,8 @@ class Arr extends Component {
      *
      * @return void
      */
-    public function mount(string $type, string $name/* , string $group */) {
+    public function mount(string $type, string $name/* , string $group */)
+    {
         $this->type = $type;
         $this->name = $name;
         $data = request()->all();
@@ -35,7 +37,8 @@ class Arr extends Component {
     /**
      * Undocumented function.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */
@@ -47,7 +50,8 @@ class Arr extends Component {
         return view()->make($view, $view_params);
     }
 
-    public function addGroup(): void {
+    public function addGroup(): void
+    {
         // $this->form_data[$this->name] =
 
         $this->form_data[$this->name][$this->group] = [];
@@ -56,12 +60,14 @@ class Arr extends Component {
         // dddx($this->form_data);
     }
 
-    public function addMail(): void {
+    public function addMail(): void
+    {
         $this->form_data[$this->name][$this->group][] = $this->email;
         $this->email = '';
     }
 
-    public function getData(): void {
+    public function getData(): void
+    {
         dddx($this->form_data);
     }
 }

@@ -6,7 +6,8 @@ namespace Modules\UI\Datas;
 
 use Spatie\LaravelData\Data;
 
-class ServerMemoryUsageData extends Data {
+class ServerMemoryUsageData extends Data
+{
     public int $total; // 34199285760"
     public string $total_nice; // => "31.85 GiB"
     public int $usage; // " => 16192126976

@@ -12,8 +12,10 @@ use Modules\Xot\Services\FileService;
 /**
  * --.
  */
-class ThemeComposer {
-    public function getMenuItemsByName(string $name): Collection {
+class ThemeComposer
+{
+    public function getMenuItemsByName(string $name): Collection
+    {
         $menu = Menu::firstWhere('name', $name);
         if (null === $menu) {
             return collect([]);
@@ -26,7 +28,8 @@ class ThemeComposer {
         return $items;
     }
 
-    public function cssInLine(string $file): string {
+    public function cssInLine(string $file): string
+    {
         $content = File::get(FileService::assetPath($file));
 
         return $content;

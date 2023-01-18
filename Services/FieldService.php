@@ -11,7 +11,8 @@ use Illuminate\Support\Str;
 /**
  * Class FieldService.
  */
-class FieldService extends BaseFieldService {
+class FieldService extends BaseFieldService
+{
     public string $name;
 
     protected string $label;
@@ -33,7 +34,8 @@ class FieldService extends BaseFieldService {
     /**
      * FieldService constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         // $this->label = $label;
         // $this->name = $name ?? Str::snake(Str::lower($label));
         // $this->key = 'form_data.'.$this->name;
@@ -42,7 +44,8 @@ class FieldService extends BaseFieldService {
     /* Unsafe usage of new static(). Consider making the class or the constructor final
     */
 
-    public static function make(): self {
+    public static function make(): self
+    {
         // return new static($label, $name);
         return new self();
     }
@@ -50,7 +53,8 @@ class FieldService extends BaseFieldService {
     /**
      * Undocumented function.
      */
-    public function setVars(array $vars): self {
+    public function setVars(array $vars): self
+    {
         foreach ($vars as $k => $v) {
             $func = 'set'.str::Studly($k);
             $this->{$func}($k);
@@ -59,68 +63,80 @@ class FieldService extends BaseFieldService {
         return $this;
     }
 
-    public function setName(string $name): self {
+    public function setName(string $name): self
+    {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getName(): string {
+    public function getName(): string
+    {
         return $this->name;
     }
 
-    public function getLabel(): string {
+    public function getLabel(): string
+    {
         return $this->label;
     }
 
-    public function getKey(): string {
+    public function getKey(): string
+    {
         return $this->key;
     }
 
-    public function getType(): string {
+    public function getType(): string
+    {
         return $this->type;
     }
 
-    public function setColSize(int $col_size): self {
+    public function setColSize(int $col_size): self
+    {
         $this->col_size = $col_size;
 
         return $this;
     }
 
-    public function setType(string $type): self {
+    public function setType(string $type): self
+    {
         // @XOT
         $this->type = Str::snake($type);
 
         return $this;
     }
 
-    public function type(string $type): self {
+    public function type(string $type): self
+    {
         // @XOT
         $this->type = Str::snake($type);
 
         return $this;
     }
 
-    public function setPrefix(string $prefix): self {
+    public function setPrefix(string $prefix): self
+    {
         $this->key = $prefix.'.'.$this->name;
 
         return $this;
     }
 
-    public function setInputComponent(string $input_component): self {
+    public function setInputComponent(string $input_component): self
+    {
         $this->input_component = 'ui::components.label_input.'.$input_component;
 
         return $this;
     }
 
-    public function toArray(): array {
+    public function toArray(): array
+    {
         return ['name' => $this->name, 'type' => $this->type];
     }
 
     /**
      * phpstan-param view-string $view.
      */
-    public function getView(): string {
+    public function getView(): string
+    {
         $type = Str::snake($this->type);
         $start = 'ui::livewire.fields.';
         $views = [];
@@ -157,7 +173,8 @@ class FieldService extends BaseFieldService {
         return $view;
     }
 
-    public function toHtml(): Renderable {
+    public function toHtml(): Renderable
+    {
         $view = (string) $this->getView();
         $view_params = [
             'view' => $view,
@@ -169,7 +186,8 @@ class FieldService extends BaseFieldService {
         return view()->make($view, $view_params);
     }
 
-    public function html(array $form_data = [], ?Model $row = null): Renderable {
+    public function html(array $form_data = [], ?Model $row = null): Renderable
+    {
         /**
          * @XOT //$form_data non dovrebbe servire
          *
@@ -220,26 +238,30 @@ class FieldService extends BaseFieldService {
         return view()->make($view, $view_params);
     }
 
-    public function file(): self {
+    public function file(): self
+    {
         $this->type = 'file';
 
         return $this;
     }
 
-    public function multiple(): self {
+    public function multiple(): self
+    {
         $this->file_multiple = true;
 
         return $this;
     }
 
-    public function array(array $fields = []): self {
+    public function array(array $fields = []): self
+    {
         $this->type = 'array';
         $this->array_fields = $fields;
 
         return $this;
     }
 
-    public function sortable(): self {
+    public function sortable(): self
+    {
         $this->array_sortable = true;
 
         return $this;

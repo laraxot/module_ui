@@ -10,7 +10,8 @@ use Illuminate\View\Component;
 /**
  * Class Nav.
  */
-class Nav extends Component {
+class Nav extends Component
+{
     public array $attrs = [];
     public string $type;
 
@@ -19,14 +20,16 @@ class Nav extends Component {
      *
      * @return void
      */
-    public function __construct(string $type = 'v1') {
+    public function __construct(string $type = 'v1')
+    {
         $this->type = $type;
     }
 
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */

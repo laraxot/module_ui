@@ -7,7 +7,8 @@ namespace Modules\UI\Datas;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 
-class FieldData extends Data {
+class FieldData extends Data
+{
     public string $name;
     public ?string $label = null;
     public ?string $name_dot = null;
@@ -56,7 +57,8 @@ class FieldData extends Data {
     }
     */
 
-    public function getNameDot() {
+    public function getNameDot()
+    {
         $this->name_dot = bracketsToDotted($this->name);
 
         return $this->name_dot;

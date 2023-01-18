@@ -22,7 +22,8 @@ use Modules\Xot\Services\FileService;
 /**
  * Class UIServiceProvider.
  */
-class UIServiceProvider extends XotBaseServiceProvider {
+class UIServiceProvider extends XotBaseServiceProvider
+{
     protected string $module_dir = __DIR__;
 
     protected string $module_ns = __NAMESPACE__;
@@ -34,14 +35,16 @@ class UIServiceProvider extends XotBaseServiceProvider {
     /**
      * Undocumented function.
      */
-    public function getXot(): XotData {
+    public function getXot(): XotData
+    {
         return $this->xot;
     }
 
     /**
      * Undocumented function.
      */
-    public function bootCallback(): void {
+    public function bootCallback(): void
+    {
         $this->xot = XotData::from(config('xra'));
 
         $this->commands(
@@ -57,7 +60,8 @@ class UIServiceProvider extends XotBaseServiceProvider {
         Paginator::useBootstrap();
     }
 
-    public function registerCollective(): void {
+    public function registerCollective(): void
+    {
         app(RegisterCollectiveComponents::class)->execute(
             $this->module_dir.'/../Resources/views/collective/fields',
             $this->module_name.'::'
@@ -71,7 +75,8 @@ class UIServiceProvider extends XotBaseServiceProvider {
      *
      * @return void
      */
-    public function bootThemeProvider(string $theme_type) {
+    public function bootThemeProvider(string $theme_type)
+    {
         // $xot = $this->getXot();
 
         $theme = $this->xot->{$theme_type};
@@ -99,7 +104,8 @@ class UIServiceProvider extends XotBaseServiceProvider {
      *
      * @return void
      */
-    public function registerNamespaces(string $theme_type) {
+    public function registerNamespaces(string $theme_type)
+    {
         $theme = $this->xot->{$theme_type};
 
         $resource_path = 'Themes/'.$theme.'/Resources';
@@ -111,7 +117,8 @@ class UIServiceProvider extends XotBaseServiceProvider {
         $this->loadTranslationsFrom($lang_dir, $theme_type);
     }
 
-    public function registerThemeConfig(string $theme_type): void {
+    public function registerThemeConfig(string $theme_type): void
+    {
         $theme = $this->xot->{$theme_type};
 
         $config_path = base_path('Themes/'.$theme.'/Config');
@@ -130,7 +137,8 @@ class UIServiceProvider extends XotBaseServiceProvider {
         }
     }
 
-    public function registerCallback(): void {
+    public function registerCallback(): void
+    {
         $loader = AliasLoader::getInstance();
         $loader->alias('Theme', 'Modules\UI\Services\ThemeService');
     }
