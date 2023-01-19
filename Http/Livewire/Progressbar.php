@@ -7,8 +7,7 @@ namespace Modules\UI\Http\Livewire;
 use Illuminate\Contracts\Support\Renderable;
 use Livewire\Component;
 
-class Progressbar extends Component
-{
+class Progressbar extends Component {
     public int $perc = 0;
     public string $autostart = 'false';
     public int $loop_index = 0;
@@ -22,8 +21,7 @@ class Progressbar extends Component
     /**s
      * --.
      */
-    public function start(): void
-    {
+    public function start(): void {
         if ($this->loop_index < $this->loop_max) {
             $this->perc = (int) ($this->loop_index * 100 / $this->loop_max);
             $this->handle();
@@ -34,16 +32,14 @@ class Progressbar extends Component
         }
     }
 
-    public function handle(): void
-    {
+    public function handle(): void {
         ++$this->loop_index;
     }
 
     /**
      * Undocumented function.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         $view = 'ui::livewire.progressbar.v1';
         $view_params = [
             'view' => $view,

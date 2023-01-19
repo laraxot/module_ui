@@ -11,8 +11,7 @@ use Illuminate\View\Component;
 /**
  * Class Rows.
  */
-class Rows extends Component
-{
+class Rows extends Component {
     public string $type;
     public string $name;
     public ?string $label;
@@ -24,8 +23,7 @@ class Rows extends Component
      *
      * @return void
      */
-    public function __construct(string $type, string $name, Collection $rows, ?string $label = null, ?Collection $value = null)
-    {
+    public function __construct(string $type, string $name, Collection $rows, ?string $label = null, ?Collection $value = null) {
         $this->type = $type;
         $this->name = $name;
         $this->label = $label;
@@ -36,8 +34,7 @@ class Rows extends Component
     /**
      * Undocumented function.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         $view = 'ui::components.input.rows.'.$this->type;
         $view_params = [
             'view' => $view,

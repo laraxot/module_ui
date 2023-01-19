@@ -7,8 +7,7 @@ namespace Modules\UI\View\Components\Form;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
 
-class Search extends Component
-{
+class Search extends Component {
     public ?string $type;
     public array $qs = [];
 
@@ -16,8 +15,7 @@ class Search extends Component
 
     public array $form_attrs = ['method' => 'get'];
 
-    public function __construct(string $type = 'v1')
-    {
+    public function __construct(string $type = 'v1') {
         $this->type = $type;
 
         /**
@@ -36,8 +34,7 @@ class Search extends Component
         }
     }
 
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */

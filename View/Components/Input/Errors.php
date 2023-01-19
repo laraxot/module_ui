@@ -10,23 +10,20 @@ use Illuminate\View\Component;
 /**
  * Undocumented class.
  */
-class Errors extends Component
-{
+class Errors extends Component {
     public string $type;
 
     /**
      * Undocumented function.
      */
-    public function __construct(string $type = 'v1')
-    {
+    public function __construct(string $type = 'v1') {
         $this->type = $type;
     }
 
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */

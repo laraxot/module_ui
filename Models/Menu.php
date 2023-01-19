@@ -26,8 +26,7 @@ use Sushi\Sushi;
  *
  * @mixin \Eloquent
  */
-class Menu extends Model
-{
+class Menu extends Model {
     use Sushi;
     use SushiConfigCrud;
 
@@ -44,8 +43,7 @@ class Menu extends Model
     }
     */
 
-    public function getRows(): array
-    {
+    public function getRows(): array {
         $rows = config($this->config_name);
         if (! \is_array($rows)) {
             return
@@ -60,13 +58,11 @@ class Menu extends Model
         return $rows;
     }
 
-    public static function byName(string $name): ?self
-    {
+    public static function byName(string $name): ?self {
         return self::where('name', '=', $name)->first();
     }
 
-    public function items(): HasMany
-    {
+    public function items(): HasMany {
         return $this->hasMany(MenuItem::class, 'menu')
             ->with('child')
             ->where(function ($query) {

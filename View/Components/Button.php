@@ -7,8 +7,7 @@ namespace Modules\UI\View\Components;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
 
-class Button extends Component
-{
+class Button extends Component {
     public string $type;
 
     public array $attrs;
@@ -18,8 +17,7 @@ class Button extends Component
      *
      * @return void
      */
-    public function __construct(string $type = 'v1', array $attrs = [])
-    {
+    public function __construct(string $type = 'v1', array $attrs = []) {
         $this->type = $type;
         $this->attrs = $attrs;
     }
@@ -27,8 +25,7 @@ class Button extends Component
     /**
      * Undocumented function.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */

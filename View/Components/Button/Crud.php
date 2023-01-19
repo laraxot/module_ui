@@ -11,16 +11,14 @@ use Modules\Xot\View\Components\XotBaseComponent;
 /**
  * Class Crud.
  */
-class Crud extends XotBaseComponent
-{
+class Crud extends XotBaseComponent {
     public PanelContract $panel;
     // public bool $has_pivot;
 
     /**
      * Undocumented function.
      */
-    public function __construct(PanelContract $panel)
-    {
+    public function __construct(PanelContract $panel) {
         $this->panel = $panel;
         // $this->has_pivot = isset($panel->getRow()->pivot);
     }
@@ -28,8 +26,7 @@ class Crud extends XotBaseComponent
     /**
      * Undocumented function.
      */
-    public function render(): View
-    {
+    public function render(): View {
         /**
          * @phpstan-var view-string
          */

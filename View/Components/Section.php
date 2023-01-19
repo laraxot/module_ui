@@ -10,8 +10,7 @@ use Illuminate\View\Component;
 /**
  * Class Section.
  */
-class Section extends Component
-{
+class Section extends Component {
     public array $attrs = [];
     public string $type;
 
@@ -20,16 +19,14 @@ class Section extends Component
      *
      * @return void
      */
-    public function __construct(string $type = 'trending')
-    {
+    public function __construct(string $type = 'trending') {
         $this->type = $type;
     }
 
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */

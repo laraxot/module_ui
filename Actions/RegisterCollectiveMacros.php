@@ -9,16 +9,13 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\QueueableAction\QueueableAction;
 
-class RegisterCollectiveMacros
-{
+class RegisterCollectiveMacros {
     use QueueableAction;
 
-    public function __construct()
-    {
+    public function __construct() {
     }
 
-    public function execute(string $macros_dir): void
-    {
+    public function execute(string $macros_dir): void {
         $files = glob($macros_dir.'/*.php');
         // dddx(['dir'=>$macros_dir,'files'=>$files]);
         if (false === $files) {

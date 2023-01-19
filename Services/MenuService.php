@@ -17,13 +17,11 @@ use Modules\Tenant\Services\TenantService;
 /**
  * Class MenuService.
  */
-class MenuService
-{
+class MenuService {
     /**
      * @return array|mixed
      */
-    public static function get()
-    {
+    public static function get() {
         $route_params = getRouteParameters();
         extract($route_params);
         if (! isset($module)) {
@@ -56,8 +54,7 @@ class MenuService
      *
      * @return string|void
      */
-    public static function renderVerMenu($item, $parent = null, $rec = 0, $singleItem = false)
-    {
+    public static function renderVerMenu($item, $parent = null, $rec = 0, $singleItem = false) {
         $html = '';
         self::checkRecursion($rec);
         if (! $item) {
@@ -242,8 +239,7 @@ class MenuService
     /**
      * @return string|void
      */
-    public static function renderHorMenu(array $item, ?array $parent = null, int $rec = 0)
-    {
+    public static function renderHorMenu(array $item, ?array $parent = null, int $rec = 0) {
         self::checkRecursion($rec);
         if (! $item) {
             return 'menu misconfiguration';
@@ -487,8 +483,7 @@ class MenuService
      * @param int $rec
      * @param int $max
      */
-    public static function checkRecursion($rec = 0, $max = 10000): void
-    {
+    public static function checkRecursion($rec = 0, $max = 10000): void {
         if ($rec > $max) {
             echo 'Too many recursions!!!';
             exit;
@@ -504,8 +499,7 @@ class MenuService
      *
      * @return bool
      */
-    public static function isActiveVerMenuItem($item, $page, $rec = 0)
-    {
+    public static function isActiveVerMenuItem($item, $page, $rec = 0) {
         if (true === @$item['redirect']) {
             return false;
         }
@@ -536,8 +530,7 @@ class MenuService
      *
      * @return bool
      */
-    public static function isActiveHorMenuItem($item, $page, $rec = 0)
-    {
+    public static function isActiveHorMenuItem($item, $page, $rec = 0) {
         // dddx([$item, $page, $rec]);
         if (true === @$item['redirect']) {
             return false;
@@ -562,8 +555,7 @@ class MenuService
 
     // Render icon or bullet
 
-    public static function renderIcon(string $icon): string
-    {
+    public static function renderIcon(string $icon): string {
         if (SvgService::isSVG($icon)) {
             return SvgService::getSVG($icon, 'menu-icon');
         } else {
@@ -576,8 +568,7 @@ class MenuService
      *
      * @return string
      */
-    public static function renderIconName($icon_name)
-    {
+    public static function renderIconName($icon_name) {
         $icon_key = 'icons.'.$icon_name;
         $icon = TenantService::config($icon_key);
         // dddx(['icon' => $icon, 'name' => 'icon_key'.$icon_key]);

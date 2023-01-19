@@ -10,8 +10,7 @@ use Livewire\Component;
 /**
  * Class Arr // Array is reserved.
  */
-class ArrTwo extends Component
-{
+class ArrTwo extends Component {
     public string $type;
     public string $name;
     public ?string $label;
@@ -31,8 +30,7 @@ class ArrTwo extends Component
      *
      * @return void
      */
-    public function mount(string $type, string $name, ?string $label, ?array $value, ?int $modelId = null)
-    {
+    public function mount(string $type, string $name, ?string $label, ?array $value, ?int $modelId = null) {
         $this->type = $type;
         $this->name = $name;
         $this->label = $label;
@@ -59,8 +57,7 @@ class ArrTwo extends Component
         $this->advanced_search_data = $this->advancedSearch();
     }
 
-    public function normalSearch(): string
-    {
+    public function normalSearch(): string {
         $normal_search_data = '';
 
         if (isset($this->form_data) && isset($this->form_data['filter']) && isset($this->form_data['filter'][0]) && 'query_string_query' === $this->form_data['filter'][0]['criteria']) {
@@ -71,16 +68,14 @@ class ArrTwo extends Component
         return $normal_search_data;
     }
 
-    public function advancedSearch(): array
-    {
+    public function advancedSearch(): array {
         return $this->form_data;
     }
 
     /**
      * Undocumented function.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */
@@ -93,14 +88,12 @@ class ArrTwo extends Component
         return view()->make($view, $view_params);
     }
 
-    public function addArr(): void
-    {
+    public function addArr(): void {
         // dddx($this->form_data);
         $this->form_data[$this->name][] = null;
     }
 
-    public function subArr(int $id): void
-    {
+    public function subArr(int $id): void {
         unset($this->form_data[$this->name][$id]);
         if (isset($this->model_id)) {
             $this->form_data['model_id'] = $this->model_id;
@@ -108,16 +101,14 @@ class ArrTwo extends Component
         }
     }
 
-    public function updatedFormData(string $value, string $key): void
-    {
+    public function updatedFormData(string $value, string $key): void {
         if (isset($this->model_id)) {
             $this->form_data['model_id'] = $this->model_id;
             $this->emit('updatedFormDataEvent', $this->form_data);
         }
     }
 
-    public function set(string $value, string $key): void
-    {
+    public function set(string $value, string $key): void {
         $this->form_data[$key] = $value;
     }
 }

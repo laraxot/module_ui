@@ -11,8 +11,7 @@ use Modules\UI\Services\ThemeService;
 /**
  * Class Hero.
  */
-class Hero extends Component
-{
+class Hero extends Component {
     public ?string $type;
 
     /**
@@ -20,8 +19,7 @@ class Hero extends Component
      *
      * @return void
      */
-    public function __construct(?string $type = 'hero')
-    {
+    public function __construct(?string $type = 'hero') {
         $this->type = $type;
         // ThemeService::make()->add('ui::View/Components/Card/rows.scss');
     }
@@ -29,8 +27,7 @@ class Hero extends Component
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */

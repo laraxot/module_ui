@@ -7,8 +7,7 @@ namespace Modules\UI\Contracts;
 /**
  * This interface allows models to receive replies.
  */
-interface HasLikeContract
-{
+interface HasLikeContract {
     /**
      * @param \Modules\LU\Models\User|null $user
      *

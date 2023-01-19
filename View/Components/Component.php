@@ -15,8 +15,7 @@ use Modules\Xot\Services\FileService;
  * controlla l'esistenza dei componenti formx richiamati tramite i field dei pannelli
  * se esiste quello del tema, nel caso utilizza quello di default.
  */
-class Component extends ViewComponent
-{
+class Component extends ViewComponent {
     public string $type;
 
     public string $table_class = 'table table-striped table-hover table-bordered table-condensed';
@@ -26,8 +25,7 @@ class Component extends ViewComponent
      *
      * @return void
      */
-    public function __construct(string $type)
-    {
+    public function __construct(string $type) {
         $this->type = $type;
         $table_class = FileService::config('adm_theme::styles.table.class');
         if (! \is_string($table_class)) {
@@ -41,8 +39,7 @@ class Component extends ViewComponent
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         $views = [
             'adm_theme::components.'.$this->type,
             'ui::components.'.$this->type,

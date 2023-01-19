@@ -14,8 +14,7 @@ use Illuminate\Support\Arr;
 /**
  * Class BaseFieldService.
  */
-class BaseFieldService
-{
+class BaseFieldService {
     protected string $name;
 
     protected string $type;
@@ -54,8 +53,7 @@ class BaseFieldService
      *
      * @return mixed
      */
-    public function __get($property)
-    {
+    public function __get($property) {
         return $this->$property;
     }
 
@@ -64,8 +62,7 @@ class BaseFieldService
      *
      * @return $this
      */
-    public function input($type = 'text')
-    {
+    public function input($type = 'text') {
         $this->type = 'input';
         $this->input_type = $type;
 
@@ -77,8 +74,7 @@ class BaseFieldService
      *
      * @return $this
      */
-    public function textarea($rows = 2)
-    {
+    public function textarea($rows = 2) {
         $this->type = 'textarea';
         $this->textarea_rows = $rows;
 
@@ -90,8 +86,7 @@ class BaseFieldService
      *
      * @return $this
      */
-    public function select($options = [])
-    {
+    public function select($options = []) {
         $this->type = 'select';
         $this->options($options);
 
@@ -101,8 +96,7 @@ class BaseFieldService
     /**
      * @return $this
      */
-    public function checkbox()
-    {
+    public function checkbox() {
         $this->type = 'checkbox';
 
         return $this;
@@ -113,8 +107,7 @@ class BaseFieldService
      *
      * @return $this
      */
-    public function checkboxes($options = [])
-    {
+    public function checkboxes($options = []) {
         $this->type = 'checkboxes';
         $this->options($options);
 
@@ -126,8 +119,7 @@ class BaseFieldService
      *
      * @return $this
      */
-    public function radio($options = [])
-    {
+    public function radio($options = []) {
         $this->type = 'radio';
         $this->options($options);
 
@@ -137,8 +129,7 @@ class BaseFieldService
     /**
      * @param array $options
      */
-    protected function options($options): void
-    {
+    protected function options($options): void {
         $this->options = Arr::isAssoc($options) ? array_flip($options) : array_combine($options, $options);
     }
 
@@ -147,8 +138,7 @@ class BaseFieldService
      *
      * @param mixed $default
      */
-    public function default($default): self
-    {
+    public function default($default): self {
         $this->default = $default;
 
         return $this;
@@ -159,8 +149,7 @@ class BaseFieldService
      *
      * @return $this
      */
-    public function autocomplete($autocomplete)
-    {
+    public function autocomplete($autocomplete) {
         $this->autocomplete = $autocomplete;
 
         return $this;
@@ -171,8 +160,7 @@ class BaseFieldService
      *
      * @return $this
      */
-    public function placeholder($placeholder)
-    {
+    public function placeholder($placeholder) {
         $this->placeholder = $placeholder;
 
         return $this;
@@ -183,8 +171,7 @@ class BaseFieldService
      *
      * @return $this
      */
-    public function help($help)
-    {
+    public function help($help) {
         $this->help = $help;
 
         return $this;
@@ -195,8 +182,7 @@ class BaseFieldService
      *
      * @return $this
      */
-    public function rules($rules)
-    {
+    public function rules($rules) {
         $this->rules = $rules;
 
         return $this;
@@ -209,8 +195,7 @@ class BaseFieldService
      *
      * @return $this
      */
-    public function view($view)
-    {
+    public function view($view) {
         $this->view = $view;
 
         return $this;
