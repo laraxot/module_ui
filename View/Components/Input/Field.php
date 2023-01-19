@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
+use Illuminate\View\ComponentAttributeBag;
 use Modules\Cms\Services\PanelService;
 use Modules\UI\Datas\FieldData;
 
@@ -61,47 +62,46 @@ class Field extends Component {
      * Get the view / contents that represents the component.
      */
     public function render(): Renderable {
-        /* -- sembra di freeze --
-        $value_type = gettype($this->value);
-        if ('object' == $value_type) {
-            $value_type = class_basename($this->value);
-        }
-        if ('Collection' == $value_type) {
-            $first = $this->value->first();
-            if ($first instanceof Model) {
-                $value_type .= '.Model';
-            }
-        }
-
-        if ('string' == $value_type && Str::contains($this->value, '.')) {
-            $info = pathinfo($this->value);
-            $ext = $info['extension'] ?? '';
-            if (in_array($ext, ['png', 'jpg'])) {
-                $value_type = 'image';
-            }
-        }
-        */
         /*
-        if (! in_array($value_type, ['integer', 'string', 'NULL', 'Collection.Model'])) {
-            dddx([
-                'value_type' => $value_type,
-                'value' => $this->value,
-                'basename' => class_basename($this->value),
-            ]);
-        }
-        */
-        // $value_type = Str::lower($value_type);
-
+        $this->attrs['class'] = 'form-control';
+        $this->attrs['name'] = $field->name;
         $type = $this->field->type;
+        */
+        $field = $this->field;
+        $div_attrs = app(ComponentAttributeBag::class);
+        $label_attrs = app(ComponentAttributeBag::class);
+        $input_attrs = app(ComponentAttributeBag::class);
+
+        $label_attrs = $label_attrs->merge(
+            [
+                'name' => $field->name,
+                'label' => $field->label ?? $field->name,
+                // 'class' => $field->label_class,
+            ]
+        );
+
+        $div_class = 'form-group col-'.$this->field->col_size;
+
+        $div_attrs = $div_attrs->merge(
+            [
+                'class' => $div_class,
+            ]
+        );
+
+        $input_attrs = $input_attrs->merge($this->field->toArray());
 
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.input.'.$type.'.field';
+        $view = 'ui::components.input.field.'.$this->tpl;
         // $view = 'ui::components.input.freeze.'.$value_type.'.'.$this->tpl;
         // dddx(['view' => $view, 'field' => $this->field]);
         $view_params = [
+            'name' => $this->field->name,
             'view' => $view,
+            'div_attrs' => $div_attrs,
+            'label_attrs' => $label_attrs,
+            'input_attrs' => $input_attrs,
         ];
 
         return view($view, $view_params);
