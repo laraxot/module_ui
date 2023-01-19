@@ -9,10 +9,17 @@
     $val = Form::getValueAttribute($field->name);
     if (is_object($val)) {
         //dddx([$field->name,$val,]);
+<<<<<<< HEAD
     
         if (method_exists($val, 'getKey')) {
             $val = $val->getKey();
         }
+=======
+        if(method_exists($val,'getKey')){
+            $val = $val->getKey();
+        }
+        
+>>>>>>> 3651566 (.)
     }
 @endphp
 
