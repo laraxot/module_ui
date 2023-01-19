@@ -62,11 +62,35 @@ class Field extends Component {
      * Get the view / contents that represents the component.
      */
     public function render(): Renderable {
+<<<<<<< HEAD
+=======
+        /* -- sembra di freeze --
+        $value_type = gettype($this->value);
+        if ('object' == $value_type) {
+            $value_type = class_basename($this->value);
+        }
+        if ('Collection' == $value_type) {
+            $first = $this->value->first();
+            if ($first instanceof Model) {
+                $value_type .= '.Model';
+            }
+        }
+
+        if ('string' == $value_type && Str::contains($this->value, '.')) {
+            $info = pathinfo($this->value);
+            $ext = $info['extension'] ?? '';
+            if (in_array($ext, ['png', 'jpg'])) {
+                $value_type = 'image';
+            }
+        }
+        */
+>>>>>>> cf7b97b (.)
         /*
         $this->attrs['class'] = 'form-control';
         $this->attrs['name'] = $field->name;
         $type = $this->field->type;
         */
+<<<<<<< HEAD
         $field = $this->field;
         $div_attrs = app(ComponentAttributeBag::class);
         $label_attrs = app(ComponentAttributeBag::class);
@@ -89,11 +113,20 @@ class Field extends Component {
         );
 
         $input_attrs = $input_attrs->merge($this->field->toArray());
+=======
+        // $value_type = Str::lower($value_type);
+
+        $type = $this->field->type;
+>>>>>>> cf7b97b (.)
 
         /**
          * @phpstan-var view-string
          */
+<<<<<<< HEAD
         $view = 'ui::components.input.field.'.$this->tpl;
+=======
+        $view = 'ui::components.input.'.$type.'.field';
+>>>>>>> cf7b97b (.)
         // $view = 'ui::components.input.freeze.'.$value_type.'.'.$this->tpl;
         // dddx(['view' => $view, 'field' => $this->field]);
         $view_params = [
