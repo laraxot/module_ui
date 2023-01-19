@@ -1,13 +1,5 @@
 @props([
-    //'label' => 'label',
-    //'for' => false,
-    //'noShadow' => false,
-    //'isRequired' => false,
-    //'error' => false,
-    //'helpText' => false,
-    //'optional' => false,
-    //'name' => null,
-    //'label' => null,
+   
 ])
 
 {{-- <br />[attributes]: {{ $attributes }} ]
