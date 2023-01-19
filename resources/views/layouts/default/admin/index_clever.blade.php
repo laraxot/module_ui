@@ -1,6 +1,7 @@
 @extends('adm_theme::layouts.app')
 @section('content')
 <<<<<<< HEAD
+<<<<<<< HEAD
     <x-topbar />
     <!-- Table -->
     <div class="card">
@@ -13,6 +14,8 @@
         </div>
         {{--  
 =======
+=======
+>>>>>>> 75be95a (up)
 <x-topbar />
 <!-- Table -->
 <div class="card">
@@ -87,4 +90,7 @@
 =======
 </div>
 @endsection
+<<<<<<< HEAD
 >>>>>>> 88c6711 (up)
+=======
+>>>>>>> 75be95a (up)
