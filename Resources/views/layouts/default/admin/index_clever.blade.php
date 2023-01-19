@@ -1,7 +1,5 @@
 @extends('adm_theme::layouts.app')
 @section('content')
-<<<<<<< HEAD
-<<<<<<< HEAD
     <x-topbar />
     <!-- Table -->
     <div class="card">
@@ -13,10 +11,8 @@
             {{--  
         </div>
         {{--  
-=======
-=======
->>>>>>> 75be95a (up)
-<x-topbar />
+
+			<x-topbar />
 <!-- Table -->
 <div class="card">
 	<div class="card-header border-bottom d-flex align-items-center">
@@ -45,7 +41,6 @@
         --}}
 	</div>
     {{--  
->>>>>>> 88c6711 (up)
 	<div class="px-4 py-4 border-top border-bottom d-flex flex-column flex-sm-row gap-3">
 		<div class="btn-group">
 			<a href="#" class="btn btn-sm btn-neutral text-primary" aria-current="page">View all</a>
@@ -72,25 +67,12 @@
 		</div>
 	</div>
     --}}
-<<<<<<< HEAD
             <x-panel.crud :panel="$_panel" />
             {{--  
-=======
-	<x-panel.crud :panel="$_panel" />
-	{{--  
->>>>>>> 88c6711 (up)
 	<div class="card-footer border-0 py-5">
 		<span class="text-muted text-sm">Showing 10 items out of 250 results found</span>
 	</div>
 	--}}
-<<<<<<< HEAD
 
         </div>
     @endsection
-=======
-</div>
-@endsection
-<<<<<<< HEAD
->>>>>>> 88c6711 (up)
-=======
->>>>>>> 75be95a (up)
