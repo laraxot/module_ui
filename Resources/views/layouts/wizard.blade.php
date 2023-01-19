@@ -2,12 +2,6 @@
     {{-- dddx([
         //'previousStep'=>$this->previousStep(),
         //'nextStep'=>$this->nextStep(),
-<<<<<<< HEAD
-        //'methods'=>get_class_methods($this)
-        'state'=>$this->state(),
-        'state_methods'=>get_class_methods($this->state()),
-        ]) --}}
-=======
         'get_defined_vars'=>get_defined_vars(),
         'methods'=>get_class_methods($this),
         //'vars'=>get_class_vars($this),
@@ -16,7 +10,6 @@
         'state_current'=>$this->state()->currentStep(),
         ]) 
     --}}
->>>>>>> cbb758dc5f1dfc86e224c143045fb79fa19409ed
     <ul class="nav nav-tabs overflow-x border-0">
         @foreach($steps as $step)
             <li class="nav-item">
@@ -27,17 +20,6 @@
 
     @yield('content')
 
-<<<<<<< HEAD
-    <div>
-         <div wire:click="previousStep" class="btn btn-primary">
-            ⬅ Previous
-        </div>
-
-        <div wire:click="goNextStep" class="btn btn-primary">
-            Go to the next step
-        </div>
-    </div>
-=======
     {{--
     <div>
         @if(!$is_first)
@@ -66,5 +48,4 @@
           </li>
         </ul>
     </nav>
->>>>>>> cbb758dc5f1dfc86e224c143045fb79fa19409ed
 </div>
