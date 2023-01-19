@@ -73,6 +73,19 @@
 		<span class="text-muted text-sm">Showing 10 items out of 250 results found</span>
 	</div>
 	--}}
+<<<<<<< HEAD
 
         </div>
     @endsection
+=======
+</div>
+<<<<<<< HEAD
+@endsection
+<<<<<<< HEAD
+>>>>>>> 88c6711 (up)
+=======
+>>>>>>> 75be95a (up)
+=======
+@endsection
+>>>>>>> 88c6711 (up)
+>>>>>>> 353cee7 (.)
