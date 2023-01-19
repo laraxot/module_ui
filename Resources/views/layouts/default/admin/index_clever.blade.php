@@ -9,32 +9,6 @@
                 {{ Str::plural($row->post_type ?? class_basename($row), $rows->total()) }}
             </h5>
             {{--  
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
-		<div class="dropdown">
-			<a class="text-muted" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false">
-			<i class="bi bi-three-dots-vertical"></i>
-			</a>
-			<div class="dropdown-menu">
-				<a href="#!" class="dropdown-item">
-				Action
-				</a>
-				<a href="#!" class="dropdown-item">
-				Another action
-				</a>
-				<a href="#!" class="dropdown-item">
-				Something else here
-				</a>
-			</div>
-		</div>
-        --}}
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
         </div>
         {{--  
 	<div class="px-4 py-4 border-top border-bottom d-flex flex-column flex-sm-row gap-3">
@@ -63,15 +37,12 @@
 		</div>
 	</div>
     --}}
-<<<<<<< Updated upstream
-        <x-panel.crud :panel="$_panel" />
-        {{--  
+            <x-panel.crud :panel="$_panel" />
+            {{--  
 	<div class="card-footer border-0 py-5">
 		<span class="text-muted text-sm">Showing 10 items out of 250 results found</span>
 	</div>
 	--}}
-=======
 
->>>>>>> Stashed changes
-    </div>
-@endsection
+        </div>
+    @endsection
