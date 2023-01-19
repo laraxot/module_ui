@@ -17,29 +17,32 @@ use Modules\UI\Datas\FieldData;
  */
 class Field extends Component {
     public FieldData $field;
-    public Model $row;
+    public ?Model $row = null;
     public string $tpl;
+    public array $attrs = [];
     /**
      * @var mixed
      */
-    public $value;
+    public $value = null;
 
     /**
      * Undocumented function.
      */
-    public function __construct(FieldData $field, Model $row, string $tpl = 'v1') {
+    public function __construct(FieldData $field, ?Model $row = null, string $tpl = 'v1') {
         $this->tpl = $tpl;
         $this->field = $field;
         $this->row = $row;
-        $tmp = $row->toArray();
+        if (null != $row) {
+            $tmp = $row->toArray();
 
-        if (Str::contains($field->getNameDot(), '.')) {
-            $this->value = Arr::get($tmp, $field->getNameDot());
-        } else {
-            $this->value = $row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
+            if (Str::contains($field->getNameDot(), '.')) {
+                $this->value = Arr::get($tmp, $field->getNameDot());
+            } else {
+                $this->value = $row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
+            }
         }
 
-        if (count($field->options) > 0) {
+        if (is_iterable($field->options) && count($field->options) > 0) {
             $this->value = collect($field->options)->get($this->value) ?? $this->value;
         }
 
@@ -58,6 +61,7 @@ class Field extends Component {
      * Get the view / contents that represents the component.
      */
     public function render(): Renderable {
+        /* -- sembra di freeze --
         $value_type = gettype($this->value);
         if ('object' == $value_type) {
             $value_type = class_basename($this->value);
@@ -76,7 +80,7 @@ class Field extends Component {
                 $value_type = 'image';
             }
         }
-
+        */
         /*
         if (! in_array($value_type, ['integer', 'string', 'NULL', 'Collection.Model'])) {
             dddx([
@@ -86,11 +90,16 @@ class Field extends Component {
             ]);
         }
         */
-        $value_type = Str::lower($value_type);
+        // $value_type = Str::lower($value_type);
+
+        $type = $this->field->type;
+
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.input.freeze.'.$value_type.'.'.$this->tpl;
+        $view = 'ui::components.input.'.$type.'.field';
+        // $view = 'ui::components.input.freeze.'.$value_type.'.'.$this->tpl;
+        // dddx(['view' => $view, 'field' => $this->field]);
         $view_params = [
             'view' => $view,
         ];
