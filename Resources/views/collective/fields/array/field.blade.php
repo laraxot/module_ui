@@ -2,7 +2,9 @@
     $field = transFields(get_defined_vars());
     
     $val = Form::getValueAttribute($name);
-    
+    if(!is_array($val)){
+        $val=[];
+    }
 @endphp
 {{-- dddx($field->options) --}}
 @component($blade_component, get_defined_vars())

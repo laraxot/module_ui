@@ -25,13 +25,18 @@ class Assoc extends Component {
      *
      * @return void
      */
-    public function mount(string $name, string $label = '', array $value = [], string $tpl = 'v1') {
+    public function mount(string $name, string $label = '', $value = null, string $tpl = 'v1') {
         $this->name = $name;
         $this->label = $label;
-        $this->value = $value;
+        $this->value = $value ?? [];
         $this->tpl = $tpl;
 
-        $this->form_data[$this->name] = $value;
+        $res = [];
+        foreach ($value as $k => $v) {
+            $res[] = ['k' => $k, 'v' => $v];
+        }
+
+        $this->form_data[$this->name] = $res;
     }
 
     /**
@@ -52,15 +57,11 @@ class Assoc extends Component {
 
     public function addArr(): void {
         // dddx($this->form_data);
-        $this->form_data[$this->name][] = null;
+        $this->form_data[$this->name][] = ['k' => '', 'v' => ''];
     }
 
-    public function subArr(int $id): void {
+    public function subArr(string $id): void {
         unset($this->form_data[$this->name][$id]);
-        if (isset($this->model_id)) {
-            $this->form_data['model_id'] = $this->model_id;
-            $this->emit('updatedFormDataEvent', $this->form_data);
-        }
     }
 
     public function updatedFormData(string $value, string $key): void {
