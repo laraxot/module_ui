@@ -39,8 +39,8 @@
 			</div>
 		</div>
         --}}
-	</div>
-    {{--  
+        </div>
+        {{--  
 	<div class="px-4 py-4 border-top border-bottom d-flex flex-column flex-sm-row gap-3">
 		<div class="btn-group">
 			<a href="#" class="btn btn-sm btn-neutral text-primary" aria-current="page">View all</a>
@@ -67,40 +67,11 @@
 		</div>
 	</div>
     --}}
-            <x-panel.crud :panel="$_panel" />
-            {{--  
+        <x-panel.crud :panel="$_panel" />
+        {{--  
 	<div class="card-footer border-0 py-5">
 		<span class="text-muted text-sm">Showing 10 items out of 250 results found</span>
 	</div>
 	--}}
-<<<<<<< HEAD
-
-        </div>
-    @endsection
-=======
-</div>
-<<<<<<< HEAD
+    </div>
 @endsection
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 88c6711 (up)
-=======
->>>>>>> 75be95a (up)
-=======
-@endsection
->>>>>>> 88c6711 (up)
-<<<<<<< HEAD
->>>>>>> 353cee7 (.)
-=======
-=======
->>>>>>> 75be95a (up)
->>>>>>> 212ea7c (rebase)
-=======
->>>>>>> dd5367b (up)
-=======
-=======
-@endsection
->>>>>>> 88c6711 (up)
->>>>>>> 14e08ac (up)
