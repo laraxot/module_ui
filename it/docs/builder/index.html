@@ -4,11 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="description" content="Builder">
+        <meta name="description" content="Menu Builder">
 
         <meta property="og:site_name" content="Modulo Theme" />
-        <meta property="og:title" content="Builder | Modulo Theme" />
-        <meta property="og:description" content="Builder" />
+        <meta property="og:title" content="Menu Builder | Modulo Theme" />
+        <meta property="og:description" content="Menu Builder" />
         <meta property="og:url" content="https://laraxot.github.io/module_theme/it/docs/builder" />
         <meta property="og:image" content="https://laraxot.github.io/module_theme/assets/img/logo.png" />
         <meta property="og:type" content="website" />
@@ -17,7 +17,7 @@
         <meta name="twitter:card" content="summary_large_image">
 
         
-        <title>Modulo Theme | Builder</title>
+        <title>Modulo Theme | Menu Builder</title>
 
         <link rel="home" href="https://laraxot.github.io/module_theme">
         <link rel="icon" href="https://laraxot.github.io/module_theme/favicon.ico">
@@ -332,7 +332,7 @@
     <a href="https://laraxot.github.io/module_theme/it/docs/arr"
         class="lvl1  nav-menu__item hover:text-blue-500"
         >
-        Input Arr
+        Input Group Arr
     </a>
     <ul class="my-0">
     </ul>
@@ -368,7 +368,7 @@
     <a href="https://laraxot.github.io/module_theme/it/docs/builder"
         class="lvl1 active font-semibold text-blue-500 nav-menu__item hover:text-blue-500"
         >
-        Builder
+        Menu Builder
     </a>
     <ul class="my-0">
     </ul>
@@ -512,7 +512,7 @@
     <a href="https://laraxot.github.io/module_theme/it/docs/v2"
         class="lvl1  nav-menu__item hover:text-blue-500"
         >
-        
+        Calendar V2
     </a>
     <ul class="my-0">
     </ul>
@@ -559,23 +559,36 @@
         </nav>
 
         <div class="DocSearch-content w-full lg:w-3/5 break-words pb-16 lg:pl-4" v-pre>
-            <h1 id="form-builder">Builder</h1>
+            <h1 id="menu-builder">Menu Builder</h1>
 
-<p>Mostra un pannello che serve a disegnare i form.</p>
+<p>Componente livewire utilizzato per creare un menu o una raccolta di menu.</p>
 
-<p>Nome Componente:</p>
+<p>Ad ogni salvataggio o modifica di un menu, verranno salvati 2 file nella cartella di configurazione utilizzato del progetto:</p>
 
-<pre><code class="language-php">livewire:form.builder
+<ol>
+<li><p>laravel\config\it\dominio\sottodominio\menu_builder.php
+memorizza in un array i menu salvati</p></li>
+<li><p>laravel\config\it\dominio\sottodominio\menu_builder_item.php
+memorizza in un array tutti gli elementi/url/voci dei singoli menu salvati</p></li>
+</ol>
+
+<pre><code class="language-php">&lt;livewire:menu.builder /&gt;
 </code></pre>
 
-<p>Parametri</p>
+<h2>Funzione getMenuItemsByName</h2>
 
-<pre><code class="language-php">?string $type = 'builder'
-</code></pre>
+<p>Funzione di Theme\View\Composers\ThemeComposer con cui si potrà recuperare tutte le voci di un menu salvato. Esempio di utilizzo:</p>
 
-<p>Esempio:</p>
-
-<pre><code class="language-php">&lt;livewire:form.builder /&gt;
+<pre><code class="language-php">&lt;!-- Side Nav START --&gt;
+&lt;ul class="nav nav-link-secondary flex-column fw-bold gap-2"&gt;
+    @foreach ($_theme-&gt;getMenuItemsByName('navbar') as $menu_item)
+        &lt;li class="nav-item"&gt;
+            &lt;a class="nav-link" href="#!"&gt;
+                &lt;a class="nav-link" href="{{ $menu_item-&gt;link }}"&gt;{{ $menu_item-&gt;label }}&lt;/a&gt;
+            &lt;/a&gt;
+        &lt;/li&gt;
+    @endforeach
+&lt;/ul&gt;
 </code></pre>
         </div>
     </div>
