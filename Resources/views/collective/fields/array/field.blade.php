@@ -3,6 +3,9 @@
     
     $val = Form::getValueAttribute($name);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c65baac (.)
     if(!is_array($val)){
         $val=[];
     }

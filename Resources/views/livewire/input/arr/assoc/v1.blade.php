@@ -1,6 +1,9 @@
 <div>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c65baac (.)
     <button type="button" class="btn btn-primary" wire:click="addArr">+</button>
     @foreach ($form_data[$name] as $key => $val)
         {{-- {{ dddx([$key, $val]) }} 
@@ -18,6 +21,7 @@
             {{ $form_data[$name][$key]['k'] }} : {{ $form_data[$name][$key]['v'] }} <br/>
             <input type="text" name="{{ $name }}[{{ $form_data[$name][$key]['k'] }}]" value="{{ $form_data[$name][$key]['v'] }}" />
         </div>
+<<<<<<< HEAD
     @endforeach
     
 =======
@@ -34,4 +38,8 @@
         <input type="text" name="{{ $name }}[]" wire:model="form_data.{{ $name }}.{{ $key }}">
     @endforeach
 >>>>>>> f532fb8 (up)
+=======
+    @endforeach
+    
+>>>>>>> c65baac (.)
 </div>
