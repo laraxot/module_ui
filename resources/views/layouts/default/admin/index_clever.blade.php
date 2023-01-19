@@ -79,7 +79,9 @@
     @endsection
 =======
 </div>
+<<<<<<< HEAD
 @endsection
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -97,3 +99,8 @@
 >>>>>>> 212ea7c (rebase)
 =======
 >>>>>>> dd5367b (up)
+=======
+=======
+@endsection
+>>>>>>> 88c6711 (up)
+>>>>>>> 14e08ac (up)
