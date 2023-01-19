@@ -12,7 +12,8 @@ use Modules\Xot\Services\FileService;
 /**
  * Undocumented class.
  */
-class Label extends Component {
+class Label extends Component
+{
     public array $attrs = [];
     public ?string $type;
     public string $tradKey;
@@ -20,7 +21,8 @@ class Label extends Component {
     /**
      * Undocumented function.
      */
-    public function __construct(?string $type = 'label') {
+    public function __construct(?string $type = 'label')
+    {
         $this->type = $type;
         /*
         $this->attrs['name'] = $this->name;
@@ -39,7 +41,8 @@ class Label extends Component {
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /*
         return function (array &$data) {
             return $this->renderData($data);
@@ -56,7 +59,8 @@ class Label extends Component {
         return view($view, $view_params);
     }
 
-    public function renderData(array $data): string {
+    public function renderData(array $data): string
+    {
         extract($data);
         /**
          * @phpstan-var view-string

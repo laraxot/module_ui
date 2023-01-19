@@ -9,13 +9,16 @@ use Modules\UI\Datas\ServerMemoryUsageData;
 use Modules\Xot\Services\FileService;
 use Spatie\QueueableAction\QueueableAction;
 
-class GetServerMemoryUsage {
+class GetServerMemoryUsage
+{
     use QueueableAction;
 
-    public function __construct() {
+    public function __construct()
+    {
     }
 
-    public function execute(): ServerMemoryUsageData {
+    public function execute(): ServerMemoryUsageData
+    {
         /** @var float $memoryTotal */
         $memoryTotal = null;
         /** @var float $memoryTotal */

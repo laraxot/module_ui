@@ -10,7 +10,8 @@ use Illuminate\View\Component;
 /**
  * Class Logout.
  */
-class Logout extends Component {
+class Logout extends Component
+{
     public ?string $type;
 
     /**
@@ -18,14 +19,16 @@ class Logout extends Component {
      *
      * @return void
      */
-    public function __construct(?string $type = 'v1') {
+    public function __construct(?string $type = 'v1')
+    {
         $this->type = $type;
     }
 
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */

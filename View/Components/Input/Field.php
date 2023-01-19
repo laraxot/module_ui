@@ -16,7 +16,8 @@ use Modules\UI\Datas\FieldData;
 /**
  * WIP WIP WIP.
  */
-class Field extends Component {
+class Field extends Component
+{
     public FieldData $field;
     public ?Model $row = null;
     public string $tpl;
@@ -29,7 +30,8 @@ class Field extends Component {
     /**
      * Undocumented function.
      */
-    public function __construct(FieldData $field, ?Model $row = null, string $tpl = 'v1') {
+    public function __construct(FieldData $field, ?Model $row = null, string $tpl = 'v1')
+    {
         $this->tpl = $tpl;
         $this->field = $field;
         $this->row = $row;
@@ -61,9 +63,14 @@ class Field extends Component {
     /**
      * Get the view / contents that represents the component.
      */
+<<<<<<< HEAD
     public function render(): Renderable {
 <<<<<<< HEAD
 =======
+=======
+    public function render(): Renderable
+    {
+>>>>>>> 18c8ac1 (up)
         /* -- sembra di freeze --
         $value_type = gettype($this->value);
         if ('object' == $value_type) {

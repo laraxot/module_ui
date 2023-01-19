@@ -32,7 +32,8 @@ use Modules\Xot\Services\PolicyService;
 /**
  * Class FormService.
  */
-class FormService {
+class FormService
+{
     /**
      * ora selectRelationshipOne
      * da select/field_relationship_one.blade.php
@@ -50,7 +51,8 @@ class FormService {
     /**
      * @param BelongsTo|HasManyThrough|HasOneOrMany|BelongsToMany|MorphOneOrMany|MorphPivot|MorphTo|MorphToMany $rows
      */
-    public static function fieldsExcludeRows($rows): array {
+    public static function fieldsExcludeRows($rows): array
+    {
         $fields_exclude = [];
 
         $fields_exclude[] = 'id';
@@ -72,14 +74,16 @@ class FormService {
         return $fields_exclude;
     }
 
-    public static function getCollectiveComponents(): array {
+    public static function getCollectiveComponents(): array
+    {
         $view_path = __DIR__.'/../Resources/views/collective/fields';
         $prefix = 'ui::';
 
         return app(GetCollectiveComponents::class)->execute($view_path, $prefix);
     }
 
-    public static function inputFreeze(FieldData $field, Model $row): Renderable {
+    public static function inputFreeze(FieldData $field, Model $row): Renderable
+    {
         $field->name_dot = bracketsToDotted($field->name);
 
         // if (\in_array('value', array_keys($params), true)) {
@@ -261,7 +265,8 @@ class FormService {
      *
      * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Support\HtmlString
      */
-    public static function inputHtml(FieldData $field, Model $row) {
+    public static function inputHtml(FieldData $field, Model $row)
+    {
         $input_type = 'bs'.Str::studly($field->type);
         if (isset($field->sub_type)) {
             $input_type .= Str::studly($field->sub_type);
@@ -329,7 +334,8 @@ class FormService {
         // */
     }
 
-    public static function btnHtml(array $params): string {
+    public static function btnHtml(array $params): string
+    {
         $class = 'btn btn-primary mb-2';
         $icon = null;       // icona a sx del titolo
         $label = null;

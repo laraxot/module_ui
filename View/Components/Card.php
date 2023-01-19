@@ -7,16 +7,19 @@ namespace Modules\UI\View\Components;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
 
-class Card extends Component {
+class Card extends Component
+{
     public ?string $type = 'card';
 
     public array $attrs = [];
 
-    public function __construct(?string $type = null) {
+    public function __construct(?string $type = null)
+    {
         $this->type = $type ?? 'card';
     }
 
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */

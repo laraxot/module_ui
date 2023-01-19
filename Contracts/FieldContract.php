@@ -11,5 +11,6 @@ namespace Modules\UI\Contracts;
  * @property string|null $type
  * @property string|null $view
  */
-interface FieldContract {
+interface FieldContract
+{
 }

@@ -12,7 +12,8 @@ use Symfony\Component\Console\Input\InputOption;
 /**
  * Class CreateThemeCommand.
  */
-class CreateThemeCommand extends Command {
+class CreateThemeCommand extends Command
+{
     /**
      * The console command name.
      *
@@ -30,7 +31,8 @@ class CreateThemeCommand extends Command {
     /**
      * Create a new command instance.
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -39,7 +41,8 @@ class CreateThemeCommand extends Command {
      *
      * @return mixed
      */
-    public function handle() {
+    public function handle()
+    {
         $name = $this->argument('name');
         if (\is_array($name)) {
             $name = implode(' ', $name);
@@ -68,7 +71,8 @@ class CreateThemeCommand extends Command {
      *
      * @return array
      */
-    protected function getArguments() {
+    protected function getArguments()
+    {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the Theme.'],
         ];
@@ -79,7 +83,8 @@ class CreateThemeCommand extends Command {
      *
      * @return array
      */
-    protected function getOptions() {
+    protected function getOptions()
+    {
         return [
             ['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
         ];

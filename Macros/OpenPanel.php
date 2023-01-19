@@ -10,11 +10,13 @@ use Illuminate\Support\Str;
 /**
  * Class OpenPanel.
  */
-class OpenPanel {
+class OpenPanel
+{
     /**
      * @return \Closure
      */
-    public function __invoke() {
+    public function __invoke()
+    {
         return function ($panel, $act = '', $params = []) {
             // $route_params = optional(\Route::current())->parameters();
             $route_params = getRouteParameters();

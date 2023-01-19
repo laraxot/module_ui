@@ -16,11 +16,13 @@ use Throwable;
 /**
  * Class SvgService.
  */
-class SvgService {
+class SvgService
+{
     /**
      * Check if $path provided is SVG.
      */
-    public static function isSVG(?string $path): bool {
+    public static function isSVG(?string $path): bool
+    {
         if (null === $path) {
             return false;
         }
@@ -39,7 +41,8 @@ class SvgService {
     /**
      * Get SVG content.
      */
-    public static function getSVG(string $filepath, string $class = ''): string {
+    public static function getSVG(string $filepath, string $class = ''): string
+    {
         //  echo $filepath;
 
         if (! \is_string($filepath) || ! file_exists($filepath)) {

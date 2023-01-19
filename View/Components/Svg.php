@@ -17,7 +17,8 @@ use Symfony\Component\DomCrawler\Crawler;
  * <x-svg icon="github" class="classi_qualsiasi" />
  * <x-svg icon="twitter" class="classi_qualsiasi" />
  */
-class Svg extends Component {
+class Svg extends Component
+{
     /**
      * Create a new component instance.
      *
@@ -27,14 +28,16 @@ class Svg extends Component {
 
     public array $attrs;
 
-    public function __construct(string $icon) {
+    public function __construct(string $icon)
+    {
         $this->icon = $icon;
     }
 
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): \Illuminate\Contracts\Support\Renderable {
+    public function render(): \Illuminate\Contracts\Support\Renderable
+    {
         // $content=File::get()
         $svg_path = FileService::fixPath(module_path('ui', 'Resources/svg/'.$this->icon.'.svg'));
         $svg_content = File::get($svg_path);
