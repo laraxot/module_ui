@@ -30,7 +30,6 @@
 
 
             function cb(start, end) {
-
                 console.log(start, end);
                 $('#{{ Str::slug($name) }} span').html(start.format('D MMM YYYY HH:mm') + ' - ' + end.format(
                     'D MMM YYYY HH:mm'));
@@ -45,11 +44,11 @@
                 startDate: start,
                 endDate: end,
                 ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Today': [moment().set('hour', 0).set('minute', 0).set('second', 0), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment()],
                     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'This Month': [moment().startOf('month'), moment()],
                     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
                         'month').endOf('month')]
                 }
