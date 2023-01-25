@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\File;
 use Modules\Xot\Traits\SushiConfigCrud;
+use Nwidart\Modules\Facades\Module;
 use Sushi\Sushi;
 
 /**
@@ -42,8 +44,7 @@ use Sushi\Sushi;
  *
  * @mixin \Eloquent
  */
-class MenuItem extends Model
-{
+class MenuItem extends Model {
     use Sushi;
     use SushiConfigCrud;
 
@@ -91,9 +92,23 @@ class MenuItem extends Model
     }
     */
 
-    public function getRows(): array
-    {
-        $rows = config($this->config_name);
+    public function getRows(): array {
+        $route_params = getRouteParameters();
+        $rows = null;
+        if (inAdmin() && isset($route_params['module'])) {
+            $menu_path = Module::getModulePath($route_params['module']).'Resources/menu/'.$this->getTable().'.php';
+
+            if (File::exists($menu_path)) {
+                $rows = File::getRequire($menu_path);
+                $rows = array_values($rows);
+            // dddx($this->config_name);
+            } else {
+                // dddx($menu_path);
+            }
+        } else {
+            $rows = config($this->config_name);
+        }
+
         if (! \is_array($rows)) {
             return [
                 [
@@ -119,33 +134,28 @@ class MenuItem extends Model
     }
     */
 
-    public function getsons(int $id): Collection
-    {
+    public function getsons(int $id): Collection {
         return $this->where('parent', $id)->get();
     }
 
-    public function getall(int $id): Collection
-    {
+    public function getall(int $id): Collection {
         return $this->where('menu', $id)
             ->orderBy('sort', 'asc')
             ->get();
     }
 
-    public static function getNextSortRoot(int $menu): int
-    {
+    public static function getNextSortRoot(int $menu): int {
         // return (int) self::where('menu', $menu)->max('sort') + 1;
         $max_sort = self::where('menu', $menu)->max('sort');
 
         return $max_sort + 1;
     }
 
-    public function parent_menu(): BelongsTo
-    {
+    public function parent_menu(): BelongsTo {
         return $this->belongsTo(Menu::class, 'menu');
     }
 
-    public function child(): HasMany
-    {
+    public function child(): HasMany {
         return $this->hasMany(self::class, 'parent')
             ->orderBy('sort', 'ASC');
     }
