@@ -10,7 +10,8 @@ use Livewire\Component;
 /**
  * Class Arr // Array is reserved.
  */
-class Assoc extends Component {
+class Assoc extends Component
+{
     public string $tpl;
     public string $name;
     public string $label;
@@ -22,7 +23,8 @@ class Assoc extends Component {
      *
      * @return void
      */
-    public function mount(string $name, string $label = '', array $value = [], string $tpl = 'v1') {
+    public function mount(string $name, string $label = '', array $value = [], string $tpl = 'v1')
+    {
         $this->name = $name;
         $this->label = $label;
         // $this->value = $value ?? [];
@@ -39,7 +41,8 @@ class Assoc extends Component {
     /**
      * Undocumented function.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */
@@ -51,11 +54,13 @@ class Assoc extends Component {
         return view()->make($view, $view_params);
     }
 
-    public function addArr(): void {
+    public function addArr(): void
+    {
         $this->form_data[$this->name][] = ['k' => '', 'v' => ''];
     }
 
-    public function subArr(string $id): void {
+    public function subArr(string $id): void
+    {
         unset($this->form_data[$this->name][$id]);
     }
 }

@@ -64,7 +64,8 @@ class FieldData extends Data
         return $this->name_dot;
     }
 
-    public function getInputClass() {
+    public function getInputClass()
+    {
         return 'form-control';
     }
 }

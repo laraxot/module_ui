@@ -5,7 +5,7 @@
                 <li class="breadcrumb-item
 					@if ($loop->last) active @endif
 				">
-                    <a href="#">{{ $item->title }}</a>
+                    <a href="#">{{ $item->name }}</a>
                     @if (!$loop->last)
                         <span class="separator">/</span>
                     @endif

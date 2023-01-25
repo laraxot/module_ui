@@ -11,7 +11,8 @@ use Illuminate\View\Component;
 /**
  * Class Rows.
  */
-class Rows extends Component {
+class Rows extends Component
+{
     public string $type = 'rows';
     public Collection $rows;
 
@@ -20,14 +21,16 @@ class Rows extends Component {
      *
      * @return void
      */
-    public function __construct(Collection $rows) {
+    public function __construct(Collection $rows)
+    {
         $this->rows = $rows;
     }
 
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         $view = 'ui::components.breadcrumb.'.$this->type;
         $view_params = [
             'view' => $view,
