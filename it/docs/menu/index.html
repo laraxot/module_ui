@@ -4,12 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="description" content="Badge">
+        <meta name="description" content="Menu">
 
         <meta property="og:site_name" content="Modulo Theme" />
-        <meta property="og:title" content="Badge | Modulo Theme" />
-        <meta property="og:description" content="Badge" />
-        <meta property="og:url" content="https://laraxot.github.io/module_theme/it/docs/badge" />
+        <meta property="og:title" content="Menu | Modulo Theme" />
+        <meta property="og:description" content="Menu" />
+        <meta property="og:url" content="https://laraxot.github.io/module_theme/it/docs/menu" />
         <meta property="og:image" content="https://laraxot.github.io/module_theme/assets/img/logo.png" />
         <meta property="og:type" content="website" />
 
@@ -17,7 +17,7 @@
         <meta name="twitter:card" content="summary_large_image">
 
         
-        <title>Modulo Theme | Badge</title>
+        <title>Modulo Theme | Menu</title>
 
         <link rel="home" href="https://laraxot.github.io/module_theme">
         <link rel="icon" href="https://laraxot.github.io/module_theme/favicon.ico">
@@ -132,7 +132,7 @@
 </li>
             <li class="pl-4">
     <a href="https://laraxot.github.io/module_theme/it/docs/badge"
-        class="lvl1 active font-semibold text-blue-500 nav-menu__item hover:text-blue-500"
+        class="lvl1  nav-menu__item hover:text-blue-500"
         >
         Badge
     </a>
@@ -521,7 +521,7 @@
 </li>
             <li class="pl-4">
     <a href="https://laraxot.github.io/module_theme/it/docs/menu"
-        class="lvl0  nav-menu__item hover:text-blue-500"
+        class="lvl0 active font-semibold text-blue-500 nav-menu__item hover:text-blue-500"
         >
         Menu
     </a>
@@ -568,12 +568,13 @@
         </nav>
 
         <div class="DocSearch-content w-full lg:w-3/5 break-words pb-16 lg:pl-4" v-pre>
-            <h1 id="badge">Badge</h1>
+            <h1 id="menu">Menu</h1>
 
-<pre><code class="language-php">&lt;x-badge&gt;
-    Notifications &lt;x-badge&gt;4&lt;/x-badge&gt;
-&lt;/x-badge&gt;
-</code></pre>
+<p>Il menu a sinistra nella dashboard del pannello di amministrazione, sotto la voce menu, prende i dati dalla funzione getModuleMenuByModuleName in laravel/Modules/Cms/View/Composers/ThemeComposer.php.</p>
+
+<p>A sua volta la funzione getModuleMenuByModuleName pesca i dati dal modello laravel/Modules/UI/Models/Menu.php.</p>
+
+<p>Menu.php ha la funzione rowsPaginated che prende i dati dai file Modules/NOME_MODULO/Resources/menu/menus.php e Modules/NOME_MODULO/Resources/menu/menu_items.php</p>
         </div>
     </div>
 </section>
