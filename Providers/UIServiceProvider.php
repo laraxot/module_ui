@@ -10,7 +10,7 @@ use Illuminate\Pagination\Paginator;
 // --- services ---
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
-use Modules\Tenant\Services\TenantService;
+
 use Modules\UI\Actions\RegisterCollectiveComponents;
 use Modules\UI\Actions\RegisterCollectiveMacros;
 use Modules\UI\Services\ThemeService;

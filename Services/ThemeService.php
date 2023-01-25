@@ -18,7 +18,6 @@ use Illuminate\Support\Str;
 use Modules\Cms\Contracts\PanelContract;
 use Modules\Cms\Services\PanelService;
 use Modules\Cms\Services\RouteService;
-use Modules\Tenant\Services\TenantService;
 use Modules\UI\Datas\FieldData;
 use Modules\Xot\Services\ArtisanService;
 use Modules\Xot\Services\FileService;
@@ -1141,26 +1140,26 @@ class ThemeService
     }
     */
 
-    /**
+    /*
      * @param string $name
      *
      * @return mixed
-     */
+     
     public static function xotModelEager($name)
     {
         return TenantService::modelEager($name);
     }
 
-    /**
+    /*
      * @param string $name
      *
      * @return array|false|mixed
-     */
+     
     public static function xotModel($name)
     {
         return TenantService::model($name);
     }
-
+    */
     /**
      * Undocumented function.
      */
@@ -1320,8 +1319,8 @@ class ThemeService
      */
     public static function getGoogleFontsInclude(): void
     {
-        if (TenantService::config('layout.resources.fonts.google.families')) {
-            $fonts = TenantService::config('layout.resources.fonts.google.families');
+        if (config('layout.resources.fonts.google.families')) {
+            $fonts = config('layout.resources.fonts.google.families');
             if (! \is_array($fonts)) {
                 $fonts = [];
             }
@@ -1371,18 +1370,18 @@ class ThemeService
         $themes = [];
 
 
-        //$themes[] = 'css/themes/layout/header/base/'.TenantService::config('layout.header.self.theme').'.css';
-        //$themes[] = 'css/themes/layout/header/menu/'.TenantService::config('layout.header.menu.desktop.submenu.theme').'.css';
-        //$themes[] = 'css/themes/layout/aside/'.TenantService::config('layout.aside.self.theme').'.css';
+        //$themes[] = 'css/themes/layout/header/base/'.config('layout.header.self.theme').'.css';
+        //$themes[] = 'css/themes/layout/header/menu/'.config('layout.header.menu.desktop.submenu.theme').'.css';
+        //$themes[] = 'css/themes/layout/aside/'.config('layout.aside.self.theme').'.css';
 
-        $themes[] = self::asset('adm_theme::dist/css/themes/layout/header/base/'.TenantService::config('layout.header.self.theme').'.css');
-        $themes[] = self::asset('adm_theme::dist/css/themes/layout/header/menu/'.TenantService::config('layout.header.menu.desktop.submenu.theme').'.css');
-        $themes[] = self::asset('adm_theme::dist/css/themes/layout/aside/'.TenantService::config('layout.aside.self.theme').'.css');
+        $themes[] = self::asset('adm_theme::dist/css/themes/layout/header/base/'.config('layout.header.self.theme').'.css');
+        $themes[] = self::asset('adm_theme::dist/css/themes/layout/header/menu/'.config('layout.header.menu.desktop.submenu.theme').'.css');
+        $themes[] = self::asset('adm_theme::dist/css/themes/layout/aside/'.config('layout.aside.self.theme').'.css');
 
-        if (TenantService::config('layout.aside.self.display')) {
-            $themes[] = self::asset('adm_theme::dist/css/themes/layout/brand/'.TenantService::config('layout.brand.self.theme').'.css');
+        if (config('layout.aside.self.display')) {
+            $themes[] = self::asset('adm_theme::dist/css/themes/layout/brand/'.config('layout.brand.self.theme').'.css');
         } else {
-            $themes[] = self::asset('adm_theme::dist/css/themes/layout/brand/'.TenantService::config('layout.header.self.theme').'.css');
+            $themes[] = self::asset('adm_theme::dist/css/themes/layout/brand/'.config('layout.header.self.theme').'.css');
         }
 
         return $themes;
@@ -1394,7 +1393,7 @@ class ThemeService
      */
     public static function tenantConfig(string $config)
     {
-        return TenantService::config($config);
+        return config($config);
     }
 
     /**
@@ -1441,7 +1440,7 @@ class ThemeService
     public static function renderIconName(string $icon_name): string
     {
         $icon_key = 'icons.'.$icon_name;
-        $icon = TenantService::config($icon_key);
+        $icon = config($icon_key);
         if (! \is_string($icon)) {
             // dddx($icon_name);
             throw new \Exception('icon not exists in config icons file ['.__LINE__.']['.__FILE__.']');
@@ -1471,8 +1470,8 @@ class ThemeService
         }
         if (! isset($xot[$theme_type])) {
             $xot[$theme_type] = self::firstThemeName($theme_type);
-            // throw new Exception('[' . __LINE__ . '][' . class_basename(__CLASS__) . ']');
-            TenantService::saveConfig(['name' => 'xra', 'data' => $xot]);
+            throw new Exception('[' . __LINE__ . '][' . class_basename(__CLASS__) . ']');
+            //TenantService::saveConfig(['name' => 'xra', 'data' => $xot]);
         }
         $theme = $xot[$theme_type];
 

@@ -1,2 +1,2 @@
 providers:
-  - Modules\Tenant\Providers\TenantServiceProvider
+  - Modules\UI\Providers\UIServiceProvider

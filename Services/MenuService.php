@@ -5,25 +5,15 @@ declare(strict_types=1);
 namespace Modules\UI\Services;
 
 use Illuminate\Support\Facades\File;
-use Modules\Tenant\Services\TenantService;
-
-// ----- Models -----
-
-// ---- xot extend -----
-// ----- services --
-
-// ---------CSS------------
 
 /**
  * Class MenuService.
  */
-class MenuService
-{
+class MenuService{
     /**
      * @return array|mixed
      */
-    public static function get()
-    {
+    public static function get(){
         $route_params = getRouteParameters();
         extract($route_params);
         if (! isset($module)) {
@@ -579,7 +569,7 @@ class MenuService
     public static function renderIconName($icon_name)
     {
         $icon_key = 'icons.'.$icon_name;
-        $icon = TenantService::config($icon_key);
+        $icon = config($icon_key);
         // dddx(['icon' => $icon, 'name' => 'icon_key'.$icon_key]);
         if (! \is_string($icon)) {
             throw new \Exception('['.__LINE__.']['.class_basename(__CLASS__).']');
