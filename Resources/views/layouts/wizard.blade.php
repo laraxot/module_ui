@@ -9,6 +9,8 @@
 
     @yield('content')
 
+    <x-flash-message />
+    
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item {{ $is_first ? 'disabled' : '' }}">
