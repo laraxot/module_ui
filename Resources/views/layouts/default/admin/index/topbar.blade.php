@@ -14,6 +14,18 @@
             }
         @endphp
     @endforeach
+
+
+    -
+    @foreach ($_panel->checkActions() as $act)
+    @php
+        try {
+            echo $act->btnHtml();
+        } catch (\Exception $e) {
+            //dddx(['act'=>$act,'e'=>$e]);
+        }
+    @endphp
+@endforeach
     <p>
         <span class="primary-color"><strong>{{ number_format($rows->total(), 0, ',', ' ') }}</strong></span>
         {{ Str::plural($row->post_type ?? class_basename($row), $rows->total()) }}
