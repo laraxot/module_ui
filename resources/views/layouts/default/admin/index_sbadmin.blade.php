@@ -58,7 +58,7 @@
                         </x-slot>
                     @endif
                 @endforeach
-            </x-theme::component>
+            </x-std>
 
             <x-pagination :rows="$rows" />
             {{-- @if (view()->exists('adm_theme::layouts.partials.pagination'))
