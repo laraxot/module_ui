@@ -4,6 +4,8 @@
     {!! Theme::include('inner_page', [], get_defined_vars()) !!}
     @component('ui::components.crud', get_defined_vars())
         @slot('content')
+        {{ Form::open(['method' => 'post','url'=>'/admin/pfed/it/companies?_act=massive']) }}
+            @csrf
             {!! Theme::include('topbar', [], get_defined_vars()) !!}
             @php
             $fields = $_panel->getFields('index');
@@ -17,6 +19,7 @@
                     @if ($loop->first)
                         <x-slot name="thead">
                             <tr>
+                                <td>select models</td>
                                 @foreach ($fields as $field)
                                     <td>{{ str_replace('_', ' ', $field->name) }}</td>
                                 @endforeach
@@ -25,11 +28,15 @@
                         </x-slot>
                         <x-slot name="tbody">
                     @endif
+
+                    
                     <tr>
+                        <td>{{ Form::checkbox('checkbox_model_id[]', $row->id, false) }}</td>
                         @foreach ($row_panel->getFields('index') as $field)
                             <td>
                                 {!! Theme::inputFreeze($field,$row) !!}
                                 @if ($loop->first)
+                               
                                     @if ($row_panel->itemActions()->count() > 5)
                                         <div class="dropdown">
                                             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
@@ -59,13 +66,8 @@
                     @endif
                 @endforeach
             </x-std>
-
             <x-pagination :rows="$rows" />
-            {{-- @if (view()->exists('adm_theme::layouts.partials.pagination'))
-                {{ $rows->appends(request()->query())->links('adm_theme::layouts.partials.pagination') }}
-            @else
-                {{ $rows->appends(request()->query())->links() }}
-            @endif --}}
+            {{ Form::close() }}
         @endslot
     @endcomponent
 @endsection
