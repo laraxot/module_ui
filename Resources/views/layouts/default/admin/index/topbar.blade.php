@@ -18,14 +18,14 @@
 
     -
     @foreach ($_panel->checkActions() as $act)
-    @php
-        try {
-            echo $act->btnHtml();
-        } catch (\Exception $e) {
-            //dddx(['act'=>$act,'e'=>$e]);
-        }
-    @endphp
-@endforeach
+        @php
+            try {
+                echo $act->btnHtml();
+            } catch (\Exception $e) {
+                //dddx(['act'=>$act,'e'=>$e]);
+            }
+        @endphp
+    @endforeach
     <p>
         <span class="primary-color"><strong>{{ number_format($rows->total(), 0, ',', ' ') }}</strong></span>
         {{ Str::plural($row->post_type ?? class_basename($row), $rows->total()) }}
@@ -35,41 +35,24 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        {{-- <form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-		</form> --}}
         <div class="col">
         </div>
         <x-form.lang type="inline" />
         <x-form.search type="inline" />
         <x-form.order type="inline" />
-        {{-- @if ($_panel->hasLang())
-            @include('ui::includes.components.form_complete.lang', [
-                'form_class' => 'form-inline my-2 my-lg-0',
-            ])
-        @endif
-        {{--@include('ui::includes.components.form_complete.search', [
-            'form_class' => 'form-inline my-2 my-lg-0',
-        ])
-        
-        @include('ui::includes.components.form_complete.order_by', [
-            'form_class' => 'form-inline my-2 my-lg-0',
-        ]) --}}
-        {{-- <form method="get" class="form-inline my-2 my-lg-0">
-			<div class="input-group">
-				<select id="sort[by]" name="sort[by]" class="form-control">
-					<option selected="selected" value=""></option>
-				</select>
-				<select id="sort[order]" name="sort[order]" class="form-control">
-					<option selected="selected" value=""></option>
-					<option value="desc">aadesc</option>
-					<option value="asc">asc</option>
-				</select>
-			</div>
-			<div class="input-group-append">
-				<button type="submit" class="btn btn-primary"><i class="fas fa-sort fa-sm"></i></button>
-			</div>
-		</form> --}}
     </div>
 </nav>
+
+@pushOnce('scripts')
+    <script>
+        $('form').submit(function() {
+            let values = [];
+            $.each($('input[name="checkbox_model_id[]"]:checked'), function() {
+                values.push($(this).val());
+            });
+            $('[name="model_ids"]').val(values.toString());
+
+            return true;
+        });
+    </script>
+@endPushOnce

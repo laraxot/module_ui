@@ -4,11 +4,9 @@
     {!! Theme::include('inner_page', [], get_defined_vars()) !!}
     @component('ui::components.crud', get_defined_vars())
         @slot('content')
-        {{ Form::open(['method' => 'post','url'=>'/admin/pfed/it/companies?_act=massive']) }}
-            @csrf
             {!! Theme::include('topbar', [], get_defined_vars()) !!}
             @php
-            $fields = $_panel->getFields('index');
+                $fields = $_panel->getFields('index');
             @endphp
             <x-pagination :rows="$rows" />
             <x-std tpl="table">
@@ -29,14 +27,13 @@
                         <x-slot name="tbody">
                     @endif
 
-                    
+
                     <tr>
                         <td>{{ Form::checkbox('checkbox_model_id[]', $row->id, false) }}</td>
                         @foreach ($row_panel->getFields('index') as $field)
                             <td>
-                                {!! Theme::inputFreeze($field,$row) !!}
+                                {!! Theme::inputFreeze($field, $row) !!}
                                 @if ($loop->first)
-                               
                                     @if ($row_panel->itemActions()->count() > 5)
                                         <div class="dropdown">
                                             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
@@ -67,7 +64,6 @@
                 @endforeach
             </x-std>
             <x-pagination :rows="$rows" />
-            {{ Form::close() }}
         @endslot
     @endcomponent
 @endsection

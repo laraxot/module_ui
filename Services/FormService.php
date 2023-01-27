@@ -512,13 +512,17 @@ class FormService {
         }
 
         // href="'.$url.'"
-        return '<button type="submit"
+        $form_open = Form::open(['method' => 'post', 'url' => $url]);
+        $form_hidden = Form::hidden('model_ids', '');
+        $form_close = Form::close();
+
+        return $form_open.$form_hidden.'<button type="submit"
                     data-href="'.$url.'"
                     data-title="'.$data_title.'"
                     title="'.$title.'"
                     class="'.$class.'"
                     data-toggle="tooltip">
                     '.$icon.' '.$title.'
-                </button>';
+                </button>'.$form_close;
     }
 }// end class
