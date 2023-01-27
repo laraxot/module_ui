@@ -17,7 +17,9 @@
                     @if ($loop->first)
                         <x-slot name="thead">
                             <tr>
-                                <td>select models</td>
+                                @if ($_panel->checkActions()->count() > 0)
+                                    <td>select models</td>
+                                @endif
                                 @foreach ($fields as $field)
                                     <td>{{ str_replace('_', ' ', $field->name) }}</td>
                                 @endforeach
@@ -29,7 +31,9 @@
 
 
                     <tr>
-                        <td>{{ Form::checkbox('checkbox_model_id[]', $row->id, false) }}</td>
+                        @if ($_panel->checkActions()->count() > 0)
+                            <td>{{ Form::checkbox('checkbox_model_id[]', $row->id, false) }}</td>
+                        @endif
                         @foreach ($row_panel->getFields('index') as $field)
                             <td>
                                 {!! Theme::inputFreeze($field, $row) !!}
