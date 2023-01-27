@@ -32,8 +32,7 @@ use Modules\Xot\Services\PolicyService;
 /**
  * Class FormService.
  */
-class FormService
-{
+class FormService {
     /**
      * ora selectRelationshipOne
      * da select/field_relationship_one.blade.php
@@ -51,8 +50,7 @@ class FormService
     /**
      * @param BelongsTo|HasManyThrough|HasOneOrMany|BelongsToMany|MorphOneOrMany|MorphPivot|MorphTo|MorphToMany $rows
      */
-    public static function fieldsExcludeRows($rows): array
-    {
+    public static function fieldsExcludeRows($rows): array {
         $fields_exclude = [];
 
         $fields_exclude[] = 'id';
@@ -74,16 +72,14 @@ class FormService
         return $fields_exclude;
     }
 
-    public static function getCollectiveComponents(): array
-    {
+    public static function getCollectiveComponents(): array {
         $view_path = __DIR__.'/../Resources/views/collective/fields';
         $prefix = 'ui::';
 
         return app(GetCollectiveComponents::class)->execute($view_path, $prefix);
     }
 
-    public static function inputFreeze(FieldData $field, Model $row): Renderable
-    {
+    public static function inputFreeze(FieldData $field, Model $row): Renderable {
         $field->name_dot = bracketsToDotted($field->name);
 
         // if (\in_array('value', array_keys($params), true)) {
@@ -265,8 +261,7 @@ class FormService
      *
      * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Support\HtmlString
      */
-    public static function inputHtml(FieldData $field, Model $row)
-    {
+    public static function inputHtml(FieldData $field, Model $row) {
         $input_type = 'bs'.Str::studly($field->type);
         if (isset($field->sub_type)) {
             $input_type .= Str::studly($field->sub_type);
@@ -334,8 +329,7 @@ class FormService
         // */
     }
 
-    public static function btnHtml(array $params): string
-    {
+    public static function btnHtml(array $params): string {
         $class = 'btn btn-primary mb-2';
         $icon = null;       // icona a sx del titolo
         $label = null;
@@ -439,5 +433,92 @@ class FormService
                     data-toggle="tooltip">
                     '.$icon.' '.$title.'
                 </a>';
+    }
+
+    public static function btnMassiveAction(array $params): string {
+        $class = 'btn btn-primary mb-2';
+        $icon = null;       // icona a sx del titolo
+        $label = null;
+        $data_title = null; // titolo del modal e tooltip
+        $title = null;      // stringa che appare nel tasto
+        $lang = app()->getLocale();
+        $error_label = 'default';
+        $tooltip = null;
+        extract($params);
+        if (! isset($panel)) {
+            throw new \Exception('panel is missing');
+        }
+        if (! isset($method)) {
+            throw new \Exception('method is missing');
+        }
+        if (! isset($act)) {
+            throw new \Exception('act is missing');
+        }
+        if (! isset($url)) {
+            throw new \Exception('url is missing');
+        }
+
+        if (null === $data_title) {
+            $data_title = $title;
+        }
+        $row = $panel->getRow();
+        if ('default' === $error_label) {
+            $error_label = '['.\get_class($row).']['.$method.']';
+        }
+        $module_name = getModuleNameFromModel($row);
+        if (null === $tooltip) {
+            $tooltip = trans(strtolower($module_name.'::'.class_basename($row)).'.btn.'.$data_title);
+        }
+
+        if (\in_array($act, ['destroy', 'delete', 'detach'], true)) {
+            $class .= ' btn-danger btn-confirm-delete';
+        }
+
+        if (! Gate::allows($method, $panel)) {
+            return '';
+        }
+
+        if (isset($modal)) {
+            // if (strlen((string)$data_title) <1 ) {
+            $title = trans($module_name.'::'.strtolower(class_basename($row)).'.act.'.$act);
+            // }
+        }
+
+        if (isset($guest_url) && ! \Auth::check()) {
+            $url = $guest_url;
+        }
+        if (isset($guest_notice) && $guest_notice && ! \Auth::check()) {
+            $url = route('login', ['lang' => $lang, 'referrer' => $url]);
+        }
+
+        if (isset($modal)) {
+            $url = url_queries(['format' => $modal], $url);
+            $target = '';
+            switch ($modal) {
+                case 'iframe':  $target = 'myModalIframe';
+                    break;
+                case 'ajax':    $target = 'myModalAjax';
+                    break;
+            }
+
+            return
+            '<span data-toggle="tooltip" title="'.$tooltip.'">
+            <button type="button" data-title="'.$tooltip.'"
+            data-href="'.$url.'" data-toggle="modal" class="'.$class.'"
+            data-target="#'.$target.'">
+            '.$icon.' '.$title.'
+            </button>
+            </span>';
+        }
+
+        // href="'.$url.'"
+        return '<button type="submit"
+                    data-href="'.$url.'"
+                    data-title="'.$data_title.'"
+                    title="'.$title.'"
+                    class="'.$class.'"
+                    data-toggle="tooltip">
+                    '.$icon.' '.$title.'
+                </button>';
     }
 }// end class
