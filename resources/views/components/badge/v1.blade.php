@@ -1,1 +1,1 @@
-<span class="badge badge-primary">{{$slot}}</span>
+<span {{ $attributes->merge($attrs) }}>{{ $slot }}</span>
