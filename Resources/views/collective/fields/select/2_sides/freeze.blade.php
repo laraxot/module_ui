@@ -1,13 +1,15 @@
 @foreach ($rows as $k => $v)
-    {{-- Panel::make()->get($v)->optionLabel($v) --}}
+    {{-- {{ Panel::make()->get($v)->optionLabel($v) }} --}}
     {{-- <span class="badge badge-info">{{ $v->{$related_fields[1]->name} }}</span> --}}
-    
-    @if (!empty(Panel::make()->get($v)->optionLabel($v)))
+
+    @if (
+        !empty(Panel::make()->get($v)->optionLabel($v)
+        ))
         <x-badge>{{ Panel::make()->get($v)->optionLabel($v) }}</x-badge>
+        {{-- {{ Panel::make()->get($v)->optionLabel($v) }} --}}
     @else
         <x-badge>{{ $v->{$related_fields[1]->name} }}</x-badge>
     @endif
-    
 @endforeach
 {{-- <div class="badge-colors text-center">
     <span class="badge filter badge-yellow" data-color="yellow">1</span>
