@@ -54,6 +54,10 @@
                                         @foreach ($row_panel->itemActions() as $act)
                                             {!! $act->btnHtml() !!}
                                         @endforeach
+                                        @foreach ($row_panel->itemActionModals() as $act)
+                                            <button onclick="Livewire.emit('modal.open', '{{ $act['class'] }}')"
+                                                class="btn btn-secondary mb-2">{!! $act['icon'] !!}</button>
+                                        @endforeach
                                     @endif
                                 @endif
                             </td>
