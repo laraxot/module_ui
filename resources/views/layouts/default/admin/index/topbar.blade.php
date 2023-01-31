@@ -4,7 +4,7 @@
     }
     
 @endphp
-<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #e9ecef; padding:5px; ">
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #e9ecef; padding:5px;z-index:0;">
     @foreach ($_panel->containerActions() as $act)
         @php
             try {
