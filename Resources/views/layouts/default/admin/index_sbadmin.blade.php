@@ -55,9 +55,13 @@
                                             {!! $act->btnHtml() !!}
                                         @endforeach
                                         @foreach ($row_panel->itemActionModals() as $act)
+                                       
+                                        @php
+                                        $row_class=str_replace('\\','\\\\',$row_panel->row::class);
+                                        @endphp
                                             <button
-                                                onclick="Livewire.emit('modal.open', '{{ $act['class'] }}',{'row': '{{ $row_panel->row::class }}','id':'{{ $row_panel->row->id }}'})"
-                                                class="btn btn-secondary mb-2">{!! $act['icon'] !!}</button>
+                                                onclick="Livewire.emit('modal.open', '{{ $act['class'] }}',{'model_type': '{{ $row_class }}','model_id':'{{ $row_panel->row->id }}'})"
+                                                class="btn btn-secondary btn-success mb-2">{!! $act['icon'] !!}</button>
                                         @endforeach
                                     @endif
                                 @endif
