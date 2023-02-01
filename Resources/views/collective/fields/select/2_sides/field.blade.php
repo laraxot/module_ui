@@ -1,34 +1,33 @@
 @php
-/**
- * https://github.com/crlcu/multiselect
- * bower install multiselect-two-sides
- */
-
-//strani errori jquery
-$field = transFields(get_defined_vars());
-
-Theme::addScript('ui::js/multiselect.js');
-
-//dddx(get_defined_vars());
-if(isset($options['field'])){
-    $field_options = $options['field']->options;
-}else{
-    $field_options = [];
+    /**
+     * https://github.com/crlcu/multiselect
+     * bower install multiselect-two-sides
+     */
     
-}
-
-$model = Form::getModel();
-$rows = $model->$name();
-//$rows=$model->user->rights();
-//$val = $rows->get();
-$val = $field->value;
-
-if (!is_iterable($val)) {
-    $val = [];
-}
-
-$related = $rows->getRelated();
-$_panel = Panel::make()->get($related);
+    //strani errori jquery
+    $field = transFields(get_defined_vars());
+    
+    Theme::addScript('ui::js/multiselect.js');
+    
+    //dddx(get_defined_vars());
+    if (isset($options['field'])) {
+        $field_options = $options['field']->options;
+    } else {
+        $field_options = [];
+    }
+    
+    $model = Form::getModel();
+    $rows = $model->$name();
+    //$rows=$model->user->rights();
+    //$val = $rows->get();
+    $val = $field->value;
+    
+    if (!is_iterable($val)) {
+        $val = [];
+    }
+    
+    $related = $rows->getRelated();
+    $_panel = Panel::make()->get($related);
 @endphp
 
 <fieldset class="form-group container-fluid border p-2">
@@ -42,8 +41,8 @@ $_panel = Panel::make()->get($related);
         </div>
         <br style="clear:both" />
         <div class="col-sm-5">
-            <select name="{{ $name }}[from][]" id="multiselect{{ $name }}"
-                class="form-control multiselect" size="8" multiple="multiple">
+            <select name="{{ $name }}[from][]" id="multiselect{{ $name }}" class="form-control multiselect"
+                size="8" multiple="multiple">
                 @foreach ($field_options as $k => $v)
                     <option value="{{ $k }}">{{ $v }}</option>
                 @endforeach
@@ -68,7 +67,6 @@ $_panel = Panel::make()->get($related);
             <select name="{{ $name }}[to][]" id="multiselect{{ $name }}_to" class="form-control"
                 size="8" multiple="multiple">
                 @foreach ($val as $k => $v)
-
                     <option value="{{ $_panel->optionId($v) }}">{{ $_panel->optionLabel($v) }}</option>
                 @endforeach
             </select>
