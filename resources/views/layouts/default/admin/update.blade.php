@@ -1,11 +1,14 @@
 @extends('adm_theme::layouts.app')
 @section('content')
     <x-flash-message />
-    @can('create', $row)
+    @can('create', $_panel)
         <a class="btn btn-primary" href="{!! $_panel->url('create') !!}">
             <i class="fas fa-plus"></i> Crea Nuovo
         </a>
     @endcan
+    {{--  
+    <x-button.edit :panel="$_panel" />
+    --}}
     <a class="btn btn-primary" href="{!! url()->previous() !!}">
         <i class="far fa-edit"></i> Continua a Modificare
     </a>
