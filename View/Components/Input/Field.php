@@ -16,8 +16,7 @@ use Modules\UI\Datas\FieldData;
 /**
  * WIP WIP WIP.
  */
-class Field extends Component
-{
+class Field extends Component {
     public FieldData $field;
     public ?Model $row = null;
     public string $tpl;
@@ -30,8 +29,7 @@ class Field extends Component
     /**
      * Undocumented function.
      */
-    public function __construct(FieldData $field, ?Model $row = null, string $tpl = 'v1')
-    {
+    public function __construct(FieldData $field, ?Model $row = null, string $tpl = 'v1') {
         $this->tpl = $tpl;
         $this->field = $field;
         $this->row = $row;
@@ -63,8 +61,7 @@ class Field extends Component
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /*
         $this->attrs['class'] = 'form-control';
         $this->attrs['name'] = $field->name;
@@ -91,6 +88,7 @@ class Field extends Component
             ]
         );
 
+        // dddx($input_attrs->merge($this->field->toArray()));
         $input_attrs = $input_attrs->merge($this->field->toArray());
 
         /**

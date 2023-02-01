@@ -9,7 +9,7 @@
                         <span class="d-inline-block me-3">👋</span>Hi, Tahlia!
                         --}}
                     </h1>
-                    
+
                 </div>
 
                 <!-- Actions -->
@@ -41,23 +41,24 @@
                         @endphp
                         @endforeach
                         --}}
+
                         <x-panel.button.create :panel="$_panel" />
                         <x-panel.actions.buttons :acts="$_panel->containerActions()" />
-                        
+
                     </div>
                 </div>
             </div>
 
-            @foreach($_panel->getTabs() as $lvl)
-            <!-- Nav -->
-            <ul class="nav nav-tabs overflow-x border-0">
-                @foreach($lvl as $v)
-                
-                <li class="nav-item">
-                    <a href="{{ $v->url }}" class="nav-link {{$v->active?'active':'' }} ">{{ $v->title }}</a>
-                </li>
-                @endforeach
-                {{--
+            @foreach ($_panel->getTabs() as $lvl)
+                <!-- Nav -->
+                <ul class="nav nav-tabs overflow-x border-0">
+                    @foreach ($lvl as $v)
+                        <li class="nav-item">
+                            <a href="{{ $v->url }}"
+                                class="nav-link {{ $v->active ? 'active' : '' }} ">{{ $v->title }}</a>
+                        </li>
+                    @endforeach
+                    {{--
                 <li class="nav-item">
                     <a href="#" class="nav-link">Most recent</a>
                 </li>
@@ -65,8 +66,8 @@
                     <a href="#" class="nav-link">Popular</a>
                 </li>
                 --}}
-            </ul>
-            @endforeach 
+                </ul>
+            @endforeach
         </div>
     </div>
 </header>
