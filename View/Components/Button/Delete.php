@@ -12,7 +12,8 @@ use Modules\Cms\Contracts\PanelContract;
 /**
  * Class Delete.
  */
-class Delete extends Component {
+class Delete extends Component
+{
     public PanelContract $panel;
     public string $method = 'delete';
     public array $attrs = [];
@@ -20,7 +21,8 @@ class Delete extends Component {
     /**
      * Undocumented function.
      */
-    public function __construct(PanelContract $panel, string $tpl = 'v1') {
+    public function __construct(PanelContract $panel, string $tpl = 'v1')
+    {
         $this->tpl = $tpl;
         $this->panel = $panel;
 
@@ -35,7 +37,8 @@ class Delete extends Component {
         }
     }
 
-    public function render(): View {
+    public function render(): View
+    {
         /**
          * @phpstan-var view-string
          */
@@ -47,7 +50,8 @@ class Delete extends Component {
         return view()->make($view, $view_params);
     }
 
-    public function shouldRender(): bool {
+    public function shouldRender(): bool
+    {
         return Gate::allows($this->method, $this->panel);
     }
 }
