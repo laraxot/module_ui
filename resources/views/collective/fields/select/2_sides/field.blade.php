@@ -40,38 +40,39 @@
             <p>{{ trans('lu::help.nota_multiselect') }}</p>
         </div>
         <br style="clear:both" />
-        <div class="col-sm-5">
-            <select name="{{ $name }}[from][]" id="multiselect{{ $name }}" class="form-control multiselect"
-                size="8" multiple="multiple">
-                @foreach ($field_options as $k => $v)
-                    <option value="{{ $k }}">{{ $v }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col-sm-2">
-            <button type="button" id="multiselect{{ $name }}_rightAll" class="btn btn-block">
-                <i class="fas fa-angle-double-right"></i>
-            </button>
-            <button type="button" id="multiselect{{ $name }}_rightSelected" class="btn btn-block">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <button type="button" id="multiselect{{ $name }}_leftSelected" class="btn btn-block">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button type="button" id="multiselect{{ $name }}_leftAll" class="btn btn-block">
-                <i class="fas fa-angle-double-left"></i>
-            </button>
-        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <select name="{{ $name }}[from][]" id="multiselect{{ $name }}"
+                    class="form-control multiselect" size="8" multiple="multiple">
+                    @foreach ($field_options as $k => $v)
+                        <option value="{{ $k }}">{{ $v }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" id="multiselect{{ $name }}_rightAll" class="btn btn-block">
+                    <i class="fas fa-angle-double-right"></i>
+                </button>
+                <button type="button" id="multiselect{{ $name }}_rightSelected" class="btn btn-block">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button type="button" id="multiselect{{ $name }}_leftSelected" class="btn btn-block">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button type="button" id="multiselect{{ $name }}_leftAll" class="btn btn-block">
+                    <i class="fas fa-angle-double-left"></i>
+                </button>
+            </div>
 
-        <div class="col-sm-5">
-            <select name="{{ $name }}[to][]" id="multiselect{{ $name }}_to" class="form-control"
-                size="8" multiple="multiple">
-                @foreach ($val as $k => $v)
-                    <option value="{{ $_panel->optionId($v) }}">{{ $_panel->optionLabel($v) }}</option>
-                @endforeach
-            </select>
+            <div class="col-sm-5">
+                <select name="{{ $name }}[to][]" id="multiselect{{ $name }}_to" class="form-control"
+                    size="8" multiple="multiple">
+                    @foreach ($val as $k => $v)
+                        <option value="{{ $_panel->optionId($v) }}">{{ $_panel->optionLabel($v) }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
-
     </div>
 </fieldset>
 
