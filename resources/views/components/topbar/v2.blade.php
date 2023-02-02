@@ -25,20 +25,19 @@
     </div>
 </header>
 
-<div class="d-flex justify-content-between flex-column flex-sm-row gap-3 mb-4">
+{{-- <div class="d-flex justify-content-between flex-column flex-sm-row gap-3 mb-4">
     <div class="hstack gap-2">
         <div class="input-group input-group-sm input-group-inline"><span class="input-group-text pe-2"><i
                     class="bi bi-search"></i> </span><input type="email" class="form-control" placeholder="Search"
                 aria-label="Search"></div>
-        {{-- <div>
+        <div>
             <button type="button" class="btn btn-sm px-3 btn-neutral d-flex align-items-center"><i
                     class="bi bi-funnel me-2"></i> <span>Filters</span> <span class="vr opacity-20 mx-3"></span> <span
                     class="text-xs text-primary">2</span></button>
-        </div> --}}
+        </div>
     </div>
-    {{-- <div class="btn-group"><a href="#" class="btn btn-sm btn-neutral"><i
+    <div class="btn-group"><a href="#" class="btn btn-sm btn-neutral"><i
                 class="bi bi-cloud-download me-2"></i>Download all </a>
-    </div> --}}
-    {{-- <a href="#"
-            class="btn btn-sm btn-neutral"><i class="bi bi-gear-wide me-2"></i>Settings</a> --}}
-</div>
+    </div>
+    <a href="#" class="btn btn-sm btn-neutral"><i class="bi bi-gear-wide me-2"></i>Settings</a>
+</div> --}}
