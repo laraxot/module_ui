@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\File;
 /**
  * Class MenuService.
  */
-class MenuService{
+class MenuService
+{
     /**
      * @return array|mixed
      */
-    public static function get(){
+    public static function get()
+    {
         $route_params = getRouteParameters();
         extract($route_params);
         if (! isset($module)) {

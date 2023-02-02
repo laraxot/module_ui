@@ -1144,7 +1144,7 @@ class ThemeService
      * @param string $name
      *
      * @return mixed
-     
+
     public static function xotModelEager($name)
     {
         return TenantService::modelEager($name);
@@ -1154,7 +1154,7 @@ class ThemeService
      * @param string $name
      *
      * @return array|false|mixed
-     
+
     public static function xotModel($name)
     {
         return TenantService::model($name);
