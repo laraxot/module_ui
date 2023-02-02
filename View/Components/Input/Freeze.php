@@ -14,8 +14,7 @@ use Modules\UI\Datas\FieldData;
 /**
  * Undocumented class.
  */
-class Freeze extends Component
-{
+class Freeze extends Component {
     public FieldData $field;
     public Model $row;
     public string $tpl;
@@ -27,8 +26,7 @@ class Freeze extends Component
     /**
      * Undocumented function.
      */
-    public function __construct(FieldData $field, Model $row, string $tpl = 'v1')
-    {
+    public function __construct(FieldData $field, Model $row, string $tpl = 'v1') {
         $this->tpl = $tpl;
         $this->field = $field;
         $this->row = $row;
@@ -52,11 +50,14 @@ class Freeze extends Component
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         $value_type = gettype($this->value);
         if ('object' == $value_type) {
-            $value_type = class_basename($this->value);
+            if ($this->value instanceof Model) {
+                $value_type = 'Model';
+            } else {
+                $value_type = class_basename($this->value);
+            }
         }
         if ('Collection' == $value_type) {
             $first = $this->value->first();
@@ -82,6 +83,17 @@ class Freeze extends Component
             ]);
         }
         */
+        /*
+        if (! in_array($value_type, ['integer', 'string'])) {
+            dddx([
+                'value' => $this->value,
+                'field' => $this->field,
+                'row' => $this->row,
+                'value_type' => $value_type,
+            ]);
+        }
+        */
+
         $value_type = Str::lower($value_type);
         /**
          * @phpstan-var view-string
