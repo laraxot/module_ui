@@ -12,28 +12,26 @@ use Modules\Cms\Contracts\PanelContract;
 /**
  * Class Show.
  */
-class Show extends Component
-{
+class Show extends Component {
     public PanelContract $panel;
     public string $method = 'show';
 
     /**
      * Undocumented function.
      */
-    public function __construct(PanelContract $panel)
-    {
+    public function __construct(PanelContract $panel, string $tpl = 'v2') {
+        $this->tpl = $tpl;
         $this->panel = $panel;
     }
 
     /**
      * Undocumented function.
      */
-    public function render(): ?View
-    {
+    public function render(): ?View {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.button.show';
+        $view = 'ui::components.button.show.'.$this->tpl;
         $view_params = [
             'view' => $view,
         ];
@@ -41,8 +39,7 @@ class Show extends Component
         return view()->make($view, $view_params);
     }
 
-    public function shouldRender(): bool
-    {
+    public function shouldRender(): bool {
         return Gate::allows($this->method, $this->panel);
     }
 }
