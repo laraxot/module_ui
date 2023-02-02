@@ -12,22 +12,30 @@ use Modules\Cms\Contracts\PanelContract;
 /**
  * Class Delete.
  */
-class Delete extends Component
-{
+class Delete extends Component {
     public PanelContract $panel;
     public string $method = 'delete';
+    public array $attrs = [];
 
     /**
      * Undocumented function.
      */
-    public function __construct(PanelContract $panel, string $tpl = 'v2')
-    {
+    public function __construct(PanelContract $panel, string $tpl = 'v2') {
         $this->tpl = $tpl;
         $this->panel = $panel;
+
+        $this->attrs['class'] = [];
+
+        if (inAdmin()) {
+            $this->attrs['button']['class'] = config('adm_theme::styles.delete.button.class', 'btn btn-primary mb-2 btn-danger btn-confirm-delete');
+            $this->attrs['icon']['class'] = config('adm_theme::styles.delete.icon.class', 'far fa-trash-alt');
+        } else {
+            $this->attrs['button']['class'] = config('pub_theme::styles.delete.button.class', 'btn btn-primary mb-2 btn-danger btn-confirm-delete');
+            $this->attrs['icon']['class'] = config('pub_theme::styles.delete.icon.class', 'far fa-trash-alt');
+        }
     }
 
-    public function render(): View
-    {
+    public function render(): View {
         /**
          * @phpstan-var view-string
          */
@@ -39,8 +47,7 @@ class Delete extends Component
         return view()->make($view, $view_params);
     }
 
-    public function shouldRender(): bool
-    {
+    public function shouldRender(): bool {
         return Gate::allows($this->method, $this->panel);
     }
 }
