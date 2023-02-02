@@ -15,13 +15,24 @@ use Modules\Xot\View\Components\XotBaseComponent;
 class Edit extends XotBaseComponent {
     public PanelContract $panel;
     public string $method = 'edit';
+    public array $attrs = [];
 
     /**
      * Undocumented function.
      */
-    public function __construct(PanelContract $panel, string $tpl = 'v2') {
+    public function __construct(PanelContract $panel, string $tpl = 'v1') {
         $this->tpl = $tpl;
         $this->panel = $panel;
+
+        $this->attrs['class'] = [];
+
+        if (inAdmin()) {
+            $this->attrs['button']['class'] = config('adm_theme::styles.edit.button.class', 'btn btn-primary mb-2');
+            $this->attrs['icon']['class'] = config('adm_theme::styles.edit.icon.class', 'far fa-edit');
+        } else {
+            $this->attrs['button']['class'] = config('pub_theme::styles.edit.button.class', 'btn btn-primary mb-2');
+            $this->attrs['icon']['class'] = config('pub_theme::styles.edit.icon.class', 'far fa-edit');
+        }
     }
 
     public function render(): View {

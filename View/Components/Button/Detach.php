@@ -12,25 +12,34 @@ use Modules\Cms\Contracts\PanelContract;
 /**
  * Class Detach.
  */
-class Detach extends Component
-{
+class Detach extends Component {
     public PanelContract $panel;
     public string $method = 'delete';
+    public array $attrs = [];
 
     /**
      * Undocumented function.
      */
-    public function __construct(PanelContract $panel)
-    {
+    public function __construct(PanelContract $panel, string $tpl = 'v1') {
+        $this->tpl = $tpl;
         $this->panel = $panel;
+
+        $this->attrs['class'] = [];
+
+        if (inAdmin()) {
+            $this->attrs['button']['class'] = config('adm_theme::styles.detach.button.class', 'btn btn-primary mb-2 btn-danger');
+            $this->attrs['icon']['class'] = config('adm_theme::styles.detach.icon.class', 'fas fa-unlink');
+        } else {
+            $this->attrs['button']['class'] = config('pub_theme::styles.detach.button.class', 'btn btn-primary mb-2 btn-danger');
+            $this->attrs['icon']['class'] = config('pub_theme::styles.detach.icon.class', 'fas fa-unlink');
+        }
     }
 
-    public function render(): View
-    {
+    public function render(): View {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.button.detach';
+        $view = 'ui::components.button.detach.'.$this->tpl;
         $view_params = [
             'view' => $view,
         ];
@@ -38,8 +47,7 @@ class Detach extends Component
         return view()->make($view, $view_params);
     }
 
-    public function shouldRender(): bool
-    {
+    public function shouldRender(): bool {
         if (! isset($this->panel->getRow()->pivot)) {
             return false;
         }

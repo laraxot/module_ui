@@ -1,3 +1,3 @@
-<a href="{{ $panel->url('edit') }}" title="edit" data-toggle="tooltip" class="btn btn-primary mb-2">
-    <i class="far fa-edit"></i>
+<a href="{{ $panel->url('edit') }}" title="edit" data-toggle="tooltip" {{ $attributes->merge($attrs['button']) }}>
+    <i {{ $attributes->merge($attrs['icon']) }}></i>
 </a>
