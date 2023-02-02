@@ -38,9 +38,9 @@
 
         </div>
     </div>
-    <div class="btn-group"><a href="#" class="btn btn-sm btn-neutral"><i
+    {{-- <div class="btn-group"><a href="#" class="btn btn-sm btn-neutral"><i
                 class="bi bi-cloud-download me-2"></i>Download all </a>
-    </div>
+    </div> --}}
     {{-- <a href="#"
             class="btn btn-sm btn-neutral"><i class="bi bi-gear-wide me-2"></i>Settings</a> --}}
 </div>
