@@ -20,6 +20,7 @@
     $rows = $model->$name();
     //$rows=$model->user->rights();
     //$val = $rows->get();
+    
     $val = $field->value;
     
     if (!is_iterable($val)) {

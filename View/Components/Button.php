@@ -7,8 +7,8 @@ namespace Modules\UI\View\Components;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
 
-class Button extends Component
-{
+class Button extends Component {
+    public string $tpl;
     public string $type;
 
     public array $attrs;
@@ -18,27 +18,23 @@ class Button extends Component
      *
      * @return void
      */
-    public function __construct(string $type = 'v1', array $attrs = [])
-    {
+    public function __construct(string $tpl = 'v1', string $type = 'button', array $attrs = []) {
+        $this->tpl = $tpl;
         $this->type = $type;
         $this->attrs = $attrs;
 
-        if (inAdmin()) {
-            $this->attrs['class']['button'] = config('adm_theme::styles.edit.button.class', 'btn btn-primary mb-2');
-        } else {
-            $this->attrs['class']['button'] = config('pub_theme::styles.edit.button.class', 'btn btn-primary mb-2');
-        }
+        $class_key = inAdmin() ? 'adm_theme' : 'pub_theme::styles.button.'.$type;
+        $this->attrs['class'] = config($class_key, 'btn btn-primary mb-2');
     }
 
     /**
      * Undocumented function.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.button.'.$this->type;
+        $view = 'ui::components.button.'.$this->tpl;
 
         $view_params = ['view' => $view];
 

@@ -90,7 +90,7 @@ class Field extends Component {
 
         // dddx($input_attrs->merge($this->field->toArray()));
         // altrimenti dà errore sui campi come gender
-        $input_attrs = $input_attrs->merge($this->field->except('options')->toArray());
+        $input_attrs = $input_attrs->merge(collect($this->field)->except('options')->toArray());
 
         /**
          * @phpstan-var view-string
