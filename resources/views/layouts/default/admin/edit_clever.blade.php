@@ -16,12 +16,12 @@
                 {!! Theme::inputHtml($field, $row) !!}
 
                 {{-- WIP
-                <x-input.field :field="$field" :row="$row" />
-                --}}
+                <x-input.field :field="$field" :row="$row" /> --}}
             @endforeach
         </div>
-        <button type="submit"
-            class="btn btn-sm bg-soft-success bg-opacity-20 bg-opacity-100-hover text-primary text-white-hover">Modifica</button>
+        {{-- <button type="submit"
+            class="btn btn-sm bg-soft-success bg-opacity-20 bg-opacity-100-hover text-primary text-white-hover">Modifica</button> --}}
+        <x-button type="submit">Modifica</x-button>
         {!! Form::close() !!}
     </x-section>
 @endsection
