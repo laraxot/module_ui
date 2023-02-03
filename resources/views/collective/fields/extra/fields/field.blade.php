@@ -4,5 +4,6 @@
 @endphp
 
 <livewire:input.extra-fields :name="$name" :model="$model" :value="$val" />
-
+{{--
 <pre> {{ print_r($val, true) }} </pre>
+--}}
