@@ -1,6 +1,7 @@
 @props([
     'url' => null,
 ])
+
 @if ($url != null)
     <a href="{{ $url }}" {{ $attributes }}>{{ $slot }}</a>
 @else
