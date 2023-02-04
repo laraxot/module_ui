@@ -23,8 +23,10 @@ class Button extends Component {
         $this->type = $type;
         $this->attrs = $attrs;
 
-        $class_key = inAdmin() ? 'adm_theme' : 'pub_theme::styles.button.'.$type;
+        $class_key = inAdmin() ? 'adm_theme::styles.button.'.$type : 'pub_theme::styles.button.'.$type;
         $this->attrs['class'] = config($class_key, 'btn btn-primary mb-2');
+
+        // dddx([$class_key, $this->attrs['class']]);
     }
 
     /**
