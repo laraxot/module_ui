@@ -12,7 +12,7 @@ class Button extends Component {
     public string $type;
 
     public array $attrs;
-    public string $url;
+    public ?string $url = '#';
 
     /**
      * Create the component instance.
