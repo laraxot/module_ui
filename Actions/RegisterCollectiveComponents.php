@@ -8,16 +8,13 @@ use Collective\Html\FormFacade as Form;
 use Modules\Xot\Services\FileService;
 use Spatie\QueueableAction\QueueableAction;
 
-class RegisterCollectiveComponents
-{
+class RegisterCollectiveComponents {
     use QueueableAction;
 
-    public function __construct()
-    {
+    public function __construct() {
     }
 
-    public function execute(string $path = '', string $prefix = ''): void
-    {
+    public function execute(string $path = '', string $prefix = ''): void {
         $blade_component_piece = 'collective.fields.group';
         if (inAdmin()) {
             $blade_component = 'adm_theme::'.$blade_component_piece;
