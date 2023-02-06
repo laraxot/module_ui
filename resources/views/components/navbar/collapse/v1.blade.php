@@ -22,9 +22,6 @@
         @endphp
 
         @foreach ($menu_items as $menu_item)
-            @php
-                //dddx([Auth::check(), $menu_item,(Auth::check() && $menu_item->logged_policy === '1') || $menu_item->logged_policy !== '1' ]);
-            @endphp
             @if ((Auth::check() && $menu_item->logged_policy === '1') || $menu_item->logged_policy !== '1')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ $menu_item->link }}">{{ $menu_item->label }}</a>

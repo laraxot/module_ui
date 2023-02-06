@@ -6,7 +6,7 @@
     
     //strani errori jquery
     $field = transFields(get_defined_vars());
-    
+
     Theme::addScript('ui::js/multiselect.js');
     
     //dddx(get_defined_vars());
@@ -20,7 +20,7 @@
     $rows = $model->$name();
     //$rows=$model->user->rights();
     //$val = $rows->get();
-    
+
     $val = $field->value;
     
     if (!is_iterable($val)) {
