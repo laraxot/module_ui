@@ -9,13 +9,16 @@ use Illuminate\Support\Str;
 use Modules\Xot\Services\FileService;
 use Spatie\QueueableAction\QueueableAction;
 
-class GetCollectiveComponents {
+class GetCollectiveComponents
+{
     use QueueableAction;
 
-    public function __construct() {
+    public function __construct()
+    {
     }
 
-    public function execute(string $view_path = '', string $prefix = ''): array {
+    public function execute(string $view_path = '', string $prefix = ''): array
+    {
         $components_json = $view_path.'/_components.json';
         $components_json = str_replace(['/', '\\'], [\DIRECTORY_SEPARATOR, \DIRECTORY_SEPARATOR], $components_json);
 
