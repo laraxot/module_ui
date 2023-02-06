@@ -12,6 +12,7 @@ class Button extends Component {
     public string $type;
 
     public array $attrs;
+    public ?string $url = '#';
 
     /**
      * Create the component instance.
@@ -19,12 +20,17 @@ class Button extends Component {
      * @return void
      */
     public function __construct(string $tpl = 'v1', string $type = 'button', array $attrs = []) {
+        // dddx($attrs);
         $this->tpl = $tpl;
         $this->type = $type;
         $this->attrs = $attrs;
 
-        $class_key = inAdmin() ? 'adm_theme' : 'pub_theme::styles.button.'.$type;
+        $this->url = isset($attrs['url']) ? $attrs['url'] : null;
+
+        $class_key = inAdmin() ? 'adm_theme::styles.button.'.$type : 'pub_theme::styles.button.'.$type;
         $this->attrs['class'] = config($class_key, 'btn btn-primary mb-2');
+
+        // dddx([$class_key, $this->attrs['class']]);
     }
 
     /**
