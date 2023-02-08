@@ -12,7 +12,13 @@
         @endif
     </a>
 @else
-    <button {{ $attributes->merge($attrs) }}>{{ $slot }}</button>
+    <button {{ $attributes->merge($attrs) }}>
+        @if (isset($attrs['icon']))
+            <i class="{{ $attrs['icon'] }}"></i>
+        @else
+            {{ $slot }}
+        @endif
+    </button>
 @endif
 
 
