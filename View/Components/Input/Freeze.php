@@ -10,12 +10,12 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Modules\UI\Datas\FieldData;
+use Spatie\ModelStates\State;
 
 /**
  * Undocumented class.
  */
-class Freeze extends Component
-{
+class Freeze extends Component {
     public FieldData $field;
     public Model $row;
     public string $tpl;
@@ -27,8 +27,7 @@ class Freeze extends Component
     /**
      * Undocumented function.
      */
-    public function __construct(FieldData $field, Model $row, string $tpl = 'v1')
-    {
+    public function __construct(FieldData $field, Model $row, string $tpl = 'v1') {
         $this->tpl = $tpl;
         $this->field = $field;
         $this->row = $row;
@@ -52,12 +51,13 @@ class Freeze extends Component
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         $value_type = gettype($this->value);
         if ('object' == $value_type) {
             if ($this->value instanceof Model) {
                 $value_type = 'Model';
+            } elseif ($this->value instanceof State) {
+                $value_type = 'State';
             } else {
                 $value_type = class_basename($this->value);
             }
@@ -105,6 +105,9 @@ class Freeze extends Component
         $view_params = [
             'view' => $view,
         ];
+        if (! view()->exists($view)) {
+            throw new \Exception('view ['.$view.'] not found');
+        }
 
         return view($view, $view_params);
     }
