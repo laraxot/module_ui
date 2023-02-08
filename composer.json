@@ -8,8 +8,9 @@
         }
     ],
     "require": {
+        "laravelcollective/html": "^6.3",
         "laraxot/module_xot": "dev-master",
-        "laravelcollective/html": "^6.3"
+        "spatie/laravel-model-states": "^2.4"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",

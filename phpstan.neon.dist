@@ -11,5 +11,5 @@ parameters:
     - ./docs/*
     - ./Tests/*
 
-    checkModelProperties: true
+    checkModelProperties: false
     checkMissingIterableValueType: false

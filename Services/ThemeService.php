@@ -617,21 +617,7 @@ class ThemeService
 
         return $view2;
 
-        // ------------ CASI PARTICOLARI -----------
-        // if ('pub_theme::translation.index' == $view) {
-        //    return 'ui::translation.index';
-        // }
-        // ---------------Panel Actions --------------------------
-        /*
-        $act = \Request::input('_act');
-        if (null != $act) {
-            $view .= '.acts.'.$act;
-        }
-        */
-
-        // dddx(['view' => $view, 'view1' => $view1, 'route_action' => $route_action]);
-
-        // return self::getViewWithFormat($view);
+       
     }
 
     /**

@@ -31,11 +31,14 @@ class Label extends Component
         */
         $this->attrs['class'] = 'form-label';
 
-        $panel = PanelService::make()->getRequestPanel();
+        
         $this->tradKey = 'pub_theme::txt';
-        if (null !== $panel) {
-            $this->tradKey = $panel->getTradMod();
-        }
+        if(class_exists(PanelService::class)){
+            $panel = PanelService::make()->getRequestPanel();
+            if (null !== $panel) {
+                $this->tradKey = $panel->getTradMod();
+            }
+    }
     }
 
     /**

@@ -45,6 +45,15 @@ class UIServiceProvider extends XotBaseServiceProvider
      */
     public function bootCallback(): void
     {
+        if ($this->app->runningInConsole()) {
+            /*
+            $this->publishes([
+                __DIR__ . '/../Config/xra.php' => config_path('xra.php'),
+            ], 'config');
+            */
+            $this->mergeConfigFrom(__DIR__ . '/../Config/xra.php', 'xra');
+        }
+        
         $this->xot = XotData::from(config('xra'));
 
         $this->commands(
@@ -62,6 +71,7 @@ class UIServiceProvider extends XotBaseServiceProvider
 
     public function registerCollective(): void
     {
+        
         app(RegisterCollectiveComponents::class)->execute(
             $this->module_dir.'/../Resources/views/collective/fields',
             $this->module_name.'::'

@@ -11,7 +11,7 @@ use Modules\Cms\Services\PanelService;
 
 class Lang extends Component
 {
-    public string $type;
+    public string $tpl;
     public string $current_locale;
     public array $supported_locale;
 
@@ -19,17 +19,21 @@ class Lang extends Component
 
     public bool $show;
 
-    public function __construct(string $type = 'v1')
+    public function __construct(string $tpl = 'v1')
     {
-        $this->type = $type;
+        $this->tpl = $tpl;
         $this->current_locale = LaravelLocalization::getCurrentLocaleName();
         $this->supported_locale = LaravelLocalization::getSupportedLocales();
-        $panel = PanelService::make()->getRequestPanel();
-        if (! is_null($panel)) {
-            $this->show = $panel->hasLang();
-        } else {
-            throw new \Exception('['.__LINE__.']['.__FILE__.'], panel is null');
+        $this->show = false;
+        if(class_exists(PanelService::class)){
+            $panel = PanelService::make()->getRequestPanel();
+            if (! is_null($panel)) {
+                $this->show = $panel->hasLang();
+            } else {
+                throw new \Exception('['.__LINE__.']['.__FILE__.'], panel is null');
+            }
         }
+        
     }
 
     public function render(): Renderable
