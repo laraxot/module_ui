@@ -10,22 +10,16 @@ use Illuminate\View\Component;
 use Modules\UI\Services\ThemeService;
 
 /**
- * Undocumented class.
+ * syntax error, unexpected token "include", expecting identifier
  */
-class IncludeView extends Component
-{
+class Include extends Component{
     public string $view;
-    public array $vars=[];
 
-    public function __construct(string $view,array $vars=[]){
-        
+    public function __construct(string $view) {
         $this->view = $view;
-        $this->vars=$vars;
-        
     }
 
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         $views = ThemeService::getDefaultViewArray();
 
         $view_tpl = $this->view;
@@ -46,24 +40,9 @@ class IncludeView extends Component
         );
 
         if (null === $view_work) {
-            if (\in_array($view_tpl, ['topbar', 'bottombar', 'inner_page'], true)) {
-                /**
-                 * @phpstan-var view-string
-                 */
-                $view = 'ui:empty';
-
-                return view($view);
-                // throw new \Exception('$view_work is null');
-            }
-
-            dddx(['err' => 'view not Exists', 'views' => $views]);
-        }
-
-        if (null === $view_work) {
             throw new \Exception('$view_work is null');
         }
 
-        
-        return view($view_work,$this->vars);
+        return view($view_work);
     }
 }

@@ -10,18 +10,17 @@ use Illuminate\View\Component;
 /**
  * Class Std.
  */
-class Topbar extends Component
-{
-    public string $type;
+class Topbar extends Component {
+    public string $tpl;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(string $type = 'v2')
+    public function __construct(string $tpl = 'v2')
     {
-        $this->type = $type;
+        $this->tpl = $tpl;
     }
 
     /**
@@ -32,7 +31,7 @@ class Topbar extends Component
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.topbar.'.$this->type;
+        $view = 'ui::components.topbar.'.$this->tpl;
         $view_params = [
             'view' => $view,
         ];
