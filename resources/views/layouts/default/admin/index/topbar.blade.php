@@ -37,9 +37,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="col">
         </div>
-        <x-form.lang type="inline" />
+        <x-form.panel.lang type="inline" />
         <x-form.search type="inline" />
-        <x-form.order type="inline" />
+        <x-form.panel.order type="inline" />
     </div>
 </nav>
 
