@@ -1367,7 +1367,7 @@ class ThemeService {
         if (! isset($xot[$theme_type])) {
             $xot[$theme_type] = self::firstThemeName($theme_type);
             throw new \Exception('['.__LINE__.']['.class_basename(__CLASS__).']');
-            // TenantService::saveConfig(['name' => 'xra', 'data' => $xot]);
+            // TenantService::saveConfig('xra',$xot);
         }
         $theme = $xot[$theme_type];
 
