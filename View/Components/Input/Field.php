@@ -16,8 +16,7 @@ use Modules\UI\Datas\FieldData;
 /**
  * WIP WIP WIP.
  */
-class Field extends Component
-{
+class Field extends Component {
     public FieldData $field;
     public ?Model $row = null;
     public string $tpl;
@@ -30,8 +29,7 @@ class Field extends Component
     /**
      * Undocumented function.
      */
-    public function __construct(FieldData $field, ?Model $row = null, string $tpl = 'v1')
-    {
+    public function __construct(FieldData $field, ?Model $row = null, string $tpl = 'v1') {
         $this->tpl = $tpl;
         $this->field = $field;
         $this->row = $row;
@@ -46,7 +44,9 @@ class Field extends Component
         }
 
         if (is_iterable($field->options) && count($field->options) > 0) {
-            $this->value = collect($field->options)->get($this->value) ?? $this->value;
+            if (is_integer($this->value) || is_string($this->value)) {
+                $this->value = collect($field->options)->get($this->value) ?? $this->value;
+            }
         }
 
         /*
@@ -63,8 +63,7 @@ class Field extends Component
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /*
         $this->attrs['class'] = 'form-control';
         $this->attrs['name'] = $field->name;
@@ -93,7 +92,7 @@ class Field extends Component
 
         // dddx($input_attrs->merge($this->field->toArray()));
         // altrimenti dà errore sui campi come gender
-        $input_attrs = $input_attrs->merge(collect($this->field)->except('options')->toArray());
+        $input_attrs = $input_attrs->merge(collect($this->field)->except(['options'])->toArray());
 
         /**
          * @phpstan-var view-string

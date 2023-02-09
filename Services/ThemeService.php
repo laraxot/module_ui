@@ -1000,7 +1000,7 @@ class ThemeService {
         return $view_first;
     }
     */
-
+    /* move to Component <x-include-view
     public static function include(string $view_tpl, array $params_tpl, array $vars): ?Renderable {
         $views = self::getDefaultViewArray();
         $views = collect($views)->map(
@@ -1033,6 +1033,7 @@ class ThemeService {
         // return view($view_work)->with($vars)->with($params_tpl); // quale delle 2 ?
         // return (string)\View::make($view_work, $params_tpl, $vars)->render();
     }
+    */
 
     /*
     //--- lo chiamo da blade, in prod si puo' ipotizzare di usare la cache

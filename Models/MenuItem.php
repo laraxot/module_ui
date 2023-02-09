@@ -44,8 +44,7 @@ use Sushi\Sushi;
  *
  * @mixin \Eloquent
  */
-class MenuItem extends Model
-{
+class MenuItem extends Model {
     use Sushi;
     use SushiConfigCrud;
 
@@ -95,8 +94,7 @@ class MenuItem extends Model
     }
     */
 
-    public function getRows(): array
-    {
+    public function getRows(): array {
         $route_params = getRouteParameters();
         $rows = null;
         if (inAdmin() && isset($route_params['module'])) {
@@ -104,6 +102,9 @@ class MenuItem extends Model
 
             if (File::exists($menu_path)) {
                 $rows = File::getRequire($menu_path);
+                if (! is_array($rows)) {
+                    throw new \Exception('['.__LINE__.']['.__FILE__.']');
+                }
                 $rows = array_values($rows);
             // dddx($this->config_name);
             } else {
@@ -139,33 +140,28 @@ class MenuItem extends Model
     }
     */
 
-    public function getsons(int $id): Collection
-    {
+    public function getsons(int $id): Collection {
         return $this->where('parent', $id)->get();
     }
 
-    public function getall(int $id): Collection
-    {
+    public function getall(int $id): Collection {
         return $this->where('menu', $id)
             ->orderBy('sort', 'asc')
             ->get();
     }
 
-    public static function getNextSortRoot(int $menu): int
-    {
+    public static function getNextSortRoot(int $menu): int {
         // return (int) self::where('menu', $menu)->max('sort') + 1;
         $max_sort = self::where('menu', $menu)->max('sort');
 
         return $max_sort + 1;
     }
 
-    public function parent_menu(): BelongsTo
-    {
+    public function parent_menu(): BelongsTo {
         return $this->belongsTo(Menu::class, 'menu');
     }
 
-    public function child(): HasMany
-    {
+    public function child(): HasMany {
         return $this->hasMany(self::class, 'parent')
             ->orderBy('sort', 'ASC');
     }

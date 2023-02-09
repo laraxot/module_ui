@@ -7,6 +7,7 @@ namespace Modules\UI\View\Components\Input;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Modules\UI\Datas\FieldData;
@@ -39,7 +40,7 @@ class Freeze extends Component {
             $this->value = $row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
         }
 
-        if (count($field->options) > 0) {
+        if (is_countable($field->options) && count($field->options) > 0) {
             if (null !== $this->value && ! is_array($this->value)) {
                 $this->value = collect($field->options)->get((string) $this->value) ?? $this->value;
             } else {
@@ -58,18 +59,23 @@ class Freeze extends Component {
                 $value_type = 'Model';
             } elseif ($this->value instanceof State) {
                 $value_type = 'State';
-            } else {
+            } elseif (is_object($this->value) || is_string($this->value)) {
                 $value_type = class_basename($this->value);
+            }/*else {
+
             }
+            */
         }
-        if ('Collection' == $value_type) {
+        // if ('Collection' == $value_type) {
+        if ($this->value instanceof Collection) {
             $first = $this->value->first();
             if ($first instanceof Model) {
                 $value_type .= '.Model';
             }
         }
 
-        if ('string' == $value_type && Str::contains($this->value, '.')) {
+        // if ('string' == $value_type && Str::contains($this->value, '.')) {
+        if (is_string($this->value) && Str::contains($this->value, '.')) {
             $info = pathinfo($this->value);
             $ext = $info['extension'] ?? '';
             if (in_array($ext, ['png', 'jpg'])) {

@@ -16,7 +16,7 @@ class GetViewAction {
      */
     public function execute(string $tpl = ''): string {
         $backtrace = debug_backtrace();
-        $file0 = FileService::fixpath($backtrace[0]['file']);
+        $file0 = FileService::fixpath($backtrace[0]['file'] ?? '');
         $file0 = Str::after($file0, base_path());
 
         $arr = explode(DIRECTORY_SEPARATOR, $file0);
