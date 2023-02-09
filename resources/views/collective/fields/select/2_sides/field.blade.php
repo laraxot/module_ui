@@ -6,7 +6,7 @@
     
     //strani errori jquery
     $field = transFields(get_defined_vars());
-
+    
     Theme::addScript('ui::js/multiselect.js');
     
     //dddx(get_defined_vars());
@@ -20,7 +20,7 @@
     $rows = $model->$name();
     //$rows=$model->user->rights();
     //$val = $rows->get();
-
+    
     $val = $field->value;
     
     if (!is_iterable($val)) {
@@ -64,6 +64,16 @@
                     <i class="fas fa-angle-double-left"></i>
                 </button>
             </div>
+            {{-- <div class="col-sm-2">
+                <x-button type="button" id="multiselect{{ $name }}_rightAll" type="block"><i
+                        class="bi bi-arrow-right"></i></x-button>
+                <x-button type="button" id="multiselect{{ $name }}_rightSelected" type="block"><i
+                        class="bi bi-arrow-right"></i></x-button>
+                <x-button type="button" id="multiselect{{ $name }}_leftSelected" type="block"><i
+                        class="bi bi-arrow-right"></i></x-button>
+                <x-button type="button" id="multiselect{{ $name }}_leftAll" type="block"><i
+                        class="bi bi-arrow-right"></i></x-button>
+            </div> --}}
 
             <div class="col-sm-5">
                 <select name="{{ $name }}[to][]" id="multiselect{{ $name }}_to" class="form-control"
