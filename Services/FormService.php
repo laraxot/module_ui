@@ -32,8 +32,7 @@ use Modules\Xot\Services\PolicyService;
 /**
  * Class FormService.
  */
-class FormService
-{
+class FormService {
     /**
      * ora selectRelationshipOne
      * da select/field_relationship_one.blade.php
@@ -51,8 +50,7 @@ class FormService
     /**
      * @param BelongsTo|HasManyThrough|HasOneOrMany|BelongsToMany|MorphOneOrMany|MorphPivot|MorphTo|MorphToMany $rows
      */
-    public static function fieldsExcludeRows($rows): array
-    {
+    public static function fieldsExcludeRows($rows): array {
         $fields_exclude = [];
 
         $fields_exclude[] = 'id';
@@ -74,55 +72,45 @@ class FormService
         return $fields_exclude;
     }
 
-    public static function getCollectiveComponents(): array
-    {
+    public static function getCollectiveComponents(): array {
         $view_path = __DIR__.'/../Resources/views/collective/fields';
         $prefix = 'ui::';
 
         return app(GetCollectiveComponents::class)->execute($view_path, $prefix);
     }
 
+    /*-- to separate component
     public static function inputFreeze(FieldData $field, Model $row): Renderable
     {
         $field->name_dot = bracketsToDotted($field->name);
 
-        // if (\in_array('value', array_keys($params), true)) {
-        //    $field->value = $params['value'];
-        // } else {
+
         try {
             $field->value = Arr::get($row, $field->name_dot);
             if (null === $field->value) {
                 $field->value = Arr::get((array) $row, $field->name_dot);
             }
-            // $field->value = $row->{$field->name_dot};
-            // $field->value = 'test['.$field->name_dot.']'.Arr::get($row, 'nome_diri');
+
         } catch (\Exception $e) {
             $field->value = '---['.$field->name_dot.']['.$e->getMessage().']['.__LINE__.'-'.basename(__FILE__).']['.$row->{$field->name_dot}.']--';
         }
-        // }
-
-        // return '['.__LINE__.__FILE__.']';
-
-        // if (isset($label)) {
-        //    $field->label = $label;
-        // }
 
         $tmp = Str::snake($field->type);
 
-        /**
+        *
          * --- da fare contratto etc etc (interface).
          *
          * @var FieldContract|null
-         */
+         *
         $comp_field = Arr::first(
             self::getCollectiveComponents(),
             function ($item) use ($field) {
                 return $item->name === 'bs'.$field->type;
             }
         );
-        /**
+        **
          * @phpstan-var view-string
-         */
+         *
         $error_view = 'ui::components.alert.error';
 
         if (null === $comp_field) {
@@ -131,9 +119,9 @@ class FormService
             return view($error_view, ['msg' => $msg]);
         }
 
-        /**
+        **
          * @phpstan-var view-string
-         */
+         *
         $view = Str::beforeLast((string) $comp_field->view, '.field').'.freeze';
         if (! View::exists($view)) {
             return view($error_view, ['msg' => '['.$view.'] NOT EXISTS !!!']);
@@ -180,14 +168,7 @@ class FormService
             // $view_params['related']=$related->get();
             $view_params['related_name'] = $related_name;
             $view_params['related_fields'] = $related_fields;
-            /*
-            $url = RouteService::urlRelated([
-                'row' => $row,
-                'related' => $related,
-                'related_name' => $related_name,
-                'act' => 'index',
-            ]);
-            */
+
             $url = '#';
 
             $view_params['manage_url'] = $url;
@@ -223,13 +204,7 @@ class FormService
                 // $pivot = new $pivot_class();
                 // dddx($pivot_class);
                 $pivot = app($pivot_class);
-                /*
-                if (is_object($pivot_class)) {
-                    $pivot = $pivot_class;
-                } else {
-                    $pivot = app($pivot_class);
-                }
-                */
+
 
                 // dddx($pivot);
                 $pivot_panel = ThemeService::panelModel($pivot);
@@ -259,14 +234,13 @@ class FormService
 
         return view()->make($view, $view_params);
     }
-
+    */
     /**
      * Undocumented function.
      *
      * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Support\HtmlString
      */
-    public static function inputHtml(FieldData $field, Model $row)
-    {
+    public static function inputHtml(FieldData $field, Model $row) {
         $input_type = 'bs'.Str::studly($field->type);
         if (isset($field->sub_type)) {
             $input_type .= Str::studly($field->sub_type);
@@ -339,8 +313,7 @@ class FormService
         // */
     }
 
-    public static function btnHtml(array $params): string
-    {
+    public static function btnHtml(array $params): string {
         $class = 'btn btn-primary mb-2';
         $icon = null;       // icona a sx del titolo
         $label = null;
@@ -446,8 +419,7 @@ class FormService
                 </a>';
     }
 
-    public static function btnMassiveAction(array $params): string
-    {
+    public static function btnMassiveAction(array $params): string {
         $class = 'btn btn-primary mb-2';
         $icon = null;       // icona a sx del titolo
         $label = null;
