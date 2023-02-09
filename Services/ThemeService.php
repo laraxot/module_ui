@@ -761,10 +761,10 @@ class ThemeService {
     }
     */
 
-    /**
+    /* move to panel
      * view.
      * Illuminate\Contracts\View\View perche' poi posso appicciare parametri con with.
-     */
+
     public static function view(string $view = null): \Illuminate\Contracts\View\View {
         $view_work = self::getViewWork(['view' => $view]);
         if (null === $view) {
@@ -780,10 +780,10 @@ class ThemeService {
         // $route_params = getRouteParameters();
         // $row_name = last($route_params);
         // if (! is_object($row) && '' != config('morph_map.'.$row)) {
-        /*
-        $model = config('morph_map.'.$row);
-        $row = new $model();
-        */
+        //
+        //$model = config('morph_map.'.$row);
+        //$row = new $model();
+        //
         // $row = TenantService::model($row_name);
         // }
         // }
@@ -816,28 +816,7 @@ class ThemeService {
             }
         );
         [$containers, $items] = params2ContainerItem($route_params);
-        /*
-        list($containers, $items) = params2ContainerItem($route_params);
-        $last_container = last($containers);
-        //$types = \Str::camel(\Str::plural($last_container));
-        $last_item = last($items);
 
-        [$ns,$group] = explode('::', $view);
-        $group = explode('.', $group);
-        $trad_short1 = $ns.'::'.implode('.', array_slice($group, -3));
-        $trad_short2 = $ns.'::'.implode('.', array_slice($group, -2));
-
-        //$trad_mod = '';
-
-        //if(isset($group[0]) && $group[0]!='auth'){
-
-        try {
-            $trad_mod = strtolower(getModuleNameFromModelName($group[0]).'').'::'.$group[0];
-        } catch (\Exception $e) {
-            $trad_mod = 'xot::txt';
-        }
-        //}
-        */
 
         $trad_mod = $panel->getTradMod();
         $modal = null;
@@ -862,6 +841,7 @@ class ThemeService {
 
         return view()->make($view, $view_params);
     }
+    */
 
     /**
      * @param mixed $view
