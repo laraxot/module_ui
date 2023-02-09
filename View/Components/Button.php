@@ -31,8 +31,9 @@ class Button extends Component {
         $this->attrs['class'] = config($class_key, 'btn btn-primary mb-2');
 
         // dddx([$class_key, $this->attrs['class']]);
-
         $this->attrs['icon'] = isset($attrs['icon']) ? $attrs['icon'] : null;
+        // $icon_class = inAdmin() ? 'adm_theme::styles.button.icon.'.$type : 'pub_theme::styles.button.icon.'.$type;
+        // $this->attrs['icon'] = config($icon_class, 'fas fa-angle-double-left');
     }
 
     /**
