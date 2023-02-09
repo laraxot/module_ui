@@ -70,7 +70,7 @@
                             </td>
                         @endforeach
                         <td>
-                            <x-button.crud :panel="$row_panel" />
+                            <x-button.panel.crud :panel="$row_panel" />
                         </td>
                     </tr>
                     @if ($loop->last)
