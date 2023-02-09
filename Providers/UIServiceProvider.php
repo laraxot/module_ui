@@ -86,7 +86,7 @@ class UIServiceProvider extends XotBaseServiceProvider {
         /*
         if (! File::exists(base_path('Themes/'.$theme))) {
             $xot[$theme_type] = ThemeService::firstThemeName($theme_type);
-            TenantService::saveConfig(['name' => 'xra', 'data' => $xot]);
+            TenantService::saveConfig('xra', $xot );
             throw new \Exception('['.base_path('Themes/'.$theme).' not exists]['.__LINE__.']['.class_basename(__CLASS__).']');
         }
         */
