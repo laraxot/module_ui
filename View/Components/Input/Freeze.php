@@ -35,7 +35,7 @@ class Freeze extends Component {
         $tmp = $row->toArray();
 
         if (Str::contains($field->getNameDot(), '.')) {
-            $this->value = Arr::get($tmp, $field->getNameDot());
+            $this->value = Arr::get($tmp, $field->getNameDot())??$row->{$field->name};
         } else {
             $this->value = $row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
         }
