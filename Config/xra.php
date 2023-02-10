@@ -2,9 +2,9 @@
 
 
 return [
-    'adm_theme' => 'Clever',
+    'adm_theme' => 'AdminLTE',
     'enable_ads' => '1',
-    'main_module' => 'PFed',
+    'main_module' => 'Quaeris',
     'primary_lang' => 'it',
     'pub_theme' => 'BsItalia',
 ];
