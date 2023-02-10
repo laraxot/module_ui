@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\UI\View\Components\Input;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Database\Eloquent\Model;
+use Exception;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Spatie\ModelStates\State;
 use Illuminate\View\Component;
 use Modules\UI\Datas\FieldData;
-use Spatie\ModelStates\State;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Support\Renderable;
 
 /**
  * Undocumented class.
@@ -37,7 +38,11 @@ class Freeze extends Component {
         if (Str::contains($field->getNameDot(), '.')) {
             $this->value = Arr::get($tmp, $field->getNameDot())??$row->{$field->name};
         } else {
+            try{
             $this->value = $row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
+        }catch(Exception $e){
+            dddx(['field'=>$this->field,'row'=>$this->row,'exception'=>$e]);
+        }
         }
 
         if (is_countable($field->options) && count($field->options) > 0) {
