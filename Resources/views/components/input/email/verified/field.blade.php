@@ -1,0 +1,1 @@
+<livewire:input.email.verified />
