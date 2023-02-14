@@ -1,9 +1,8 @@
 <div>
     <h2>Validated Email Addresses</h2>
 
-    <select wire:model.lazy="{{ $attrs_arr['wire:model.lazy'] }}" wire:model="{{ $attrs_arr['wire:model'] }}"
-        wire:change="updateFormData" name="{{ $attrs_arr['name'] }}" class="{{ $attrs_arr['class'] }}"
-        aria-label="Default select example">
+    <select wire:model.lazy="{{ $attrs['wire:model.lazy'] }}" wire:change="updateFormData" name="{{ $attrs['name'] }}"
+        class="{{ $attrs['class'] }}" aria-label="Default select example">
         <option selected>Select Email Address</option>
         @foreach ($my_validated_email_addresses as $email)
             <option value="{{ $email->value }}">{{ $email->value }}</option>
