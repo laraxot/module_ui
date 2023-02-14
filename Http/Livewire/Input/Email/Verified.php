@@ -13,6 +13,7 @@ use Modules\Cms\Actions\GetViewAction;
  */
 class Verified extends Component {
     public array $form_data = [];
+    public string $tpl;
 
     /**
      * Undocumented function.
