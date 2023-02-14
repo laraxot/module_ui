@@ -1076,6 +1076,11 @@ class ThemeService {
      * Undocumented function.
      DEPRECATED
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 6c08cc5 (up)
+=======
+>>>>>>> ec33dfc (.)
 =======
 >>>>>>> 6c08cc5 (up)
 =======
@@ -1091,6 +1096,11 @@ class ThemeService {
 
     /* -- TO COMPONENT <x-input.freeze
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 6c08cc5 (up)
+=======
+>>>>>>> ec33dfc (.)
 =======
 >>>>>>> 6c08cc5 (up)
 =======
