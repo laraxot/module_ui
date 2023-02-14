@@ -1074,8 +1074,8 @@ class ThemeService {
     */
     /*
      * Undocumented function.
-<<<<<<< HEAD
      DEPRECATED
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> 6c08cc5 (up)
@@ -1083,6 +1083,8 @@ class ThemeService {
 >>>>>>> ec33dfc (.)
 =======
 >>>>>>> 6c08cc5 (up)
+=======
+>>>>>>> ec33dfc (.)
      deprecated
     public static function panelModel(Model $model): PanelContract {
         $class = StubService::make()->setModelAndName($model, 'panel')->get();
@@ -1091,9 +1093,9 @@ class ThemeService {
         return $panel;
     }
     */
-<<<<<<< HEAD
 
     /* -- TO COMPONENT <x-input.freeze
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> 6c08cc5 (up)
@@ -1101,6 +1103,8 @@ class ThemeService {
 >>>>>>> ec33dfc (.)
 =======
 >>>>>>> 6c08cc5 (up)
+=======
+>>>>>>> ec33dfc (.)
     public static function inputFreeze(FieldData $field, Model $row): Renderable {
         return FormService::inputFreeze($field, $row);
     }
