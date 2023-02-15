@@ -1,5 +1,5 @@
 <div>
-    <h2>Validated Email Addresses</h2>
+
 
     @if ($is_sent === true)
         <h2>Write the code that you received via email</h2>
@@ -21,6 +21,7 @@
         </div>
     @endif
 
+    <h2>Validated Email Addresses</h2>
     <select wire:model.lazy="{{ $attrs['wire:model.lazy'] }}" wire:change="updateFormData" name="{{ $attrs['name'] }}"
         class="{{ $attrs['class'] }}" aria-label="Default select example">
         <option selected>Select Email Address</option>
