@@ -78,6 +78,7 @@ class Field extends Component {
             [
                 'name' => $field->name,
                 'label' => $field->label ?? $field->name,
+
                 // 'class' => $field->label_class,
             ]
         );
@@ -100,6 +101,7 @@ class Field extends Component {
         $view = 'ui::components.input.field.'.$this->tpl;
         // $view = 'ui::components.input.freeze.'.$value_type.'.'.$this->tpl;
         // dddx(['view' => $view, 'field' => $this->field]);
+
         $view_params = [
             'name' => $this->field->name,
             'view' => $view,

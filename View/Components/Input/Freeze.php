@@ -36,6 +36,7 @@ class Freeze extends Component {
         $tmp = $row->toArray();
 
         if (Str::contains($field->getNameDot(), '.')) {
+<<<<<<< HEAD
             $this->value = Arr::get($tmp, $field->getNameDot())??$row->{$field->name};
         } else {
             try{
@@ -43,10 +44,21 @@ class Freeze extends Component {
         }catch(Exception $e){
             dddx(['field'=>$this->field,'row'=>$this->row,'exception'=>$e]);
         }
+=======
+            $this->value = Arr::get($tmp, $field->getNameDot()) ?? $row->{$field->name};
+        } else {
+            try {
+                $this->value = $row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
+            } catch (\Exception $e) {
+                dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
+            }
+>>>>>>> 8e967e0812a54c55c21b148322371762d3f677f9
         }
 
         if (is_countable($field->options) && count($field->options) > 0) {
-            if (null !== $this->value && ! is_array($this->value)) {
+            // if (null !== $this->value &&  !is_array($this->value)) {
+            // if (null !== $this->value && ctype_alnum($this->value)) {
+            if (null !== $this->value && (is_string($this->value) || is_numeric($this->value))) {
                 $this->value = collect($field->options)->get((string) $this->value) ?? $this->value;
             } else {
                 $this->value = '';
