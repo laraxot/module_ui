@@ -1,6 +1,5 @@
 <div>
 
-
     @if ($is_sent === true)
         <h2>Write the code that you received via email</h2>
         <div class="input-group mb-3">
