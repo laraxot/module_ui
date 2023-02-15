@@ -62,13 +62,13 @@ class Verified extends Component {
         $row->save();
 
         Notification::route('mail', $row->value)
-            ->notify(new HtmlNotification('notify@privacyfed.eu', 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
+            ->notify(new HtmlNotification(config('mail.from.address'), 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
 
         $this->is_sent = true;
     }
 
     public function verify_code() {
-        $is_valid_contact = Contact::where('user_id', $this->user_id)->where('verified_at', null)->where('value', $this->form_data['add_email'])->where('token', $this->form_data['token']);
+        $is_valid_contact = Contact::where('user_id', $this->user_id)->where('verified_at', null)->where('value', $this->form_data['add_email'])->where('token', $this->form_data['token'] ?? '');
         if (false == $is_valid_contact->get()->isEmpty()) {
             $row = $is_valid_contact->first();
             $row->verified_at = now();
