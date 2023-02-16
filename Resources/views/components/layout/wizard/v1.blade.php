@@ -1,3 +1,8 @@
+@props([
+    'steps' => [],
+    'is_first' => false,
+    'is_last' => false,
+])
 <div>
     <ul class="nav nav-tabs overflow-x border-0">
         @foreach ($steps as $step)
@@ -7,7 +12,7 @@
         @endforeach
     </ul>
 
-    @yield('content')
+    {{ $slot }}
 
     <x-flash-message />
 
