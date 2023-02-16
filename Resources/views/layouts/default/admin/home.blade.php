@@ -3,7 +3,8 @@
     @lang('Welcome')
 
     @foreach ($_panel->itemActions() as $act)
-        {!! $act->btnHtml() !!}
+        <x-button.action :action="$act" />
+        {{-- {!! $act->btnHtml() !!} --}}
     @endforeach
 
     {{-- sono le azioni di quel definito Modulo percio' item }
