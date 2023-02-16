@@ -1,8 +1,7 @@
 @extends('adm_theme::layouts.app')
 @section('content')
-    {{--
-    <x-topbar />
-    --}}
+    {{-- <x-topbar /> --}}
+
     {!! $_panel->indexNav() !!}
     <x-include-view view="inner_page" :vars="get_defined_vars()" />
 
