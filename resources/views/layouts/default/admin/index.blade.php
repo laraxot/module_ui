@@ -52,7 +52,9 @@
                                 <a href="#" class="nav-link">Popular</a>
                             </li> --}}
                     @endforeach
+                    &nbsp;
                 @endforeach
+
             </ul>
             {{-- </div> --}}
         </div>
@@ -89,10 +91,10 @@
                         @foreach ($_panel->containerActions() as $action)
                             <x-button.action :action="$action"></x-button.action>
                         @endforeach
-                        <a href="#" class="btn btn-sm btn-neutral text-primary" aria-current="page">View
+                        {{-- <a href="#" class="btn btn-sm btn-neutral text-primary" aria-current="page">View
                             all</a>
                         <a href="#" class="btn btn-sm btn-neutral">Private</a>
-                        <a href="#" class="btn btn-sm btn-neutral">Shared files</a>
+                        <a href="#" class="btn btn-sm btn-neutral">Shared files</a> --}}
                     </div>
                 </div>
                 <!-- Table -->
