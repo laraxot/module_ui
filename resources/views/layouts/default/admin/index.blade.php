@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <div class="border-bottom pt-6">
                 <div class="row align-items-center">
-                    {{-- <div class="col-sm col-12">
+                    <div class="col-sm col-12">
                         <!-- Title -->
-                        <h1 class="h2 ls-tight">
+                        {{-- <h1 class="h2 ls-tight">
                             <span class="d-inline-block me-3">😎</span>My Cool Projects
-                        </h1>
-                    </div> --}}
+                        </h1> --}}
+                    </div>
                     <!-- Actions -->
                     <div class="col-sm-auto col-12 mt-4 mt-sm-0">
                         <div class="hstack gap-2 justify-content-sm-end">
