@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
 use Modules\Cms\Actions\GetStyleClassByViewAction;
 use Modules\Cms\Actions\GetViewAction;
+use Modules\Cms\Actions\GetViewThemeByViewAction;
 
 class Search extends Component {
     public string $tpl;
@@ -31,7 +32,8 @@ class Search extends Component {
             ->except(['q'])
             ->all();
 
-        $this->view = app(GetViewAction::class)->execute($this->tpl);
+        $view = app(GetViewAction::class)->execute($this->tpl);
+        $this->view = app(GetViewThemeByViewAction::class)->execute($view);
         $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($this->view);
         // dddx([$this->attrs, $this->view]);
         // switch ($type) {
