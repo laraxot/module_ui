@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Modules\UI\Http\Livewire\Import\Csv;
 
-use Exception;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Modules\Cms\Actions\GetViewAction;
@@ -35,13 +35,27 @@ class Rules extends Component {
 
     public bool $is_first_row_head = false;
 
+    public string $action_class;
+
+    public array $vars;
+
+    // protected array $rules = [
+    //     'data.*.0' => 'required',
+    //     'data.*.1' => 'email',
+    // ];
+
     /**
      * Undocumented function.
      *
      * @return void
      */
-    public function mount(array $rules) {
+    public function mount(array $rules, string $action_class, array $vars) {
         $this->my_rules = $rules;
+        if (! class_exists($action_class)) {
+            throw new \Exception('['.__FILE__.']['.__LINE__.']');
+        }
+        $this->action_class = $action_class;
+        $this->vars = $vars;
     }
 
     /**
@@ -70,9 +84,10 @@ class Rules extends Component {
         /**
          * @phpstan-var view-string
          */
-        // $view = 'ui::livewire.import.csv.model';
         $view = app(GetViewAction::class)->execute();
-        $view_params = [];
+        $view_params = [
+            'view' => $view,
+        ];
 
         return view($view, $view_params);
     }
@@ -83,46 +98,18 @@ class Rules extends Component {
      * @return void
      */
     public function import() {
-        $model = app($this->modelClass);
-
         $rows = $this->data;
-
-        /**
-         * controllo che non vengano erroneamente importati contatti con tutti campi null.
-         */
-        $rows = $rows->filter(
-            function ($item) {
-                // if(!method_exists($item,'toArray')){
-                //    throw new Exception('['.__LINE__.']['.__FILE__.']');
-                // }
-                foreach ($item->toArray() as $key => $value) {
-                    if (null !== $value) {
-                        return $item;
-                    }
-                }
-            }
-        );
 
         if ($this->is_first_row_head) {
             $rows = $rows->slice(1);
         }
 
-        foreach ($rows as $v) {
-            $keys = array_values($this->form_data);
-            // Cannot call method values() on mixed.
-            $values = $v->values()->all();
-            $data = array_combine($keys, $values);
-            // dddx([$keys, $data, $values]);
-            // Result of && is always true.
-            // if (false !== $data && false !== $this->fields) {
-            // if (false !== $data && false !== $this->fields) {
-            $data = array_merge($data, $this->fields);
-            // }
-            $data['mobile_phone'] = strval($data['mobile_phone']);
-            // dddx($data['mobile_phone']);
-            // dddx(['data' => $data, 'v' => $v, 'form_data' => $this->form_data, 'keys' => $keys]);
-            $model->create($data);
+        foreach ($rows as $row) {
+            Validator::make($row, $this->my_rules)->validate();
         }
+
+        app($this->action_class)->execute($rows, $this->vars);
+
         session()->flash('message', 'Import successfully ');
     }
 }
