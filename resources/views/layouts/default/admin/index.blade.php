@@ -99,7 +99,7 @@
                 <div class="card">
                     <div class="card-header border-bottom d-flex align-items-center">
                         <h5 class="me-auto">{{ $_panel_name }}</h5>
-                        <div class="dropdown">
+                        {{-- <div class="dropdown">
                             <a class="text-muted" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i class="bi bi-three-dots-vertical"></i>
@@ -115,7 +115,7 @@
                                     Something else here
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <x-panel.crud :panel="$_panel" :rows="$rows" />
