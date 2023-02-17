@@ -11,7 +11,7 @@
                             class="btn btn-sm btn-neutral border-base" data-bs-toggle="modal"><span class="pe-2"><i
                                     class="bi bi-people-fill"></i> </span><span>Share</span> </a> --}}
                         <x-panel.button.create :panel="$_panel" />
-                        <x-panel.actions.buttons :acts="$_panel->containerActions()" />
+                        <x-panel.actions.buttons :acts="$_panel->getActions('container')" />
                     </div>
                 </div>
             </div>

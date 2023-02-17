@@ -17,7 +17,7 @@
                     @if ($loop->first)
                         <x-slot name="thead">
                             <tr>
-                                @if ($_panel->checkActions()->count() > 0)
+                                @if ($_panel->getActions('check')->count() > 0)
                                     <td>select models</td>
                                 @endif
                                 @foreach ($fields as $field)
@@ -31,32 +31,32 @@
 
 
                     <tr>
-                        @if ($_panel->checkActions()->count() > 0)
+                        @if ($_panel->getActions('check')->count() > 0)
                             <td>{{ Form::checkbox('checkbox_model_id[]', $row->id, false) }}</td>
                         @endif
                         @foreach ($row_panel->getFields('index') as $field)
                             <td>
                                 {!! Theme::inputFreeze($field, $row) !!}
                                 @if ($loop->first)
-                                    @if ($row_panel->itemActions()->count() > 5)
+                                    @if ($row_panel->getActions('item')->count() > 5)
                                         <div class="dropdown">
                                             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
                                                 aria-haspopup="true" aria-expanded="false">
                                                 <i class="fas fa-tools"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                @foreach ($row_panel->itemActions() as $act)
+                                                @foreach ($row_panel->getActions('item') as $act)
                                                     {!! $act->btnHtml() !!}
                                                 @endforeach
                                             </div>
                                         </div>
                                     @else
-                                        @foreach ($row_panel->itemActions() as $act)
+                                        @foreach ($row_panel->getActions('item') as $act)
                                             {!! $act->btnHtml() !!}
                                         @endforeach
-                                        {{--  
+                                        {{--
                                         @foreach ($row_panel->itemActionModals() as $act)
-                                       
+
                                         @php
                                         $row_class=str_replace('\\','\\\\',$row_panel->row::class);
                                         @endphp
