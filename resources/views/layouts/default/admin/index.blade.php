@@ -17,7 +17,7 @@
                 <!-- Actions -->
                 <div class="col-sm-auto col-12 mt-4 mt-sm-0">
                     <div class="hstack gap-2 justify-content-sm-end">
-                        {{-- @foreach ($_panel->containerActions() as $action)
+                        {{-- @foreach ($_panel->getActions('container') as $action)
                                 <a href="#modalExport" class="btn btn-sm btn-neutral border-base" data-bs-toggle="modal">
                                     <span class="pe-2">
                                         <i class="bi bi-people-fill"></i>
@@ -88,7 +88,7 @@
                         </div> --}}
                     </div>
                     <div class="btn-group">
-                        @foreach ($_panel->containerActions() as $action)
+                        @foreach ($_panel->getActions('container') as $action)
                             <x-button.action :action="$action"></x-button.action>
                         @endforeach
                         {{-- <a href="#" class="btn btn-sm btn-neutral text-primary" aria-current="page">View

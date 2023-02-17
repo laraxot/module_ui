@@ -24,7 +24,7 @@
         <td>
             {!! Theme::inputFreeze($field, $row) !!}
             @if ($loop->first)
-                @foreach ($_panel->itemActions() as $act)
+                @foreach ($_panel->getActions('item') as $act)
                     {!! $act->btn(['row' => $row]) !!}
                 @endforeach
             @endif
