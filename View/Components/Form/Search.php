@@ -6,19 +6,21 @@ namespace Modules\UI\View\Components\Form;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
+use Modules\Cms\Actions\GetStyleClassByViewAction;
+use Modules\Cms\Actions\GetViewAction;
 
-class Search extends Component
-{
-    public ?string $type;
+class Search extends Component {
+    public string $tpl;
     public array $qs = [];
 
     public array $attrs = [];
 
     public array $form_attrs = ['method' => 'get'];
 
-    public function __construct(string $type = 'v1')
-    {
-        $this->type = $type;
+    public string $view;
+
+    public function __construct(string $tpl = 'v1') {
+        $this->tpl = $tpl;
 
         /**
          * @var array
@@ -29,22 +31,25 @@ class Search extends Component
             ->except(['q'])
             ->all();
 
-        switch ($type) {
-            case 'inline':
-                $this->form_attrs['class'] = 'd-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search float-right';
-                break;
-        }
+        $this->view = app(GetViewAction::class)->execute($this->tpl);
+        $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($this->view);
+
+        // switch ($type) {
+        //     case 'inline':
+        //         $this->form_attrs['class'] = 'd-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search float-right';
+        //         break;
+        // }
     }
 
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.form.search.'.$this->type;
+        // $view = 'ui::components.form.search.'.$this->type;
+        $view = $this->view;
 
         $view_params = [];
 
-        return view()->make($view, $view_params);
+        return view($view, $view_params);
     }
 }
