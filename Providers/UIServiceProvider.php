@@ -58,7 +58,7 @@ class UIServiceProvider extends XotBaseServiceProvider {
             ]
         );
 
-        BladeService::registerComponents($this->module_dir.'/../View/Components', 'Modules\\UI');
+        //BladeService::registerComponents($this->module_dir.'/../View/Components', 'Modules\\UI');
 
         $this->registerCollective();
 
