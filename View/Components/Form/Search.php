@@ -33,7 +33,7 @@ class Search extends Component {
 
         $this->view = app(GetViewAction::class)->execute($this->tpl);
         $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($this->view);
-
+        // dddx([$this->attrs, $this->view]);
         // switch ($type) {
         //     case 'inline':
         //         $this->form_attrs['class'] = 'd-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search float-right';
