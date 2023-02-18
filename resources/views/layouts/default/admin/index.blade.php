@@ -38,7 +38,25 @@
             </div>
             <!-- Nav -->
             {{-- <ul class="nav nav-tabs overflow-x border-0"> --}}
-            <ul class="nav nav-tabs align-items-end card-header-tabs w-100">
+            {{-- <ul class="nav nav-tabs align-items-end card-header-tabs w-100">
+                @foreach ($_panel->getTabs() as $level)
+                    @foreach ($level as $tab)
+                        <x-button.link :link="$tab" tpl="tab" />
+                        <li class="nav-item">
+                                <a href="#" class="nav-link active">View all</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Most recent</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Popular</a>
+                            </li>
+                    @endforeach
+
+                    &nbsp;
+                @endforeach
+            </ul> --}}
+            <x-navbar.container tpl="horizontal">
                 @foreach ($_panel->getTabs() as $level)
                     @foreach ($level as $tab)
                         <x-button.link :link="$tab" tpl="tab" />
@@ -52,11 +70,10 @@
                                 <a href="#" class="nav-link">Popular</a>
                             </li> --}}
                     @endforeach
+
                     &nbsp;
                 @endforeach
-
-            </ul>
-            {{-- </div> --}}
+            </x-navbar.container>
         </div>
     </header>
     <!-- Main -->
