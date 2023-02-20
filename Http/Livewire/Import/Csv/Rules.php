@@ -51,6 +51,7 @@ class Rules extends Component {
      */
     public function mount(array $rules, string $action_class, array $vars) {
         $this->my_rules = $rules;
+        $this->my_rules = ['required', 'numeric'];
         if (! class_exists($action_class)) {
             throw new \Exception('['.__FILE__.']['.__LINE__.']');
         }
