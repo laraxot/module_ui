@@ -106,7 +106,8 @@
                     </div>
                     <div class="btn-group">
                         @foreach ($_panel->getActions('container') as $action)
-                            <x-button.action :action="$action"></x-button.action>
+                            {{-- <x-button.action :action="$action"></x-button.action> --}}
+                            <x-button.link :link="$action->getLinkData()"></x-button.link>
                         @endforeach
                         {{-- <a href="#" class="btn btn-sm btn-neutral text-primary" aria-current="page">View
                             all</a>
