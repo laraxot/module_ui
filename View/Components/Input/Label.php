@@ -5,17 +5,14 @@ declare(strict_types=1);
 namespace Modules\UI\View\Components\Input;
 
 use Illuminate\View\Component;
-use Modules\Xot\Services\FileService;
+use Modules\Cms\Actions\GetStyleClassByViewAction;
 use Modules\Cms\Actions\GetViewAction;
 use Modules\Cms\Services\PanelService;
-use Illuminate\Contracts\Support\Renderable;
-use Modules\Cms\Actions\GetStyleClassByViewAction;
 
 /**
  * Undocumented class.
  */
-class Label extends Component
-{
+class Label extends Component {
     public array $attrs = [];
     public string $tpl;
     public string $tradKey;
@@ -23,42 +20,40 @@ class Label extends Component
     /**
      * Undocumented function.
      */
-    public function __construct(string $tpl = 'label') {
+    public function __construct(string $tpl = 'v1') {
         $this->tpl = $tpl;
         /*
         $this->attrs['name'] = $this->name;
 
         $this->for = 'form_data.'.$this->name;
         */
-        //$this->attrs['class'] = 'form-label';
+        // $this->attrs['class'] = 'form-label';
 
-        
         $this->tradKey = 'pub_theme::txt';
-        if(class_exists(PanelService::class)){
+        if (class_exists(PanelService::class)) {
             $panel = PanelService::make()->getRequestPanel();
             if (null !== $panel) {
                 $this->tradKey = $panel->getTradMod();
             }
-    }
+        }
     }
 
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable
-    {
-        /*
+    public function render() {
+        // *
         return function (array &$data) {
             return $this->renderData($data);
         };
-        */
-        //$view = 'ui::components.input.label.label';
-         /**
+        // */
+        // $view = 'ui::components.input.label.label';
+        /**
          * @phpstan-var view-string
          */
         $view = app(GetViewAction::class)->execute($this->tpl);
 
-        $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($view); 
+        $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($view);
 
         $view_params = [
             'view' => $view,
@@ -67,28 +62,29 @@ class Label extends Component
         return view($view, $view_params);
     }
 
-    public function renderData(array $data): string
-    {
+    public function renderData(array $data): string {
         extract($data);
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.input.label.'.$this->type;
+        $view = app(GetViewAction::class)->execute($this->tpl);
+        $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($view);
+        $label = $attributes->get('label');
+        $name = $attributes->get('name');
+        $this->attrs['for'] = $attributes->get('id');
 
-        /*
-        $theme = inAdmin() ? 'adm_theme' : 'pub_theme';
-        FileService::viewCopy('ui::components.input.label', $theme.'::components.input.label');
-
-        $view = $theme.'::components.input.label';
-        if (null === $this->field) {
-            $this->field = (object) [
-                'name' => $this->name,
-                'type' => $this->type,
-            ];
+        $trans_key = $this->tradKey.'.'.$name.'.label';
+        $name_lang = trans($trans_key);
+        if ($trans_key == $name_lang) {
+            $name_lang = $name;
         }
-        */
+
+        $label = $label ?? $name_lang;
+
         $view_params = [
             'view' => $view,
+            'label' => $label,
+            'attrs' => $this->attrs,
         ];
         $view_params = array_merge($data, $view_params);
 
