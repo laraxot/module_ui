@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\UI\View\Components\Input;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
-use Illuminate\View\ComponentAttributeBag;
-use Modules\Cms\Services\PanelService;
 use Modules\UI\Datas\FieldData;
+use Modules\Cms\Actions\GetViewAction;
+use Modules\Cms\Services\PanelService;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\View\ComponentAttributeBag;
+use Illuminate\Contracts\Support\Renderable;
 
 /**
  * WIP WIP WIP.
@@ -48,7 +49,13 @@ class Field extends Component {
                 $this->value = collect($field->options)->get($this->value) ?? $this->value;
             }
         }
+        /*
+        dddx([
+            'field'=>$field,
+            'row'=>$row,
+            'value'=>$this->value,
 
+        ]);*/
         /*
         $this->attrs['class'] = 'form-label';
 
@@ -78,6 +85,7 @@ class Field extends Component {
             [
                 'name' => $field->name,
                 'label' => $field->label ?? $field->name,
+
                 // 'class' => $field->label_class,
             ]
         );
@@ -92,14 +100,35 @@ class Field extends Component {
 
         // dddx($input_attrs->merge($this->field->toArray()));
         // altrimenti dà errore sui campi come gender
-        $input_attrs = $input_attrs->merge(collect($this->field)->except(['options'])->toArray());
+        // $input_attrs = $input_attrs->merge(collect($this->field)->except(['options'])->toArray());
+        $input_attrs = $input_attrs
+            
+            ->merge(
+                collect($this->field)
+                ->except(['options','attributes','rules'])
+                ->map(
+                    function ($item,$key) {
+                        if (is_array($item)) {
+                            //return json_encode($item);
+                            dddx(['key'=>$key,'item'=>$item]);
+                        }
+
+                        return $item;
+                    }
+                )
+            ->toArray());
+
+       
 
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.input.field.'.$this->tpl;
+        $view = app(GetViewAction::class)->execute($this->tpl);
+        
+        //$view = 'ui::components.input.field.'.$this->tpl;
         // $view = 'ui::components.input.freeze.'.$value_type.'.'.$this->tpl;
         // dddx(['view' => $view, 'field' => $this->field]);
+
         $view_params = [
             'name' => $this->field->name,
             'view' => $view,

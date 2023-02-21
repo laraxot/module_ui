@@ -6,6 +6,8 @@ namespace Modules\UI\View\Components;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
+use Modules\Cms\Actions\GetStyleClassByViewAction;
+use Modules\Cms\Actions\GetViewAction;
 
 class Button extends Component {
     public string $tpl;
@@ -13,6 +15,7 @@ class Button extends Component {
 
     public array $attrs;
     public ?string $url = '#';
+    public string $view;
 
     /**
      * Create the component instance.
@@ -27,8 +30,8 @@ class Button extends Component {
 
         $this->url = isset($attrs['url']) ? $attrs['url'] : null;
 
-        $class_key = inAdmin() ? 'adm_theme::styles.button.'.$type : 'pub_theme::styles.button.'.$type;
-        $this->attrs['class'] = config($class_key, 'btn btn-primary mb-2');
+        $this->view = app(GetViewAction::class)->execute($this->tpl);
+        $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($this->view);
 
         // dddx([$class_key, $this->attrs['class']]);
         $this->attrs['icon'] = isset($attrs['icon']) ? $attrs['icon'] : null;
@@ -43,7 +46,7 @@ class Button extends Component {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.button.'.$this->tpl;
+        $view = $this->view;
 
         $view_params = ['view' => $view];
 

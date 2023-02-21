@@ -5,7 +5,7 @@
     
 @endphp
 <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #e9ecef; padding:5px;z-index:0;">
-    @foreach ($_panel->containerActions() as $act)
+    @foreach ($_panel->getActions('container') as $act)
         @php
             try {
                 echo $act->btnHtml();
@@ -17,7 +17,7 @@
 
 
     -
-    @foreach ($_panel->checkActions() as $act)
+    @foreach ($_panel->getActions('check') as $act)
         @php
             try {
                 echo $act->btnHtml();

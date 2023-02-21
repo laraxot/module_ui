@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\UI\View\Components\Input;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
-use Modules\Cms\Services\PanelService;
 use Modules\Xot\Services\FileService;
+use Modules\Cms\Actions\GetViewAction;
+use Modules\Cms\Services\PanelService;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Cms\Actions\GetStyleClassByViewAction;
 
 /**
  * Undocumented class.
@@ -15,21 +17,20 @@ use Modules\Xot\Services\FileService;
 class Label extends Component
 {
     public array $attrs = [];
-    public ?string $type;
+    public string $tpl;
     public string $tradKey;
 
     /**
      * Undocumented function.
      */
-    public function __construct(?string $type = 'label')
-    {
-        $this->type = $type;
+    public function __construct(string $tpl = 'label') {
+        $this->tpl = $tpl;
         /*
         $this->attrs['name'] = $this->name;
 
         $this->for = 'form_data.'.$this->name;
         */
-        $this->attrs['class'] = 'form-label';
+        //$this->attrs['class'] = 'form-label';
 
         
         $this->tradKey = 'pub_theme::txt';
@@ -51,10 +52,14 @@ class Label extends Component
             return $this->renderData($data);
         };
         */
-        /**
+        //$view = 'ui::components.input.label.label';
+         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.input.label.label';
+        $view = app(GetViewAction::class)->execute($this->tpl);
+
+        $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($view); 
+
         $view_params = [
             'view' => $view,
         ];

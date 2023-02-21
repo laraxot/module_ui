@@ -9,7 +9,7 @@
 		<i class="fa fa-plus"></i>
 	</a>
     @endcan --}}
-    @foreach ($_panel->containerActions() as $act)
+    @foreach ($_panel->getActions('container') as $act)
         {!! $act->btn() !!}
     @endforeach
 

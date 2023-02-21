@@ -30,7 +30,7 @@ return !in_array($item->type,['Password']);
             {!! Theme::inputFreeze($field, $row) !!}
 
             @if ($loop->first)
-                @foreach ($row_panel->itemActions() as $act)
+                @foreach ($row_panel->getActions('item') as $act)
                     {!! $act->btnHtml() !!}
                 @endforeach
             @endif

@@ -22,7 +22,7 @@ class Input extends Component
     /**
      * ---.
      */
-    public function __construct(string $name, string $type, ?array $options = [])
+    public function __construct(string $name, string $type, ?array $options = [],?array $attributes = [])
     {
         $this->name = $name;
         $this->type = Str::snake($type);
@@ -30,6 +30,10 @@ class Input extends Component
         $this->attrs['name'] = $this->name;
         $this->attrs['class'] = 'form-control';
         $this->attrs['wire:model.lazy'] = 'form_data.'.$name;
+        if(is_array($attributes) && count($attributes)>0){
+            $this->attrs=array_merge($this->attrs,$attributes);
+        }
+        
 
         switch ($this->type) {
             case 'checkbox.arr':

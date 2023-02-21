@@ -1075,7 +1075,6 @@ class ThemeService {
     /*
      * Undocumented function.
      DEPRECATED
-     deprecated
     public static function panelModel(Model $model): PanelContract {
         $class = StubService::make()->setModelAndName($model, 'panel')->get();
         $panel = app($class)->setRow($model);
