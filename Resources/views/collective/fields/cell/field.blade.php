@@ -48,7 +48,11 @@
 	</x-std>
 	<div class="row">
     @foreach($fields as $field)
+		{{--  
     	{!! Theme::inputHtml($field,$model) !!}
+		--}}
+		<x-input.field :field="$field" :row="$model" />
+		
     @endforeach
 	</div>
 </x-std>
