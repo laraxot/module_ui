@@ -5,6 +5,7 @@
     }
     
     $fields = $_panel->getFields('edit');
+    
 @endphp
 
 @section('content')
@@ -13,6 +14,7 @@
         {!! Form::bsOpenPanel($_panel, 'update') !!}
         <div class="row">
             @foreach ($fields as $field)
+                
                 {!! Theme::inputHtml($field, $row) !!}
 
                 {{-- WIP
