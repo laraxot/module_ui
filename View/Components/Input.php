@@ -6,34 +6,37 @@ namespace Modules\UI\View\Components;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Str;
 use Illuminate\View\Component;
+use Modules\Cms\Actions\GetViewAction;
+use Modules\UI\Actions\GetCollectiveViewByType;
 
 /**
  * Undocumented class.
  */
-class Input extends Component
-{
+class Input extends Component {
     public array $attrs = [];
     public string $type = 'text';
     public string $name = 'empty-name';
     public ?array $options = [];
+    // public string $tpl;
+    public string $collective_view;
 
     /**
      * ---.
      */
-    public function __construct(string $name, string $type, ?array $options = [],?array $attributes = [])
-    {
+    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = []) {
         $this->name = $name;
-        $this->type = Str::snake($type);
+        $this->collective_view = app(GetCollectiveViewByType::class)->execute($type); // ui::collective.fields.string.field
+
+        $this->type = $type;
+
         $this->options = $options;
         $this->attrs['name'] = $this->name;
         $this->attrs['class'] = 'form-control';
         $this->attrs['wire:model.lazy'] = 'form_data.'.$name;
-        if(is_array($attributes) && count($attributes)>0){
-            $this->attrs=array_merge($this->attrs,$attributes);
+        if (is_array($attributes) && count($attributes) > 0) {
+            $this->attrs = array_merge($this->attrs, $attributes);
         }
-        
 
         switch ($this->type) {
             case 'checkbox.arr':
@@ -62,13 +65,15 @@ class Input extends Component
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         // esempio Modules/UI/Resources/views/components/input/select/field.blade.php
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.input.'.$this->type.'.field';
+        // $view = 'ui::components.input.'.$this->type.'.field';
+        // $view = app(GetViewAction::class)->execute($this->type.'.field');
+        // collective = ui::collective.fields.string.field
+        $view = str_replace('ui::collective.fields.', 'ui::components.input.', $this->collective_view);
 
         $view_params = [
             'view' => $view,
