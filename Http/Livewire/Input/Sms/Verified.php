@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\UI\Http\Livewire\Input\Email;
+namespace Modules\UI\Http\Livewire\Input\Sms;
 
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Contracts\Support\Renderable;
@@ -14,7 +14,7 @@ use Livewire\Component;
 use Modules\Cms\Actions\GetViewAction;
 use Modules\LU\Services\ProfileService;
 use Modules\Notify\Models\Contact;
-use Modules\Notify\Notifications\HtmlNotification;
+use Modules\Notify\Notifications\SmsNotification;
 
 /**
  * Class Arr // Array is reserved.
@@ -25,7 +25,7 @@ class Verified extends Component {
     public array $attrs = [];
     public string $tpl = '';
     public string $user_id = '';
-    public Collection $my_validated_email_addresses;
+    public Collection $my_validated_sms_addresses;
 
     /**
      * Undocumented function.
@@ -37,11 +37,11 @@ class Verified extends Component {
         $this->user_id = (string) Auth::id();
         $this->form_data = session()->get('form_data') ?? [];
         $this->tpl = $tpl;
-        $this->myEmailAddresses();
+        $this->mySmsAddresses();
     }
 
-    public function myEmailAddresses() {
-        $this->my_validated_email_addresses = Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', '!=', null)->get();
+    public function mySmsAddresses() {
+        $this->my_validated_sms_addresses = Contact::where('user_id', $this->user_id)->where('contact_type', 'mobile')->where('verified_at', '!=', null)->get();
         // Debugbar::info($this->my_validated_email_addresses);
     }
 
@@ -49,7 +49,7 @@ class Verified extends Component {
         $this->emit('updateFormData', $this->form_data);
     }
 
-    public function verify_email() {
+    public function verify_sms() {
         $this->form_data['confirm_token'] = Str::random(6);
 
         $row = new Contact();
@@ -57,28 +57,28 @@ class Verified extends Component {
         $row->model_type = 'profile';
         $row->model_id = ProfileService::make()->getProfile()->id;
         $row->user_id = $this->user_id;
-        $row->contact_type = 'email';
-        $row->value = $this->form_data['add_email'];
+        $row->contact_type = 'mobile';
+        $row->value = $this->form_data['add_mobile'];
         $row->save();
 
-        Notification::route('mail', $row->value)
-            ->notify(new HtmlNotification(config('mail.from.address'), 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
+        $n = new SmsNotification('', 'Verify Sms', 'Verification Code: '.$row->token);
+        Notification::route('sms', '+393911352526')->notify($n);
 
         $this->is_sent = true;
     }
 
     public function verify_code() {
-        $is_valid_contact = Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', null)->where('value', $this->form_data['add_email'])->where('token', $this->form_data['token'] ?? '');
+        $is_valid_contact = Contact::where('user_id', $this->user_id)->where('contact_type', 'mobile')->where('verified_at', null)->where('value', $this->form_data['add_mobile'])->where('token', $this->form_data['token'] ?? '');
         if (false == $is_valid_contact->get()->isEmpty()) {
             $row = $is_valid_contact->first();
             $row->verified_at = now();
             $row->save();
-            session()->flash('message', 'Email Verified');
+            session()->flash('message', 'Sms Verified');
             $this->is_sent = false;
         } else {
-            session()->flash('status_error', 'Email NOT Verified');
+            session()->flash('status_error', 'Sms NOT Verified');
         }
-        $this->myEmailAddresses();
+        $this->mySmsAddresses();
     }
 
     /**
