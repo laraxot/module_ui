@@ -106,7 +106,7 @@ class Rules extends Component {
         }
 
         foreach ($rows as $row) {
-            Validator::make($row, $this->my_rules)->validate();
+            Validator::make((array) $row, $this->my_rules)->validate();
         }
 
         app($this->action_class)->execute($rows, $this->vars);

@@ -69,9 +69,9 @@ class Label extends Component {
          */
         $view = app(GetViewAction::class)->execute($this->tpl);
         $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($view);
-        // $label = $attributes->get('label');
-        // $name = $attributes->get('name');
-        // $this->attrs['for'] = $attributes->get('id');
+        $label = $attributes->get('label');
+        $name = $attributes->get('name');
+        $this->attrs['for'] = $attributes->get('id');
 
         $trans_key = $this->tradKey.'.'.$name.'.label';
         $name_lang = trans($trans_key);
