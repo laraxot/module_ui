@@ -22,8 +22,7 @@ use Modules\Notify\Notifications\SmsNotification;
 class Verified extends Component {
     public array $form_data = [];
     public bool $is_sent = false;
-    public array $attrs = [];
-    public string $tpl = '';
+    public ?string $tpl = '';
     public string $user_id = '';
     public Collection $my_validated_sms_addresses;
 
@@ -32,24 +31,24 @@ class Verified extends Component {
      *
      * @return void
      */
-    public function mount(string $tpl = 'v1', array $attrs) {
+    public function mount(?string $tpl = 'v1') {
         // non sapevo in che altro modo passarlo
         $this->user_id = (string) Auth::id();
-        $this->form_data = session()->get('form_data') ?? [];
+        $this->form_data = (array) session()->get('form_data') ?? [];
         $this->tpl = $tpl;
         $this->mySmsAddresses();
     }
 
-    public function mySmsAddresses() {
+    public function mySmsAddresses(): void {
         $this->my_validated_sms_addresses = Contact::where('user_id', $this->user_id)->where('contact_type', 'mobile')->where('verified_at', '!=', null)->get();
         // Debugbar::info($this->my_validated_email_addresses);
     }
 
-    public function updateFormData() {
+    public function updateFormData(): void {
         $this->emit('updateFormData', $this->form_data);
     }
 
-    public function verify_sms() {
+    public function verify_sms(): void {
         $this->form_data['confirm_token'] = Str::random(6);
 
         $row = new Contact();
