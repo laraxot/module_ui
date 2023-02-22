@@ -10,24 +10,31 @@
             </div>
         </div>
     @else
-        <h2>Add Mobile Number</h2>
-        <div class="input-group mb-3">
-            <input wire:model.lazy="form_data.add_mobile" type="text" class="form-control"
-                placeholder="Example: +39395566771" aria-label="Mobile Number" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button wire:click="verify_sms()" class="btn btn-success" type="button">Verify</button>
+        <div id="add_sms_form" style="display: none">
+            <h2>Add Mobile Number</h2>
+            <div class="input-group mb-3">
+                <input wire:model.lazy="form_data.add_mobile" type="text" class="form-control"
+                    placeholder="Example: +39395566771" aria-label="Mobile Number" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button wire:click="verify_sms()" class="btn btn-success" type="button">Verify</button>
+                </div>
             </div>
         </div>
     @endif
 
     <h2>Validated Sms Addresses</h2>
-    <select wire:model.lazy="{{ $attrs['wire:model.lazy'] }}" wire:change="updateFormData" name="{{ $attrs['name'] }}"
-        class="{{ $attrs['class'] }}" aria-label="Default select example">
-        <option selected>Select Mobile Number</option>
-        @foreach ($my_validated_sms_addresses as $sms)
-            <option value="{{ $sms->value }}">{{ $sms->value }}</option>
-        @endforeach
-    </select>
+    <div class="input-group mb-3">
+        <select wire:model.lazy="{{ $attrs['wire:model.lazy'] }}" wire:change="updateFormData"
+            name="{{ $attrs['name'] }}" class="{{ $attrs['class'] }}" aria-label="Default select example">
+            <option selected>Select Mobile Number</option>
+            @foreach ($my_validated_sms_addresses as $sms)
+                <option value="{{ $sms->value }}">{{ $sms->value }}</option>
+            @endforeach
+        </select>
+        <div class="input-group-append">
+            <button onclick=" $('#add_sms_form').toggle()" class="btn btn-info" type="button">Add</button>
+        </div>
+    </div>
 
     <x-flash-message />
 </div>
