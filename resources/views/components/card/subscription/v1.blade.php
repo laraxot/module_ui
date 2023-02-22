@@ -1,7 +1,7 @@
-<main class="py-6 bg-surface-secondary">
-    <div class="container-fluid max-w-screen-md vstack gap-6">
+<main class="py-2 bg-surface-secondary">
+    <div class="container-fluid">
         <div class="card">
-            <div class="card-body py-4">
+            <div class="card-body py-2">
                 <!-- Icon + Dropdown -->
                 <div class="d-flex align-items-center justify-content-between mb-5">
                     <div class="flex-1">
