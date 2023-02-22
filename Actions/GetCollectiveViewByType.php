@@ -24,7 +24,9 @@ class GetCollectiveViewByType {
         }
 
         $coll = app(GetCollectiveComponents::class)->execute();
+
         $res = collect($coll)->firstWhere('name', 'bs'.ucfirst($type));
+
         if (null == $res) {
             // dddx([$type, 'bs'.ucfirst($type), collect($coll)->firstWhere('name', 'bs'.ucfirst($type))]);
             throw new \Exception('['.__LINE__.']['.__FILE__.']');
