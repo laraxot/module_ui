@@ -69,21 +69,26 @@ class Label extends Component {
          */
         $view = app(GetViewAction::class)->execute($this->tpl);
         $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($view);
-        $label = $attributes->get('label');
-        $name = $attributes->get('name');
-        $this->attrs['for'] = $attributes->get('id');
 
-        $trans_key = $this->tradKey.'.'.$name.'.label';
-        $name_lang = trans($trans_key);
-        if ($trans_key == $name_lang) {
-            $name_lang = $name;
+        if (isset($attributes) && is_object($attributes)) {
+            $label = $attributes->get('label');
+            $name = $attributes->get('name');
+            $this->attrs['for'] = $attributes->get('id');
         }
 
-        $label = $label ?? $name_lang;
+        if (isset($name)) {
+            $trans_key = $this->tradKey.'.'.$name.'.label';
+            $name_lang = trans($trans_key);
+            if ($trans_key == $name_lang) {
+                $name_lang = $name;
+
+                $label = $label ?? $name_lang;
+            }
+        }
 
         $view_params = [
             'view' => $view,
-            'label' => $label,
+            'label' => $label ?? '',
             'attrs' => $this->attrs,
         ];
         $view_params = array_merge($data, $view_params);
