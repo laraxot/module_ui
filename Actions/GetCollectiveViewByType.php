@@ -15,7 +15,7 @@ class GetCollectiveViewByType {
         // date.datetime.range
         // bsDateDatetimeRange
 
-        if (count(explode('.', $type)) > 1) {
+        if (count(explode('.', $type)) > 0) {
             $tmp = '';
             foreach (explode('.', $type) as $t) {
                 $tmp .= ucfirst($t);

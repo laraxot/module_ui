@@ -25,13 +25,14 @@ class Verified extends Component {
     public ?string $tpl = '';
     public string $user_id = '';
     public Collection $my_validated_sms_addresses;
+    public array $attrs = [];
 
     /**
      * Undocumented function.
      *
      * @return void
      */
-    public function mount(?string $tpl = 'v1') {
+    public function mount(?string $tpl = 'v1', ?array $attrs = []) {
         // non sapevo in che altro modo passarlo
         $this->user_id = (string) Auth::id();
         $this->form_data = (array) session()->get('form_data') ?? [];
