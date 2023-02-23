@@ -29,7 +29,7 @@ class GetCollectiveViewByType {
 
         if (null == $res) {
             // dddx([$type, 'bs'.ucfirst($type), collect($coll)->firstWhere('name', 'bs'.ucfirst($type))]);
-            throw new \Exception('['.__LINE__.']['.__FILE__.']');
+            throw new \Exception('['.$type.']['.__LINE__.']['.__FILE__.']');
         }
 
         return $res->view;
