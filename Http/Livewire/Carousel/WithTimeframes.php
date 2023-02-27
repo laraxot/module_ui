@@ -61,7 +61,7 @@ class WithTimeframes extends Component
         //     $str,
         //     $this->txt,
         // ]);
-        $strpos = app(PositionToStrposAction::class)->execute($str, $this->txt);
+        // $strpos = app(PositionToStrposAction::class)->execute($str, $this->txt);
 
         $this->emit('getFrameSecond', $this->component_id,$this->i);
     }
