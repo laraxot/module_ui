@@ -7,13 +7,13 @@ namespace Modules\UI\View\Components\Breadcrumb;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
+use Modules\Cms\Actions\GetViewAction;
 
 /**
  * Class Rows.
  */
-class Rows extends Component
-{
-    public string $type = 'rows';
+class Rows extends Component {
+    public string $tpl;
     public Collection $rows;
 
     /**
@@ -21,17 +21,16 @@ class Rows extends Component
      *
      * @return void
      */
-    public function __construct(Collection $rows)
-    {
+    public function __construct(Collection $rows, string $tpl = 'rows') {
         $this->rows = $rows;
+        $this->tpl = $tpl;
     }
 
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): Renderable
-    {
-        $view = 'ui::components.breadcrumb.'.$this->type;
+    public function render(): Renderable {
+        $view = app(GetViewAction::class)->execute($this->tpl);
         $view_params = [
             'view' => $view,
         ];
