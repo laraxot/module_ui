@@ -13,6 +13,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Modules\Cms\Actions\GetViewAction;
 use Modules\Xot\Services\XLSService;
 
 /**
@@ -77,7 +78,7 @@ class Model extends Component {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::livewire.import.xls.model';
+        $view = app(GetViewAction::class)->execute();
         $view_params = [];
 
         return view($view, $view_params);

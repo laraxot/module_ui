@@ -6,12 +6,12 @@ namespace Modules\UI\Http\Livewire\Input;
 
 use Illuminate\Contracts\Support\Renderable;
 use Livewire\Component;
+use Modules\Cms\Actions\GetViewAction;
 
 /**
  * Class Slider.
  */
-class Slider extends Component
-{
+class Slider extends Component {
     public string $driver = 'noui';
     public array $attrs = [];
     public float $min = 0;
@@ -34,8 +34,7 @@ class Slider extends Component
      *
      * @return void
      */
-    public function mount(string $id, ?string $driver = null)
-    {
+    public function mount(string $id, ?string $driver = null) {
         if (null !== $driver) {
             $this->driver = $driver;
         }
@@ -45,12 +44,11 @@ class Slider extends Component
     /**
      * Undocumented function.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::livewire.input.slider.'.$this->driver;
+        $view = app(GetViewAction::class)->execute($this->driver);
         $view_params = [
             'view' => $view,
         ];
@@ -61,8 +59,7 @@ class Slider extends Component
     /**
      * Set min - max of slider.
      */
-    public function setMinMax(float $min, float $max): void
-    {
+    public function setMinMax(float $min, float $max): void {
         $this->min = $min;
         $this->max = $max;
         $this->dispatchBrowserEvent('setSliderMinMax', ['min' => $min, 'max' => $max]);
@@ -71,22 +68,19 @@ class Slider extends Component
     /**
      * set values of range.
      */
-    public function setValues(array $values): void
-    {
+    public function setValues(array $values): void {
         $this->values = $values;
         $this->dispatchBrowserEvent('setSliderValues', ['values' => $values]);
     }
 
-    public function updateValues(array $values): void
-    {
+    public function updateValues(array $values): void {
         $this->values = $values;
         $this->emit('updateSliderValues', $values);
         $this->emit('updateSliderValues', $values);
     }
 
     // * 4 debug
-    public function test(): void
-    {
+    public function test(): void {
         dddx($this->values);
     }
 

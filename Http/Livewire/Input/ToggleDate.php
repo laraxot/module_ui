@@ -11,8 +11,7 @@ use Livewire\Component;
 /**
  * Class Field.
  */
-class ToggleDate extends Component
-{
+class ToggleDate extends Component {
     public Model $model;
     public string $field;
     public bool $isActive;
@@ -20,8 +19,7 @@ class ToggleDate extends Component
     /**
      * Undocumented function.
      */
-    public function mount(): void
-    {
+    public function mount(): void {
         // $this->model = $model;
         // $this->field = $field;
         $this->isActive = null !== $this->model->getAttribute($this->field);
@@ -30,12 +28,11 @@ class ToggleDate extends Component
     /**
      * Undocumented function.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::livewire.input.toggle-date';
+        $view = app(GetViewAction::class)->execute();
         $view_params = [
             'view' => $view,
         ];
@@ -48,8 +45,7 @@ class ToggleDate extends Component
      *
      * @return void
      */
-    public function updating(string $field, mixed $value)
-    {
+    public function updating(string $field, mixed $value) {
         $val = $value ? now() : null;
         $this->model->setAttribute($this->field, $val);
         $this->model->save();

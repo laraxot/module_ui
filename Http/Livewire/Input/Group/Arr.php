@@ -10,9 +10,8 @@ use Livewire\Component;
 /**
  * Class Arr // Array is reserved.
  */
-class Arr extends Component
-{
-    public string $type;
+class Arr extends Component {
+    public string $tpl;
     public string $name;
     public array $form_data;
     public string $group;
@@ -23,9 +22,8 @@ class Arr extends Component
      *
      * @return void
      */
-    public function mount(string $type, string $name/* , string $group */)
-    {
-        $this->type = $type;
+    public function mount(string $tpl = 'v1', string $name/* , string $group */) {
+        $this->tpl = $tpl;
         $this->name = $name;
         $data = request()->all();
         $this->form_data = $data;
@@ -37,12 +35,11 @@ class Arr extends Component
     /**
      * Undocumented function.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::livewire.input.group.arr.'.$this->type;
+        $view = app(GetViewAction::class)->execute($this->tpl);
         $view_params = [
             'view' => $view,
         ];
@@ -50,8 +47,7 @@ class Arr extends Component
         return view($view, $view_params);
     }
 
-    public function addGroup(): void
-    {
+    public function addGroup(): void {
         // $this->form_data[$this->name] =
 
         $this->form_data[$this->name][$this->group] = [];
@@ -60,14 +56,12 @@ class Arr extends Component
         // dddx($this->form_data);
     }
 
-    public function addMail(): void
-    {
+    public function addMail(): void {
         $this->form_data[$this->name][$this->group][] = $this->email;
         $this->email = '';
     }
 
-    public function getData(): void
-    {
+    public function getData(): void {
         dddx($this->form_data);
     }
 }
