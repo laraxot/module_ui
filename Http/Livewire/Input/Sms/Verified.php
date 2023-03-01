@@ -69,6 +69,7 @@ class Verified extends Component {
 
     public function verify_code() {
         $is_valid_contact = Contact::where('user_id', $this->user_id)->where('contact_type', 'mobile')->where('verified_at', null)->where('value', $this->form_data['add_mobile'])->where('token', $this->form_data['token'] ?? '');
+//         73     Called 'isEmpty' on Laravel collection, but could have been retrieved as a query.
         if (false == $is_valid_contact->get()->isEmpty()) {
             $row = $is_valid_contact->first();
             $row->verified_at = now();

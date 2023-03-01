@@ -29,7 +29,7 @@ class Arr extends Component {
      *
      * @return void
      */
-    public function mount(string $tpl = 'v1', string $name, ?string $label, ?array $value, ?int $modelId = null) {
+    public function mount(string $name, ?string $label, ?array $value, ?int $modelId = null,string $tpl = 'v1') {
         $this->tpl = $tpl;
         $this->name = $name;
         $this->label = $label;

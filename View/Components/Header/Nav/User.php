@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\UI\View\Components\Header\Nav;
 
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Auth;
+use Modules\Cms\Actions\GetViewAction;
+use Illuminate\Contracts\Support\Renderable;
 
 /**
  * Class Nav.

@@ -24,7 +24,7 @@ class WithTimeframes extends Component {
     /**
      * Undocumented function.
      */
-    public function mount(string $component_id, array $items, ?bool $showBtnLink = true, string $tpl = 'v1', string $txt): void {
+    public function mount(string $component_id, array $items, string $txt, ?bool $showBtnLink = true, string $tpl = 'v1'): void {
         $this->items = $items;
         $this->showBtnLink = $showBtnLink;
         $this->tpl = $tpl;

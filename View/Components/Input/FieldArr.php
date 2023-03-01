@@ -38,7 +38,7 @@ class FieldArr extends Component {
         /**
          * @phpstan-var view-string
          */
-        $view = app(GetViewAction::class)->execute($tpl);
+        $view = app(GetViewAction::class)->execute($this->tpl);
         $view_params = [
             'view' => $view,
         ];

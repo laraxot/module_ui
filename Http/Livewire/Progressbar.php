@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\UI\Http\Livewire;
 
-use Illuminate\Contracts\Support\Renderable;
 use Livewire\Component;
+use Modules\Cms\Actions\GetViewAction;
+use Illuminate\Contracts\Support\Renderable;
 
 class Progressbar extends Component {
     public int $perc = 0;

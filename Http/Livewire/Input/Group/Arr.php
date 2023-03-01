@@ -22,7 +22,7 @@ class Arr extends Component {
      *
      * @return void
      */
-    public function mount(string $tpl = 'v1', string $name/* , string $group */) {
+    public function mount( string $name/* , string $group */,string $tpl = 'v1') {
         $this->tpl = $tpl;
         $this->name = $name;
         $data = request()->all();

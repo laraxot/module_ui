@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\UI\View\Components\Input;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
+use Modules\Cms\Actions\GetViewAction;
+use Illuminate\Contracts\Support\Renderable;
 
 /**
  * Undocumented class.
