@@ -77,14 +77,16 @@ class Label extends Component {
             $this->attrs['for'] = $attributes->get('id');
         }
 
-        if (isset($name)) {
+        if (isset($name) && !isset($label)) {
             $trans_key = $this->tradKey.'.'.$name.'.label';
-            $name_lang = trans($trans_key);
-            if ($trans_key == $name_lang) {
-                $name_lang = $name;
+            $label = trans($trans_key);
+            // if ($trans_key == $name_lang) {
+            //     $name_lang = $name;
 
-                $label = $label ?? $name_lang;
-            }
+            //     $label = $label ?? $name_lang;
+            // }else{
+            //     $label = $name_lang;
+            // }
         }
 
         $view_params = [
