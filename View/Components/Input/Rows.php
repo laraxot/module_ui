@@ -23,7 +23,7 @@ class Rows extends Component {
      *
      * @return void
      */
-    public function __construct(string $tpl = 'v1', string $name, Collection $rows, ?string $label = null, ?Collection $value = null) {
+    public function __construct( string $name, Collection $rows, ?string $label = null, ?Collection $value = null,string $tpl = 'v1') {
         $this->tpl = $tpl;
         $this->name = $name;
         $this->label = $label;
