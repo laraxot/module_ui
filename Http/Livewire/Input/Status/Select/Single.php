@@ -74,6 +74,6 @@ class Single extends Component
             'view' => $view,
         ];
 
-        return view()->make($view, $view_params);
+        return view($view, $view_params);
     }
 }

@@ -232,7 +232,7 @@ class FormService {
         $field->view = $view;
         $view_params['field'] = $field;
 
-        return view()->make($view, $view_params);
+        return view($view, $view_params);
     }
     */
     /**

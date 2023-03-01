@@ -84,7 +84,7 @@ class Model extends Component {
         $view = 'ui::livewire.import.csv.model';
         $view_params = [];
 
-        return view()->make($view, $view_params);
+        return view($view, $view_params);
     }
 
     /**

@@ -183,7 +183,7 @@ class FieldService extends BaseFieldService
             // 'row' => $row,
         ];
 
-        return view()->make($view, $view_params);
+        return view($view, $view_params);
     }
 
     public function html(array $form_data = [], ?Model $row = null): Renderable
@@ -235,7 +235,7 @@ class FieldService extends BaseFieldService
             throw new \Exception('view is null');
         }
 
-        return view()->make($view, $view_params);
+        return view($view, $view_params);
     }
 
     public function file(): self

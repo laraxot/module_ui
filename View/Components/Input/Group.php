@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
+use Modules\Cms\Actions\GetViewAction;
 
 /**
  * Undocumented class.
  */
-class Group extends Component
-{
+class Group extends Component {
     public string $tpl = 'group';
     // public string $name;
     // public string $type;
@@ -27,8 +27,7 @@ class Group extends Component
         $this->options = $options ?? [];
     }
     */
-    public function __construct(?array $options = null)
-    {
+    public function __construct(?array $options = null) {
         // $this->name = $name;
         // $this->type = $type;
         $this->options = $options ?? [];
@@ -37,8 +36,7 @@ class Group extends Component
     /**
      * Get the view / contents that represents the component.
      */
-    public function render()
-    {
+    public function render() {
         return function (array &$data) {
             return $this->renderData($data);
         };
@@ -47,8 +45,7 @@ class Group extends Component
     /**
      * @see https:// stackoverflow.com/questions/65334221/laravel-accessing-attributes-slots-within-component-classes
      */
-    public function renderData(array &$data): string
-    {
+    public function renderData(array &$data): string {
         extract($data);
         if (! isset($attributes)) {
             throw new \Exception('['.__LINE__.']['.__FILE__.']');
@@ -63,7 +60,7 @@ class Group extends Component
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.input.group.'.$this->tpl;
+        $view = app(GetViewAction::class)->execute($this->tpl);
 
         $div_attrs = app(ComponentAttributeBag::class);
         $label_attrs = app(ComponentAttributeBag::class);
@@ -113,8 +110,7 @@ class Group extends Component
         return view($view, $view_params)->render();
     }
 
-    public function shouldRender(): bool
-    {
+    public function shouldRender(): bool {
         return true;
     }
 }

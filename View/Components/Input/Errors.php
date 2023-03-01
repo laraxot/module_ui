@@ -10,27 +10,24 @@ use Illuminate\View\Component;
 /**
  * Undocumented class.
  */
-class Errors extends Component
-{
-    public string $type;
+class Errors extends Component {
+    public string $tpl;
 
     /**
      * Undocumented function.
      */
-    public function __construct(string $type = 'v1')
-    {
-        $this->type = $type;
+    public function __construct(string $tpl = 'v1') {
+        $this->tpl = $tpl;
     }
 
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.input.errors.'.$this->type;
+        $view = app(GetViewAction::class)->execute($this->tpl);
         $view_params = [
             'view' => $view,
         ];

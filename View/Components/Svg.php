@@ -6,6 +6,7 @@ namespace Modules\UI\View\Components;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\View\Component;
+use Modules\Cms\Actions\GetViewAction;
 use Modules\Xot\Services\FileService;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -17,27 +18,26 @@ use Symfony\Component\DomCrawler\Crawler;
  * <x-svg icon="github" class="classi_qualsiasi" />
  * <x-svg icon="twitter" class="classi_qualsiasi" />
  */
-class Svg extends Component
-{
+class Svg extends Component {
     /**
      * Create a new component instance.
      *
      * @return void
      */
     public string $icon;
+    public string $tpl;
 
     public array $attrs;
 
-    public function __construct(string $icon)
-    {
+    public function __construct(string $icon, string $tpl = 'v1') {
         $this->icon = $icon;
+        $this->tpl = $tpl;
     }
 
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): \Illuminate\Contracts\Support\Renderable
-    {
+    public function render(): \Illuminate\Contracts\Support\Renderable {
         // $content=File::get()
         $svg_path = FileService::fixPath(module_path('ui', 'Resources/svg/'.$this->icon.'.svg'));
         $svg_content = File::get($svg_path);
@@ -88,7 +88,7 @@ class Svg extends Component
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.svg';
+        $view = app(GetViewAction::class)->execute($this->tpl);
         $view_params = [
             'view' => $view,
             'svg_content' => $svg_content,
@@ -96,7 +96,7 @@ class Svg extends Component
             'svg_html' => $m[2],
         ];
 
-        return view()->make($view, $view_params);
+        return view($view, $view_params);
     }
 }
 

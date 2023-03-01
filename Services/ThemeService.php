@@ -839,7 +839,7 @@ class ThemeService {
             'modal' => $modal,
         ];
 
-        return view()->make($view, $view_params);
+        return view($view, $view_params);
     }
     */
 

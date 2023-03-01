@@ -125,10 +125,6 @@ class Field extends Component {
          */
         $view = app(GetViewAction::class)->execute($this->tpl);
 
-        // $view = 'ui::components.input.field.'.$this->tpl;
-        // $view = 'ui::components.input.freeze.'.$value_type.'.'.$this->tpl;
-        // dddx(['view' => $view, 'field' => $this->field]);
-
         $view_params = [
             'name' => $this->field->name,
             'view' => $view,

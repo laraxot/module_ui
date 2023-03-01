@@ -32,7 +32,6 @@ class Std extends Component {
         /**
          * @phpstan-var view-string
          */
-        // $view = 'ui::components.std.'.$this->tpl;
         $view = app(GetViewAction::class)->execute($this->tpl);
         $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($view);
 

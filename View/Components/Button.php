@@ -50,6 +50,6 @@ class Button extends Component {
 
         $view_params = ['view' => $view];
 
-        return view()->make($view, $view_params);
+        return view($view, $view_params);
     }
 }

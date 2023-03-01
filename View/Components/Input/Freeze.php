@@ -10,6 +10,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
+use Modules\Cms\Actions\GetViewAction;
 use Modules\UI\Datas\FieldData;
 use Spatie\ModelStates\State;
 
@@ -113,7 +114,7 @@ class Freeze extends Component {
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.input.freeze.'.$value_type.'.'.$this->tpl;
+        $view = app(GetViewAction::class)->execute($value_type.'.'.$this->tpl);
         $view_params = [
             'view' => $view,
         ];

@@ -57,7 +57,7 @@ class Edit extends XotBaseComponent
         //    return null;
         // }
 
-        return view()->make($view, $view_params);
+        return view($view, $view_params);
     }
 
     public function shouldRender(): bool

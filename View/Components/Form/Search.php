@@ -47,7 +47,6 @@ class Search extends Component {
         /**
          * @phpstan-var view-string
          */
-        // $view = 'ui::components.form.search.'.$this->type;
         $view = $this->view;
 
         $view_params = [];

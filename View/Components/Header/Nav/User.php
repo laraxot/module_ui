@@ -11,37 +11,33 @@ use Illuminate\View\Component;
 /**
  * Class Nav.
  */
-class User extends Component
-{
+class User extends Component {
     public array $attrs = [];
-    public string $type;
+    public string $tpl;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(string $type = 'v1')
-    {
-        $this->type = $type;
+    public function __construct(string $tpl = 'v1') {
+        $this->tpl = $tpl;
     }
 
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
+        $tpl = (Auth::guest() ? 'guest' : 'logged').'.'.$this->tpl;
         /**
          * @phpstan-var view-string
          */
-        $view = 'ui::components.header.nav.user_';
-        $view .= Auth::guest() ? 'guest' : 'logged';
-        $view .= '.'.$this->type;
+        $view = app(GetViewAction::class)->execute($tpl);
 
         $view_params = [
             'view' => $view,
         ];
 
-        return view()->make($view, $view_params);
+        return view($view, $view_params);
     }
 }

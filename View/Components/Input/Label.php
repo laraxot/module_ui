@@ -47,7 +47,8 @@ class Label extends Component {
             return $this->renderData($data);
         };
         // */
-        // $view = 'ui::components.input.label.label';
+
+        // $view = app(GetViewAction::class)->execute($this->tpl);
         /*
          * @phpstan-var view-string
          */
