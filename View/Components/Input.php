@@ -70,7 +70,6 @@ class Input extends Component {
         /**
          * @phpstan-var view-string
          */
-        // $view = 'ui::components.input.'.$this->type.'.field';
         // $view = app(GetViewAction::class)->execute($this->type.'.field');
         // collective = ui::collective.fields.string.field
         $view = str_replace('ui::collective.fields.', 'ui::components.input.', $this->collective_view);

@@ -21,7 +21,6 @@ class Card extends Component {
         /**
          * @phpstan-var view-string
          */
-        // $view = 'ui::components.card.'.$this->type;
         $view = app(GetViewAction::class)->execute($this->tpl);
 
         $view_params = [];
