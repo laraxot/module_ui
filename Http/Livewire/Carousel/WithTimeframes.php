@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace Modules\UI\Http\Livewire\Carousel;
 
+use Illuminate\Contracts\Support\Renderable;
 use Livewire\Component;
 use Modules\Cms\Actions\GetViewAction;
-use Illuminate\Contracts\Support\Renderable;
 use Modules\Mediamonitor\Actions\PositionToStrposAction;
-
 
 /**
  * Undocumented class.
  */
-class WithTimeframes extends Component
-{
+class WithTimeframes extends Component {
     public int $press_id;
     public string $tpl;
     public array $items;
@@ -26,8 +24,7 @@ class WithTimeframes extends Component
     /**
      * Undocumented function.
      */
-    public function mount(string $component_id, array $items, ?bool $showBtnLink = true, string $tpl = 'v1', string $txt): void
-    {
+    public function mount(string $component_id, array $items, ?bool $showBtnLink = true, string $tpl = 'v1', string $txt): void {
         $this->items = $items;
         $this->showBtnLink = $showBtnLink;
         $this->tpl = $tpl;
@@ -38,12 +35,10 @@ class WithTimeframes extends Component
     /**
      * Undocumented function.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */
-        // $view = 'ui::livewire.carousel.carousel.'.$this->tpl;
         $view = app(GetViewAction::class)->execute($this->tpl);
 
         $view_params = [
@@ -53,8 +48,7 @@ class WithTimeframes extends Component
         return view($view, $view_params);
     }
 
-    public function next(): void
-    {
+    public function next(): void {
         ++$this->i;
         $str = (string) $this->items[$this->i];
         // dddx([
@@ -63,12 +57,11 @@ class WithTimeframes extends Component
         // ]);
         // $strpos = app(PositionToStrposAction::class)->execute($str, $this->txt);
 
-        $this->emit('getFrameSecond', $this->component_id,$this->i);
+        $this->emit('getFrameSecond', $this->component_id, $this->i);
     }
 
-    public function prev(): void
-    {
+    public function prev(): void {
         --$this->i;
-        $this->emit('getFrameSecond', $this->component_id,$this->i);
+        $this->emit('getFrameSecond', $this->component_id, $this->i);
     }
 }
