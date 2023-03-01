@@ -6,7 +6,7 @@
     $fields = $_panel->getFields('create');
 @endphp
 @section('content')
-    <x-section type="crud">
+    <x-section tpl="crud">
         <x-include-view view="topbar" />
         {!! Form::bsOpenPanel($_panel, 'store') !!}
         <div class="row">

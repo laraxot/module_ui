@@ -9,7 +9,7 @@
 @endphp
 
 @section('content')
-    <x-section type="crud">
+    <x-section tpl="crud">
         <x-include-view view="topbar" />
         {!! Form::bsOpenPanel($_panel, 'update') !!}
         <div class="row">
