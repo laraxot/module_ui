@@ -80,6 +80,7 @@ class ArrTwo extends Component {
         /**
          * @phpstan-var view-string
          */
+        // $view = 'ui::livewire.input.arr.'.$this->type;
         $view = app(GetViewAction::class)->execute($this->tpl);
         $view_params = [
             // ProfileService::make()->getProfile()->max_search_days
