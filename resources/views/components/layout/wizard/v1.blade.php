@@ -4,6 +4,7 @@
     'is_last' => false,
 ])
 <div>
+    {{ dddx($steps) }}
     <ul class="nav nav-tabs overflow-x border-0">
         @foreach ($steps as $step)
             <li class="nav-item">
