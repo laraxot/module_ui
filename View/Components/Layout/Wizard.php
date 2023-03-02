@@ -13,6 +13,7 @@ class Wizard extends Component {
     public string $tpl;
     public string $view;
     public array $attrs = [];
+    // public array $steps;
 
     public function __construct(string $tpl = 'v1') {
         $this->tpl = $tpl;
