@@ -36,4 +36,9 @@ class Debug extends Component {
         ];
         return view($view,$view_params);
     }
+
+    public function shouldRender(): bool
+    {
+        return false;
+    }
 }
