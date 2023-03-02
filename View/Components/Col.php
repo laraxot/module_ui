@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\UI\View\Components;
 
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
+use Modules\Cms\Actions\GetViewAction;
 
 /**
  * Class Col.
  */
-class Col extends Component
-{
+class Col extends Component {
     public int $size;
 
     /**
@@ -18,16 +19,16 @@ class Col extends Component
      *
      * @return void
      */
-    public function __construct(int $size)
-    {
+    public function __construct(int $size) {
         $this->size = $size;
     }
 
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): \Illuminate\Contracts\Support\Renderable
-    {
-        return view()->make('ui::components.col');
+    public function render(): Renderable {
+        $view = app(GetViewAction::class)->execute();
+
+        return view($view);
     }
 }
