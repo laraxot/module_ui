@@ -1,4 +1,4 @@
-<div>
+<div wire:init="init()">
     <div>
         @if (session()->has('message'))
             <div class="alert alert-success">
@@ -14,15 +14,7 @@
     <br />
     <div class="btn-group" role="group" aria-label="Basic example">
 
-        @if ($autostart === 'true')
-            @push('scripts')
-                <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                        @this.start();
-                    });
-                </script>
-            @endpush
-        @else
+        @if ($autostart != 'true')
             <a class="btn btn-primary" href="{{ $url }}" role="button">
                 <i class="fas fa-backward"></i>
             </a>
