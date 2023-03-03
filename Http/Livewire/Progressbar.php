@@ -11,6 +11,7 @@ use Illuminate\Contracts\Support\Renderable;
 class Progressbar extends Component {
     public int $perc = 0;
     public string $autostart = 'false';
+    public string $autocomplete = 'true';
     public int $loop_index = 0;
     public int $loop_max = 100;
     public array $errors = [];
@@ -31,6 +32,7 @@ class Progressbar extends Component {
         } else {
             $this->perc = 100;
             session()->flash('message', 'FINITO');
+            $this->complete();
         }
     }
 
@@ -49,5 +51,18 @@ class Progressbar extends Component {
         ];
 
         return view($view, $view_params);
+    }
+
+    public function init(){
+        if($this->autostart === 'true'){
+            $this->start();
+        }
+    }
+
+    public function complete(){
+        if ($this->autocomplete === 'true' && $this->onComplete != ''){
+            return $this->{$this->onComplete}();
+
+        }
     }
 }
