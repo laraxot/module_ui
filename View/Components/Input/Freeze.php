@@ -36,15 +36,15 @@ class Freeze extends Component {
 
         if (Str::contains($field->getNameDot(), '.')) {
             // $this->value = Arr::get($this->row->toArray(), $field->getNameDot()) ?? $row->{$field->name};
-            $this->value = $this->row->{$field->getNameDot()} ?? $row->{$field->name};
+            $this->value = $this->row->{$field->getNameDot()} ?? $row->{$field->name} ?? null;
         } else {
-            try {
-                // $this->value = $row->{$field->name} ?? Arr::get($this->row->toArray(), $field->getNameDot());
-                $this->value = $row->{$field->name} ?? $this->row->{$field->getNameDot()};
-            } catch (\Exception $e) {
-                // dddx([$row, $field->name, $field->getNameDot()]);
-                dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
-            }
+            // try {
+            // $this->value = $row->{$field->name} ?? Arr::get($this->row->toArray(), $field->getNameDot());
+            $this->value = $row->{$field->name} ?? $this->row->{$field->getNameDot()} ?? null;
+            // } catch (\Exception $e) {
+            // dddx([$row, $field->name, $field->getNameDot()]);
+            //    dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
+            // }
         }
 
         if (is_countable($field->options) && count($field->options) > 0) {
