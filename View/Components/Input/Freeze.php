@@ -35,11 +35,14 @@ class Freeze extends Component {
         $this->row = $row;
 
         if (Str::contains($field->getNameDot(), '.')) {
-            $this->value = Arr::get($tmp, $field->getNameDot()) ?? $row->{$field->name};
+            // $this->value = Arr::get($this->row->toArray(), $field->getNameDot()) ?? $row->{$field->name};
+            $this->value = $this->row->{$field->getNameDot()} ?? $row->{$field->name};
         } else {
             try {
-                $this->value = $row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
+                // $this->value = $row->{$field->name} ?? Arr::get($this->row->toArray(), $field->getNameDot());
+                $this->value = $row->{$field->name} ?? $this->row->{$field->getNameDot()};
             } catch (\Exception $e) {
+                // dddx([$row, $field->name, $field->getNameDot()]);
                 dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
             }
         }
