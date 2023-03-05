@@ -32,7 +32,7 @@ class Button extends Component {
 
         $this->view = app(GetViewAction::class)->execute($this->tpl);
         $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($this->view);
-
+        $this->attrs['type'] = $type;
         // dddx([$class_key, $this->attrs['class']]);
         $this->attrs['icon'] = isset($attrs['icon']) ? $attrs['icon'] : null;
         // $icon_class = inAdmin() ? 'adm_theme::styles.button.icon.'.$type : 'pub_theme::styles.button.icon.'.$type;
