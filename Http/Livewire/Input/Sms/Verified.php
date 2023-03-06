@@ -21,7 +21,7 @@ use Modules\Notify\Notifications\SmsNotification;
  */
 class Verified extends Component {
     public array $form_data = [];
-    public bool $is_sent = false;
+    public int $step = 1;
     public ?string $tpl = '';
     public string $user_id = '';
     public Collection $my_validated_sms_addresses;
@@ -64,7 +64,7 @@ class Verified extends Component {
         $n = new SmsNotification('', 'Verify Sms', 'Verification Code: '.$row->token);
         Notification::route('sms', $this->form_data['add_mobile'])->notify($n);
 
-        $this->is_sent = true;
+        $this->step = 3;
     }
 
     public function verify_code() {
@@ -75,12 +75,21 @@ class Verified extends Component {
             $row = $is_valid_contact->first();
             $row->verified_at = now();
             $row->save();
+
+            $this->form_data['mobile'] = $this->form_data['add_mobile'];
+
+            $this->updateFormData();
+
             session()->flash('message', 'Sms Verified');
-            $this->is_sent = false;
+            $this->step = 1;
         } else {
             session()->flash('status_error', 'Sms NOT Verified');
         }
         $this->mySmsAddresses();
+    }
+
+    public function add() {
+        $this->step = 2;
     }
 
     /**

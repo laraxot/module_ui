@@ -21,7 +21,7 @@ use Modules\Notify\Notifications\HtmlNotification;
  */
 class Verified extends Component {
     public array $form_data = [];
-    public bool $is_sent = false;
+    public int $step = 1;
     public ?string $tpl = '';
     public string $user_id = '';
     public Collection $my_validated_email_addresses;
@@ -64,7 +64,7 @@ class Verified extends Component {
         Notification::route('mail', $row->value)
             ->notify(new HtmlNotification(config('mail.from.address'), 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
 
-        $this->is_sent = true;
+        $this->step = 3;
     }
 
     public function verify_code() {
@@ -73,12 +73,22 @@ class Verified extends Component {
             $row = $is_valid_contact->first();
             $row->verified_at = now();
             $row->save();
+
+            $this->form_data['email'] = $this->form_data['add_email'];
+
+            $this->updateFormData();
+
             session()->flash('message', 'Email Verified');
-            $this->is_sent = false;
+
+            $this->step = 1;
         } else {
             session()->flash('status_error', 'Email NOT Verified');
         }
         $this->myEmailAddresses();
+    }
+
+    public function add() {
+        $this->step = 2;
     }
 
     /**
