@@ -1,30 +1,30 @@
 @php
-/**
- * https://github.com/crlcu/multiselect
- * bower install multiselect-two-sides
- */
-//Theme::addScript('/theme/bc/multiselect/dist/js/multiselect.js');
-$options = [];
-extract($attributes);
-$field = transFields(get_defined_vars());
-//dddx(get_defined_vars());
-
-$model = Form::getModel();
-$val = $model->$name;
-//dddx($model);
-//$user=Auth::user();
-//$user_id=is_object($user)?$user->user_id:'NO-SET';
-$model_linked = $model->$name()->getRelated();
-$_panel = Theme::panelModel($model_linked);
-$_panel->setBuilder($model_linked->query());
-//$all=$_panel->options();
-/*
+    /**
+     * https://github.com/crlcu/multiselect
+     * bower install multiselect-two-sides
+     */
+    //Theme::addScript('/theme/bc/multiselect/dist/js/multiselect.js');
+    $options = [];
+    extract($attributes);
+    $field = transFields(get_defined_vars());
+    //dddx(get_defined_vars());
+    
+    $model = Form::getModel();
+    $val = $model->$name;
+    //dddx($model);
+    //$user=Auth::user();
+    //$user_id=is_object($user)?$user->user_id:'NO-SET';
+    $model_linked = $model->$name()->getRelated();
+    $_panel = Theme::panelModel($model_linked);
+    $_panel->setBuilder($model_linked->query());
+    //$all=$_panel->options();
+    /*
 
  $data=request()->all();
  $all=$_panel->rows($data)->get();
  //*/
-$all = $_panel->options();
-//dddx(get_class($_panel));//Modules\Progressioni\Models\Panels\SchedePanel
+    $all = $_panel->options();
+    //dddx(get_class($_panel));//Modules\Progressioni\Models\Panels\SchedePanel
 @endphp
 {{-- @component($blade_component, get_defined_vars())
 	@slot('label')
@@ -34,7 +34,6 @@ $all = $_panel->options();
 		Form::text($name,$options,$value, $field->attributes)
 	@endslot
 @endcomponent --}}
-{{--  --}}
 <br style="clear:both" />
 <p>{{ trans('lu::help.nota_multiselect') }}</p><br />
 <div class="row">
@@ -72,7 +71,6 @@ $all = $_panel->options();
     </div>
 
 </div>
-{{--  --}}
 {{-- @push('scripts')
 <script type="text/javascript">
 jQuery(document).ready(function($) {
