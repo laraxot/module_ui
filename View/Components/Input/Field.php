@@ -34,6 +34,7 @@ class Field extends Component {
         $this->tpl = $tpl;
         $this->field = $field;
         $this->row = $row;
+        
 
         if (null != $row) {
             $tmp = $row->toArray();
