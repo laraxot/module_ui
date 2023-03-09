@@ -78,7 +78,8 @@
             <div class="col-sm-5">
                 <select name="{{ $name }}[to][]" id="multiselect{{ $name }}_to" class="form-control"
                     size="8" multiple="multiple">
-                    @foreach (collect($val)->unique('name') as $k => $v)
+                    {{-- altrimenti ti mette sia quelli con user_id null che con user_id --}}
+                    @foreach ($val as $k => $v)
                         <option value="{{ $_panel->optionId($v) }}">{{ $_panel->optionLabel($v) }}</option>
                     @endforeach
                 </select>
