@@ -24,8 +24,8 @@
         <br style="clear:both" />
         <div class="row">
             {{-- @if (collect($field_options)->count() > 10) --}}
-            @foreach (collect($field_options)->chunk((int) count($field_options) / 2) as $chunk)
-                <div class="col-sm-6">
+            @foreach (collect($field_options)->chunk((int) count($field_options) / 3) as $chunk)
+                <div class="col-sm-4">
                     @foreach ($chunk as $real_value => $rule)
                         <p>{{ $rule['comment'] }}</p>
                         <div class="input-group mt-3">
