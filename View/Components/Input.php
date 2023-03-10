@@ -13,7 +13,8 @@ use Modules\UI\Actions\GetCollectiveViewByType;
 /**
  * Undocumented class.
  */
-class Input extends Component {
+class Input extends Component
+{
     public array $attrs = [];
     public string $type = 'text';
     public string $name = 'empty-name';
@@ -24,7 +25,9 @@ class Input extends Component {
     /**
      * ---.
      */
-    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = []) {
+    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = [])
+    {
+
         $this->name = $name;
         $this->collective_view = app(GetCollectiveViewByType::class)->execute($type); // ui::collective.fields.string.field
 
@@ -33,7 +36,7 @@ class Input extends Component {
         $this->options = $options;
         $this->attrs['name'] = $this->name;
         $this->attrs['class'] = 'form-control';
-        $this->attrs['wire:model.lazy'] = 'form_data.'.$name;
+        $this->attrs['wire:model.lazy'] = 'form_data.' . $name;
         if (is_array($attributes) && count($attributes) > 0) {
             $this->attrs = array_merge($this->attrs, $attributes);
         }
@@ -65,7 +68,8 @@ class Input extends Component {
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         // esempio Modules/UI/Resources/views/components/input/select/field.blade.php
         /**
          * @phpstan-var view-string

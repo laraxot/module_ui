@@ -56,7 +56,7 @@ class FieldService extends BaseFieldService
     public function setVars(array $vars): self
     {
         foreach ($vars as $k => $v) {
-            $func = 'set'.str::Studly($k);
+            $func = 'set' . str::Studly($k);
             $this->{$func}($k);
         }
 
@@ -115,14 +115,14 @@ class FieldService extends BaseFieldService
 
     public function setPrefix(string $prefix): self
     {
-        $this->key = $prefix.'.'.$this->name;
+        $this->key = $prefix . '.' . $this->name;
 
         return $this;
     }
 
     public function setInputComponent(string $input_component): self
     {
-        $this->input_component = 'ui::components.label_input.'.$input_component;
+        $this->input_component = 'ui::components.label_input.' . $input_component;
 
         return $this;
     }
@@ -145,7 +145,7 @@ class FieldService extends BaseFieldService
         for ($i = $pieces_count; $i > 0; --$i) {
             $a = \array_slice($pieces, 0, $i);
             $b = \array_slice($pieces, $i);
-            $views[] = $start.implode('_', $a).'.'.implode('_', array_merge(['field'], $b));
+            $views[] = $start . implode('_', $a) . '.' . implode('_', array_merge(['field'], $b));
         }
         $view = collect($views)->first(
             function ($view_check) {
@@ -203,13 +203,14 @@ class FieldService extends BaseFieldService
         for ($i = $pieces_count; $i > 0; --$i) {
             $a = \array_slice($pieces, 0, $i);
             $b = \array_slice($pieces, $i);
-            $views[] = $start.implode('_', $a).'.'.implode('_', array_merge(['field'], $b));
+            $views[] = $start . implode('_', $a) . '.' . implode('_', array_merge(['field'], $b));
         }
         $view = collect($views)->first(
             function ($view_check) {
                 return \View::exists($view_check);
             }
         );
+
         if (null === $view) {
             $ddd_msg =
                 [

@@ -9,18 +9,21 @@ use Illuminate\Support\Str;
 use Modules\Xot\Services\FileService;
 use Spatie\QueueableAction\QueueableAction;
 
-class GetCollectiveComponents {
+class GetCollectiveComponents
+{
     use QueueableAction;
 
-    public function __construct() {
+    public function __construct()
+    {
     }
 
-    public function execute(string $view_path = '', string $prefix = ''): array {
+    public function execute(string $view_path = '', string $prefix = ''): array
+    {
         if ('' == $view_path && '' == $prefix) {
-            $view_path = __DIR__.'/../Resources/views/collective/fields';
+            $view_path = __DIR__ . '/../Resources/views/collective/fields';
             $prefix = 'ui::';
         }
-        $components_json = $view_path.'/_components.json';
+        $components_json = $view_path . '/_components.json';
         $components_json = str_replace(['/', '\\'], [\DIRECTORY_SEPARATOR, \DIRECTORY_SEPARATOR], $components_json);
 
         $exists = File::exists($components_json);
@@ -42,7 +45,7 @@ class GetCollectiveComponents {
 
         $comps = [];
 
-        if (! $view_path) {
+        if (!$view_path) {
             throw new \Exception('$view_path is false');
         }
 
@@ -52,15 +55,15 @@ class GetCollectiveComponents {
                 $ris = new \stdClass();
                 $tmp = str_replace(\DIRECTORY_SEPARATOR, ' ', $item);
                 $tmp_dot = str_replace(\DIRECTORY_SEPARATOR, '.', $item);
-                $ris->name = 'bs'.Str::studly($tmp);
-                $ris->view = $prefix.'collective.fields.'.$tmp_dot.'.field';
+                $ris->name = 'bs' . Str::studly($tmp);
+                $ris->view = $prefix . 'collective.fields.' . $tmp_dot . '.field';
 
                 return $ris;
             }
         )->all();
 
         $content = json_encode($comps);
-        if (! $content) {
+        if (!$content) {
             throw new \Exception('$content is false');
         }
         File::put($components_json, $content);

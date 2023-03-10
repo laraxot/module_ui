@@ -31,6 +31,7 @@
     $_panel = Panel::make()->get($related);
 @endphp
 
+
 <fieldset class="form-group container-fluid border p-2">
     <legend class="col-form-label col-sm-2 pt-0 w-auto">
         <h4>{{ $name }}</h4>
