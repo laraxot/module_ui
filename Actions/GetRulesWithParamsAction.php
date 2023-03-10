@@ -56,8 +56,13 @@ class GetRulesWithParamsAction
     public function getParamsType(string $method_name): array
     {
         $parameters = [
-            'digitsBetween' => ['min', 'max'],
+            'digits_between' => ['min', 'max'],
         ];
-        return ['name' => $method_name, 'type' => 'string'];
+
+        if (isset($parameters[$method_name])) {
+            return $parameters[$method_name];
+        }
+
+        return ['json'];
     }
 }
