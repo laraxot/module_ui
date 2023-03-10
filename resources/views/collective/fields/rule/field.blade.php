@@ -23,29 +23,31 @@
     <div class="row" style="border:1px solid  dark;">
         <br style="clear:both" />
         <div class="row">
-            @if (collect($field_options)->count() > 10)
-                @foreach (collect($field_options)->chunk((int) count($field_options) / 2) as $chunk)
-                    <div class="col-sm-6">
-                        @foreach ($chunk as $real_value => $rule)
-                            <p>{{ $rule['comment'] }}</p>
-                            <div class="input-group mt-3">
-                                <div class="input-group-text">
-                                    <input class="form-check-input" id="{{ $rule['name'] }}" name="{{ $rule['name'] }}"
-                                        type="checkbox" value="{{ $rule['name'] }}">
-                                    <label for="ckbx1" class="d-block mx-2">
-                                        {{ $rule['name'] }}
-                                    </label>
-                                </div>
-                                @foreach ($rule['params'] as $param => $type)
+            {{-- @if (collect($field_options)->count() > 10) --}}
+            @foreach (collect($field_options)->chunk((int) count($field_options) / 2) as $chunk)
+                <div class="col-sm-6">
+                    @foreach ($chunk as $real_value => $rule)
+                        <p>{{ $rule['comment'] }}</p>
+                        <div class="input-group mt-3">
+                            <div class="input-group-text">
+                                <input class="form-check-input" id="{{ $rule['name'] }}" name="{{ $rule['name'] }}"
+                                    type="checkbox" value="{{ $rule['name'] }}">
+                                <label for="ckbx1" class="d-block mx-2">
+                                    {{ $rule['name'] }}
+                                </label>
+                            </div>
+                            @foreach ($rule['params'] as $param => $type)
+                                @if ($type != '')
                                     <input id="{{ $rule['name'] }}_{{ $param }}"
                                         name="{{ $rule['name'] }}_{{ $param }}" type="{{ $type }}"
                                         class="form-control" placeholder="{{ $param }}" />
-                                @endforeach
-                            </div>
-                        @endforeach
-                    </div>
-                @endforeach
-                {{-- @else
+                                @endif
+                            @endforeach
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
+            {{-- @else
                 <div class="col-sm-12">
                     @foreach (collect($field_options) as $real_value => $text)
                         <div class="form-check">
@@ -55,8 +57,8 @@
                             </label>
                         </div>
                     @endforeach
-                </div> --}}
-            @endif
+                </div> 
+            @endif --}}
         </div>
     </div>
 </fieldset>
