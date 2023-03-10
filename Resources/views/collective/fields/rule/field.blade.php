@@ -36,9 +36,9 @@
                                         {{ $rule['name'] }}
                                     </label>
                                 </div>
-                                @foreach ($rule['params'] as $param)
+                                @foreach ($rule['params'] as $param => $type)
                                     <input id="{{ $rule['name'] }}_{{ $param }}"
-                                        name="{{ $rule['name'] }}_{{ $param }}" type="text"
+                                        name="{{ $rule['name'] }}_{{ $param }}" type="{{ $type }}"
                                         class="form-control" placeholder="{{ $param }}" />
                                 @endforeach
                             </div>
