@@ -1,9 +1,5 @@
 @php
-    //dd(app(\Modules\UI\Actions\GetRulesWithParamsAction::class)->execute());
-    
     $field = transFields(get_defined_vars());
-    
-    //Theme::addScript('ui::js/multiselect.js');
     
     if (isset($options['field'])) {
         $field_options = $options['field']->options;
@@ -11,18 +7,11 @@
         $field_options = [];
     }
     
-    //$model = Form::getModel();
-    //$rows = $model->$name();
-    
     $val = $field->value;
     
     if (!is_iterable($val)) {
         $val = [];
     }
-    
-    //$related = $rows->getRelated();
-    //$_panel = Panel::make()->get($related);
-    
 @endphp
 
 
@@ -37,16 +26,21 @@
             @if (collect($field_options)->count() > 10)
                 @foreach (collect($field_options)->chunk((int) count($field_options) / 2) as $chunk)
                     <div class="col-sm-6">
-
                         @foreach ($chunk as $real_value => $rule)
+                            <p>{{ $rule['comment'] }}</p>
                             <div class="input-group mt-3">
                                 <div class="input-group-text">
-                                    <input class="form-check-input" id="ckbx1" type="checkbox" value="">
+                                    <input class="form-check-input" id="{{ $rule['name'] }}" name="{{ $rule['name'] }}"
+                                        type="checkbox" value="{{ $rule['name'] }}">
                                     <label for="ckbx1" class="d-block mx-2">
                                         {{ $rule['name'] }}
                                     </label>
                                 </div>
-                                <input type="text" class="form-control" placeholder="{{ $rule['comment'] }}" />
+                                @foreach ($rule['params'] as $param)
+                                    <input id="{{ $rule['name'] }}_{{ $param }}"
+                                        name="{{ $rule['name'] }}_{{ $param }}" type="text"
+                                        class="form-control" placeholder="{{ $param }}" />
+                                @endforeach
                             </div>
                         @endforeach
                     </div>
