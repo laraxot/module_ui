@@ -16,6 +16,8 @@ class GetRulesWithParamsAction
 {
     use QueueableAction;
 
+
+
     public function execute(): array
     {
         $validatorClass = new ReflectionClass(ValidatesAttributes::class);
@@ -25,7 +27,13 @@ class GetRulesWithParamsAction
                 return Str::startsWith($method->name, 'validate');
             })
             ->map(function ($method) {
-                dd($method->getParameters());
+
+                //$param_names = collect($method->getParameters())->pluck('name', 'name')->except(['attribute', 'value']);
+
+                $method_name = str_replace('validate_', '', Str::snake($method->name));
+
+                $params = $this->getParamsType($method_name);
+
                 $start = strpos($method->getDocComment(), 'Validate');
                 $end = strpos($method->getDocComment(), '@');
 
@@ -37,11 +45,19 @@ class GetRulesWithParamsAction
                     $comment = trim($comment);
                 }
 
-                //dd($comment);
                 return [
-                    'name' => str_replace('validate_', '', Str::snake($method->name)),
+                    'name' => $method_name,
                     'comment' => $comment,
+                    'params' => $params
                 ];
             })->toArray();
+    }
+
+    public function getParamsType(string $method_name): array
+    {
+        $parameters = [
+            'digitsBetween' => ['min', 'max'],
+        ];
+        return ['name' => $method_name, 'type' => 'string'];
     }
 }
