@@ -4,14 +4,16 @@
     'is_last' => false,
 ])
 <div>
-    <ul class="nav nav-tabs overflow-x border-0">
-        @foreach ($steps as $step)
-            <li class="nav-item">
-                <span href="#" class="nav-link {{ $step->isCurrent() ? 'active' : '' }}">{{ $step->label }}</span>
-            </li>
-        @endforeach
-    </ul>
-
+    <div class="mb-5">
+        <ul class="nav nav-tabs overflow-x border-0">
+            @foreach ($steps as $step)
+                <li class="nav-item">
+                    <span href="#"
+                        class="nav-link {{ $step->isCurrent() ? 'active' : '' }}">{{ $step->label }}</span>
+                </li>
+            @endforeach
+        </ul>
+    </div>
     {{ $slot }}
 
     <x-flash-message />

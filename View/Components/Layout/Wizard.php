@@ -13,11 +13,11 @@ class Wizard extends Component {
     public string $tpl;
     public string $view;
     public array $attrs = [];
-    // public array $steps;
+    public array $steps;
 
-    public function __construct(string $tpl = 'v1') {
+    public function __construct(array $steps, string $tpl = 'v1') {
         $this->tpl = $tpl;
-
+        $this->steps = $steps;
         $this->view = app(GetViewAction::class)->execute($this->tpl);
         // $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($this->view);
     }
