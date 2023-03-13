@@ -7,31 +7,42 @@
         $field_options = [];
     }
     
-    $val = $field->value;
+    $rules = $field->value;
     
-    if (!is_iterable($val)) {
-        $val = [];
+    //dddx($rules);
+    
+    if (!is_iterable($rules)) {
+        $rules = [];
     }
 @endphp
 
 
 <fieldset class="form-group container-fluid border p-2">
-    <legend class="col-form-label col-sm-2 pt-0 w-auto">
+    {{-- <legend class="col-form-label col-sm-2 pt-0 w-auto">
         <h4>{{ $name }}</h4>
-    </legend>
+    </legend> --}}
+
+    <button type="button" class="btn btn-primary" id="btn-rules" onclick="$('#rules').toggleClass('d-none');">
+        Add Rules
+    </button>
 
     <div class="row" style="border:1px solid  dark;">
+        {{-- must toggle the rules with id = rules --}}
+
         <br style="clear:both" />
-        <div class="row">
+        <div class="row d-none" id="rules">
             {{-- @if (collect($field_options)->count() > 10) --}}
+
             @foreach (collect($field_options)->chunk((int) count($field_options) / 3) as $chunk)
                 <div class="col-sm-4">
                     @foreach ($chunk as $real_value => $rule)
                         <p>{{ $rule['comment'] }}</p>
                         <div class="input-group mt-3">
                             <div class="input-group-text">
-                                <input class="form-check-input" id="{{ $rule['name'] }}" name="{{ $rule['name'] }}"
-                                    type="checkbox" value="{{ $rule['name'] }}">
+                                <input class="form-check-input" id="{{ $rule['name'] }}"
+                                    name="{{ $name }}[{{ $rule['name'] }}][checked]" type="checkbox"
+                                    value="{{ $rules[$rule['name']]['checked'] ?? 'true' }}"
+                                    @if (isset($rules[$rule['name']]['checked'])) checked @endif>
                                 <label for="ckbx1" class="d-block mx-2">
                                     {{ $rule['name'] }}
                                 </label>
@@ -39,8 +50,10 @@
                             @foreach ($rule['params'] as $param => $type)
                                 @if ($type != '')
                                     <input id="{{ $rule['name'] }}_{{ $param }}"
-                                        name="{{ $rule['name'] }}_{{ $param }}" type="{{ $type }}"
-                                        class="form-control" placeholder="{{ $param }}" />
+                                        name="{{ $name }}[{{ $rule['name'] }}][{{ $param }}]"
+                                        type="{{ $type }}" class="form-control"
+                                        placeholder="{{ $param }}" 3
+                                        value="{{ $rules[$rule['name']][$param] ?? '' }}" />
                                 @endif
                             @endforeach
                         </div>
