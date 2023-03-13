@@ -83,6 +83,7 @@ class Group extends Component {
             }
             $tmp[$k] = $v;
         }
+
         $input_attrs->setAttributes($tmp);
         $col_size = $attributes->get('col_size') ?? '12';
         $div_class = 'form-group '.$attributes->get('div_class').' col-'.$col_size;

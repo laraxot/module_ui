@@ -34,7 +34,7 @@ class Input extends Component
         $this->type = $type;
 
         $this->options = $options;
-        $this->attrs['name'] = $this->name;
+        $this->attrs['name'] = dottedToBrackets($this->name);
         $this->attrs['class'] = 'form-control';
         $this->attrs['wire:model.lazy'] = 'form_data.' . $name;
         if (is_array($attributes) && count($attributes) > 0) {

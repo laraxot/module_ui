@@ -39,28 +39,35 @@ class Field extends Component
 
 
         if (null != $row) {
-            $tmp = $row->toArray();
+            //$tmp = $row->toArray();
 
             if (Str::contains($field->getNameDot(), '.')) {
+                /*
+                dddx(['t1'=>Arr::get($row,$field->getNameDot()),
+                   // 't2'=>$row->get($field->getNameDot()),
+                   't2'=>Model::get($row,$field->getNameDot()),
+                ]);
                 $this->value = Arr::get($tmp, $field->getNameDot());
+                */
+                $this->value = Arr::get($row, $field->getNameDot());
+                
             } else {
-                $this->value = $row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
+                $this->value = $row->{$field->name} ?? Arr::get($row, $field->getNameDot());
             }
         }
 
+        
+        /*    
         if (is_iterable($field->options) && count($field->options) > 0) {
             if (is_integer($this->value) || is_string($this->value)) {
+                
                 $this->value = collect($field->options)->get($this->value) ?? $this->value;
+                
             }
         }
+        */
 
-        /*
-        dddx([
-            'field'=>$field,
-            'row'=>$row,
-            'value'=>$this->value,
-
-        ]);*/
+       
         /*
         $this->attrs['class'] = 'form-label';
 
