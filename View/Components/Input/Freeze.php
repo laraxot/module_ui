@@ -17,7 +17,8 @@ use Spatie\ModelStates\State;
 /**
  * Undocumented class.
  */
-class Freeze extends Component {
+class Freeze extends Component
+{
     public FieldData $field;
     public Model $row;
     public string $tpl;
@@ -29,22 +30,26 @@ class Freeze extends Component {
     /**
      * Undocumented function.
      */
-    public function __construct(FieldData $field, Model $row, string $tpl = 'v1') {
+    public function __construct(FieldData $field, Model $row, string $tpl = 'v1')
+    {
         $this->tpl = $tpl;
         $this->field = $field;
         $this->row = $row;
 
         try {
+            /*
             $tmp = $this->row->getAttributes();
             if (Str::contains($field->getNameDot(), '.')) {
                 $this->value = Arr::get($tmp, $field->getNameDot()) ?? $row->{$field->name};
             } else {
                 $this->value = $this->row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
             }
+            */
+            $this->value = $this->row->{$field->name} ?? Arr::get($row, $field->getNameDot());
         } catch (\Exception $e) {
             dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
         }
-
+        /*
         if (is_countable($field->options) && count($field->options) > 0) {
             // if (null !== $this->value &&  !is_array($this->value)) {
             // if (null !== $this->value && ctype_alnum($this->value)) {
@@ -54,12 +59,14 @@ class Freeze extends Component {
                 $this->value = '';
             }
         }
+        */
     }
 
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         $value_type = gettype($this->value);
         if ('object' == $value_type) {
             if ($this->value instanceof Model) {
@@ -111,15 +118,24 @@ class Freeze extends Component {
         */
 
         $value_type = Str::lower($value_type);
+        /*
+        if ($this->field->name == 'companies') {
+            dddx([
+                'value_type' => $value_type,
+                'value' => $this->value,
+
+            ]);
+        }
+        */
         /**
          * @phpstan-var view-string
          */
-        $view = app(GetViewAction::class)->execute($value_type.'.'.$this->tpl);
+        $view = app(GetViewAction::class)->execute($value_type . '.' . $this->tpl);
         $view_params = [
             'view' => $view,
         ];
-        if (! view()->exists($view)) {
-            throw new \Exception('view ['.$view.'] not found');
+        if (!view()->exists($view)) {
+            throw new \Exception('view [' . $view . '] not found');
         }
 
         return view($view, $view_params);
