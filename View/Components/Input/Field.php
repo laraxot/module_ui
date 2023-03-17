@@ -14,9 +14,6 @@ use Modules\Cms\Actions\GetViewAction;
 use Modules\Cms\Services\PanelService;
 use Modules\UI\Datas\FieldData;
 
-/**
- * WIP WIP WIP.
- */
 class Field extends Component
 {
     public FieldData $field;
@@ -50,13 +47,12 @@ class Field extends Component
                 $this->value = Arr::get($tmp, $field->getNameDot());
                 */
                 $this->value = Arr::get($row, $field->getNameDot());
-                
             } else {
                 $this->value = $row->{$field->name} ?? Arr::get($row, $field->getNameDot());
             }
         }
 
-        
+
         /*    
         if (is_iterable($field->options) && count($field->options) > 0) {
             if (is_integer($this->value) || is_string($this->value)) {
@@ -67,7 +63,7 @@ class Field extends Component
         }
         */
 
-       
+
         /*
         $this->attrs['class'] = 'form-label';
 
