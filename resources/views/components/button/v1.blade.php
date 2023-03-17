@@ -19,13 +19,16 @@
             {{ $slot }}
         @endif
     </button>
-
+    {{--
     @if($attributes->get('wire:click')!=null)
     <div wire:loading wire:target="{{ $attributes->get('wire:click') }}">
         <x-spinner />
     </div>
     @endif
-
+    --}}
+    <div wire:loading >
+        <x-spinner />
+    </div>
 @endif
 
 {{-- <a href="{{ $attrs['url'] }}" title="{{ $attrs['title'] }}" data-toggle="tooltip" class="{{ $attrs['class']['button'] }}">
