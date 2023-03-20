@@ -47,7 +47,8 @@ class Freeze extends Component
             */
             $this->value = $this->row->{$field->name} ?? Arr::get($row, $field->getNameDot());
         } catch (\Exception $e) {
-            dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
+            //altrimenti dà errore "Undefined array key "Modules\PFed\Models\States\CompanyReport\Accepted"" ma non è una relazione
+            //dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
         }
         /*
         if (is_countable($field->options) && count($field->options) > 0) {
