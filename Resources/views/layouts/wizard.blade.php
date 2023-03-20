@@ -13,6 +13,7 @@
 
     <nav aria-label="Page navigation example">
         <ul class="pagination">
+
             <li class="page-item {{ $is_first ? 'disabled' : '' }}">
                 <a class="page-link" href="#" aria-label="Previous" wire:click="previousStep">
                     <span aria-hidden="true">&laquo;</span>
