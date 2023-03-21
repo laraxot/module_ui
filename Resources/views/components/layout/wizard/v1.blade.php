@@ -1,5 +1,10 @@
 @props([
     'steps' => [],
+<<<<<<< HEAD
+=======
+    // 'is_first' => false,
+    // 'is_last' => false,
+>>>>>>> b5a3fec2 (up)
 ])
 <div>
     <div class="mb-5">
