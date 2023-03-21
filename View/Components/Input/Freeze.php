@@ -47,7 +47,8 @@ class Freeze extends Component
             */
             $this->value = $this->row->{$field->name} ?? Arr::get($row, $field->getNameDot());
         } catch (\Exception $e) {
-            dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
+            //dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
+            $this->value = null;
         }
         /*
         if (is_countable($field->options) && count($field->options) > 0) {
