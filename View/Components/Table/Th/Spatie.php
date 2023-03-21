@@ -42,27 +42,6 @@ class Spatie extends Component
                 . '"></span>';
         }
 
-        //dddx(['sort_by' => $sort_by, 'order' => $order]);
-
-        /*
-        if (request()->has('sort_by') && request()->input('sort_by') == $name) {
-            $icon = ' <span class="fa fa-caret-'
-                .(request()->input('sort_direction', 'asc') == 'asc' ? 'up' : 'down')
-                .'"></span>';
-        }
-
-        $order = 'asc';
-        if (request()->has('sort_direction')) {
-            $order = (request()->input('sort_direction') == 'desc' ? 'asc' : 'desc');
-        }
-
-        $url = request()->fullUrlWithQuery([
-            'sort_by'        => $name,
-            'sort_direction' => $order,
-            'filter'         => request('filter'),
-            'limit'          => request('limit'),
-        ]);
-        */
         $url = request()->fullUrlWithQuery([
             'sort' => $sort,
         ]);
