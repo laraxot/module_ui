@@ -1072,16 +1072,16 @@ class ThemeService {
         return TenantService::model($name);
     }
     */
-    /*
-     * Undocumented function.
-     DEPRECATED
+    // *
+     // * Undocumented function.
+     // DEPRECATED
     public static function panelModel(Model $model): PanelContract {
         $class = StubService::make()->setModelAndName($model, 'panel')->get();
         $panel = app($class)->setRow($model);
 
         return $panel;
     }
-    */
+    // */
 
     /* -- TO COMPONENT <x-input.freeze
     public static function inputFreeze(FieldData $field, Model $row): Renderable {
