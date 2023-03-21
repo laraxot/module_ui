@@ -100,7 +100,11 @@ class Freeze extends Component
                 'rf_parent' => $reflection_class->getParentClass()->getParentClass()->getName(),
             ]);
             //*/
-            $str = $reflection_class->getParentClass()->getParentClass()->getName();
+            $str = $reflection_class
+                ->getParentClass()
+                ->getParentClass()
+                ->getName();
+
             switch ($str) {
                 case 'Spatie\\ModelStates\\State':
                     $value_type = 'state';
