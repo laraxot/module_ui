@@ -37,14 +37,6 @@ class Freeze extends Component
         $this->row = $row;
 
         try {
-            /*
-            $tmp = $this->row->getAttributes();
-            if (Str::contains($field->getNameDot(), '.')) {
-                $this->value = Arr::get($tmp, $field->getNameDot()) ?? $row->{$field->name};
-            } else {
-                $this->value = $this->row->{$field->name} ?? Arr::get($tmp, $field->getNameDot());
-            }
-            */
             $this->value = $this->row->{$field->name} ?? Arr::get($row, $field->getNameDot());
         } catch (\Exception $e) {
             //dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
@@ -97,6 +89,27 @@ class Freeze extends Component
                 $value_type = 'image';
             }
         }
+        if (is_string($this->value) && class_exists($this->value)) {
+            //&& $this->value instanceof \Spatie\ModelStates\State
+            $reflection_class = new \ReflectionClass($this->value);
+            /*
+            dddx([
+                'value_type' => $value_type,
+                'value' => $this->value,
+                //  'test' => $reflection_class->isInstance(\Spatie\ModelStates\State::class),
+                'rf_parent' => $reflection_class->getParentClass()->getParentClass()->getName(),
+            ]);
+            //*/
+            $str = $reflection_class->getParentClass()->getParentClass()->getName();
+            switch ($str) {
+                case 'Spatie\\ModelStates\\State':
+                    $value_type = 'state';
+                    break;
+                default:
+                    throw new \Exception('[' . $str . '][' . __LINE__ . '][' . __FILE__ . ']');
+                    break;
+            }
+        }
 
         /*
         if (! in_array($value_type, ['integer', 'string', 'NULL', 'Collection.Model'])) {
@@ -120,14 +133,14 @@ class Freeze extends Component
 
         $value_type = Str::lower($value_type);
         /*
-        if ($this->field->name == 'companies') {
+        if ($this->field->name == 'state') {
             dddx([
                 'value_type' => $value_type,
                 'value' => $this->value,
 
             ]);
         }
-        */
+        //*/
         /**
          * @phpstan-var view-string
          */

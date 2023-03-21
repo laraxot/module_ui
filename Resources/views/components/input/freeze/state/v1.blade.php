@@ -1,2 +1,2 @@
-{{-- {{ dddx([get_defined_vars(), ]) }} --}}
-{{ class_basename($value) }}
+{{-- dddx([get_defined_vars()]) --}}
+{!! app($value, ['model' => $row])->icon() !!}
