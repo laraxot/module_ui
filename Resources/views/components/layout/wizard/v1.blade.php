@@ -1,7 +1,5 @@
 @props([
     'steps' => [],
-    // 'is_first' => false,
-    // 'is_last' => false,
 ])
 <div>
     <div class="mb-5">
