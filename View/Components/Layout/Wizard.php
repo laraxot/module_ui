@@ -18,12 +18,8 @@ class Wizard extends Component
     public bool $is_first;
     public bool $is_last;
 
-<<<<<<< HEAD
     public function __construct(array $steps, string $tpl = 'v1')
     {
-=======
-    public function __construct(array $steps, bool $isFirst, bool $isLast, string $tpl = 'v1') {
->>>>>>> 5a83cb32 (up)
         $this->tpl = $tpl;
         $this->steps = $steps;
         $this->is_first = $isFirst;
