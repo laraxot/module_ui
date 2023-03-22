@@ -20,6 +20,7 @@
     {{-- dddx($input_attrs) --}}
     <x-input {{ $input_attrs }} :options="$options" value="{{ old($name) }}"/>
     @error($name)
+        {{-- <x-std tpl="alert.danger">{{ $message }}</x-std> --}}
         <div class="alert alert-danger">{{ $message }}</div>
         {{-- <div 
         style="background-color:#F38541;border: 0px;
