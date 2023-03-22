@@ -18,8 +18,18 @@
 <div {{ $div_attrs }}>
     <x-input.label {{ $label_attrs }} />
     {{-- dddx($input_attrs) --}}
-    <x-input {{ $input_attrs }} :options="$options" />
+    <x-input {{ $input_attrs }} :options="$options" value="{{ old($name) }}"/>
     @error($name)
         <div class="alert alert-danger">{{ $message }}</div>
+        {{-- <div 
+        style="background-color:#F38541;border: 0px;
+        text-transform: uppercase;
+        font-family: 'Inter';border-radius: 100px;
+        color: #fff;
+        text-align: center;
+        "
+        >{{ $message }}</div> --}}
+
+        {{-- ARANCIONE #F38541 --}}
     @enderror
 </div>
