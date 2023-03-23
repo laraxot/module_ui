@@ -92,26 +92,30 @@ class Freeze extends Component
         if (is_string($this->value) && class_exists($this->value)) {
             //&& $this->value instanceof \Spatie\ModelStates\State
             $reflection_class = new \ReflectionClass($this->value);
-            /*
-            dddx([
-                'value_type' => $value_type,
-                'value' => $this->value,
-                //  'test' => $reflection_class->isInstance(\Spatie\ModelStates\State::class),
-                'rf_parent' => $reflection_class->getParentClass()->getParentClass()->getName(),
-            ]);
-            //*/
-            $str = $reflection_class
-                ->getParentClass()
-                ->getParentClass()
-                ->getName();
 
-            switch ($str) {
-                case 'Spatie\\ModelStates\\State':
-                    $value_type = 'state';
-                    break;
-                default:
-                    throw new \Exception('[' . $str . '][' . __LINE__ . '][' . __FILE__ . ']');
-                    break;
+            // dddx([
+            //     'value_type' => $value_type,
+            //     'value' => $this->value,
+            //     //  'test' => $reflection_class->isInstance(\Spatie\ModelStates\State::class),
+            //     // 'rf_parent' => $reflection_class->getParentClass()->getParentClass()->getName(),
+            //     'rf_parent' => $reflection_class->getParentClass()->getName(),
+            // ]);
+
+            if($reflection_class->getParentClass()->getParentClass() != false){
+                $str = $reflection_class
+                    ->getParentClass()
+                    ->getParentClass()
+                    ->getName();
+            
+
+                switch ($str) {
+                    case 'Spatie\\ModelStates\\State':
+                        $value_type = 'state';
+                        break;
+                    default:
+                        throw new \Exception('[' . $str . '][' . __LINE__ . '][' . __FILE__ . ']');
+                        break;
+                }
             }
         }
 
