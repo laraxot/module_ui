@@ -22,8 +22,6 @@ class Search extends Component
 
     public string $view;
 
-    public array $categories = [];
-
     public function __construct(string $tpl = 'v1')
     {
         $this->tpl = $tpl;
@@ -40,15 +38,6 @@ class Search extends Component
         $view = app(GetViewAction::class)->execute($this->tpl);
         $this->view = app(GetViewThemeByViewAction::class)->execute($view);
         $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($this->view);
-
-        //vedere come aggiustare meglio. l'ideale sarebbe che 
-        //se il pannello avesse il suo file del form di ricerca prendesse quello in automatico
-        //come fa anche sulle pagine di autenticazione
-        if (str_contains(url()->current(), '/admin/pfed/it/companies')) {
-
-            $this->categories = Category::ofType('company')->pluck('name', 'id')->all();
-            $this->view = 'pfed::components.form.search.company';
-        }
     }
 
     public function render(): Renderable
