@@ -18,7 +18,8 @@
 <div {{ $div_attrs }}>
     <x-input.label {{ $label_attrs }} />
     {{-- dddx($input_attrs) --}}
-    <x-input {{ $input_attrs }} :options="$options" value="{{ old($name) }}"/>
+
+    <x-input {{ $input_attrs }} :options="$options" value="{{ old($name) }}" />
     @error($name)
         {{-- <x-std tpl="alert.danger">{{ $message }}</x-std> --}}
         <div class="alert alert-danger">{{ $message }}</div>
