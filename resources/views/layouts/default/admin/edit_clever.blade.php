@@ -14,9 +14,9 @@
         {!! Form::bsOpenPanel($_panel, 'update') !!}
         <div class="row">
             @foreach ($fields as $field)
-                {{-- {!! Theme::inputHtml($field, $row) !!} --}}
+                {!! Theme::inputHtml($field, $row) !!}
 
-                <x-input.field :field="$field" :row="$row" />
+                {{-- <x-input.field :field="$field" :row="$row" /> --}}
             @endforeach
         </div>
         {{-- <button type="submit"
