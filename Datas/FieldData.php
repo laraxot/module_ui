@@ -62,6 +62,14 @@ class FieldData extends Data {
         return $this->name_dot;
     }
 
+    public function getLabel(): string {
+        if (null !== $this->label) {
+            return $this->label;
+        }
+
+        return trans('pub_theme::txt.'.$this->name.'.label');
+    }
+
     public function getInputClass(): string {
         return 'form-control';
     }

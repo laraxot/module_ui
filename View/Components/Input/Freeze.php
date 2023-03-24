@@ -17,8 +17,7 @@ use Spatie\ModelStates\State;
 /**
  * Undocumented class.
  */
-class Freeze extends Component
-{
+class Freeze extends Component {
     public FieldData $field;
     public Model $row;
     public string $tpl;
@@ -30,16 +29,19 @@ class Freeze extends Component
     /**
      * Undocumented function.
      */
-    public function __construct(FieldData $field, Model $row, string $tpl = 'v1')
-    {
+    public function __construct(FieldData $field, Model $row, string $tpl = 'v1') {
         $this->tpl = $tpl;
         $this->field = $field;
         $this->row = $row;
 
         try {
+            /*if (! \in_array($field->name, ['profile', 'roles'])) {
+                dddx($field->name);
+            }*/
+
             $this->value = $this->row->{$field->name} ?? Arr::get($row, $field->getNameDot());
         } catch (\Exception $e) {
-            //dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
+            dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
             $this->value = null;
         }
         /*
@@ -58,8 +60,7 @@ class Freeze extends Component
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         $value_type = gettype($this->value);
         if ('object' == $value_type) {
             if ($this->value instanceof Model) {
@@ -90,7 +91,7 @@ class Freeze extends Component
             }
         }
         if (is_string($this->value) && class_exists($this->value)) {
-            //&& $this->value instanceof \Spatie\ModelStates\State
+            // && $this->value instanceof \Spatie\ModelStates\State
             $reflection_class = new \ReflectionClass($this->value);
 
             // dddx([
@@ -101,19 +102,18 @@ class Freeze extends Component
             //     'rf_parent' => $reflection_class->getParentClass()->getName(),
             // ]);
 
-            if($reflection_class->getParentClass()->getParentClass() != false){
+            if (false != $reflection_class->getParentClass()->getParentClass()) {
                 $str = $reflection_class
                     ->getParentClass()
                     ->getParentClass()
                     ->getName();
-            
 
                 switch ($str) {
                     case 'Spatie\\ModelStates\\State':
                         $value_type = 'state';
                         break;
                     default:
-                        throw new \Exception('[' . $str . '][' . __LINE__ . '][' . __FILE__ . ']');
+                        throw new \Exception('['.$str.']['.__LINE__.']['.__FILE__.']');
                         break;
                 }
             }
@@ -139,6 +139,10 @@ class Freeze extends Component
         }
         */
 
+        if ('Cell' == $this->field->type) {
+            $value_type = 'cell';
+        }
+
         $value_type = Str::lower($value_type);
         /*
         if ($this->field->name == 'state') {
@@ -152,12 +156,13 @@ class Freeze extends Component
         /**
          * @phpstan-var view-string
          */
-        $view = app(GetViewAction::class)->execute($value_type . '.' . $this->tpl);
+        $view = app(GetViewAction::class)->execute($value_type.'.'.$this->tpl);
+
         $view_params = [
             'view' => $view,
         ];
-        if (!view()->exists($view)) {
-            throw new \Exception('view [' . $view . '] not found');
+        if (! view()->exists($view)) {
+            throw new \Exception('view ['.$view.'] not found');
         }
 
         return view($view, $view_params);
