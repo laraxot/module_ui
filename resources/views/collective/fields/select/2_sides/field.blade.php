@@ -17,9 +17,12 @@
     }
     
     $model = Form::getModel();
-    $rows = $model->$name();
-    //$rows=$model->user->rights();
-    //$val = $rows->get();
+    
+    $name = $field->name;
+    $name_dot = bracketsToDotted($name);
+    //dddx(Arr::get($model, $name_dot));
+    // $rows = $model->$name();
+    $rows = Arr::get($model, $name_dot);
     
     $val = $field->value;
     
@@ -27,7 +30,12 @@
         $val = [];
     }
     
-    $related = $rows->getRelated();
+    if ($rows instanceof \Illuminate\Database\Eloquent\Collection) {
+        $related = $rows->first();
+    } else {
+        $related = $rows->getRelated();
+    }
+    
     $_panel = Panel::make()->get($related);
 @endphp
 
