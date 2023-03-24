@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\UI\Http\Livewire;
 
+use Illuminate\Contracts\Support\Renderable;
 use Livewire\Component;
 use Modules\Cms\Actions\GetViewAction;
-use Illuminate\Contracts\Support\Renderable;
 
 class Progressbar extends Component {
     public int $perc = 0;
@@ -53,16 +53,15 @@ class Progressbar extends Component {
         return view($view, $view_params);
     }
 
-    public function init(){
-        if($this->autostart === 'true'){
+    public function init(): void {
+        if ('true' === $this->autostart) {
             $this->start();
         }
     }
 
-    public function complete(){
-        if ($this->autocomplete === 'true' && $this->onComplete != ''){
+    public function complete() {
+        if ('true' === $this->autocomplete && '' != $this->onComplete) {
             return $this->{$this->onComplete}();
-
         }
     }
 }

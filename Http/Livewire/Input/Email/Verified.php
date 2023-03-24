@@ -68,8 +68,8 @@ class Verified extends Component {
     }
 
     public function verify_code() {
-        $is_valid_contact = Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', null)->where('value', $this->form_data['add_email'])->where('token', $this->form_data['token'] ?? '');
-        if (false == $is_valid_contact->get()->isEmpty()) {
+        $is_valid_contact = Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', null)->where('value', $this->form_data['add_email'])->where('token', $this->form_data['token'] ?? '')->get();
+        if (false == $is_valid_contact->isEmpty()) {
             $row = $is_valid_contact->first();
             $row->verified_at = now();
             $row->save();
