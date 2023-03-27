@@ -66,8 +66,15 @@ class FieldData extends Data {
         if (null !== $this->label) {
             return $this->label;
         }
+        $trans_key = 'pub_theme::txt.'.$this->name.'.label';
+        $trans = trans($trans_key);
+        if ($trans != $trans_key) {
+            $this->label = $trans;
 
-        return trans('pub_theme::txt.'.$this->name.'.label');
+            return $trans;
+        }
+
+        return $this->name;
     }
 
     public function getInputClass(): string {
