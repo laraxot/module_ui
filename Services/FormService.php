@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\UI\Services;
 
 use Collective\Html\FormFacade as Form;
-use Exception;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -251,7 +250,8 @@ class FormService {
                 return 0 === $k ? $v : '['.$v.']';
             }
         )->implode('');
-        $input_value = (isset($field->value) ? $field->value : null);
+        $input_value = $field->value ?? null;
+
         $col_size = isset($field->col_size) ? $field->col_size : 12;
         $field->col_size = $col_size;
 
@@ -264,53 +264,12 @@ class FormService {
         }
         $div_exludes = ['Hidden', 'Cell'];
         $input_opts = ['field' => $field];
-        // if (! in_array($field->type, $div_exludes)) {
-        //    return '<div class="col-sm-'.$col_size.'">'.Form::$input_type($input_name, $input_value, $input_attrs, $input_opts).'</div>';
-        // }
-        // dddx([$field, $input_opts]);
+
         if (isset($field->label)) {
             $input_attrs['label'] = $field->label;
-            // $input_attrs['field'] = $field;
         }
 
-        // return Form::$input_type($input_name, $input_value, $input_attrs, $input_opts);
-        // *
-        // try {
-        // 320    Dead catch - Exception is never thrown in the try block.
-
-        /*if ('bsPivotFields' == $input_type) {
-            dddx([$input_name, $input_value, $input_attrs, $input_opts]);
-        }*/
-
         return Form::$input_type($input_name, $input_value, $input_attrs, $input_opts);
-        // } catch (\Exception $e) {
-        /*
-        return '<div style="border:red">
-            ERRORE
-        </div>';
-        */
-        /*
-        dddx(
-            [
-                'message' => $e->getMessage(),
-                'code' => $e->getCode(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
-                //'methods' => get_class_methods($e),
-                'e' => $e,
-            ]
-        );
-        */
-        /*
-        return '<div>
-            message :'.$e->getMessage().'
-            code :'.$e->getCode().'
-            file :'.$e->getFile().'
-            line :'.$e->getLine().'
-            </div>';
-        */
-        // }
-        // */
     }
 
     public static function btnHtml(array $params): string {
