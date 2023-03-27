@@ -34,15 +34,16 @@
     }
     
     if ($rows instanceof \Illuminate\Database\Eloquent\Collection) {
-        //qui ci passa
-        $related = $rows->first();
+        //così funziona meglio
+        $related = $rows->first() ?? $model->$name()->getModel();
+    
         //così funziona su http://pfed.lan2/admin/pfed/it/edit/company_profiles/22
         $val = $rows;
         //dddx($val);
     } else {
         $related = $rows->getRelated();
     }
-    
+    //dddx([$rows->first(), $model->$name()->getModel()]);
     $_panel = Panel::make()->get($related);
 @endphp
 
