@@ -93,6 +93,7 @@ class Freeze extends Component {
         if (is_string($this->value) && class_exists($this->value)) {
             // && $this->value instanceof \Spatie\ModelStates\State
             $reflection_class = new \ReflectionClass($this->value);
+            $parent=$reflection_class?->getParentClass();
 
             // dddx([
             //     'value_type' => $value_type,
@@ -102,9 +103,8 @@ class Freeze extends Component {
             //     'rf_parent' => $reflection_class->getParentClass()->getName(),
             // ]);
 
-            if (false != $reflection_class->getParentClass()->getParentClass()) {
-                $str = $reflection_class
-                    ->getParentClass()
+            if (false != $parent && false != $parent?->getParentClass()) {
+                $str = $parent
                     ->getParentClass()
                     ->getName();
 
