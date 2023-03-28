@@ -1,6 +1,8 @@
 @extends('adm_theme::layouts.app')
 @section('content')
-    @lang('Welcome')
+    @lang('pub_theme::txt.Welcome.label')
+
+
 
     @foreach ($_panel->getActions('item') as $act)
         <x-button.action :action="$act" />
