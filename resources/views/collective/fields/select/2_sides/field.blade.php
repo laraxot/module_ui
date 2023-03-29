@@ -34,16 +34,17 @@
     }
     
     if ($rows instanceof \Illuminate\Database\Eloquent\Collection) {
+        //così funziona meglio
         $related = $rows->first() ?? $model->$name()->getModel();
+    
+        //così funziona su http://pfed.lan2/admin/pfed/it/edit/company_profiles/22
         $val = $rows;
+        //dddx($val);
     } else {
         $related = $rows->getRelated();
     }
-
-    $_panel=null;
-    if($related!=null){
-        $_panel = Panel::make()->get($related);
-    }
+    //dddx([$rows->first(), $model->$name()->getModel()]);
+    $_panel = Panel::make()->get($related);
 @endphp
 
 
@@ -85,11 +86,11 @@
 
                 <select name="{{ $field_name }}[to][]" id="multiselect{{ $field_id }}_to" class="form-control"
                     size="8" multiple="multiple">
-                    @if($_panel!=null)
+                    {{-- altrimenti ti mette sia quelli con user_id null che con user_id --}}
+
                     @foreach ($val as $k => $v)
                         <option value="{{ $_panel->optionId($v) }}">{{ $_panel->optionLabel($v) }}</option>
                     @endforeach
-                    @endif
                 </select>
             </div>
         </div>
