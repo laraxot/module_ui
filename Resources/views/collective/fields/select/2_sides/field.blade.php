@@ -34,7 +34,6 @@
     }
     
     if ($rows instanceof \Illuminate\Database\Eloquent\Collection) {
-<<<<<<< HEAD
         //così funziona meglio
         $related = $rows->first() ?? $model->$name()->getModel();
     
@@ -46,27 +45,6 @@
     }
     //dddx([$rows->first(), $model->$name()->getModel()]);
     $_panel = Panel::make()->get($related);
-=======
-        $related = $rows->first();
-        /*
-        if($related==null){
-        dddx([
-            'name_dot'=>$name_dot,
-            '$field_options' => $field_options,
-            'rows'=>$rows,
-            'methods'=>get_class_methods($rows),
-            'related'=>$rows->first(),
-            ]);
-        }
-        */
-    } else {
-        $related = $rows->getRelated();
-    }
-    $_panel=null;
-    if($related!=null){
-        $_panel = Panel::make()->get($related);
-    }
->>>>>>> b469e3c (.)
 @endphp
 
 
@@ -109,15 +87,10 @@
                 <select name="{{ $field_name }}[to][]" id="multiselect{{ $field_id }}_to" class="form-control"
                     size="8" multiple="multiple">
                     {{-- altrimenti ti mette sia quelli con user_id null che con user_id --}}
-<<<<<<< HEAD
 
-=======
-                    @if($_panel!=null)
->>>>>>> b469e3c (.)
                     @foreach ($val as $k => $v)
                         <option value="{{ $_panel->optionId($v) }}">{{ $_panel->optionLabel($v) }}</option>
                     @endforeach
-                    @endif
                 </select>
             </div>
         </div>
