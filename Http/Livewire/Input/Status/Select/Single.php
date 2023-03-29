@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\UI\Http\Livewire\Input\Status\Select;
 
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Modules\Cms\Actions\GetViewAction;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Support\Renderable;
 use Modules\Xot\Contracts\ModelWithStatusContract;
 
 /**
@@ -34,11 +34,10 @@ class Single extends Component {
         $this->modelId = $model->getKey();
 
         $this->options = $options;
-        if (property_exists($model, 'status')) {
+
+        if (isset($model->status)) {
             $this->status = $model->status;
         }
-
-        // dddx($model->status);
     }
 
     public function changeStatus(): void {
@@ -67,6 +66,7 @@ class Single extends Component {
          * @phpstan-var view-string
          */
         $view = app(GetViewAction::class)->execute();
+
         $view_params = [
             'view' => $view,
         ];
