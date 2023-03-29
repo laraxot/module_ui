@@ -39,8 +39,11 @@
     } else {
         $related = $rows->getRelated();
     }
-    
-    $_panel = Panel::make()->get($related);
+
+    $_panel=null;
+    if($related!=null){
+        $_panel = Panel::make()->get($related);
+    }
 @endphp
 
 
@@ -82,7 +85,7 @@
 
                 <select name="{{ $field_name }}[to][]" id="multiselect{{ $field_id }}_to" class="form-control"
                     size="8" multiple="multiple">
-                    {{-- altrimenti ti mette sia quelli con user_id null che con user_id --}}
+                    @if($_panel!=null)
                     @foreach ($val as $k => $v)
                         <option value="{{ $_panel->optionId($v) }}">{{ $_panel->optionLabel($v) }}</option>
                     @endforeach
