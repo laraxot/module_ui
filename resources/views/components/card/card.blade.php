@@ -1,3 +1,4 @@
+@props(['tools'=>null])
 <div class="card">
     @if (isset($top))
         {!! $top !!}
