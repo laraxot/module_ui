@@ -60,9 +60,8 @@ class Verified extends Component {
         $row->contact_type = 'email';
         $row->value = $this->form_data['add_email'];
         $row->save();
-
-        Notification::route('mail', $row->value)
-            ->notify(new HtmlNotification(config('mail.from.address'), 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
+        
+        Notification::route('mail', $row->value)->notify(new HtmlNotification(config('mail.from.address'), 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
 
         $this->step = 3;
     }

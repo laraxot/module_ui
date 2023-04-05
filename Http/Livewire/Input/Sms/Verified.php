@@ -62,6 +62,7 @@ class Verified extends Component {
         $row->save();
 
         $n = new SmsNotification('', 'Verify Sms', 'Verification Code: '.$row->token);
+
         Notification::route('sms', $this->form_data['add_mobile'])->notify($n);
 
         $this->step = 3;

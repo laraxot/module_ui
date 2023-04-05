@@ -1,0 +1,85 @@
+Laravel Livewire makes building interactive web applications easy! Laravel Livewire has amazing docs but also an amazing community.
+
+Here are some tools you may not know about.
+
+Livewire dev tools
+Chrome and Firefox DevTools extension for debugging Livewire applications
+
+https://github.com/rw4lll/livewire-devtools
+
+AlpineJS dev tools
+Chrome/Firefox DevTools extension for debugging Alpine.js applications.
+
+https://github.com/alpine-collective/alpinejs-devtools
+
+Livewire Kit
+41 Laravel Livewire Components
+
+Ready-made. Download code and adapt to your project. Tailwind or Bootstrap.
+
+https://livewirekit.com/
+
+Livewire Demos
+Library of TALL stack Components. Directly plug these reusable components in your application.
+
+https://livewiredemos.com/
+
+Wire UI
+A simple, fast and elegant way to add blade components made with alpine.js and tailwind, ready to use, enjoy the ease. Livewire components and Tall Stack components
+
+https://livewire-wireui.com/
+
+Wire-elements
+Components crafted with Livewire.
+
+https://wire-elements.dev/
+
+Raycast — Livewire docs
+Quickly search through Laravel Livewire documentation and open it in the browser
+
+https://www.raycast.com/tafhyseni/laravel-livewire
+
+Packages
+Laravel Livewire Wizard
+
+This package offers lightweight Livewire components that allow you to easily build a wizard. With “wizard” /multi-step process in which each step has its own screen.
+
+https://github.com/spatie/laravel-livewire-wizard
+
+Filament
+Filament is a collection of tools for rapidly building beautiful TALL stack apps
+
+https://filamentphp.com
+
+Laravel AdminTW
+Laravel AdminTW is minimal Livewire theme styled with TailwindCSS.
+
+Laravel AdminTW supports both light and dark mode based on the users OS.
+
+Provided are blade and Laravel Livewire components for common layout / UI elements and a complete test suite (Pest PHP).
+
+https://laraveladmintw.com
+
+Laravel Livewire Tables
+A dynamic Laravel Livewire component for data tables.
+
+https://github.com/rappasoft/laravel-livewire-tables
+
+Laravel Modules with Livewire
+Using [Laravel Livewire]( github.com/livewire/livewire) in [Laravel Modules]( github.com/nWidart/laravel-modules) package with automatically registered livewire components for every modules.
+
+https://github.com/mhmiton/laravel-modules-livewire
+
+Livewire — a Statamic addon
+A third-party Laravel Livewire integration for Statamic.
+
+https://statamic.com/addons/jonassiewertsen/livewire
+
+Courses
+https://codecourse.com/subjects/laravel-livewire https://laracasts.com/topics/laravel-livewire
+
+Practical Laravel Livewire from Scratch
+https://laraveldaily.com/course/livewire-for-beginners
+
+Advanced Laravel Livewire
+https://laraveldaily.com/course/livewire-advanced
