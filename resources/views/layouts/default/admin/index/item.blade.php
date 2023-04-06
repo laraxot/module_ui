@@ -31,7 +31,7 @@ return !in_array($item->type,['Password']);
 
             @if ($loop->first)
                 @foreach ($row_panel->getActions('item') as $act)
-                    {!! $act->btnHtml() !!}
+                    <x-button.action :action="$act" />
                 @endforeach
             @endif
         </td>

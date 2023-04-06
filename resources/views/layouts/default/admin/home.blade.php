@@ -6,7 +6,7 @@
 
     @foreach ($_panel->getActions('item') as $act)
         <x-button.action :action="$act" />
-        {{-- {!! $act->btnHtml() !!} --}}
+        {{-- <x-button.action :action="$act" /> --}}
     @endforeach
 
     {{-- sono le azioni di quel definito Modulo percio' item }

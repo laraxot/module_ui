@@ -46,13 +46,13 @@
                                             </button>
                                             <div class="dropdown-menu">
                                                 @foreach ($row_panel->getActions('item') as $act)
-                                                    {!! $act->btnHtml() !!}
+                                                    <x-button.action :action="$act" />
                                                 @endforeach
                                             </div>
                                         </div>
                                     @else
                                         @foreach ($row_panel->getActions('item') as $act)
-                                            {!! $act->btnHtml() !!}
+                                            <x-button.action :action="$act" />
                                         @endforeach
                                         {{--
                                         @foreach ($row_panel->itemActionModals() as $act)
