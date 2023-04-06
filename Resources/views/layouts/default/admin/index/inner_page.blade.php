@@ -8,3 +8,8 @@
 </div>
 @endif
 --}}
+{{--
+<button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Tooltip on top">
+  Tooltip on top
+</button>
+--}}
