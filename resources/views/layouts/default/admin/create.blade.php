@@ -14,7 +14,8 @@
                 {!! Theme::inputHtml($field, $row) !!}
             @endforeach
         </div>
-        {{ Form::bsSubmit('Salva') }}
+        {{-- {{ Form::bsSubmit('Salva') }} --}}
+        <x-button type="submit">Salva</x-button>
         {!! Form::close() !!}
     </x-section>
 @endsection

@@ -22,9 +22,12 @@
         <h4>{{ $name }}</h4>
     </legend> --}}
 
-    <button type="button" class="btn btn-primary" id="btn-rules" onclick="$('#rules').toggleClass('d-none');">
+    {{-- <button type="button" class="btn btn-primary" id="btn-rules" onclick="$('#rules').toggleClass('d-none');">
         Add Rules
-    </button>
+    </button> --}}
+    <x-button type="button" id="btn-rules" onclick="$('#rules').toggleClass('d-none');">
+        Add Rules
+    </x-button>
 
     <div class="row" style="border:1px solid  dark;">
         {{-- must toggle the rules with id = rules --}}
