@@ -29,8 +29,6 @@
         $val = [];
     }
     
-   // dd([$model, $name_dot,$rows??'niente']);
-    /*
     if ($rows instanceof \Illuminate\Database\Eloquent\Collection) {
         //così funziona meglio
         $related = $rows->first() ?? $model->$name()->getModel();
@@ -39,12 +37,12 @@
         $val = $rows;
         //dddx($val);
     } else {
-        $related = $rows?->getRelated()??null;
+        $related = $rows?->getRelated() ?? null;
     }
-
-    $_panel = Panel::make()->get($related); 
-    */
-    //dddx($field);
+    $_panel = null;
+    if ($related != null) {
+        $_panel = Panel::make()->get($related);
+    }
 @endphp
 
 
@@ -87,13 +85,11 @@
                 <select name="{{ $field_name }}[to][]" id="multiselect{{ $field_id }}_to" class="form-control"
                     size="8" multiple="multiple">
                     {{-- altrimenti ti mette sia quelli con user_id null che con user_id --}}
-
-                    @foreach ($val as $k => $v)
-                        {{--
-                        <option value="{{ $_panel->optionId($v) }}">{{ $_panel->optionLabel($v) }}</option>
-                        --}}
-                        
-                    @endforeach
+                    @if ($_panel != null)
+                        @foreach ($val as $k => $v)
+                            <option value="{{ $_panel->optionId($v) }}">{{ $_panel->optionLabel($v) }}</option>
+                        @endforeach
+                    @endif
                 </select>
             </div>
         </div>
