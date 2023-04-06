@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\UI\Datas;
 
+use Modules\Cms\Services\RouteService;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 
@@ -80,5 +81,20 @@ class FieldData extends Data {
 
     public function getInputClass(): string {
         return 'form-control';
+    }
+
+    /**
+     * @return DataCollection<FieldData>
+     */
+    public function getFields(?string $act = null): DataCollection {
+        if (null == $act) {
+            $act = RouteService::getAct();
+        }
+
+        return $this->fields->filter(
+            function ($item) use ($act) {
+                return ! in_array($act, $item->except);
+            }
+        );
     }
 }
