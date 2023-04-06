@@ -30,7 +30,7 @@
     }
     
    // dd([$model, $name_dot,$rows??'niente']);
-    
+    /*
     if ($rows instanceof \Illuminate\Database\Eloquent\Collection) {
         //così funziona meglio
         $related = $rows->first() ?? $model->$name()->getModel();
@@ -42,9 +42,9 @@
         $related = $rows?->getRelated()??null;
     }
 
-    dd($model);
-
-    $_panel = Panel::make()->get($related);
+    $_panel = Panel::make()->get($related); 
+    */
+    //dddx($field);
 @endphp
 
 
@@ -89,7 +89,10 @@
                     {{-- altrimenti ti mette sia quelli con user_id null che con user_id --}}
 
                     @foreach ($val as $k => $v)
+                        {{--
                         <option value="{{ $_panel->optionId($v) }}">{{ $_panel->optionLabel($v) }}</option>
+                        --}}
+                        
                     @endforeach
                 </select>
             </div>
