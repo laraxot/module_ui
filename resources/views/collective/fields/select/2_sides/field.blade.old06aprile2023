@@ -19,17 +19,19 @@
     $model = Form::getModel();
     
     $name = $field->name;
+    
     $field_id = str()->slug($name, '_');
     $field_name = dottedToBrackets($name);
     $name_dot = bracketsToDotted($name);
+    //dddx(Arr::get($model, $name_dot));
+    // $rows = $model->$name();
     $rows = Arr::get($model, $name_dot);
+    
     $val = $field->value;
     
     if (!is_iterable($val)) {
         $val = [];
     }
-    
-   // dd([$model, $name_dot,$rows??'niente']);
     
     if ($rows instanceof \Illuminate\Database\Eloquent\Collection) {
         //così funziona meglio
@@ -39,11 +41,9 @@
         $val = $rows;
         //dddx($val);
     } else {
-        $related = $rows?->getRelated()??null;
+        $related = $rows->getRelated();
     }
-
-    dd($model);
-
+    //dddx([$rows->first(), $model->$name()->getModel()]);
     $_panel = Panel::make()->get($related);
 @endphp
 
