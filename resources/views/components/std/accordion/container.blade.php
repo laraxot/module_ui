@@ -1,4 +1,4 @@
-<div {{ $attributes->merge($attrs) }} id="accordionExample">
+<div {{ $attributes->merge($attrs) }} id="{{ $id }}">
     <x-std tpl="accordion.item">
         <x-slot name="id">{{ $id }}</x-slot>
         <x-slot name="header">
