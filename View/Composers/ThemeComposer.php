@@ -31,14 +31,20 @@ class ThemeComposer {
 
         return $content;
     }
-
+    /*
     public function languages() {
         $langs = config('laravellocalization.supportedLocales');
         $langs = collect($langs)->map(
             function ($item, $k) {
+                $reg = collect(explode('_', $item['regional']))->first();
+                if ('en' == $reg) {
+                    $reg = 'gb';
+                }
+
                 return [
                     'id' => $k,
                     'name' => $item['name'],
+                    'flag' => '<div class="iti__flag-box"><div class="iti__flag iti__'.$reg.'"></div></div>',
                 ];
             }
         );
@@ -62,4 +68,5 @@ class ThemeComposer {
 
         return $lang[$field];
     }
+    */
 }
