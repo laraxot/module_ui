@@ -45,7 +45,10 @@
                 endDate: end,
                 ranges: {
                     'Today': [moment().set('hour', 0).set('minute', 0).set('second', 0), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment()],
+                    'Yesterday': [moment().subtract(1, 'days').set('hour', 0).set('minute', 0).set('second',
+                        0), moment().subtract(1, 'days').set('hour', 23).set('minute', 59).set(
+                        'second',
+                        59)],
                     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
                     'This Month': [moment().startOf('month'), moment()],
