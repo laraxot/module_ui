@@ -2,7 +2,9 @@
     <ul class="nav nav-tabs overflow-x border-0">
         @foreach ($steps as $step)
             <li class="nav-item">
-                <span href="#" class="nav-link {{ $step->isCurrent() ? 'active' : '' }}">{{ $step->label }}</span>
+                <span href="#" class="nav-link {{ $step->isCurrent() ? 'active' : '' }}">
+                    {{ $step->label }}
+                </span>
             </li>
         @endforeach
     </ul>
