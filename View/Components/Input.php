@@ -8,35 +8,48 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
 use Modules\Cms\Actions\GetViewAction;
+use Modules\Cms\Services\PanelService;
 use Modules\UI\Actions\GetCollectiveViewByType;
 
 /**
  * Undocumented class.
  */
-class Input extends Component
-{
+class Input extends Component {
     public array $attrs = [];
     public string $type = 'text';
     public string $name = 'empty-name';
+    // public string $name_dot = 'empty.name';
     public ?array $options = [];
     // public string $tpl;
     public string $collective_view;
+    public string $tradKey;
 
     /**
      * ---.
      */
-    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = [])
-    {
-
+    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = []) {
         $this->name = $name;
         $this->collective_view = app(GetCollectiveViewByType::class)->execute($type); // ui::collective.fields.string.field
+
+        $this->tradKey = 'pub_theme::txt';
+        if (class_exists(PanelService::class)) {
+            $panel = PanelService::make()->getRequestPanel();
+            if (null !== $panel) {
+                $this->tradKey = $panel->getTradMod();
+            }
+        }
 
         $this->type = $type;
 
         $this->options = $options;
-        $this->attrs['name'] = dottedToBrackets($this->name);
+        $name_dot = dottedToBrackets($this->name);
+        $this->attrs['name'] = $name_dot;
         $this->attrs['class'] = 'form-control';
-        $this->attrs['wire:model.lazy'] = 'form_data.' . $name;
+        $this->attrs['wire:model.lazy'] = 'form_data.'.$name;
+        $trans_key = $this->tradKey.'.'.$name_dot.'.placeholder';
+        $trans = trans($trans_key);
+        $this->attrs['placeholder'] = ($trans != $trans_key) ? $trans : $name_dot;
+
         if (is_array($attributes) && count($attributes) > 0) {
             $this->attrs = array_merge($this->attrs, $attributes);
         }
@@ -68,8 +81,7 @@ class Input extends Component
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         // esempio Modules/UI/Resources/views/components/input/select/field.blade.php
         /**
          * @phpstan-var view-string
