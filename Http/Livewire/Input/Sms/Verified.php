@@ -9,7 +9,6 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Modules\Cms\Actions\GetViewAction;
 use Modules\LU\Services\ProfileService;
@@ -50,7 +49,7 @@ class Verified extends Component {
     }
 
     public function verify_sms(): void {
-        $this->form_data['confirm_token'] = Str::random(6);
+        $this->form_data['confirm_token'] = rand(10000, 99999);
 
         $row = new Contact();
         $row->token = $this->form_data['confirm_token'];
@@ -82,6 +81,7 @@ class Verified extends Component {
             $this->updateFormData();
 
             session()->flash('message', 'Sms Verified');
+
             $this->step = 1;
         } else {
             session()->flash('status_error', 'Sms NOT Verified');

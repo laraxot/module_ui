@@ -9,7 +9,6 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Str;
 use Livewire\Component;
 use Modules\Cms\Actions\GetViewAction;
 use Modules\LU\Services\ProfileService;
@@ -50,7 +49,7 @@ class Verified extends Component {
     }
 
     public function verify_email(): void {
-        $this->form_data['confirm_token'] = Str::random(6);
+        $this->form_data['confirm_token'] = rand(10000, 99999);
 
         $row = new Contact();
         $row->token = $this->form_data['confirm_token'];
@@ -60,7 +59,7 @@ class Verified extends Component {
         $row->contact_type = 'email';
         $row->value = $this->form_data['add_email'];
         $row->save();
-        
+
         Notification::route('mail', $row->value)->notify(new HtmlNotification(config('mail.from.address'), 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
 
         $this->step = 3;
