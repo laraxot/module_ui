@@ -58,7 +58,7 @@ class Verified extends Component {
     public function verify_email(): void {
         $this->form_data['confirm_token'] = rand(10000, 99999);
 
-        if (Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->firstWhere('value', $this->form_data['add_email'])) {
+        if (Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', '!=', null)->firstWhere('value', $this->form_data['add_email'])) {
             $this->askForConfirmation(
                 callback: function () {
                 },

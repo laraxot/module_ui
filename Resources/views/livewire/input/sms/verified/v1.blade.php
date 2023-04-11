@@ -18,19 +18,19 @@
 
     @if ($step === 2)
         <div id="add_sms_form">
-            <h2>Add Mobile Number</h2>
+            {{-- <h2>AddMobileNumber</h2> --}}
             <div class="input-group mb-3">
                 <input wire:model.lazy="form_data.add_mobile" type="text" class="form-control"
                     placeholder="Example: +39395566771" aria-label="Mobile Number" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button wire:click="verify_sms()" class="btn btn-success" type="button">Verify</button>
+                    <button wire:click="verify_sms()" class="btn btn-success" type="button">Verifica</button>
                 </div>
             </div>
         </div>
     @endif
 
     @if ($step === 3)
-        <h2>Write the code that you received via sms</h2>
+        <h3>Inserisci il codice che hai ricevuto via sms</h3>
         <div class="input-group mb-3">
             <input wire:model.lazy="form_data.token" type="text" class="form-control" placeholder="Verification Code"
                 aria-label="Verification Code" aria-describedby="basic-addon2">
