@@ -14,13 +14,16 @@ use Modules\Cms\Actions\GetViewAction;
 use Modules\LU\Services\ProfileService;
 use Modules\Notify\Models\Contact;
 use Modules\Notify\Notifications\SmsNotification;
+use WireElements\Pro\Concerns\InteractsWithConfirmationModal;
 
 /**
  * Class Arr // Array is reserved.
  */
 class Verified extends Component {
+    use InteractsWithConfirmationModal;
+
     public array $form_data = [];
-    public int $step = 1;
+    public int $step = 2;
     public ?string $tpl = '';
     public string $user_id = '';
     public Collection $my_validated_sms_addresses;
@@ -39,6 +42,10 @@ class Verified extends Component {
         $this->mySmsAddresses();
     }
 
+    public static function getName() {
+        return 'input.sms.verified';
+    }
+
     public function mySmsAddresses(): void {
         $this->my_validated_sms_addresses = Contact::where('user_id', $this->user_id)->where('contact_type', 'mobile')->where('verified_at', '!=', null)->get();
         // Debugbar::info($this->my_validated_email_addresses);
@@ -51,6 +58,19 @@ class Verified extends Component {
     public function verify_sms(): void {
         $this->form_data['confirm_token'] = rand(10000, 99999);
 
+        if (Contact::where('user_id', $this->user_id)->where('contact_type', 'mobile')->firstWhere('value', $this->form_data['add_mobile'])) {
+            $this->askForConfirmation(
+                callback: function () {
+                },
+                prompt: [
+                    'title' => __('Attenzione!'),
+                    'message' => __('Non puoi aggiungere un numero già esistente'),
+                    'confirm' => __('Annulla'),
+                ],
+            );
+
+            return;
+        }
         $row = new Contact();
         $row->token = $this->form_data['confirm_token'];
         $row->model_type = 'profile';
@@ -73,16 +93,18 @@ class Verified extends Component {
         //         73     Called 'isEmpty' on Laravel collection, but could have been retrieved as a query.
         if (false == $is_valid_contact->isEmpty()) {
             $row = $is_valid_contact->first();
+
+            $row = $is_valid_contact->first();
             $row->verified_at = now();
             $row->save();
 
-            $this->form_data['mobile'] = $this->form_data['add_mobile'];
-
+            $this->form_data['sms'] = $this->form_data['add_mobile'];
+            // dd($this->form_data['mobile']);
             $this->updateFormData();
 
             session()->flash('message', 'Sms Verified');
 
-            $this->step = 1;
+            $this->step = 2;
         } else {
             session()->flash('status_error', 'Sms NOT Verified');
         }

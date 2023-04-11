@@ -20,7 +20,7 @@ use Modules\Notify\Notifications\HtmlNotification;
  */
 class Verified extends Component {
     public array $form_data = [];
-    public int $step = 1;
+    public int $step = 2;
     public ?string $tpl = '';
     public string $user_id = '';
     public Collection $my_validated_email_addresses;
@@ -78,7 +78,7 @@ class Verified extends Component {
 
             session()->flash('message', 'Email Verified');
 
-            $this->step = 1;
+            $this->step = 2;
         } else {
             session()->flash('status_error', 'Email NOT Verified');
         }
