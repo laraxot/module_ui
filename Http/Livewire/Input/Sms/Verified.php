@@ -64,8 +64,9 @@ class Verified extends Component {
                 },
                 prompt: [
                     'title' => __('Attenzione!'),
-                    'message' => __('Non puoi aggiungere un numero già esistente'),
-                    'confirm' => __('Annulla'),
+                    'message' => __('Non puoi aggiungere un numero di telefono già esistente'),
+                    'confirm' => __('Ok'),
+                    'cancel' => __('Annulla'),
                 ],
             );
 
@@ -99,7 +100,7 @@ class Verified extends Component {
             $row->save();
 
             $this->form_data['sms'] = $this->form_data['add_mobile'];
-            // dd($this->form_data['mobile']);
+
             $this->updateFormData();
 
             session()->flash('message', 'Sms Verified');

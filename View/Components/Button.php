@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\UI\View\Components;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
-use Modules\Cms\Actions\GetStyleClassByViewAction;
 use Modules\Cms\Actions\GetViewAction;
+use Modules\Cms\Services\PanelService;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Cms\Actions\GetStyleClassByViewAction;
 
 class Button extends Component {
     public string $tpl;
@@ -16,6 +17,8 @@ class Button extends Component {
     public array $attrs;
     public ?string $url = '#';
     public string $view;
+
+    public string $tradKey;
 
     /**
      * Create the component instance.
@@ -37,6 +40,14 @@ class Button extends Component {
         $this->attrs['icon'] = isset($attrs['icon']) ? $attrs['icon'] : null;
         // $icon_class = inAdmin() ? 'adm_theme::styles.button.icon.'.$type : 'pub_theme::styles.button.icon.'.$type;
         // $this->attrs['icon'] = config($icon_class, 'fas fa-angle-double-left');
+
+        $this->tradKey = 'pub_theme::txt';
+        if (class_exists(PanelService::class)) {
+            $panel = PanelService::make()->getRequestPanel();
+            if (null !== $panel) {
+                $this->tradKey = $panel->getTradMod();
+            }
+        }
     }
 
     /**

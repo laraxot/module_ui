@@ -14,11 +14,14 @@ use Modules\Cms\Actions\GetViewAction;
 use Modules\LU\Services\ProfileService;
 use Modules\Notify\Models\Contact;
 use Modules\Notify\Notifications\HtmlNotification;
+use WireElements\Pro\Concerns\InteractsWithConfirmationModal;
 
 /**
  * Class Arr // Array is reserved.
  */
 class Verified extends Component {
+    use InteractsWithConfirmationModal;
+
     public array $form_data = [];
     public int $step = 2;
     public ?string $tpl = '';
@@ -39,6 +42,10 @@ class Verified extends Component {
         $this->myEmailAddresses();
     }
 
+    public static function getName() {
+        return 'input.email.verified';
+    }
+
     public function myEmailAddresses(): void {
         $this->my_validated_email_addresses = Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', '!=', null)->get();
         // Debugbar::info($this->my_validated_email_addresses);
@@ -50,6 +57,21 @@ class Verified extends Component {
 
     public function verify_email(): void {
         $this->form_data['confirm_token'] = rand(10000, 99999);
+
+        if (Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->firstWhere('value', $this->form_data['add_email'])) {
+            $this->askForConfirmation(
+                callback: function () {
+                },
+                prompt: [
+                    'title' => __('Attenzione!'),
+                    'message' => __('Non puoi aggiungere un indirizzo email già esistente'),
+                    'confirm' => __('Ok'),
+                    'cancel' => __('Annulla'),
+                ],
+            );
+
+            return;
+        }
 
         $row = new Contact();
         $row->token = $this->form_data['confirm_token'];
