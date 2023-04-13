@@ -35,10 +35,9 @@ class Freeze extends Component {
         $this->row = $row;
 
         try {
-            /*if (! \in_array($field->name, ['profile', 'roles'])) {
-                dddx($field->name);
-            }*/
-
+            // if (! in_array($field->name, ['id', 'service'])) {
+            //    dddx($this->row->getTranslation('name', 'it'));
+            // }
             $this->value = $this->row->{$field->name} ?? Arr::get($row, $field->getNameDot());
         } catch (\Exception $e) {
             dddx(['field' => $this->field, 'row' => $this->row, 'exception' => $e]);
@@ -93,7 +92,7 @@ class Freeze extends Component {
         if (is_string($this->value) && class_exists($this->value)) {
             // && $this->value instanceof \Spatie\ModelStates\State
             $reflection_class = new \ReflectionClass($this->value);
-            $parent=$reflection_class?->getParentClass();
+            $parent = $reflection_class?->getParentClass();
 
             // dddx([
             //     'value_type' => $value_type,
