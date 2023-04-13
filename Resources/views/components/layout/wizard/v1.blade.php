@@ -30,30 +30,31 @@
     <x-flash-message />
 
 
-    <nav aria-label="Page navigation example">
+    <nav aria-label="wizard navigation">
         <ul class="pagination">
             @if ($hasPrevious)
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous" wire:click="previousStep">
+                    <a class="page-link" href="#" aria-label="Previous" wire:click="previousStep()">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
             @else
                 <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Previous" >
+                    <a class="page-link" href="#" aria-label="Previous">
                         <span aria-hidden="true">&nbsp;</span>
                     </a>
                 </li>
             @endif
             @if ($hasNext)
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next" wire:click="nextStep">
+                    <a class="page-link" href="#" aria-label="Next"
+                        wire:click="{{ method_exists($this, 'goNextStep') ? 'goNextStep' : 'nextStep' }}()">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
             @else
                 <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Next" >
+                    <a class="page-link" href="#" aria-label="Next">
                         <span aria-hidden="true">&nbsp;</span>
                     </a>
                 </li>
