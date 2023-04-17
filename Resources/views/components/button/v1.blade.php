@@ -36,7 +36,10 @@
     </div>
     @endif
     --}}
-    <div wire:loading>
+    @php
+        $target = $attributes->wire('click')->value();
+    @endphp
+    <div wire:loading wire:target="{{ $target }}">
         <x-spinner />
     </div>
 @endif
