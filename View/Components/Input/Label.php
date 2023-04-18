@@ -72,12 +72,16 @@ class Label extends Component {
         $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($view);
 
         if (isset($attributes) && is_object($attributes)) {
+            /*75     Call to an undefined method object::get().
+            76     Call to an undefined method object::get().
+            77     Call to an undefined method object::get().
+            */
             $label = $attributes->get('label');
             $name = $attributes->get('name');
             $this->attrs['for'] = $attributes->get('id');
         }
 
-        if (isset($name) && !isset($label)) {
+        if (isset($name) && ! isset($label)) {
             $trans_key = $this->tradKey.'.'.$name.'.label';
             $label = trans($trans_key);
             // if ($trans_key == $name_lang) {
