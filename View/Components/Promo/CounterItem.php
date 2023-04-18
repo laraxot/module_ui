@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\UI\View\Components\Promo;
 
 use Illuminate\View\Component;
+use Modules\Cms\Actions\GetViewAction;
 
 /**
  * Undocumented class.
@@ -29,8 +30,9 @@ class CounterItem extends Component {
     public function render() {
         $view = app(GetViewAction::class)->execute();
         $view_params = [
-            'view'=>$view
+            'view' => $view,
         ];
-        return view($view,$view_params );
+
+        return view($view, $view_params);
     }
 }
