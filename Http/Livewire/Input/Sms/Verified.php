@@ -19,12 +19,13 @@ use WireElements\Pro\Concerns\InteractsWithConfirmationModal;
 /**
  * Class Arr // Array is reserved.
  */
-class Verified extends Component {
+class Verified extends Component
+{
     use InteractsWithConfirmationModal;
 
     public array $form_data = [];
     public int $step = 2;
-    public ?string $tpl = '';
+    public string $tpl;
     public string $user_id = '';
     public Collection $my_validated_sms_addresses;
     public array $attrs = [];
@@ -34,28 +35,33 @@ class Verified extends Component {
      *
      * @return void
      */
-    public function mount(?string $tpl = 'v1', ?array $attrs = []) {
+    public function mount(string $tpl = 'v1')
+    {
         $this->user_id = (string) Auth::id();
-        $this->form_data = (array) session()->get('form_data') ?? [];
+        $this->form_data = (array) session()->get('form_data', []);
         $this->tpl = $tpl;
         $this->mySmsAddresses();
     }
 
-    public static function getName(): string {
+    public static function getName(): string
+    {
         return 'input.sms.verified';
     }
 
-    public function mySmsAddresses(): void {
+    public function mySmsAddresses(): void
+    {
         $this->my_validated_sms_addresses = Contact::where('user_id', $this->user_id)->where('contact_type', 'mobile')->where('verified_at', '!=', null)->get();
         // Debugbar::info($this->my_validated_email_addresses);
     }
 
-    public function updateFormData(): void {
+    public function updateFormData(): void
+    {
         $this->emit('updateFormData', $this->form_data);
     }
 
-    public function verify_sms(): void {
-        $this->form_data['confirm_token'] = rand(10000, 99999);
+    public function verify_sms(): void
+    {
+        $this->form_data['confirm_token'] = strval(rand(10000, 99999));
 
         if (Contact::where('user_id', $this->user_id)->where('contact_type', 'mobile')->where('verified_at', '!=', null)->firstWhere('value', $this->form_data['add_mobile'])) {
             $this->askForConfirmation(
@@ -74,8 +80,8 @@ class Verified extends Component {
         $row = new Contact();
         $row->token = (string) $this->form_data['confirm_token'];
         $row->model_type = 'profile';
-        $row->model_id = ProfileService::make()->getProfile()?->id;
-        $row->user_id = $this->user_id;
+        $row->model_id = strval(ProfileService::make()->getProfile()->id);
+        $row->user_id = (string) $this->user_id;
         $row->contact_type = 'mobile';
         $row->value = $this->form_data['add_mobile'];
         $row->save();
@@ -87,7 +93,13 @@ class Verified extends Component {
         $this->step = 3;
     }
 
-    public function verify_code() {
+    /**
+     * Undocumented function.
+     *
+     * @return void
+     */
+    public function verify_code()
+    {
         $is_valid_contact = Contact::where('user_id', $this->user_id)->where('contact_type', 'mobile')->where('verified_at', null)->where('value', $this->form_data['add_mobile'])->where('token', $this->form_data['token'] ?? '')->get();
 
         //         73     Called 'isEmpty' on Laravel collection, but could have been retrieved as a query.
@@ -95,6 +107,10 @@ class Verified extends Component {
             $row = $is_valid_contact->first();
 
             $row = $is_valid_contact->first();
+            if (null == $row) {
+                throw new \Exception('['.__LINE__.']['.__FILE__.']');
+            }
+            // Access to an undefined property Modules\Notify\Models\Contact::$verified_at
             $row->verified_at = now();
             $row->save();
 
@@ -111,14 +127,16 @@ class Verified extends Component {
         $this->mySmsAddresses();
     }
 
-    public function add() {
+    public function add(): void
+    {
         $this->step = 2;
     }
 
     /**
      * Undocumented function.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */

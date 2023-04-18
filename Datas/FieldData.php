@@ -8,7 +8,8 @@ use Modules\Cms\Services\RouteService;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 
-class FieldData extends Data {
+class FieldData extends Data
+{
     public string $name;
     public ?string $label = null;
     public ?string $name_dot = null;
@@ -58,13 +59,15 @@ class FieldData extends Data {
     }
     */
 
-    public function getNameDot(): string {
+    public function getNameDot(): string
+    {
         $this->name_dot = bracketsToDotted($this->name);
 
         return $this->name_dot;
     }
 
-    public function getLabel(): string {
+    public function getLabel(): string
+    {
         if (null !== $this->label) {
             return $this->label;
         }
@@ -82,20 +85,32 @@ class FieldData extends Data {
         return $this->name;
     }
 
-    public function getInputClass(): string {
+    public function getInputClass(): string
+    {
         return 'form-control';
     }
 
     /**
      * @return DataCollection<FieldData>
      */
-    public function getFields(?string $act = null): DataCollection {
+    public function getFields(?string $act = null): DataCollection
+    {
         if (null == $act) {
             $act = RouteService::getAct();
         }
+        if (null == $this->fields) {
+            throw new \Exception('['.__LINE__.']['.__FILE__.']');
+        }
 
         return $this->fields->filter(
+            /**
+             * @param FieldData $item
+             */
             function ($item) use ($act) {
+                if (! $item instanceof FieldData) {
+                    throw new \Exception('['.__LINE__.']['.__FILE__.']');
+                }
+
                 return ! in_array($act, $item->except);
             }
         );
