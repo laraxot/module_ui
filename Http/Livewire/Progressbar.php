@@ -59,6 +59,11 @@ class Progressbar extends Component {
         }
     }
 
+    /**
+     * Undocumented function.
+     *
+     * @return mixed
+     */
     public function complete() {
         if ('true' === $this->autocomplete && '' != $this->onComplete) {
             return $this->{$this->onComplete}();
