@@ -21,7 +21,7 @@ class Spatie extends Component {
         $this->name = $name;
         $this->tpl = $tpl;
         $icon = '';
-        $sort = (string) request('sort', '');
+        $sort = strval(request('sort', ''));
         $sort_by = $sort;
         $order = 'asc';
         if (Str::startsWith($sort_by, '-')) {

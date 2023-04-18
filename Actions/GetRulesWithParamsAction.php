@@ -33,7 +33,7 @@ class GetRulesWithParamsAction {
                     if (is_int($start)) {
                         $comment = substr((string) $method->getDocComment(), $start, $end - $start);
                         $comment = preg_replace('/\s\s+/', ' ', $comment);
-                        $comment = str_replace('* ', '', $comment);
+                        $comment = str_replace('* ', '', (string) $comment);
                         $comment = trim($comment);
                     }
 

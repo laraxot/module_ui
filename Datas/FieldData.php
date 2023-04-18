@@ -71,7 +71,10 @@ class FieldData extends Data {
         $trans_key = 'pub_theme::txt.'.$this->name.'.label';
         $trans = trans($trans_key);
         if ($trans != $trans_key) {
-            $this->label = (string) $trans;
+            if (! is_string($trans)) {
+                throw new \Exception('['.__LINE__.']['.__FILE__.']');
+            }
+            $this->label = $trans;
 
             return $trans;
         }

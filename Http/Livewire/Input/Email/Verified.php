@@ -42,7 +42,7 @@ class Verified extends Component {
         $this->myEmailAddresses();
     }
 
-    public static function getName() {
+    public static function getName(): string {
         return 'input.email.verified';
     }
 

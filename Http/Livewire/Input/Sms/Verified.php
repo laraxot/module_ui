@@ -35,14 +35,13 @@ class Verified extends Component {
      * @return void
      */
     public function mount(?string $tpl = 'v1', ?array $attrs = []) {
-        // non sapevo in che altro modo passarlo
         $this->user_id = (string) Auth::id();
         $this->form_data = (array) session()->get('form_data') ?? [];
         $this->tpl = $tpl;
         $this->mySmsAddresses();
     }
 
-    public static function getName() {
+    public static function getName(): string {
         return 'input.sms.verified';
     }
 
@@ -73,9 +72,9 @@ class Verified extends Component {
             return;
         }
         $row = new Contact();
-        $row->token = $this->form_data['confirm_token'];
+        $row->token = (string) $this->form_data['confirm_token'];
         $row->model_type = 'profile';
-        $row->model_id = ProfileService::make()->getProfile()->id;
+        $row->model_id = ProfileService::make()->getProfile()?->id;
         $row->user_id = $this->user_id;
         $row->contact_type = 'mobile';
         $row->value = $this->form_data['add_mobile'];
