@@ -8,44 +8,47 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Concerns\ValidatesAttributes;
 use Spatie\QueueableAction\QueueableAction;
 
-class GetRulesWithParamsAction {
+class GetRulesWithParamsAction
+{
     use QueueableAction;
 
-    public function execute(): array {
+    public function execute(): array
+    {
         $validatorClass = new \ReflectionClass(ValidatesAttributes::class);
 
         $r = collect($validatorClass->getMethods(\ReflectionMethod::IS_PUBLIC))
             ->filter(function ($method) {
                 return Str::startsWith($method->name, 'validate');
             })
-            ->map(function ($method) {
-                // $param_names = collect($method->getParameters())->pluck('name', 'name')->except(['attribute', 'value']);
+            ->map(
+                function ($method) {
+                    // $param_names = collect($method->getParameters())->pluck('name', 'name')->except(['attribute', 'value']);
 
-                $method_name = str_replace('validate_', '', Str::snake($method->name));
+                    $method_name = str_replace('validate_', '', Str::snake($method->name));
 
-                $params = $this->getParamsType($method_name);
+                    $params = $this->getParamsType($method_name);
 
-                if (null != $params) {
-                    $start = strpos((string) $method->getDocComment(), 'Validate');
-                    $end = strpos((string) $method->getDocComment(), '@');
+                    if (null != $params) {
+                        $start = strpos((string) $method->getDocComment(), 'Validate');
+                        $end = strpos((string) $method->getDocComment(), '@');
 
-                    $comment = '';
-                    if (is_int($start)) {
-                        $comment = substr((string) $method->getDocComment(), $start, $end - $start);
-                        $comment = preg_replace('/\s\s+/', ' ', $comment);
-                        $comment = str_replace('* ', '', (string) $comment);
-                        $comment = trim($comment);
+                        $comment = '';
+                        if (is_int($start)) {
+                            $comment = substr((string) $method->getDocComment(), $start, $end - $start);
+                            $comment = preg_replace('/\s\s+/', ' ', $comment);
+                            $comment = str_replace('* ', '', (string) $comment);
+                            $comment = trim($comment);
+                        }
+
+                        return [
+                            'name' => $method_name,
+                            'comment' => $comment,
+                            'params' => $params,
+                        ];
                     }
-
-                    return [
-                        'name' => $method_name,
-                        'comment' => $comment,
-                        'params' => $params,
-                    ];
-                }
-            })->filter(function ($v) {
-                return null !== $v;
-            })->toArray();
+                })->filter(function ($v) {
+                    return null !== $v;
+                })->toArray();
 
         // dd($r);
 
@@ -55,7 +58,8 @@ class GetRulesWithParamsAction {
     /**
      * @return array|null
      */
-    public function getParamsType(string $method_name) {
+    public function getParamsType(string $method_name)
+    {
         $parameters = [
             'accepted' => [''],
             'active_url' => [''],
