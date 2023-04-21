@@ -102,7 +102,7 @@ class Model extends Component
          * controllo che non vengano erroneamente importati contatti con tutti campi null.
          */
         $rows = $rows->filter(
-            function ($item) {
+            function (Collection $item) {
                 /*if (! ($item instanceof Collection)) {
                     throw new \InvalidArgumentException('Il parametro $item non è una collezione');
                 }*/
