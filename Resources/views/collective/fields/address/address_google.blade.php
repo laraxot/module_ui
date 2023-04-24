@@ -11,7 +11,7 @@ if (isset($field['value']) && (is_array($field['value']) || is_object($field['va
     <label>{!! $field['label'] !!}</label>
     @include('crud::inc.field_translatable_icon')
     <input type="hidden"
-        value="{{ old($field['name'])? old($field['name']): (isset($field['value'])? $field['value']: (isset($field['default'])? $field['default']: '')) }}"
+        value="{{ old($field['name']) ? old($field['name']) : (isset($field['value']) ? $field['value'] : (isset($field['default']) ? $field['default'] : '')) }}"
         name="{{ $field['name'] }}">
 
     @if (isset($field['prefix']) || isset($field['suffix']))
@@ -28,7 +28,7 @@ if (isset($field['value']) && (is_array($field['value']) || is_object($field['va
         <input type="text"
             data-google-address="{&quot;field&quot;: &quot;{{ $field['name'] }}&quot;, &quot;full&quot;: {{ isset($field['store_as_json']) && $field['store_as_json'] ? 'true' : 'false' }} }"
             name="{{ $field['name'] }}"
-            value="{{ old($field['name'])? old($field['name']): (isset($field['value'])? $field['value']: (isset($field['default'])? $field['default']: '')) }}"
+            value="{{ old($field['name']) ? old($field['name']) : (isset($field['value']) ? $field['value'] : (isset($field['default']) ? $field['default'] : '')) }}"
             @include('crud::inc.field_attributes')>
     @endif
     @if (isset($field['suffix']))
@@ -60,7 +60,6 @@ if (isset($field['value']) && (is_array($field['value']) || is_object($field['va
             .ap-input-icon.ap-icon-clear {
                 right: 10px !important;
             }
-
         </style>
     @endpush
 
@@ -71,53 +70,55 @@ if (isset($field['value']) && (is_array($field['value']) || is_object($field['va
             function initAutocomplete() {
 
 
-                $('[data-google-address]').each(function() {
+                $('[data-google-address]').each(
+                    function() {
 
-                    var $this = $(this),
-                        $addressConfig = $this.data('google-address'),
-                        $field = $('[name="' + $addressConfig.field + '"]');
+                        var $this = $(this),
+                            $addressConfig = $this.data('google-address'),
+                            $field = $('[name="' + $addressConfig.field + '"]');
 
-                    if ($field.val().length) {
-                        var existingData = JSON.parse($field.val());
-                        $this.val(existingData.value);
-                    }
+                        if ($field.val().length) {
+                            var existingData = JSON.parse($field.val());
+                            $this.val(existingData.value);
+                        }
 
-                    var $autocomplete = new google.maps.places.Autocomplete(
-                        ($this[0]), {
-                            types: ['geocode']
+                        var $autocomplete = new google.maps.places.Autocomplete(
+                            ($this[0]), {
+                                types: ['geocode']
+                            });
+
+                        $autocomplete.addListener('place_changed', function fillInAddress() {
+
+                            var place = $autocomplete.getPlace();
+                            var value = $this.val();
+                            var latlng = place.geometry.location;
+                            var data = {
+                                "value": value,
+                                "latlng": latlng
+                            };
+
+                            for (var i = 0; i < place.address_components.length; i++) {
+                                var addressType = place.address_components[i].types[0];
+                                data[addressType] = place.address_components[i]['long_name'];
+                            }
+                            $field.val(JSON.stringify(data));
+
                         });
 
-                    $autocomplete.addListener('place_changed', function fillInAddress() {
+                        $this.change(function() {
+                            if (!$this.val().length) {
+                                $field.val("");
+                            }
+                        });
 
-                        var place = $autocomplete.getPlace();
-                        var value = $this.val();
-                        var latlng = place.geometry.location;
-                        var data = {
-                            "value": value,
-                            "latlng": latlng
-                        };
-
-                        for (var i = 0; i < place.address_components.length; i++) {
-                            var addressType = place.address_components[i].types[0];
-                            data[addressType] = place.address_components[i]['long_name'];
-                        }
-                        $field.val(JSON.stringify(data));
 
                     });
-
-                    $this.change(function() {
-                        if (!$this.val().length) {
-                            $field.val("");
-                        }
-                    });
-
-
-                });
 
             }
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_places.key') }}&libraries=places&callback=initAutocomplete"
-                async defer></script>
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_places.key') }}&libraries=places&callback=initAutocomplete"
+            async defer></script>
     @endpush
 @endif
 {{-- End of Extra CSS and JS --}}
