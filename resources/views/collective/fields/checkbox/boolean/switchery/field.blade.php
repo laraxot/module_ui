@@ -38,10 +38,9 @@
     <script>
         if (!elems) {
             var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-            elems.foreach(
-                function(html) {
-                    var switchery = new Switchery(html);
-                });
+            elems.forEach(function(html) {
+                var switchery = new Switchery(html);
+            });
         }
     </script>
 @endpush

@@ -1,8 +1,8 @@
 @php
-    if (!is_object($row)) {
-        return '';
-    }
-    $fields = $_panel->getFields('create');
+if (!is_object($row)) {
+    return '';
+}
+$fields = $_panel->getFields('create');
 @endphp
 
 {!! Form::bsOpen($row, 'store') !!}
@@ -10,8 +10,7 @@
     @foreach ($fields as $field)
         {{-- @php
 	$input='bs'.Str::studly($field->type);
-	$input_name=collect(explode('.',$field->name))->map(
-function ($v, $k){
+	$input_name=collect(explode('.',$field->name))->map(function ($v, $k){
 		return $k==0?$v:'['.$v.']';
 	})->implode('');
 	$input_value=(isset($field->value)?$field->value:null);
@@ -19,7 +18,7 @@ function ($v, $k){
 	<div class="col-sm-{{ isset($field->col_size)?$field->col_size:12 }}">
 	{!! Form::$input($input_name,$input_value) !!}
 	</div> --}}
-        {!! Theme::inputHtml($field, $row) !!}
+        {!! Theme::inputHtml($field,$row) !!}
     @endforeach
 </div>
 

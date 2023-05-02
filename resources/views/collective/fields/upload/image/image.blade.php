@@ -124,8 +124,7 @@
         <script>
             jQuery(document).ready(function($) {
                 // Loop through all instances of the image field
-                $('.form-group.image').each(
-function(index){
+                $('.form-group.image').each(function(index){
                     // Find DOM elements under this form-group element
                     var $mainImage = $(this).find('#mainImage');
                     var $uploadImage = $(this).find("#uploadImage");

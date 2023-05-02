@@ -19,7 +19,8 @@ if (is_array($value)) {
     @include('crud::inc.field_translatable_icon')
     <input class="video-json" type="hidden" name="{{ $field['name'] }}" value="{{ $value }}">
     <div class="input-group">
-        <input @include('crud::inc.field_attributes', ['default_class' => 'video-link form-control']) type="text" id="{{ $field['name'] }}_link">
+        <input @include('crud::inc.field_attributes', ['default_class'=> 'video-link form-control']) type="text"
+        id="{{ $field['name'] }}_link">
         <div class="input-group-addon video-previewSuffix video-noPadding">
             <div class="video-preview">
                 <span class="video-previewImage"></span>
@@ -95,6 +96,7 @@ if (is_array($value)) {
                 background-size: cover;
                 background-position: center center;
             }
+
         </style>
     @endpush
 
@@ -110,12 +112,12 @@ if (is_array($value)) {
 
                     // RegExps for YouTube link forms
                     var youtubeStandardExpr =
-                        /^https?:\/\/(www\.)?youtube.com\/watch\?v=([^?&]+)/i; // Group 2 is video ID
+                    /^https?:\/\/(www\.)?youtube.com\/watch\?v=([^?&]+)/i; // Group 2 is video ID
                     var youtubeAlternateExpr =
-                        /^https?:\/\/(www\.)?youtube.com\/v\/([^\/\?]+)/i; // Group 2 is video ID
+                    /^https?:\/\/(www\.)?youtube.com\/v\/([^\/\?]+)/i; // Group 2 is video ID
                     var youtubeShortExpr = /^https?:\/\/youtu.be\/([^\/]+)/i; // Group 1 is video ID
                     var youtubeEmbedExpr =
-                        /^https?:\/\/(www\.)?youtube.com\/embed\/([^\/]+)/i; // Group 2 is video ID
+                    /^https?:\/\/(www\.)?youtube.com\/embed\/([^\/]+)/i; // Group 2 is video ID
 
                     var match = link.match(youtubeStandardExpr);
 
@@ -293,63 +295,62 @@ if (is_array($value)) {
                 };
 
                 // Loop through all instances of the video field
-                $("[data-video]").each(
-                    function(index) {
+                $("[data-video]").each(function(index) {
 
-                        var $this = $(this),
-                            jsonField = $this.find('.video-json'),
-                            linkField = $this.find('.video-link'),
-                            pDummy = $this.find('.video-dummy'),
-                            pWrap = $this.find('.video-preview');
+                    var $this = $(this),
+                        jsonField = $this.find('.video-json'),
+                        linkField = $this.find('.video-link'),
+                        pDummy = $this.find('.video-dummy'),
+                        pWrap = $this.find('.video-preview');
 
-                        try {
-                            var videoJson = JSON.parse(jsonField.val());
-                            jsonField.val(JSON.stringify(videoJson));
-                            linkField.val(videoJson.url);
-                            updateVideoPreview(videoJson, $this);
-                        } catch (e) {
-                            pDummy.show();
-                            pWrap.hide();
-                            jsonField.val('');
-                            linkField.val('');
-                        }
+                    try {
+                        var videoJson = JSON.parse(jsonField.val());
+                        jsonField.val(JSON.stringify(videoJson));
+                        linkField.val(videoJson.url);
+                        updateVideoPreview(videoJson, $this);
+                    } catch (e) {
+                        pDummy.show();
+                        pWrap.hide();
+                        jsonField.val('');
+                        linkField.val('');
+                    }
 
-                        linkField.on('focus', function() {
-                            linkField.originalState = linkField.val();
-                        });
-
-                        linkField.on('change', function() {
-
-                            if (linkField.originalState != linkField.val()) {
-
-                                if (linkField.val().length) {
-
-                                    videoParsing = true;
-
-                                    parseVideoLink(linkField.val(), function(videoJson) {
-
-                                        if (videoJson.success) {
-                                            linkField.val(videoJson.data.url);
-                                            jsonField.val(JSON.stringify(videoJson.data));
-                                            updateVideoPreview(videoJson.data, $this);
-                                        } else {
-                                            pDummy.show();
-                                            pWrap.hide();
-                                            alert(videoJson.message);
-                                        }
-
-                                        videoParsing = false;
-                                    });
-                                } else {
-                                    videoParsing = false;
-                                    jsonField.val('');
-                                    $this.find('.video-preview').fadeOut();
-                                    pDummy.show();
-                                    pWrap.hide();
-                                }
-                            }
-                        });
+                    linkField.on('focus', function() {
+                        linkField.originalState = linkField.val();
                     });
+
+                    linkField.on('change', function() {
+
+                        if (linkField.originalState != linkField.val()) {
+
+                            if (linkField.val().length) {
+
+                                videoParsing = true;
+
+                                parseVideoLink(linkField.val(), function(videoJson) {
+
+                                    if (videoJson.success) {
+                                        linkField.val(videoJson.data.url);
+                                        jsonField.val(JSON.stringify(videoJson.data));
+                                        updateVideoPreview(videoJson.data, $this);
+                                    } else {
+                                        pDummy.show();
+                                        pWrap.hide();
+                                        alert(videoJson.message);
+                                    }
+
+                                    videoParsing = false;
+                                });
+                            } else {
+                                videoParsing = false;
+                                jsonField.val('');
+                                $this.find('.video-preview').fadeOut();
+                                pDummy.show();
+                                pWrap.hide();
+                            }
+                        }
+                    });
+                });
 
                 var videoParsing = false;
 

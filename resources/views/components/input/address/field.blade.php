@@ -25,56 +25,55 @@
         //Function that will be called by Google Places Library
         function initAutocomplete() {
 
-            $('[data-google-address]').each(
-                function() {
-                    var $this = $(this);
-                    var $addressConfig = $this.data('google-address');
-                    var $field = $('[name="' + $addressConfig.field + '"]');
+            $('[data-google-address]').each(function() {
+                var $this = $(this);
+                var $addressConfig = $this.data('google-address');
+                var $field = $('[name="' + $addressConfig.field + '"]');
 
-                    if ($field.val().length) {
-                        //console.log($field.val());
-                        var existingData = JSON.parse($field.val());
-                        $this.val(existingData.value);
+                if ($field.val().length) {
+                    //console.log($field.val());
+                    var existingData = JSON.parse($field.val());
+                    $this.val(existingData.value);
+                }
+
+                var $autocomplete = new google.maps.places.Autocomplete(
+                    ($this[0]), {
+                        types: ['geocode']
+                    });
+
+                $autocomplete.addListener('place_changed', function fillInAddress() {
+
+                    var place = $autocomplete.getPlace();
+
+                    var value = $this.val();
+                    var latlng = place.geometry.location;
+                    var data = {
+                        "value": value,
+                        "latlng": latlng
+                    };
+
+                    for (var i = 0; i < place.address_components.length; i++) {
+                        var addressType = place.address_components[i].types[0];
+                        data[addressType] = place.address_components[i]['long_name'];
+                        data[addressType + '_short'] = place.address_components[i]['short_name'];
                     }
 
-                    var $autocomplete = new google.maps.places.Autocomplete(
-                        ($this[0]), {
-                            types: ['geocode']
-                        });
-
-                    $autocomplete.addListener('place_changed', function fillInAddress() {
-
-                        var place = $autocomplete.getPlace();
-
-                        var value = $this.val();
-                        var latlng = place.geometry.location;
-                        var data = {
-                            "value": value,
-                            "latlng": latlng
-                        };
-
-                        for (var i = 0; i < place.address_components.length; i++) {
-                            var addressType = place.address_components[i].types[0];
-                            data[addressType] = place.address_components[i]['long_name'];
-                            data[addressType + '_short'] = place.address_components[i]['short_name'];
-                        }
 
 
-
-                        $val = JSON.stringify(data);
-                        $field.val($val);
-                        @this.set('form_data.' + $addressConfig.field, $val);
-                        @this.set('form_data.' + $addressConfig.field + '_value', value);
-                    });
-
-                    $this.change(function() {
-                        if (!$this.val().length) {
-                            $field.val("");
-                        }
-                    });
-
-
+                    $val = JSON.stringify(data);
+                    $field.val($val);
+                    @this.set('form_data.' + $addressConfig.field, $val);
+                    @this.set('form_data.' + $addressConfig.field + '_value', value);
                 });
+
+                $this.change(function() {
+                    if (!$this.val().length) {
+                        $field.val("");
+                    }
+                });
+
+
+            });
 
         }
     </script>

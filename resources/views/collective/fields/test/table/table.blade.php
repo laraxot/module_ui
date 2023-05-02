@@ -2,7 +2,7 @@
 // <!-- array input -->
 $max = isset($field['max']) && (int) $field['max'] > 0 ? $field['max'] : -1;
 $min = isset($field['min']) && (int) $field['min'] > 0 ? $field['min'] : -1;
-$item_name = strtolower(isset($field['entity_singular']) && !empty($field['entity_singular']) ? $field['entity_singular'] : $field['label']);
+$item_name = strtolower(isset($field['entity_singular']) && ! empty($field['entity_singular']) ? $field['entity_singular'] : $field['label']);
 
 $items = old(square_brackets_to_dots($field['name'])) ?? ($field['value'] ?? ($field['default'] ?? ''));
 
@@ -14,7 +14,7 @@ if (is_array($items)) {
     } else {
         $items = '[]';
     }
-} elseif (is_string($items) && !is_array(json_decode($items))) {
+} elseif (is_string($items) && ! is_array(json_decode($items))) {
     $items = '[]';
 }
 
@@ -66,8 +66,8 @@ $empty_row = json_encode($empty_row);
                     </td>
                     <td ng-if="max == -1 || max > 1">
                         <button ng-hide="min > -1 && $index < min" class="btn btn-sm btn-default" type="button"
-                            ng-click="removeItem(item);"><span class="sr-only">delete item</span><i class="fa fa-trash"
-                                role="presentation" aria-hidden="true"></i></button>
+                            ng-click="removeItem(item);"><span class="sr-only">delete item</span><i
+                                class="fa fa-trash" role="presentation" aria-hidden="true"></i></button>
                     </td>
                 </tr>
 
@@ -119,10 +119,9 @@ $empty_row = json_encode($empty_row);
                     handle: '.sort-handle',
                     axis: 'y',
                     helper: function(e, ui) {
-                        ui.children().each(
-                            function() {
-                                $(this).width($(this).width());
-                            });
+                        ui.children().each(function() {
+                            $(this).width($(this).width());
+                        });
                         return ui;
                     },
                 };

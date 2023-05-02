@@ -32,7 +32,7 @@ if (isset($field['value']) && (is_array($field['value']) || is_object($field['va
         <input type="text"
             data-address="{&quot;field&quot;: &quot;{{ $field['name'] }}&quot;, &quot;full&quot;: {{ isset($field['store_as_json']) && $field['store_as_json'] ? 'true' : 'false' }} }"
             name="{{ $field['name'] }}"
-            value="{{ old($field['name']) ? old($field['name']) : (isset($field['value']) ? $field['value'] : (isset($field['default']) ? $field['default'] : '')) }}"
+            value="{{ old($field['name'])? old($field['name']): (isset($field['value'])? $field['value']: (isset($field['default'])? $field['default']: '')) }}"
             @include('crud::inc.field_attributes')>
     @endif
     @if (isset($field['suffix']))
@@ -64,6 +64,7 @@ if (isset($field['value']) && (is_array($field['value']) || is_object($field['va
             .ap-input-icon.ap-icon-clear {
                 right: 10px !important;
             }
+
         </style>
     @endpush
 
@@ -74,45 +75,44 @@ if (isset($field['value']) && (is_array($field['value']) || is_object($field['va
             jQuery(document).ready(function($) {
                 window.AlgoliaPlaces = window.AlgoliaPlaces || {};
 
-                $('[data-address]').each(
-                    function() {
+                $('[data-address]').each(function() {
 
-                        var $this = $(this),
-                            $addressConfig = $this.data('address'),
-                            $field = $('[name="' + $addressConfig.field + '"]'),
-                            $place = places({
-                                container: $this[0]
-                            });
+                    var $this = $(this),
+                        $addressConfig = $this.data('address'),
+                        $field = $('[name="' + $addressConfig.field + '"]'),
+                        $place = places({
+                            container: $this[0]
+                        });
 
-                        function clearInput() {
-                            if (!$this.val().length) {
-                                $field.val('');
-                            }
+                    function clearInput() {
+                        if (!$this.val().length) {
+                            $field.val('');
                         }
+                    }
 
-                        if ($addressConfig.full) {
+                    if ($addressConfig.full) {
 
-                            $place.on('change', function(e) {
-                                var result = JSON.parse(JSON.stringify(e.suggestion));
-                                delete(result.highlight);
-                                delete(result.hit);
-                                delete(result.hitIndex);
-                                delete(result.rawAnswer);
-                                delete(result.query);
-                                $field.val(JSON.stringify(result));
-                            });
+                        $place.on('change', function(e) {
+                            var result = JSON.parse(JSON.stringify(e.suggestion));
+                            delete(result.highlight);
+                            delete(result.hit);
+                            delete(result.hitIndex);
+                            delete(result.rawAnswer);
+                            delete(result.query);
+                            $field.val(JSON.stringify(result));
+                        });
 
-                            $this.on('change blur', clearInput);
-                            $place.on('clear', clearInput);
+                        $this.on('change blur', clearInput);
+                        $place.on('clear', clearInput);
 
-                            if ($field.val().length) {
-                                var existingData = JSON.parse($field.val());
-                                $this.val(existingData.value);
-                            }
+                        if ($field.val().length) {
+                            var existingData = JSON.parse($field.val());
+                            $this.val(existingData.value);
                         }
+                    }
 
-                        window.AlgoliaPlaces[$addressConfig.field] = $place;
-                    });
+                    window.AlgoliaPlaces[$addressConfig.field] = $place;
+                });
             });
         </script>
     @endpush

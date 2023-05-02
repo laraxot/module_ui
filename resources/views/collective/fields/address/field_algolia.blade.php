@@ -32,8 +32,7 @@
 	$(document).ready(function(){
 		window.AlgoliaPlaces = window.AlgoliaPlaces || {};
 
-		$('[data-address]').each(
-function(){
+		$('[data-address]').each(function(){
 
 			var $this      = $(this),
 			$addressConfig = $this.data('address'),

@@ -1,22 +1,21 @@
 @php
-    $multiple = array_get($field, 'multiple', true);
-    $value = old(square_brackets_to_dots($field['name'])) ?? ($field['value'] ?? ($field['default'] ?? ''));
-    
-    if (!$multiple && is_array($value)) {
-        $value = array_first($value);
-    }
+$multiple = array_get($field, 'multiple', true);
+$value = old(square_brackets_to_dots($field['name'])) ?? $field['value'] ?? $field['default'] ?? '';
+
+if (!$multiple && is_array($value)) {
+    $value = array_first($value);
+}
 @endphp
 
-<div @include('crud::inc.field_wrapper_attributes')>
+<div @include('crud::inc.field_wrapper_attributes') >
 
     <div><label>{!! $field['label'] !!}</label></div>
     @include('crud::inc.field_translatable_icon')
     @if ($multiple)
-        @foreach ((array) $value as $v)
+        @foreach((array)$value as $v)
             @if ($v)
                 <div class="input-group input-group-sm">
-                    <input type="text" name="{{ $field['name'] }}[]" value="{{ $v }}"
-                        @include('crud::inc.field_attributes') readonly>
+                    <input type="text" name="{{ $field['name'] }}[]" value="{{ $v }}" @include('crud::inc.field_attributes') readonly>
                     <div class="input-group-btn">
                         <button type="button" class="browse_{{ $field['name'] }} remove btn btn-default">
                             <i class="fa fa-trash"></i>
@@ -26,8 +25,7 @@
             @endif
         @endforeach
     @else
-        <input type="text" name="{{ $field['name'] }}" value="{{ $value }}" @include('crud::inc.field_attributes')
-            readonly>
+        <input type="text" name="{{ $field['name'] }}" value="{{ $value }}" @include('crud::inc.field_attributes') readonly>
     @endif
 
     <div class="btn-group" role="group" aria-label="..." style="margin-top: 3px;">
@@ -66,14 +64,12 @@
     @push('crud_fields_styles')
         <!-- include browse server css -->
         <link rel="stylesheet" type="text/css"
-            href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+              href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('packages/barryvdh/elfinder/css/elfinder.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('packages/barryvdh/elfinder/css/theme.css') }}">
-        <link href="{{ asset('vendor/backpack/colorbox/example2/colorbox.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('vendor/backpack/colorbox/example2/colorbox.css') }}" rel="stylesheet" type="text/css"/>
         <style>
-            #cboxContent,
-            #cboxLoadedContent,
-            .cboxIframe {
+            #cboxContent, #cboxLoadedContent, .cboxIframe {
                 background: transparent;
             }
         </style>
@@ -94,10 +90,10 @@
 {{-- FIELD JS - will be loaded in the after_scripts section --}}
 @push('crud_fields_scripts')
     <script>
-        $(function() {
+        $(function () {
             var template = document.getElementById('browse_multiple_template_{{ $field['name'] }}').innerHTML;
 
-            $(document).on('click', '.popup.browse_{{ $field['name'] }}', function(event) {
+            $(document).on('click', '.popup.browse_{{ $field['name'] }}', function (event) {
                 event.preventDefault();
 
                 var element = $(this);
@@ -108,39 +104,38 @@
                     customData: {
                         _token: '{{ csrf_token() }}'
                     },
-                    url: '{{ route('elfinder.connector') }}',
+                    url: '{{ route("elfinder.connector") }}',
                     soundPath: '{{ asset('/packages/barryvdh/elfinder/sounds') }}',
                     dialog: {
                         width: 900,
                         modal: true,
                         @if ($multiple)
-                            title: '{{ trans('backpack::crud.select_files') }}',
+                        title: '{{ trans('backpack::crud.select_files') }}',
                         @else
-                            title: '{{ trans('backpack::crud.select_file') }}',
+                        title: '{{ trans('backpack::crud.select_file') }}',
                         @endif
                     },
                     resizable: false,
                     @if ($mimes = array_get($field, 'mime_types'))
-                        onlyMimes: {!! json_encode($mimes) !!},
+                    onlyMimes: {!! json_encode($mimes) !!},
                     @endif
                     commandsOptions: {
                         getfile: {
                             @if ($multiple)
-                                multiple: true,
+                            multiple: true,
                             @endif
                             oncomplete: 'destroy'
                         }
                     },
-                    getFileCallback: function(files) {
+                    getFileCallback: function (files) {
                         @if ($multiple)
-                            files.foreach(
-                                function(file) {
-                                    var input = $(template);
-                                    input.find('input').val(file.path);
-                                    element.parent().before(input);
-                                });
+                        files.forEach(function (file) {
+                            var input = $(template);
+                            input.find('input').val(file.path);
+                            element.parent().before(input);
+                        });
                         @else
-                            $('input[name=\'{{ $field['name'] }}\']').val(files.path);
+                        $('input[name=\'{{ $field['name'] }}\']').val(files.path);
                         @endif
                         $.colorbox.close();
                     }
@@ -155,21 +150,21 @@
                 });
             });
 
-            $(document).on('click', '.clear.browse_{{ $field['name'] }}', function(event) {
+            $(document).on('click', '.clear.browse_{{ $field['name'] }}', function (event) {
                 event.preventDefault();
 
                 @if ($multiple)
-                    $('input[name=\'{{ $field['name'] }}[]\']').parents('.input-group').remove();
+                $('input[name=\'{{ $field['name'] }}[]\']').parents('.input-group').remove();
                 @else
-                    $('input[name=\'{{ $field['name'] }}\']').val('');
+                $('input[name=\'{{ $field['name'] }}\']').val('');
                 @endif
             });
 
             @if ($multiple)
-                $(document).on('click', '.remove.browse_{{ $field['name'] }}', function(event) {
-                    event.preventDefault();
-                    $(this).parents('.input-group').remove();
-                });
+            $(document).on('click', '.remove.browse_{{ $field['name'] }}', function (event) {
+                event.preventDefault();
+                $(this).parents('.input-group').remove();
+            });
             @endif
         });
     </script>

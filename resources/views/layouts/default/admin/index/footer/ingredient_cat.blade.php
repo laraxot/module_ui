@@ -18,8 +18,7 @@ function updateTot(){
 	var $qty=$('#qty').val();
 	var $price=$('#price').text();
 	var $tot=$qty*$price;
-	$('.ingredient-item').each(
-function( index ) {
+	$('.ingredient-item').each(function( index ) {
 		$tot+=$(this).find('.ingredient-qty').val() * $(this).find('.ingredient-price').val();
 	});
 	$('#tot').text($tot);

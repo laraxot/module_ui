@@ -1,36 +1,32 @@
-{!! Form::bsOpen($row, 'store') !!}
+{!! Form::bsOpen($row,'store') !!}
 <div class="row">
-    @php
-        //*
-$excludes = $_panel->pivot_key_names;
-$fields = collect($_panel->fields())
-    ->filter(function ($item) use ($excludes) {
-        return !in_array($item->name, $excludes);
-    })
-    ->all();
-//*/
-    @endphp
-    @foreach ($fields as $field)
-        @php
-            $input = 'bs' . Str::studly($field->type);
-            $input_name = collect(explode('.', $field->name))
-                ->map(function ($v, $k) {
-                    return $k == 0 ? $v : '[' . $v . ']';
-                })
-                ->implode('');
-            $input_value = isset($field->value) ? $field->value : null;
-            if (!isset($field->col_size)) {
-                $field->col_size = 12;
-            }
-            if (!isset($field->attributes)) {
-                $field->attributes = [];
-            }
-            $input_attrs = $field->attributes;
-        @endphp
-        <div class="col-sm-{{ $field->col_size }}">
-            {!! Form::$input($input_name, $input_value, $input_attrs) !!}
-        </div>
-    @endforeach
+@php
+	//*
+	$excludes=$_panel->pivot_key_names;
+	$fields=collect($_panel->fields())
+			->filter(function($item) use($excludes) {
+				return !in_array($item->name,$excludes);
+			})
+			->all()
+			;
+	//*/
+
+@endphp
+@foreach($fields as $field)
+@php
+	$input='bs'.Str::studly($field->type);
+	$input_name=collect(explode('.',$field->name))->map(function ($v, $k){
+		return $k==0?$v:'['.$v.']';
+	})->implode('');
+	$input_value=(isset($field->value)?$field->value:null);
+	if(!isset($field->col_size))$field->col_size=12;
+	if(!isset($field->attributes)) $field->attributes=[];
+	$input_attrs=$field->attributes;
+@endphp
+	<div class="col-sm-{{ $field->col_size }}">
+	{!! Form::$input($input_name,$input_value,$input_attrs) !!}
+	</div>
+@endforeach
 </div>
 
 {{--
@@ -41,5 +37,5 @@ $fields = collect($_panel->fields())
 	</div>
 </div>
 --}}
-{{ Form::bsSubmit('save') }}
+{{Form::bsSubmit('save')}}
 {!! Form::close() !!}
