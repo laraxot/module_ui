@@ -11,10 +11,10 @@ use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
 use Modules\Cms\Actions\GetViewAction;
-use Modules\Cms\Services\PanelService;
 use Modules\UI\Datas\FieldData;
 
-class Field extends Component {
+class Field extends Component
+{
     public FieldData $field;
     public ?Model $row = null;
     public string $tpl;
@@ -27,58 +27,27 @@ class Field extends Component {
     /**
      * Undocumented function.
      */
-    public function __construct(FieldData $field, ?Model $row = null, string $tpl = 'v1') {
+    public function __construct(FieldData $field, ?Model $row = null, string $tpl = 'v1')
+    {
         $this->tpl = $tpl;
         $this->field = $field;
         $this->row = $row;
 
+        // $this->value = $this->field->value ?? null;
         if (null != $row) {
-            // $tmp = $row->toArray();
-
             if (Str::contains($field->getNameDot(), '.')) {
-                /*
-                dddx(['t1'=>Arr::get($row,$field->getNameDot()),
-                   // 't2'=>$row->get($field->getNameDot()),
-                   't2'=>Model::get($row,$field->getNameDot()),
-                ]);
-                $this->value = Arr::get($tmp, $field->getNameDot());
-                */
                 $this->value = Arr::get($row, $field->getNameDot());
             } else {
                 $this->value = $row->{$field->name} ?? Arr::get($row, $field->getNameDot());
             }
         }
-
-        /*
-        if (is_iterable($field->options) && count($field->options) > 0) {
-            if (is_integer($this->value) || is_string($this->value)) {
-
-                $this->value = collect($field->options)->get($this->value) ?? $this->value;
-
-            }
-        }
-        */
-
-        /*
-        $this->attrs['class'] = 'form-label';
-
-        $panel = PanelService::make()->getRequestPanel();
-        $this->tradKey = 'pub_theme::txt';
-        if (null !== $panel) {
-            $this->tradKey = $panel->getTradMod();
-        }
-        */
     }
 
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable {
-        /*
-        $this->attrs['class'] = 'form-control';
-        $this->attrs['name'] = $field->name;
-        $type = $this->field->type;
-        */
+    public function render(): Renderable
+    {
         $field = $this->field;
         $div_attrs = app(ComponentAttributeBag::class);
         $label_attrs = app(ComponentAttributeBag::class);
@@ -88,8 +57,6 @@ class Field extends Component {
             [
                 'name' => $field->name,
                 'label' => $field->label ?? $field->name,
-
-                // 'class' => $field->label_class,
             ]
         );
 
@@ -101,9 +68,7 @@ class Field extends Component {
             ]
         );
 
-        // dddx($input_attrs->merge($this->field->toArray()));
         // altrimenti dà errore sui campi come gender
-        // $input_attrs = $input_attrs->merge(collect($this->field)->except(['options'])->toArray());
         $input_attrs = $input_attrs
             ->merge(
                 collect($this->field)
@@ -112,7 +77,6 @@ class Field extends Component {
                         function ($item, $key) {
                             if (is_array($item)) {
                                 return json_encode($item);
-                                // dddx(['key' => $key, 'item' => $item]);
                             }
 
                             return $item;

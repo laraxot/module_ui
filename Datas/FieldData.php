@@ -12,7 +12,7 @@ class FieldData extends Data {
     public string $name;
     public ?string $label = null;
     public ?string $name_dot = null;
-    public string $type;
+    public ?string $type = '';
     public int $col_size = 12;
     public array $except = [];
     /**

@@ -1,3 +1,5 @@
+@props([])
+
 <div>
 
     @if ($step === 1)
@@ -23,7 +25,8 @@
         <div id="add_email_form">
             <div class="input-group mb-3">
                 <input wire:model.lazy="form_data.add_email" type="email" class="form-control"
-                    placeholder="Email Address" aria-label="Email Address" aria-describedby="basic-addon2">
+                    placeholder="Email Address" aria-label="Email Address" aria-describedby="basic-addon2"
+                    :value="$value">
                 <div class="input-group-append">
                     <button wire:click="verify_email()" class="btn btn-success" type="button">Verify</button>
                 </div>
