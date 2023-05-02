@@ -19,6 +19,9 @@ use Sushi\Sushi;
  * @property int                          $id
  * @property string|null                  $label
  * @property string|null                  $link
+ * @property string                       $roles
+ * @property string                       $icon
+ * @property bool                         $active
  * @property int|null                     $menu
  * @property int|null                     $sort
  * @property int|null                     $parent
@@ -28,7 +31,6 @@ use Sushi\Sushi;
  * @property Collection|MenuItem[]        $child
  * @property int|null                     $child_count
  * @property \Modules\UI\Models\Menu|null $parent_menu
- *
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem query()
@@ -41,7 +43,6 @@ use Sushi\Sushi;
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereParent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereRoleId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereSort($value)
- *
  * @mixin \Eloquent
  */
 class MenuItem extends Model {
@@ -66,7 +67,10 @@ class MenuItem extends Model {
         'menu',
         'depth',
         'role_id',
-        'allowed_roles',
+        // 'allowed_roles',
+        'roles',
+        'active',
+        'icon',
     ];
 
     /**
@@ -84,7 +88,10 @@ class MenuItem extends Model {
         'menu' => 'int',
         'depth' => 'int',
         'role_id' => 'int',
-        'allowed_roles' => 'string',
+        // 'allowed_roles' => 'string',
+        'roles' => 'string',
+        'active' => 'bool',
+        'icon' => 'string',
     ];
     /*
     public function __construct(array $attributes = [])
@@ -126,7 +133,8 @@ class MenuItem extends Model {
                     'menu' => 0,
                     'depth' => 0,
                     'role_id' => 0,
-                    'allowed_roles' => '',
+                    // 'allowed_roles' => '',
+                    'roles' => '',
                 ],
             ];
         }

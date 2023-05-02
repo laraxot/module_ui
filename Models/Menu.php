@@ -19,13 +19,11 @@ use Sushi\Sushi;
  * @property string|null                                                            $name
  * @property \Illuminate\Database\Eloquent\Collection|\Modules\UI\Models\MenuItem[] $items
  * @property int|null                                                               $items_count
- *
  * @method static Builder|Menu newModelQuery()
  * @method static Builder|Menu newQuery()
  * @method static Builder|Menu query()
  * @method static Builder|Menu whereId($value)
  * @method static Builder|Menu whereName($value)
- *
  * @mixin \Eloquent
  */
 class Menu extends Model

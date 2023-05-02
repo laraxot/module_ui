@@ -8,13 +8,15 @@ use Illuminate\Support\Str;
 use Modules\Xot\Services\FileService;
 use Spatie\QueueableAction\QueueableAction;
 
-class GetViewAction {
+class GetViewAction
+{
     use QueueableAction;
 
     /**
      * PER ORA FUNZIONA SOLO CON LIVEWIRE.
      */
-    public function execute(string $tpl = ''): string {
+    public function execute(string $tpl = ''): string
+    {
         $backtrace = debug_backtrace();
         $file0 = FileService::fixpath($backtrace[0]['file'] ?? '');
         $file0 = Str::after($file0, base_path());
@@ -29,12 +31,13 @@ class GetViewAction {
         $mod = $arr[1];
         $tmp = array_slice($arr, 3);
 
-        $tmp = collect($tmp)->map(function ($item) {
-            $item = str_replace('.php', '', $item);
-            $item = Str::slug(Str::snake($item));
+        $tmp = collect($tmp)->map(
+            function ($item) {
+                $item = str_replace('.php', '', $item);
+                $item = Str::slug(Str::snake($item));
 
-            return $item;
-        })->implode('.');
+                return $item;
+            })->implode('.');
 
         $view = Str::lower($mod).'::'.$tmp;
         if ('' != $tpl) {

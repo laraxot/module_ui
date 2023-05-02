@@ -1,11 +1,11 @@
 @php
-if (isset($options['field'])) {
-    $options = $options['field']->options;
-}
-extract($attributes);
-$field = transFields(get_defined_vars());
-$value = Form::getValueAttribute($name);
-
+    if (isset($options['field'])) {
+        $options = $options['field']->options;
+    }
+    extract($attributes);
+    $field = transFields(get_defined_vars());
+    $value = Form::getValueAttribute($name);
+    
 @endphp
 
 
@@ -21,11 +21,12 @@ $value = Form::getValueAttribute($name);
                     <div class="card-body">
                         <input type="checkbox" name="{{ $v['key'] }}" value="{{ $v['key'] }}" />{{ $v['label'] }}
                     </div>
-                     <ul class="list-group list-group-flush">
-                        @foreach($v['sons'] as $son)
-                        <li class="list-group-item">
-                            <input type="checkbox" name="{{ $son['key'] }}" value="{{ $son['key'] }}" />{{ $son['label'] }}
-                        </li>
+                    <ul class="list-group list-group-flush">
+                        @foreach ($v['sons'] as $son)
+                            <li class="list-group-item">
+                                <input type="checkbox" name="{{ $son['key'] }}"
+                                    value="{{ $son['key'] }}" />{{ $son['label'] }}
+                            </li>
                         @endforeach
                     </ul>
                 </div>
@@ -44,9 +45,10 @@ $value = Form::getValueAttribute($name);
         $(document).ready(function() {
             let values = $('input[name="{{ $name }}"]').val().split(',');
 
-            values.forEach(function(v) {
-                $('.list_checkbox_{{ $name }} input[name="' + v + '"]').prop('checked', true);
-            });
+            values.foreach(
+                function(v) {
+                    $('.list_checkbox_{{ $name }} input[name="' + v + '"]').prop('checked', true);
+                });
 
             console.log(values);
         });
@@ -55,13 +57,14 @@ $value = Form::getValueAttribute($name);
 
             let list = new Array();
 
-            $(this).find('input[type="checkbox"]').each(function(i, e) {
+            $(this).find('input[type="checkbox"]').each(
+                function(i, e) {
 
-                if (e.checked === true) {
-                    list.push(e.value);
-                }
+                    if (e.checked === true) {
+                        list.push(e.value);
+                    }
 
-            });
+                });
 
             $('input[name="{{ $name }}"]').val(list.join());
 

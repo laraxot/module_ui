@@ -1,69 +1,61 @@
 <?php
 
-
-
 declare(strict_types=1);
 
 namespace Modules\UI\Actions;
 
-use ReflectionClass;
-use ReflectionMethod;
 use Illuminate\Support\Str;
-use Spatie\QueueableAction\QueueableAction;
 use Illuminate\Validation\Concerns\ValidatesAttributes;
+use Spatie\QueueableAction\QueueableAction;
 
 class GetRulesWithParamsAction
 {
     use QueueableAction;
 
-
-
     public function execute(): array
     {
-        $validatorClass = new ReflectionClass(ValidatesAttributes::class);
+        $validatorClass = new \ReflectionClass(ValidatesAttributes::class);
 
-        $r = collect($validatorClass->getMethods(ReflectionMethod::IS_PUBLIC))
+        $r = collect($validatorClass->getMethods(\ReflectionMethod::IS_PUBLIC))
             ->filter(function ($method) {
                 return Str::startsWith($method->name, 'validate');
             })
-            ->map(function ($method) {
+            ->map(
+                function ($method) {
+                    // $param_names = collect($method->getParameters())->pluck('name', 'name')->except(['attribute', 'value']);
 
-                //$param_names = collect($method->getParameters())->pluck('name', 'name')->except(['attribute', 'value']);
+                    $method_name = str_replace('validate_', '', Str::snake($method->name));
 
-                $method_name = str_replace('validate_', '', Str::snake($method->name));
+                    $params = $this->getParamsType($method_name);
 
-                $params = $this->getParamsType($method_name);
+                    if (null != $params) {
+                        $start = strpos((string) $method->getDocComment(), 'Validate');
+                        $end = strpos((string) $method->getDocComment(), '@');
 
-                if (null != $params) {
+                        $comment = '';
+                        if (is_int($start)) {
+                            $comment = substr((string) $method->getDocComment(), $start, $end - $start);
+                            $comment = preg_replace('/\s\s+/', ' ', $comment);
+                            $comment = str_replace('* ', '', (string) $comment);
+                            $comment = trim($comment);
+                        }
 
-                    $start = strpos($method->getDocComment(), 'Validate');
-                    $end = strpos($method->getDocComment(), '@');
-
-                    $comment = '';
-                    if (is_int($start)) {
-                        $comment = substr($method->getDocComment(), $start, $end - $start);
-                        $comment = preg_replace('/\s\s+/', ' ', $comment);
-                        $comment = str_replace('* ', '', $comment);
-                        $comment = trim($comment);
+                        return [
+                            'name' => $method_name,
+                            'comment' => $comment,
+                            'params' => $params,
+                        ];
                     }
+                })->filter(function ($v) {
+                    return null !== $v;
+                })->toArray();
 
-                    return [
-                        'name' => $method_name,
-                        'comment' => $comment,
-                        'params' => $params
-                    ];
-                }
-            })->filter(function ($v) {
-                return $v !== null;
-            })->toArray();
-
-        //dd($r);
+        // dd($r);
 
         return $r;
     }
 
     /**
-     * @param string $method_name
      * @return array|null
      */
     public function getParamsType(string $method_name)
@@ -83,14 +75,14 @@ class GetRulesWithParamsAction
             'date_equals' => ['date' => 'text'],
             'decimal' => [
                 'min' => 'number',
-                'max' => 'number'
+                'max' => 'number',
             ],
             'declined' => [''],
             'different' => ['field' => 'text'],
             'digits' => ['value' => 'number'],
             'digits_between' => [
                 'min' => 'number',
-                'max' => 'number'
+                'max' => 'number',
             ],
             'email' => [''],
             'filled' => [''],
@@ -123,7 +115,6 @@ class GetRulesWithParamsAction
             'uppercase' => [''],
             'url' => [''],
             'uuid' => [''],
-
         ];
 
         if (isset($parameters[$method_name])) {
@@ -131,6 +122,6 @@ class GetRulesWithParamsAction
         }
 
         return null;
-        //return ['json' => 'json'];
+        // return ['json' => 'json'];
     }
 }
