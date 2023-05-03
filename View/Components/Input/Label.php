@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\UI\View\Components\Input;
 
 use Illuminate\View\Component;
+use Illuminate\View\ComponentAttributeBag;
 use Modules\Cms\Actions\GetStyleClassByViewAction;
 use Modules\Cms\Actions\GetViewAction;
 use Modules\Cms\Services\PanelService;
@@ -12,7 +13,8 @@ use Modules\Cms\Services\PanelService;
 /**
  * Undocumented class.
  */
-class Label extends Component {
+class Label extends Component
+{
     public array $attrs = [];
     public string $tpl;
     public string $tradKey;
@@ -20,7 +22,8 @@ class Label extends Component {
     /**
      * Undocumented function.
      */
-    public function __construct(string $tpl = 'v1') {
+    public function __construct(string $tpl = 'v1')
+    {
         $this->tpl = $tpl;
         /*
         $this->attrs['name'] = $this->name;
@@ -41,7 +44,8 @@ class Label extends Component {
     /**
      * Get the view / contents that represents the component.
      */
-    public function render() {
+    public function render()
+    {
         // *
         return function (array &$data) {
             return $this->renderData($data);
@@ -63,7 +67,8 @@ class Label extends Component {
         // return view($view, $view_params);
     }
 
-    public function renderData(array $data): string {
+    public function renderData(array $data): string
+    {
         extract($data);
         /**
          * @phpstan-var view-string
@@ -71,11 +76,12 @@ class Label extends Component {
         $view = app(GetViewAction::class)->execute($this->tpl);
         $this->attrs['class'] = app(GetStyleClassByViewAction::class)->execute($view);
 
-        if (isset($attributes) && is_object($attributes)) {
+        if (isset($attributes) && $attributes instanceof ComponentAttributeBag) {
             /*75     Call to an undefined method object::get().
             76     Call to an undefined method object::get().
             77     Call to an undefined method object::get().
             */
+
             $label = $attributes->get('label');
             $name = $attributes->get('name');
             $this->attrs['for'] = $attributes->get('id');
