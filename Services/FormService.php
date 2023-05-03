@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\UI\Services;
 
 use Collective\Html\FormFacade as Form;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -16,13 +15,8 @@ use Illuminate\Database\Eloquent\Relations\MorphOneOrMany;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Modules\UI\Actions\GetCollectiveComponents;
-use Modules\UI\Contracts\FieldContract;
 use Modules\UI\Datas\FieldData;
 
 /**
@@ -78,162 +72,6 @@ class FormService
         return app(GetCollectiveComponents::class)->execute($view_path, $prefix);
     }
 
-    /*-- to separate component
-    public static function inputFreeze(FieldData $field, Model $row): Renderable
-    {
-        $field->name_dot = bracketsToDotted($field->name);
-
-
-        try {
-            $field->value = Arr::get($row, $field->name_dot);
-            if (null === $field->value) {
-                $field->value = Arr::get((array) $row, $field->name_dot);
-            }
-
-        } catch (\Exception $e) {
-            $field->value = '---['.$field->name_dot.']['.$e->getMessage().']['.__LINE__.'-'.basename(__FILE__).']['.$row->{$field->name_dot}.']--';
-        }
-
-        $tmp = Str::snake($field->type);
-
-        *
-         * --- da fare contratto etc etc (interface).
-         *
-         * @var FieldContract|null
-         *
-        $comp_field = Arr::first(
-            self::getCollectiveComponents(),
-            function ($item) use ($field) {
-                return $item->name === 'bs'.$field->type;
-            }
-        );
-        **
-         * @phpstan-var view-string
-         *
-        $error_view = 'ui::components.alert.error';
-
-        if (null === $comp_field) {
-            $msg = 'not registered component [bs'.$field->type.']';
-
-            return view($error_view, ['msg' => $msg]);
-        }
-
-        **
-         * @phpstan-var view-string
-         *
-        $view = Str::beforeLast((string) $comp_field->view, '.field').'.freeze';
-        if (! View::exists($view)) {
-            return view($error_view, ['msg' => '['.$view.'] NOT EXISTS !!!']);
-        }
-
-        $view_params = [];
-
-        $view_params['row'] = $row;
-        $view_params['field'] = $field;
-        $field->method = Str::camel($field->name);
-
-        if (\is_object($field->value)) {
-            $is_collection = ('Illuminate\Database\Eloquent\Collection' === \get_class($field->value));
-        } else {
-            $is_collection = false;
-        }
-        if ($is_collection) {
-            $rows = $row->{$field->method}(); // cachare tutto per accellerare
-            $related = $rows->getRelated();
-            // $related=$field->value->first();
-            // ///////////////////////////////////
-            $params['rows'] = $rows;
-
-            // $view_params['rows']=$rows->get();
-            $view_params['rows'] = $field->value;
-
-            $fields_exclude = self::fieldsExcludeRows($rows);
-            $related_panel = ThemeService::panelModel($related);
-            // 220    Else branch is unreachable because previous condition is always true.
-            // if (is_object($related_panel)) {
-            $related_fields = $related_panel->fields();
-            // } else {
-            //    $related_fields = [];
-            // }
-            $related_fields = collect($related_fields)
-                ->filter(
-                    function ($item) use ($fields_exclude) {
-                        return ! \in_array($item->name, $fields_exclude, true);
-                    }
-                )
-                ->all();
-
-            $related_name = Str::singular($field->name);
-            // $view_params['related']=$related->get();
-            $view_params['related_name'] = $related_name;
-            $view_params['related_fields'] = $related_fields;
-
-            $url = '#';
-
-            $view_params['manage_url'] = $url;
-
-            if (method_exists((object) $rows, 'getPivotClass')) {
-                // dddx($rows);
-                $pivot_class = $rows->getPivotClass();
-                if (! Str::startsWith($pivot_class, 'Modules\\')) {
-                    $get_related_class = get_class($rows->getRelated());
-                    if (false == $get_related_class) {
-                        throw new \Exception('['.__LINE__.']['.__FILE__.']');
-                    }
-                    $pivot1 = implode('\\', \array_slice(explode('\\', $get_related_class), 0, -1)).'\\';
-                    $pivot1 .= Str::studly(Str::singular($rows->getTable()));
-
-                    if (! class_exists($pivot1)) {
-                        dddx(
-                            [
-                                // 'rows' => $rows,
-                                'pivot_class' => $pivot_class,
-                                'related' => $rows->getRelated(),
-                                'getMorphClass' => $rows->getMorphClass(),
-                                'getMorphType' => $rows->getMorphType(),
-                                'table' => $rows->getTable(),
-                                'methods' => get_class_methods($rows),
-                                'pivot1' => $pivot1,
-                                'pivot1_exists' => class_exists($pivot1),
-                            ]
-                        );
-                    }
-                    $pivot_class = $pivot1;
-                }
-                // $pivot = new $pivot_class();
-                // dddx($pivot_class);
-                $pivot = app($pivot_class);
-
-
-                // dddx($pivot);
-                $pivot_panel = ThemeService::panelModel($pivot);
-                // ogni tanto ThemeService::panelModel($pivot) rilascia una stringa e non un oggetto
-                // ci ho messo una pezza, ma forse dovrebbe aggiornare morph_map?
-                if (! \is_object($pivot_panel)) {
-                    $pivot_panel = app($pivot_panel);
-                    // dddx($pivot_panel);
-                }
-                $pivot_fields = $pivot_panel->fields();
-                $pivot_fields = collect($pivot_fields)->filter(
-                    function ($item) use ($fields_exclude) {
-                        return ! \in_array($item->name, $fields_exclude, true);
-                    }
-                )->all();
-                $view_params['pivot'] = $pivot;
-                $view_params['pivot_panel'] = $pivot_panel;
-                $view_params['pivot_fields'] = $pivot_fields;
-            }
-
-            // dddx($field->fields);
-            // $field->fields=$field->value;
-        }
-
-        $field->view = $view;
-        $view_params['field'] = $field;
-
-        return view($view, $view_params);
-    }
-    */
     /**
      * Undocumented function.
      *
