@@ -25,7 +25,7 @@ class Verified extends Component
 
     public array $form_data = [];
     public int $step = 2;
-    public ?string $tpl = '';
+    public string $tpl;
     public string $user_id = '';
     public Collection $my_validated_sms_addresses;
     public array $attrs = [];
@@ -35,10 +35,10 @@ class Verified extends Component
      *
      * @return void
      */
-    public function mount(?string $tpl = 'v1', ?array $attrs = [])
+    public function mount(string $tpl = 'v1', ?array $attrs = [])
     {
         $this->user_id = (string) Auth::id();
-        $this->form_data = (array) session()->get('form_data') ?? [];
+        $this->form_data = (array) session()->get('form_data');
         $this->tpl = $tpl;
         $this->mySmsAddresses();
     }
@@ -80,7 +80,7 @@ class Verified extends Component
         $row = new Contact();
         $row->token = (string) $this->form_data['confirm_token'];
         $row->model_type = 'profile';
-        $row->model_id = ProfileService::make()->getProfile()?->id;
+        $row->model_id = ProfileService::make()->getProfile()->id;
         $row->user_id = $this->user_id;
         $row->contact_type = 'mobile';
         $row->value = $this->form_data['add_mobile'];
@@ -93,7 +93,7 @@ class Verified extends Component
         $this->step = 3;
     }
 
-    public function verify_code()
+    public function verify_code(): void
     {
         $is_valid_contact = Contact::where('user_id', $this->user_id)->where('contact_type', 'mobile')->where('verified_at', null)->where('value', $this->form_data['add_mobile'])->where('token', $this->form_data['token'] ?? '')->get();
 
@@ -102,6 +102,9 @@ class Verified extends Component
             $row = $is_valid_contact->first();
 
             $row = $is_valid_contact->first();
+            if (null == $row) {
+                throw new \Exception('[][]');
+            }
             $row->verified_at = now();
             $row->save();
 
@@ -118,7 +121,7 @@ class Verified extends Component
         $this->mySmsAddresses();
     }
 
-    public function add()
+    public function add(): void
     {
         $this->step = 2;
     }

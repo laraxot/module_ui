@@ -21,7 +21,8 @@ use Modules\Xot\Services\CSVService;
  *
  * @property Collection $data
  */
-class Model extends Component {
+class Model extends Component
+{
     use WithFileUploads;
 
     /**
@@ -42,7 +43,8 @@ class Model extends Component {
      *
      * @return void
      */
-    public function mount(string $modelClass, ?array $fields, ?array $trans) {
+    public function mount(string $modelClass, ?array $fields, ?array $trans)
+    {
         $this->modelClass = $modelClass;
         $this->fillable = app($modelClass)->getFillable();
         $this->fillable = array_combine($this->fillable, $this->fillable);
@@ -59,7 +61,8 @@ class Model extends Component {
     /**
      * Undocumented function.
      */
-    public function getDataProperty(): Collection {
+    public function getDataProperty(): Collection
+    {
         $path = $this->myfile->getRealPath();
 
         if (false !== $path) {
@@ -78,7 +81,8 @@ class Model extends Component {
     /**
      * Undocumented function.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */
@@ -93,7 +97,8 @@ class Model extends Component {
      *
      * @return void
      */
-    public function import() {
+    public function import()
+    {
         $model = app($this->modelClass);
 
         $rows = $this->data;
@@ -106,7 +111,11 @@ class Model extends Component {
                 // if(!method_exists($item,'toArray')){
                 //    throw new Exception('['.__LINE__.']['.__FILE__.']');
                 // }
-                foreach ($item->toArray() as $key => $value) {
+                $items = [];
+                if (is_object($item) && method_exists($item, 'toArray')) {
+                    $items = $item->toArray();
+                }
+                foreach ($items as $key => $value) {
                     if (null !== $value) {
                         return $item;
                     }
@@ -121,7 +130,12 @@ class Model extends Component {
         foreach ($rows as $v) {
             $keys = array_values($this->form_data);
             // Cannot call method values() on mixed.
-            $values = $v->values()->all();
+            if (is_object($v) && method_exists($v, 'values')) {
+                $values = $v->values()->all();
+            } else {
+                throw new \Exception('[][]');
+            }
+
             $data = array_combine($keys, $values);
             // dddx([$keys, $data, $values]);
             // Result of && is always true.

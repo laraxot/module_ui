@@ -19,12 +19,13 @@ use WireElements\Pro\Concerns\InteractsWithConfirmationModal;
 /**
  * Class Arr // Array is reserved.
  */
-class Verified extends Component {
+class Verified extends Component
+{
     use InteractsWithConfirmationModal;
 
     public array $form_data = [];
     public int $step = 2;
-    public ?string $tpl = '';
+    public string $tpl;
     public string $user_id = '';
     public Collection $my_validated_email_addresses;
     public array $attrs = [];
@@ -34,28 +35,33 @@ class Verified extends Component {
      *
      * @return void
      */
-    public function mount(?string $tpl = 'v1', ?array $attrs = []) {
+    public function mount(string $tpl = 'v1', ?array $attrs = [])
+    {
         // non sapevo in che altro modo passarlo
         $this->user_id = (string) Auth::id();
-        $this->form_data = session()->get('form_data') ?? [];
+        $this->form_data = (array) session()->get('form_data');
         $this->tpl = $tpl;
         $this->myEmailAddresses();
     }
 
-    public static function getName(): string {
+    public static function getName(): string
+    {
         return 'input.email.verified';
     }
 
-    public function myEmailAddresses(): void {
+    public function myEmailAddresses(): void
+    {
         $this->my_validated_email_addresses = Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', '!=', null)->get();
         // Debugbar::info($this->my_validated_email_addresses);
     }
 
-    public function updateFormData(): void {
+    public function updateFormData(): void
+    {
         $this->emit('updateFormData', $this->form_data);
     }
 
-    public function verify_email(): void {
+    public function verify_email(): void
+    {
         $this->form_data['confirm_token'] = rand(10000, 99999);
 
         if (Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', '!=', null)->firstWhere('value', $this->form_data['add_email'])) {
@@ -74,23 +80,28 @@ class Verified extends Component {
         }
 
         $row = new Contact();
-        $row->token = $this->form_data['confirm_token'];
+        $row->token = strval($this->form_data['confirm_token']);
         $row->model_type = 'profile';
         $row->model_id = ProfileService::make()->getProfile()->id;
         $row->user_id = $this->user_id;
         $row->contact_type = 'email';
         $row->value = $this->form_data['add_email'];
         $row->save();
+        $mail = strval(config('mail.from.address'));
 
-        Notification::route('mail', $row->value)->notify(new HtmlNotification(config('mail.from.address'), 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
+        Notification::route('mail', $row->value)->notify(new HtmlNotification($mail, 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
 
         $this->step = 3;
     }
 
-    public function verify_code() {
+    public function verify_code(): void
+    {
         $is_valid_contact = Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', null)->where('value', $this->form_data['add_email'])->where('token', $this->form_data['token'] ?? '')->get();
         if (false == $is_valid_contact->isEmpty()) {
             $row = $is_valid_contact->first();
+            if (null == $row) {
+                throw new \Exception('[][]');
+            }
             $row->verified_at = now();
             $row->save();
 
@@ -107,14 +118,16 @@ class Verified extends Component {
         $this->myEmailAddresses();
     }
 
-    public function add() {
+    public function add(): void
+    {
         $this->step = 2;
     }
 
     /**
      * Undocumented function.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */

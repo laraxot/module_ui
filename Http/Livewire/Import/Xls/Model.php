@@ -103,10 +103,16 @@ class Model extends Component
          */
         $rows = $rows->filter(
             function ($item) {
+                /*
                 try {
                     $items = $item->toArray();
                 } catch (\Exception $e) {
                     throw new \Exception('['.__LINE__.']['.__FILE__.']');
+                }
+                */
+                $items = [];
+                if (is_object($item) && method_exists($item, 'toArray')) {
+                    $items = $item->toArray();
                 }
                 foreach ($items as $key => $value) {
                     if (null !== $value) {
@@ -123,7 +129,11 @@ class Model extends Component
         foreach ($rows as $v) {
             $keys = array_values($this->form_data);
             // Cannot call method values() on mixed.
-            $values = $v->values()->all();
+            if (is_object($v) && method_exists($v, 'values')) {
+                $values = $v->values()->all();
+            } else {
+                throw new \Exception('[][]');
+            }
             $data = array_combine($keys, $values);
             // dddx([$keys, $data, $values]);
             // Result of && is always true.

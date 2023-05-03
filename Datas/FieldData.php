@@ -109,6 +109,10 @@ class FieldData extends Data implements Wireable
 
         return $this->fields->filter(
             function ($item) use ($act) {
+                if (! $item instanceof FieldData) {
+                    throw new \Exception('[][]');
+                }
+
                 return ! in_array($act, $item->except);
             }
         );
