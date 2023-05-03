@@ -14,20 +14,24 @@ use Nwidart\Modules\Facades\Module;
 use Sushi\Sushi;
 
 /**
- * Modules\UI\Models\MenuItem
+ * Modules\UI\Models\MenuItem.
  *
- * @property int $id
- * @property string|null $label
- * @property string|null $link
- * @property int|null $menu
- * @property int|null $sort
- * @property int|null $parent
- * @property string|null $class
- * @property int|null $depth
- * @property int|null $role_id
- * @property-read Collection<int, MenuItem> $child
- * @property-read int|null $child_count
- * @property-read \Modules\UI\Models\Menu|null $parent_menu
+ * @property int                          $id
+ * @property string|null                  $label
+ * @property string|null                  $link
+ * @property int|null                     $menu
+ * @property int|null                     $sort
+ * @property int|null                     $parent
+ * @property string|null                  $class
+ * @property int|null                     $depth
+ * @property int|null                     $role_id
+ * @property string                       $roles
+ * @property bool                         $active
+ * @property string                       $icon
+ * @property Collection<int, MenuItem>    $child
+ * @property int|null                     $child_count
+ * @property \Modules\UI\Models\Menu|null $parent_menu
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem query()
@@ -40,9 +44,11 @@ use Sushi\Sushi;
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereParent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereRoleId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereSort($value)
+ *
  * @mixin \Eloquent
  */
-class MenuItem extends Model {
+class MenuItem extends Model
+{
     use Sushi;
     use SushiConfigCrud;
 
@@ -98,7 +104,8 @@ class MenuItem extends Model {
     }
     */
 
-    public function getRows(): array {
+    public function getRows(): array
+    {
         $route_params = getRouteParameters();
         $rows = null;
         if (inAdmin() && isset($route_params['module'])) {
@@ -145,28 +152,33 @@ class MenuItem extends Model {
     }
     */
 
-    public function getsons(int $id): Collection {
+    public function getsons(int $id): Collection
+    {
         return $this->where('parent', $id)->get();
     }
 
-    public function getall(int $id): Collection {
+    public function getall(int $id): Collection
+    {
         return $this->where('menu', $id)
             ->orderBy('sort', 'asc')
             ->get();
     }
 
-    public static function getNextSortRoot(int $menu): int {
+    public static function getNextSortRoot(int $menu): int
+    {
         // return (int) self::where('menu', $menu)->max('sort') + 1;
         $max_sort = self::where('menu', $menu)->max('sort');
 
         return $max_sort + 1;
     }
 
-    public function parent_menu(): BelongsTo {
+    public function parent_menu(): BelongsTo
+    {
         return $this->belongsTo(Menu::class, 'menu');
     }
 
-    public function child(): HasMany {
+    public function child(): HasMany
+    {
         return $this->hasMany(self::class, 'parent')
             ->orderBy('sort', 'ASC');
     }
