@@ -14,24 +14,20 @@ use Nwidart\Modules\Facades\Module;
 use Sushi\Sushi;
 
 /**
- * Modules\UI\Models\MenuItem.
+ * Modules\UI\Models\MenuItem
  *
- * @property int                          $id
- * @property string|null                  $label
- * @property string|null                  $link
- * @property string                       $roles
- * @property string                       $icon
- * @property bool                         $active
- * @property int|null                     $menu
- * @property int|null                     $sort
- * @property int|null                     $parent
- * @property string|null                  $class
- * @property int|null                     $depth
- * @property int|null                     $role_id
- * @property Collection|MenuItem[]        $child
- * @property int|null                     $child_count
- * @property \Modules\UI\Models\Menu|null $parent_menu
- *
+ * @property int $id
+ * @property string|null $label
+ * @property string|null $link
+ * @property int|null $menu
+ * @property int|null $sort
+ * @property int|null $parent
+ * @property string|null $class
+ * @property int|null $depth
+ * @property int|null $role_id
+ * @property-read Collection<int, MenuItem> $child
+ * @property-read int|null $child_count
+ * @property-read \Modules\UI\Models\Menu|null $parent_menu
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem query()
@@ -44,7 +40,6 @@ use Sushi\Sushi;
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereParent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereRoleId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereSort($value)
- *
  * @mixin \Eloquent
  */
 class MenuItem extends Model {
