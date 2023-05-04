@@ -7,14 +7,14 @@ namespace Modules\UI\View\Components;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
-use Modules\Cms\Actions\GetViewAction;
 use Modules\Cms\Services\PanelService;
 use Modules\UI\Actions\GetCollectiveViewByType;
 
 /**
  * Undocumented class.
  */
-class Input extends Component {
+class Input extends Component
+{
     public array $attrs = [];
     public string $type = 'text';
     public string $name = 'empty-name';
@@ -27,7 +27,8 @@ class Input extends Component {
     /**
      * ---.
      */
-    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = []) {
+    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = [])
+    {
         $this->name = $name;
         $this->collective_view = app(GetCollectiveViewByType::class)->execute($type); // ui::collective.fields.string.field
 
@@ -81,13 +82,12 @@ class Input extends Component {
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         // esempio Modules/UI/Resources/views/components/input/select/field.blade.php
         /**
          * @phpstan-var view-string
          */
-        // $view = app(GetViewAction::class)->execute($this->type.'.field');
-        // collective = ui::collective.fields.string.field
         $view = str_replace('ui::collective.fields.', 'ui::components.input.', $this->collective_view);
 
         $view_params = [

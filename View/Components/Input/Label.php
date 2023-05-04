@@ -81,6 +81,10 @@ class Label extends Component
             76     Call to an undefined method object::get().
             77     Call to an undefined method object::get().
             */
+<<<<<<< HEAD
+=======
+
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
             $label = $attributes->get('label');
             $name = $attributes->get('name');
             $this->attrs['for'] = $attributes->get('id');

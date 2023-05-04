@@ -25,7 +25,11 @@ class Verified extends Component
 
     public array $form_data = [];
     public int $step = 2;
+<<<<<<< HEAD
     public string $tpl = '';
+=======
+    public string $tpl;
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
     public string $user_id = '';
     public Collection $my_validated_email_addresses;
     public array $attrs = [];
@@ -35,6 +39,7 @@ class Verified extends Component
      *
      * @return void
      */
+<<<<<<< HEAD
     public function mount(string $tpl = 'v1')
     {
         // non sapevo in che altro modo passarlo
@@ -44,6 +49,13 @@ class Verified extends Component
             $form_data = [];
         }
         $this->form_data = $form_data;
+=======
+    public function mount(string $tpl = 'v1', ?array $attrs = [])
+    {
+        // non sapevo in che altro modo passarlo
+        $this->user_id = (string) Auth::id();
+        $this->form_data = (array) session()->get('form_data');
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
         $this->tpl = $tpl;
         $this->myEmailAddresses();
     }
@@ -66,7 +78,11 @@ class Verified extends Component
 
     public function verify_email(): void
     {
+<<<<<<< HEAD
         $this->form_data['confirm_token'] = strval(rand(10000, 99999));
+=======
+        $this->form_data['confirm_token'] = rand(10000, 99999);
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
 
         if (Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', '!=', null)->firstWhere('value', $this->form_data['add_email'])) {
             $this->askForConfirmation(
@@ -84,31 +100,44 @@ class Verified extends Component
         }
 
         $row = new Contact();
-        $row->token = $this->form_data['confirm_token'];
+        $row->token = strval($this->form_data['confirm_token']);
         $row->model_type = 'profile';
         $row->model_id = strval(ProfileService::make()->getProfile()->id);
         $row->user_id = $this->user_id;
         $row->contact_type = 'email';
         $row->value = $this->form_data['add_email'];
         $row->save();
+        $mail = strval(config('mail.from.address'));
 
+<<<<<<< HEAD
         Notification::route('mail', $row->value)->notify(new HtmlNotification(strval(config('mail.from.address')), 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
+=======
+        Notification::route('mail', $row->value)->notify(new HtmlNotification($mail, 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
 
         $this->step = 3;
     }
 
+<<<<<<< HEAD
     /**
      * Undocumented function.
      *
      * @return void
      */
     public function verify_code()
+=======
+    public function verify_code(): void
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
     {
         $is_valid_contact = Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', null)->where('value', $this->form_data['add_email'])->where('token', $this->form_data['token'] ?? '')->get();
         if (false == $is_valid_contact->isEmpty()) {
             $row = $is_valid_contact->first();
             if (null == $row) {
+<<<<<<< HEAD
                 throw new \Exception('['.__LINE__.']['.__FILE__.']');
+=======
+                throw new \Exception('[][]');
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
             }
             $row->verified_at = now();
             $row->save();

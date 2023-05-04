@@ -31,8 +31,12 @@ use Modules\Xot\Services\PolicyService;
 /**
  * Class FormService.
  */
+<<<<<<< HEAD
 class FormService
 {
+=======
+class FormService {
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
     /**
      * ora selectRelationshipOne
      * da select/field_relationship_one.blade.php
@@ -50,8 +54,12 @@ class FormService
     /**
      * @param BelongsTo|HasManyThrough|HasOneOrMany|BelongsToMany|MorphOneOrMany|MorphPivot|MorphTo|MorphToMany $rows
      */
+<<<<<<< HEAD
     public static function fieldsExcludeRows($rows): array
     {
+=======
+    public static function fieldsExcludeRows($rows): array {
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
         $fields_exclude = [];
 
         $fields_exclude[] = 'id';
@@ -73,8 +81,12 @@ class FormService
         return $fields_exclude;
     }
 
+<<<<<<< HEAD
     public static function getCollectiveComponents(): array
     {
+=======
+    public static function getCollectiveComponents(): array {
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
         $view_path = __DIR__.'/../Resources/views/collective/fields';
         $prefix = 'ui::';
 
@@ -242,8 +254,12 @@ class FormService
      *
      * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Support\HtmlString
      */
+<<<<<<< HEAD
     public static function inputHtml(FieldData $field, Model $row)
     {
+=======
+    public static function inputHtml(FieldData $field, Model $row) {
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
         $input_type = 'bs'.Str::studly($field->type);
         if (isset($field->sub_type)) {
             $input_type .= Str::studly($field->sub_type);
@@ -276,8 +292,12 @@ class FormService
         return Form::$input_type($input_name, $input_value, $input_attrs, $input_opts);
     }
 
+<<<<<<< HEAD
     public static function btnHtml(array $params): string
     {
+=======
+    public static function btnHtml(array $params): string {
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
         $class = 'btn btn-primary mb-2';
         $icon = null;       // icona a sx del titolo
         $label = null;
@@ -349,7 +369,10 @@ class FormService
             $url = route('login', ['lang' => $lang, 'referrer' => $url]);
         }
 
+<<<<<<< HEAD
         /*-- deprecated
+=======
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
         if (isset($modal)) {
             $url = url_queries(['format' => $modal], $url);
             $target = '';
@@ -369,7 +392,10 @@ class FormService
             </button>
             </span>';
         }
+<<<<<<< HEAD
         */
+=======
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
         // data-href serve per le chiamate ajax
         // dddx($params, $title, $data_title);
         // $title = trans(strtolower($module_name.'::'.class_basename($row)).'.act.'.$title);
@@ -385,8 +411,12 @@ class FormService
                 </a>';
     }
 
+<<<<<<< HEAD
     public static function btnMassiveAction(array $params): string
     {
+=======
+    public static function btnMassiveAction(array $params): string {
+>>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
         $class = 'btn btn-primary mb-2';
         $icon = null;       // icona a sx del titolo
         $label = null;
