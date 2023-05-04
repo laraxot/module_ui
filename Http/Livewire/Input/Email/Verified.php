@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\UI\Http\Livewire\Input\Email;
 
-use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Modules\Cms\Actions\GetViewAction;
+use Modules\ExtraField\Actions\ExtraFieldGroup\Create;
+use Modules\ExtraField\Models\ExtraFieldGroup;
+use Modules\ExtraField\Models\ExtraFieldGroupMorph;
 use Modules\LU\Services\ProfileService;
 use Modules\Notify\Models\Contact;
 use Modules\Notify\Notifications\HtmlNotification;
+use Modules\Xot\Datas\XotData;
 use WireElements\Pro\Concerns\InteractsWithConfirmationModal;
 
 /**
@@ -24,14 +28,19 @@ class Verified extends Component
     use InteractsWithConfirmationModal;
 
     public array $form_data = [];
+<<<<<<< HEAD
     public int $step = 2;
 <<<<<<< HEAD
     public string $tpl = '';
 =======
+=======
+    public int $step = 1;
+>>>>>>> 324b0d00bcb74c5009366c1450ada6b7a3338cd2
     public string $tpl;
 >>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
     public string $user_id = '';
-    public Collection $my_validated_email_addresses;
+    public Collection $validated_email_addresses;
+    public Collection $not_validated_email_addresses;
     public array $attrs = [];
 
     /**
@@ -67,8 +76,8 @@ class Verified extends Component
 
     public function myEmailAddresses(): void
     {
-        $this->my_validated_email_addresses = Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', '!=', null)->get();
-        // Debugbar::info($this->my_validated_email_addresses);
+        $this->validated_email_addresses = Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', '!=', null)->get();
+        $this->not_validated_email_addresses = Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', null)->get();
     }
 
     public function updateFormData(): void
@@ -76,7 +85,7 @@ class Verified extends Component
         $this->emit('updateFormData', $this->form_data);
     }
 
-    public function verify_email(): void
+    public function addEmail(): void
     {
 <<<<<<< HEAD
         $this->form_data['confirm_token'] = strval(rand(10000, 99999));
@@ -84,22 +93,14 @@ class Verified extends Component
         $this->form_data['confirm_token'] = rand(10000, 99999);
 >>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
 
-        if (Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', '!=', null)->firstWhere('value', $this->form_data['add_email'])) {
-            $this->askForConfirmation(
-                callback: function () {
-                },
-                prompt: [
-                    'title' => __('Attenzione!'),
-                    'message' => __('Non puoi aggiungere un indirizzo email già esistente'),
-                    'confirm' => __('Ok'),
-                    'cancel' => __('Annulla'),
-                ],
-            );
+        $xot = XotData::make();
+        $profile = $xot->getProfileModelByUserId($this->user_id);
 
-            return;
-        }
+        $extra_field_group_id = (string) ExtraFieldGroup::firstWhere('name', 'email')?->id;
+        app(Create::class)->execute($profile, $extra_field_group_id, $this->user_id, ['uuid' => Str::uuid()->toString(), 'token' => $this->form_data['confirm_token'], 'email' => $this->form_data['add_email']]);
 
-        $row = new Contact();
+        // da mettere in extrafieldgroupmorph e extrafieldmorph
+        /*$row = new Contact();
         $row->token = strval($this->form_data['confirm_token']);
         $row->model_type = 'profile';
         $row->model_id = strval(ProfileService::make()->getProfile()->id);
@@ -110,14 +111,33 @@ class Verified extends Component
         $mail = strval(config('mail.from.address'));
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         Notification::route('mail', $row->value)->notify(new HtmlNotification(strval(config('mail.from.address')), 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
 =======
         Notification::route('mail', $row->value)->notify(new HtmlNotification($mail, 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
 >>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
+=======
+       */
+
+        $this->sendToken();
+    }
+
+    public function sendToken(): void
+    {
+        // è sbagliato. bisogna usare Datas
+        $mail = strval(config('mail.from.address'));
+        Notification::route('mail', $this->form_data['add_email'])->notify(new HtmlNotification($mail, 'Verify Email Address', '<h1>Verification Code</h1><h3>'.strval($this->form_data['confirm_token']).'</h3>'));
+    }
+
+    public function verifyOldEmail(): void
+    {
+        $this->addEmail();
+>>>>>>> 324b0d00bcb74c5009366c1450ada6b7a3338cd2
 
         $this->step = 3;
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     /**
      * Undocumented function.
@@ -128,7 +148,38 @@ class Verified extends Component
 =======
     public function verify_code(): void
 >>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
+=======
+    public function verifyEmail(): void
+>>>>>>> 324b0d00bcb74c5009366c1450ada6b7a3338cd2
     {
+        /*
+        fare spatie action extraFieldGroupMorph
+
+        if (ExtraFieldGroupMorph::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', '!=', null)->firstWhere('value', $this->form_data['add_email'])) {
+             $this->askForConfirmation(
+                 callback: function () {
+                 },
+                 prompt: [
+                     'title' => __('Attenzione!'),
+                     'message' => __('Non puoi aggiungere un indirizzo email già esistente'),
+                     'confirm' => __('Ok'),
+                     'cancel' => __('Annulla'),
+                 ],
+             );
+
+             return;
+         }*/
+
+        $this->addEmail();
+
+        $this->step = 3;
+    }
+
+    public function verifyCode(): void
+    {
+        /*
+        fare spatie action extraFieldGroupMorph
+
         $is_valid_contact = Contact::where('user_id', $this->user_id)->where('contact_type', 'email')->where('verified_at', null)->where('value', $this->form_data['add_email'])->where('token', $this->form_data['token'] ?? '')->get();
         if (false == $is_valid_contact->isEmpty()) {
             $row = $is_valid_contact->first();
@@ -151,7 +202,7 @@ class Verified extends Component
             $this->step = 2;
         } else {
             session()->flash('status_error', 'Email NOT Verified');
-        }
+        }*/
         $this->myEmailAddresses();
     }
 
