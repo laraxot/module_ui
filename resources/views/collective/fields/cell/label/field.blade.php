@@ -1,8 +1,8 @@
 @php
-
-    $row=Form::getModel();
+    
+    $row = Form::getModel();
     $fields = $attributes['fields'];
-
+    
     //dddx([$attributes['fields'],$row])
     /*$fields = $attributes['fields'];
     $model = Form::getModel();
@@ -18,7 +18,8 @@
         ->all();
     if ($disabled) {
         $fields = collect($fields)
-            ->map(function ($item) {
+            ->map(
+function ($item) {
                 if (!isset($item->attributes)) {
                     $item->attributes = [];
                 }
@@ -28,6 +29,7 @@
             ->all();
     }
     */
+    
 @endphp
 
 <fieldset class="form-group container-fluid border p-2" {{-- $disabled --}}>

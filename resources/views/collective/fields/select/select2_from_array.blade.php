@@ -66,7 +66,8 @@
     <script>
         jQuery(document).ready(function($) {
             // trigger select2 for each untriggered select2 box
-            $('.select2_from_array').each(function (i, obj) {
+            $('.select2_from_array').each(
+function (i, obj) {
                 if (!$(obj).hasClass("select2-hidden-accessible"))
                 {
                     $(obj).select2({
