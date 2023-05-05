@@ -30,8 +30,6 @@ class GetRulesWithParamsAction
 =======
             ->map(
                 function ($method) {
-                    // $param_names = collect($method->getParameters())->pluck('name', 'name')->except(['attribute', 'value']);
-
                     $method_name = str_replace('validate_', '', Str::snake($method->name));
 >>>>>>> 4a8c17c748c115a1ed0de97c2fc7506d68e4b299
 
