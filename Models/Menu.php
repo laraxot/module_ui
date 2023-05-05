@@ -13,26 +13,19 @@ use Nwidart\Modules\Facades\Module;
 use Sushi\Sushi;
 
 /**
-<<<<<<< HEAD
  * Modules\UI\Models\Menu.
  *
- * @property int                                                                    $id
- * @property string|null                                                            $name
- * @property \Illuminate\Database\Eloquent\Collection|\Modules\UI\Models\MenuItem[] $items
- * @property int|null                                                               $items_count
-=======
- * Modules\UI\Models\Menu
+ * @property int                                                                        $id
+ * @property string|null                                                                $name
+ * @property \Illuminate\Database\Eloquent\Collection<int, \Modules\UI\Models\MenuItem> $items
+ * @property int|null                                                                   $items_count
  *
- * @property int $id
- * @property string|null $name
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\UI\Models\MenuItem> $items
- * @property-read int|null $items_count
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
  * @method static Builder|Menu newModelQuery()
  * @method static Builder|Menu newQuery()
  * @method static Builder|Menu query()
  * @method static Builder|Menu whereId($value)
  * @method static Builder|Menu whereName($value)
+ *
  * @mixin \Eloquent
  */
 class Menu extends Model

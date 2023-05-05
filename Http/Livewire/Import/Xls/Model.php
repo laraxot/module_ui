@@ -103,27 +103,17 @@ class Model extends Component
          */
         $rows = $rows->filter(
             function ($item) {
-<<<<<<< HEAD
-                /*if (! ($item instanceof Collection)) {
-                    throw new \InvalidArgumentException('Il parametro $item non è una collezione');
-                }*/
-
-=======
                 /*
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
                 try {
                     $items = $item->toArray();
                 } catch (\Exception $e) {
                     throw new \Exception('['.__LINE__.']['.__FILE__.']');
                 }
-<<<<<<< HEAD
-=======
                 */
                 $items = [];
                 if (is_object($item) && method_exists($item, 'toArray')) {
                     $items = $item->toArray();
                 }
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
                 foreach ($items as $key => $value) {
                     if (null !== $value) {
                         return $item;

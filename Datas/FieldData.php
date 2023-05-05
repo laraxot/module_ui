@@ -10,15 +10,10 @@ use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 
-<<<<<<< HEAD
-class FieldData extends Data
-{
-=======
 class FieldData extends Data implements Wireable
 {
     use WireableData;
 
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
     public string $name;
     public ?string $label = null;
     public ?string $name_dot = null;
@@ -121,11 +116,7 @@ class FieldData extends Data implements Wireable
              */
             function ($item) use ($act) {
                 if (! $item instanceof FieldData) {
-<<<<<<< HEAD
-                    throw new \Exception('['.__LINE__.']['.__FILE__.']');
-=======
                     throw new \Exception('[][]');
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
                 }
 
                 return ! in_array($act, $item->except);

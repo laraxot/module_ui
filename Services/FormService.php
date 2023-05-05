@@ -15,13 +15,6 @@ use Illuminate\Database\Eloquent\Relations\MorphOneOrMany;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-<<<<<<< HEAD
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\View;
-=======
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
 use Illuminate\Support\Str;
 use Modules\UI\Actions\GetCollectiveComponents;
 use Modules\UI\Datas\FieldData;
