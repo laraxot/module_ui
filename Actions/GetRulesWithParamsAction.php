@@ -11,12 +11,8 @@ use Spatie\QueueableAction\QueueableAction;
 class GetRulesWithParamsAction {
     use QueueableAction;
 
-<<<<<<< HEAD
     public function execute(): array
     {
-=======
-    public function execute(): array {
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
         $validatorClass = new \ReflectionClass(ValidatesAttributes::class);
 
         $r = collect($validatorClass->getMethods(\ReflectionMethod::IS_PUBLIC))

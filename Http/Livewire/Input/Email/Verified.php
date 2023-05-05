@@ -14,7 +14,6 @@ use Modules\Cms\Actions\GetViewAction;
 use Modules\ExtraField\Actions\ExtraFieldGroup\Create;
 use Modules\ExtraField\Models\ExtraFieldGroup;
 use Modules\ExtraField\Models\ExtraFieldGroupMorph;
-use Modules\LU\Services\ProfileService;
 use Modules\Notify\Models\Contact;
 use Modules\Notify\Notifications\HtmlNotification;
 use Modules\Xot\Datas\XotData;
@@ -28,16 +27,7 @@ class Verified extends Component
     use InteractsWithConfirmationModal;
 
     public array $form_data = [];
-<<<<<<< HEAD
-    public int $step = 2;
-<<<<<<< HEAD
-    public string $tpl = '';
-=======
-=======
     public int $step = 1;
->>>>>>> 324b0d00bcb74c5009366c1450ada6b7a3338cd2
-    public string $tpl;
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
     public string $user_id = '';
     public Collection $validated_email_addresses;
     public Collection $not_validated_email_addresses;
@@ -48,7 +38,6 @@ class Verified extends Component
      *
      * @return void
      */
-<<<<<<< HEAD
     public function mount(string $tpl = 'v1')
     {
         // non sapevo in che altro modo passarlo
@@ -58,13 +47,6 @@ class Verified extends Component
             $form_data = [];
         }
         $this->form_data = $form_data;
-=======
-    public function mount(string $tpl = 'v1', ?array $attrs = [])
-    {
-        // non sapevo in che altro modo passarlo
-        $this->user_id = (string) Auth::id();
-        $this->form_data = (array) session()->get('form_data');
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
         $this->tpl = $tpl;
         $this->myEmailAddresses();
     }
@@ -87,11 +69,7 @@ class Verified extends Component
 
     public function addEmail(): void
     {
-<<<<<<< HEAD
         $this->form_data['confirm_token'] = strval(rand(10000, 99999));
-=======
-        $this->form_data['confirm_token'] = rand(10000, 99999);
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
 
         $xot = XotData::make();
         $profile = $xot->getProfileModelByUserId($this->user_id);
@@ -99,25 +77,7 @@ class Verified extends Component
         $extra_field_group_id = (string) ExtraFieldGroup::firstWhere('name', 'email')?->id;
         app(Create::class)->execute($profile, $extra_field_group_id, $this->user_id, ['uuid' => Str::uuid()->toString(), 'token' => $this->form_data['confirm_token'], 'email' => $this->form_data['add_email']]);
 
-        // da mettere in extrafieldgroupmorph e extrafieldmorph
-        /*$row = new Contact();
-        $row->token = strval($this->form_data['confirm_token']);
-        $row->model_type = 'profile';
-        $row->model_id = strval(ProfileService::make()->getProfile()->id);
-        $row->user_id = $this->user_id;
-        $row->contact_type = 'email';
-        $row->value = $this->form_data['add_email'];
-        $row->save();
-        $mail = strval(config('mail.from.address'));
-
-<<<<<<< HEAD
-<<<<<<< HEAD
         Notification::route('mail', $row->value)->notify(new HtmlNotification(strval(config('mail.from.address')), 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
-=======
-        Notification::route('mail', $row->value)->notify(new HtmlNotification($mail, 'Verify Email Address', '<h1>Verification Code</h1><h3>'.$row->token.'</h3>'));
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
-=======
-       */
 
         $this->sendToken();
     }
@@ -132,25 +92,16 @@ class Verified extends Component
     public function verifyOldEmail(): void
     {
         $this->addEmail();
->>>>>>> 324b0d00bcb74c5009366c1450ada6b7a3338cd2
 
         $this->step = 3;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
      * Undocumented function.
      *
      * @return void
      */
     public function verify_code()
-=======
-    public function verify_code(): void
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
-=======
-    public function verifyEmail(): void
->>>>>>> 324b0d00bcb74c5009366c1450ada6b7a3338cd2
     {
         /*
         fare spatie action extraFieldGroupMorph
@@ -184,11 +135,7 @@ class Verified extends Component
         if (false == $is_valid_contact->isEmpty()) {
             $row = $is_valid_contact->first();
             if (null == $row) {
-<<<<<<< HEAD
                 throw new \Exception('['.__LINE__.']['.__FILE__.']');
-=======
-                throw new \Exception('[][]');
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
             }
             $row->verified_at = now();
             $row->save();

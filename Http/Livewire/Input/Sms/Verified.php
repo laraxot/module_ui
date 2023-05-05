@@ -35,17 +35,10 @@ class Verified extends Component
      *
      * @return void
      */
-<<<<<<< HEAD
     public function mount(string $tpl = 'v1')
     {
         $this->user_id = (string) Auth::id();
         $this->form_data = (array) session()->get('form_data', []);
-=======
-    public function mount(string $tpl = 'v1', ?array $attrs = [])
-    {
-        $this->user_id = (string) Auth::id();
-        $this->form_data = (array) session()->get('form_data');
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
         $this->tpl = $tpl;
         $this->mySmsAddresses();
     }
@@ -68,11 +61,7 @@ class Verified extends Component
 
     public function verify_sms(): void
     {
-<<<<<<< HEAD
         $this->form_data['confirm_token'] = strval(rand(10000, 99999));
-=======
-        $this->form_data['confirm_token'] = rand(10000, 99999);
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
 
         if (Contact::where('user_id', $this->user_id)->where('contact_type', 'mobile')->where('verified_at', '!=', null)->firstWhere('value', $this->form_data['add_mobile'])) {
             $this->askForConfirmation(
@@ -104,16 +93,12 @@ class Verified extends Component
         $this->step = 3;
     }
 
-<<<<<<< HEAD
     /**
      * Undocumented function.
      *
      * @return void
      */
     public function verify_code()
-=======
-    public function verify_code(): void
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
     {
         $is_valid_contact = Contact::where('user_id', $this->user_id)->where('contact_type', 'mobile')->where('verified_at', null)->where('value', $this->form_data['add_mobile'])->where('token', $this->form_data['token'] ?? '')->get();
 
@@ -123,14 +108,9 @@ class Verified extends Component
 
             $row = $is_valid_contact->first();
             if (null == $row) {
-<<<<<<< HEAD
                 throw new \Exception('['.__LINE__.']['.__FILE__.']');
             }
             // Access to an undefined property Modules\Notify\Models\Contact::$verified_at
-=======
-                throw new \Exception('[][]');
-            }
->>>>>>> eb9ac63612a2a9a65cf3585dad0a6f569a9685af
             $row->verified_at = now();
             $row->save();
 
