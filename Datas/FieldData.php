@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\UI\Datas;
 
+use Livewire\Wireable;
 use Modules\Cms\Services\RouteService;
+use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 
