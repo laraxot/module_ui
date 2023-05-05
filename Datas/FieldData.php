@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace Modules\UI\Datas;
 
-use Livewire\Wireable;
 use Modules\Cms\Services\RouteService;
-use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 
+<<<<<<< HEAD
 class FieldData extends Data implements Wireable {
     use WireableData;
 
+=======
+class FieldData extends Data
+{
+>>>>>>> 4a8c17c748c115a1ed0de97c2fc7506d68e4b299
     public string $name;
     public ?string $label = null;
     public ?string $name_dot = null;
@@ -105,7 +108,11 @@ class FieldData extends Data implements Wireable {
         return $this->fields->filter(
             function ($item) use ($act) {
                 if (! $item instanceof FieldData) {
+<<<<<<< HEAD
                     throw new \Exception('[][]');
+=======
+                    throw new \Exception('['.__LINE__.']['.__FILE__.']');
+>>>>>>> 4a8c17c748c115a1ed0de97c2fc7506d68e4b299
                 }
 
                 return ! in_array($act, $item->except);

@@ -98,17 +98,23 @@ class Model extends Component {
          */
         $rows = $rows->filter(
             function ($item) {
+<<<<<<< HEAD
                 /*
+=======
+>>>>>>> 4a8c17c748c115a1ed0de97c2fc7506d68e4b299
                 try {
                     $items = $item->toArray();
                 } catch (\Exception $e) {
                     throw new \Exception('['.__LINE__.']['.__FILE__.']');
                 }
+<<<<<<< HEAD
                 */
                 $items = [];
                 if (is_object($item) && method_exists($item, 'toArray')) {
                     $items = $item->toArray();
                 }
+=======
+>>>>>>> 4a8c17c748c115a1ed0de97c2fc7506d68e4b299
                 foreach ($items as $key => $value) {
                     if (null !== $value) {
                         return $item;
@@ -123,22 +129,14 @@ class Model extends Component {
 
         foreach ($rows as $v) {
             $keys = array_values($this->form_data);
-            // Cannot call method values() on mixed.
             if (is_object($v) && method_exists($v, 'values')) {
                 $values = $v->values()->all();
             } else {
                 throw new \Exception('[][]');
             }
             $data = array_combine($keys, $values);
-            // dddx([$keys, $data, $values]);
-            // Result of && is always true.
-            // if (false !== $data && false !== $this->fields) {
-            // if (false !== $data && false !== $this->fields) {
             $data = array_merge($data, $this->fields);
-            // }
             $data['mobile_phone'] = strval($data['mobile_phone']);
-            // dddx($data['mobile_phone']);
-            // dddx(['data' => $data, 'v' => $v, 'form_data' => $this->form_data, 'keys' => $keys]);
             $model->create($data);
         }
         session()->flash('message', 'Import successfully ');
