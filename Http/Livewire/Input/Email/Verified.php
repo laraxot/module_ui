@@ -14,7 +14,6 @@ use Modules\Cms\Actions\GetViewAction;
 use Modules\ExtraField\Actions\ExtraFieldGroup\Create;
 use Modules\ExtraField\Models\ExtraFieldGroup;
 use Modules\ExtraField\Models\ExtraFieldGroupMorph;
-use Modules\LU\Services\ProfileService;
 use Modules\Notify\Models\Contact;
 use Modules\Notify\Notifications\HtmlNotification;
 use Modules\Xot\Datas\XotData;

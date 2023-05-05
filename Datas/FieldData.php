@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\UI\Datas;
 
-use Livewire\Wireable;
 use Modules\Cms\Services\RouteService;
-use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 
@@ -102,21 +100,15 @@ class FieldData extends Data implements Wireable
         if (null == $act) {
             $act = RouteService::getAct();
         }
-        if (null == $this->fields) {
-            throw new \Exception('['.__LINE__.']['.__FILE__.']');
-        }
 
         if (null == $this->fields) {
             throw new \Exception('['.__LINE__.']['.__FILE__.']');
         }
 
         return $this->fields->filter(
-            /**
-             * @param FieldData $item
-             */
             function ($item) use ($act) {
                 if (! $item instanceof FieldData) {
-                    throw new \Exception('[][]');
+                    throw new \Exception('['.__LINE__.']['.__FILE__.']');
                 }
 
                 return ! in_array($act, $item->except);
