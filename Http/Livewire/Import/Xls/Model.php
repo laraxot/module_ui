@@ -103,16 +103,6 @@ class Model extends Component
          */
         $rows = $rows->filter(
             function ($item) {
-<<<<<<< HEAD
-=======
-                /*
-                try {
-                    $items = $item->toArray();
-                } catch (\Exception $e) {
-                    throw new \Exception('['.__LINE__.']['.__FILE__.']');
-                }
-                */
->>>>>>> e723df785962a32cfea807fe3cfe8354a0d087ca
                 $items = [];
                 if (is_object($item) && method_exists($item, 'toArray')) {
                     $items = $item->toArray();
