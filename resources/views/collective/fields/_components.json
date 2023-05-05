@@ -28,6 +28,10 @@
         "view": "ui::collective.fields.array.elastic.filter.field"
     },
     {
+        "name": "bsBigint",
+        "view": "ui::collective.fields.bigint.field"
+    },
+    {
         "name": "bsBoolean",
         "view": "ui::collective.fields.boolean.field"
     },
