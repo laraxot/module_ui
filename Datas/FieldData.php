@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\UI\Datas;
 
+use Livewire\Wireable;
 use Modules\Cms\Services\RouteService;
+use Spatie\LaravelData\Concerns\WireableData;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\DataCollection;
 
@@ -108,7 +110,11 @@ class FieldData extends Data implements Wireable
         return $this->fields->filter(
             function ($item) use ($act) {
                 if (! $item instanceof FieldData) {
+<<<<<<< HEAD
                     throw new \Exception('['.__LINE__.']['.__FILE__.']');
+=======
+                    throw new \Exception('[][]');
+>>>>>>> e723df785962a32cfea807fe3cfe8354a0d087ca
                 }
 
                 return ! in_array($act, $item->except);

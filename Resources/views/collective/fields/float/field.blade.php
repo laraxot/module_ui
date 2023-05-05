@@ -1,7 +1,11 @@
 @php
     $field = transFields(get_defined_vars());
+<<<<<<< HEAD
     $field->attributes = array_merge($field->attributes, ['step' => '0.01']);
     
+=======
+    $field->attributes['step'] = '0.01';
+>>>>>>> e723df785962a32cfea807fe3cfe8354a0d087ca
 @endphp
 @component($blade_component, get_defined_vars())
     @slot('label')

@@ -11,13 +11,19 @@ use Spatie\QueueableAction\QueueableAction;
 class GetRulesWithParamsAction {
     use QueueableAction;
 
+<<<<<<< HEAD
     public function execute(): array {
+=======
+    public function execute(): array
+    {
+>>>>>>> e723df785962a32cfea807fe3cfe8354a0d087ca
         $validatorClass = new \ReflectionClass(ValidatesAttributes::class);
 
         $r = collect($validatorClass->getMethods(\ReflectionMethod::IS_PUBLIC))
             ->filter(function ($method) {
                 return Str::startsWith($method->name, 'validate');
             })
+<<<<<<< HEAD
             ->map(function ($method) {
                 // $param_names = collect($method->getParameters())->pluck('name', 'name')->except(['attribute', 'value']);
 <<<<<<< HEAD
@@ -25,9 +31,14 @@ class GetRulesWithParamsAction {
                     $params = $this->getParamsType($method_name);
 =======
 =======
+=======
+>>>>>>> e723df785962a32cfea807fe3cfe8354a0d087ca
             ->map(
                 function ($method) {
+                    // $param_names = collect($method->getParameters())->pluck('name', 'name')->except(['attribute', 'value']);
+
                     $method_name = str_replace('validate_', '', Str::snake($method->name));
+<<<<<<< HEAD
 >>>>>>> 4a8c17c748c115a1ed0de97c2fc7506d68e4b299
 >>>>>>> 27711be125842af4bcfc7dd7aa0b8edee994b7f4
 
@@ -45,11 +56,34 @@ class GetRulesWithParamsAction {
                         $comment = preg_replace('/\s\s+/', ' ', $comment);
                         $comment = str_replace('* ', '', (string) $comment);
                         $comment = trim($comment);
+=======
+
+                    $params = $this->getParamsType($method_name);
+
+                    if (null != $params) {
+                        $start = strpos((string) $method->getDocComment(), 'Validate');
+                        $end = strpos((string) $method->getDocComment(), '@');
+
+                        $comment = '';
+                        if (is_int($start)) {
+                            $comment = substr((string) $method->getDocComment(), $start, $end - $start);
+                            $comment = preg_replace('/\s\s+/', ' ', $comment);
+                            $comment = str_replace('* ', '', (string) $comment);
+                            $comment = trim($comment);
+                        }
+
+                        return [
+                            'name' => $method_name,
+                            'comment' => $comment,
+                            'params' => $params,
+                        ];
+>>>>>>> e723df785962a32cfea807fe3cfe8354a0d087ca
                     }
                 })->filter(function ($v) {
                     return null !== $v;
                 })->toArray();
 
+<<<<<<< HEAD
                     return [
                         'name' => $method_name,
                         'comment' => $comment,
@@ -60,6 +94,8 @@ class GetRulesWithParamsAction {
                 return null !== $v;
             })->toArray();
 
+=======
+>>>>>>> e723df785962a32cfea807fe3cfe8354a0d087ca
         // dd($r);
 
         return $r;
