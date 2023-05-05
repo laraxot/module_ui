@@ -110,11 +110,7 @@ class FieldData extends Data implements Wireable
         return $this->fields->filter(
             function ($item) use ($act) {
                 if (! $item instanceof FieldData) {
-<<<<<<< HEAD
                     throw new \Exception('['.__LINE__.']['.__FILE__.']');
-=======
-                    throw new \Exception('[][]');
->>>>>>> e723df785962a32cfea807fe3cfe8354a0d087ca
                 }
 
                 return ! in_array($act, $item->except);
