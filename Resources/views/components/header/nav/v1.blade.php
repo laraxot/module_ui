@@ -16,7 +16,8 @@
                                 class="sr-only">What are you looking for?</span></label>
                         <input type="hidden" name="filter[0][criteria]" value="query_string_query">
                         @php
-                            $max_search_days = $profile->getProfile()->max_search_days ?? 365;
+                            //$max_search_days = $profile->getProfile()->max_search_days ?? 365;
+                            $max_search_days = $_theme->getProfileMaxSearchDays();
                         @endphp
                         <input type="hidden" name="date_from" value="{{ date('Y-m-d', strtotime('-'.$max_search_days.' days')) }}">
                         <input type="hidden" name="date_to" value="{{ date('Y-m-d') }}">
