@@ -28,7 +28,7 @@ abstract class BaseStep extends StepComponent
     /* --- cosi' non funziona.. da pensare altro metodo ..
     public static function getName(): string
     {
-        // return 'wizard.service.steps.choose-category-company';
+        // return 'wizard.service.add.choose-category-company';
         $backtrace = debug_backtrace();
         $obj = $backtrace[1]['object'];
         $t1 = new \ReflectionClass($obj);
@@ -80,9 +80,11 @@ abstract class BaseStep extends StepComponent
 
     public function stepInfo(): array
     {
+        $trans_key = str_replace('::livewire.', '::', $this->getView());
+
         return [
-            'label' => trans(str_replace('::livewire.', '::', $this->getView())),
-            'icon' => 'fa-shopping-cart',
+            'label' => trans($trans_key.'.label'),
+            'icon' => trans($trans_key.'.icon'),
         ];
     }
 
