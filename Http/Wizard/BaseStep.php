@@ -63,7 +63,7 @@ abstract class BaseStep extends StepComponent
         }
         $backtrace = debug_backtrace();
 
-        if (! isset($backtrace[0]['object'])) {
+        if (!isset($backtrace[0]['object'])) {
             throw new \Exception('[][]');
         }
         $obj = $backtrace[0]['object'];
@@ -80,9 +80,10 @@ abstract class BaseStep extends StepComponent
 
     public function stepInfo(): array
     {
+        $trans_key = str_replace('::livewire.', '::', $this->getView());
         return [
-            'label' => trans(str_replace('::livewire.', '::', $this->getView())),
-            'icon' => 'fa-shopping-cart',
+            'label' => trans($trans_key . '.label'),
+            'icon' => trans($trans_key . '.icon'),
         ];
     }
 
