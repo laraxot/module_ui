@@ -9,7 +9,8 @@ use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Modules\Cms\Actions\GetViewAction;
 
-class Spatie extends Component {
+class Spatie extends Component
+{
     public string $name;
     public string $tpl;
 
@@ -17,11 +18,16 @@ class Spatie extends Component {
     public string $label;
     public string $icon;
 
-    public function __construct(string $name, string $tpl = 'v1') {
+    public function __construct(string $name, string $tpl = 'v1')
+    {
         $this->name = $name;
         $this->tpl = $tpl;
         $icon = '';
-        $sort = strval(request('sort', ''));
+        /**
+         * @var string $sort_request
+         */
+        $sort_request = request('sort', '');
+        $sort = strval($sort_request);
         $sort_by = $sort;
         $order = 'asc';
         if (Str::startsWith($sort_by, '-')) {
@@ -46,7 +52,8 @@ class Spatie extends Component {
         $this->icon = $icon;
     }
 
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */
