@@ -1,12 +1,8 @@
-@props([
-    'title',
-    'tools'=>null,
-    'footer'=>null,
-])
-<div {{ $attributes->merge(['class'=>'card']) }} >
+@props(['title', 'tools' => null, 'footer' => null])
+<div {{ $attributes->merge(['class' => 'card']) }}>
     <div class="card-header border-0">
         <h3 class="card-title">
-           {!! $title !!}
+            {!! $title !!}
         </h3>
         <div class="card-tools">
             {!! $tools !!}
