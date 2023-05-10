@@ -4,6 +4,11 @@
 /source/assets/build/
 .env
 npm-debug.log
+*.cache
+*.phar
 *.lock
+package-lock.json
+*.lock
+package-lock.json
 *.log
 
