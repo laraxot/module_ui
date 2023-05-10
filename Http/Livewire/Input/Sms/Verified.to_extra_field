@@ -14,7 +14,7 @@ use Modules\Cms\Actions\GetViewAction;
 use Modules\LU\Services\ProfileService;
 use Modules\Notify\Models\Contact;
 use Modules\Notify\Notifications\SmsNotification;
-use WireElements\Pro\Concerns\InteractsWithConfirmationModal;
+use Modules\Modal\Concerns\InteractsWithConfirmationModal;
 
 /**
  * Class Arr // Array is reserved.
