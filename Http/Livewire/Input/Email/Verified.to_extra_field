@@ -17,7 +17,7 @@ use Modules\ExtraField\Models\ExtraFieldGroupMorph;
 use Modules\Notify\Models\Contact;
 use Modules\Notify\Notifications\HtmlNotification;
 use Modules\Xot\Datas\XotData;
-use Modules\Modal\Concerns\InteractsWithConfirmationModal;
+use Modules\Wire\Concerns\InteractsWithConfirmationModal;
 
 /**
  * Class Arr // Array is reserved.
