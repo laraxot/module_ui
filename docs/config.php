@@ -60,4 +60,8 @@ return [
          //return url('/'.$page->lang.'/'.trimPath($path));
         return url('/'.trimPath($path));
     },
+
+    'children' => function ($page, $docs) {
+        return $docs->where('parent_id', $page->id);
+    },
 ];
