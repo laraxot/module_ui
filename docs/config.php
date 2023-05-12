@@ -9,7 +9,7 @@ return [
     'production' => false,
     'siteName' => 'Modulo '.$moduleName,
     'siteDescription' => 'Modulo '.$moduleName,
-    //'lang' => 'it',
+    'lang' => 'it',
 
     'collections' => [
         'posts' => [
@@ -38,6 +38,9 @@ return [
     // helpers
     'isActive' => function ($page, $path) {
         return Str::endsWith(trimPath($page->getPath()), trimPath($path));
+    },
+    'isItemActive' => function ($page, $item) {
+        return Str::endsWith(trimPath($page->getPath()), trimPath($item->getPath()));
     },
     'isActiveParent' => function ($page, $menuItem) {
         if (is_object($menuItem) && $menuItem->children) {
