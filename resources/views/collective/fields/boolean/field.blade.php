@@ -4,6 +4,8 @@
     //utilizzo un nuovo blade_component fatto a doc per i campi boolean
     //(ancora in test, nel caso cancellare il nuovo componente)
     //dddx($field->attributes);
+    
+    $field->attributes['class'] = 'form-check-input';
 @endphp
 @component($blade_component, get_defined_vars())
     @slot('label')
