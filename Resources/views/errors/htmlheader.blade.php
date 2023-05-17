@@ -34,6 +34,7 @@
             a {
                 background-color: transparent;
                 -webkit-text-decoration-skip: objects;
+                display: inline-block;
             }
 
             strong {
@@ -94,6 +95,12 @@
             [type="reset"]:-moz-focusring,
             [type="submit"]:-moz-focusring {
                 outline: 1px dotted ButtonText;
+            }
+
+            .btn.btn-primary {
+                color: #fff;
+                background-color: #605dba;
+                border-color: #605dba;
             }
 
             legend {
