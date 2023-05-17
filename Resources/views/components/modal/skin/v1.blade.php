@@ -1,6 +1,6 @@
 @props(['contentPadding' => true, 'onSubmit' => null])
 <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content shadow-3">
+    <div class="modal-content shadow-3 p-3">
         <div class="modal-header">
             @if ($title ?? false)
                 <h5 class="modal-title">{{ $title }}</h5>
