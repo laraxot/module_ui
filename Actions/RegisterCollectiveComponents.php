@@ -19,7 +19,7 @@ class RegisterCollectiveComponents
     public function execute(string $path = '', string $prefix = ''): void
     {
         $blade_component_piece = 'collective.fields.group';
-        if (inAdmin()) {
+        if (\inAdmin()) {
             $blade_component = 'adm_theme::'.$blade_component_piece;
         } else {
             $blade_component = 'pub_theme::'.$blade_component_piece;
