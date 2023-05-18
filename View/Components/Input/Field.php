@@ -92,7 +92,7 @@ class Field extends Component
 
         $view_params = [
             'name' => $this->field->name,
-            'view' => $view,
+            'view' => $view, // ui::components.input.field.v1
             'div_attrs' => $div_attrs,
             'label_attrs' => $label_attrs,
             'input_attrs' => $input_attrs,

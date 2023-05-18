@@ -70,6 +70,7 @@ class Label extends Component
     public function renderData(array $data): string
     {
         extract($data);
+
         /**
          * @phpstan-var view-string
          */
@@ -82,6 +83,7 @@ class Label extends Component
             77     Call to an undefined method object::get().
             */
             $label = $attributes->get('label');
+
             $name = $attributes->get('name');
             $this->attrs['for'] = $attributes->get('id');
         }
@@ -103,6 +105,7 @@ class Label extends Component
             'label' => $label ?? '',
             'attrs' => $this->attrs,
         ];
+
         $view_params = array_merge($data, $view_params);
 
         return view($view, $view_params)->render();
