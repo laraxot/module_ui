@@ -13,6 +13,7 @@
         <x-include-view view="topbar" />
         {!! Form::bsOpenPanel($_panel, 'update') !!}
         <div class="row">
+
             @foreach ($fields as $field)
                 {!! Theme::inputHtml($field, $row) !!}
 
