@@ -25,6 +25,9 @@
             @endforeach
         </ul>
     </div>
+
+    {{ $slot }}
+
     <nav aria-label="wizard navigation">
         <ul class="pagination d-flex justify-content-between py-4">
             @if ($hasPrevious)
@@ -58,8 +61,6 @@
             @endif
         </ul>
     </nav>
-
-    {{ $slot }}
 
     <x-flash-message />
 </div>
