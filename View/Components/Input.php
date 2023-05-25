@@ -46,7 +46,8 @@ class Input extends Component
         $name_dot = dottedToBrackets($this->name);
         $this->attrs['name'] = $name_dot;
         $this->attrs['class'] = 'form-control';
-        $this->attrs['wire:model.lazy'] = 'form_data.'.$name;
+        // TO-DO ho provato a togliere il wire model lazy per risolvere quel problema del verified. semmai modifica. da Davide
+        $this->attrs['wire:model'] = 'form_data.'.$name;
         $trans_key = $this->tradKey.'.'.$name_dot.'.placeholder';
         $trans = trans($trans_key);
         $this->attrs['placeholder'] = ($trans != $trans_key) ? $trans : $name_dot;
@@ -55,6 +56,7 @@ class Input extends Component
             $this->attrs = array_merge($this->attrs, $attributes);
         }
 
+        echo $this->type;
         switch ($this->type) {
             case 'checkbox.arr':
                 $this->attrs['class'] = 'form-check-input';
