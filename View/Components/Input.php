@@ -56,7 +56,6 @@ class Input extends Component
             $this->attrs = array_merge($this->attrs, $attributes);
         }
 
-        echo $this->type;
         switch ($this->type) {
             case 'checkbox.arr':
                 $this->attrs['class'] = 'form-check-input';
