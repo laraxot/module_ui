@@ -46,6 +46,7 @@ class Input extends Component
         $name_dot = dottedToBrackets($this->name);
         $this->attrs['name'] = $name_dot;
         $this->attrs['class'] = 'form-control';
+
         // TO-DO ho provato a togliere il wire model lazy per risolvere quel problema del verified. semmai modifica. da Davide
         $this->attrs['wire:model'] = 'form_data.'.$name;
         $trans_key = $this->tradKey.'.'.$name_dot.'.placeholder';
