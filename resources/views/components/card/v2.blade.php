@@ -1,5 +1,5 @@
 @props(['title', 'tools' => null, 'footer' => null])
-<div {{ $attributes->merge(['class' => 'card']) }}>
+<div {{ $attributes->merge(['class' => 'card m-0 p-0']) }}>
     @if ($title || $tools)
         <div class="card-header border-0 p-3 d-flex justify-content-between align-items-center">
             @if ($title)
