@@ -24,6 +24,6 @@ class RouteServiceProvider extends XotBaseRouteServiceProvider
     public function bootCallback(): void
     {
         $router = app('router');
-        $router->aliasMiddleware('splade', \ProtoneMedia\Splade\Http\SpladeMiddleware::class);
+        //$router->aliasMiddleware('splade', \ProtoneMedia\Splade\Http\SpladeMiddleware::class);
     }
 }
