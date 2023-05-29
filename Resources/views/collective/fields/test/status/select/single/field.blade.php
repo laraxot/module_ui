@@ -1,7 +1,3 @@
-@php
-    $val = Form::getValueAttribute($name);
-    
-@endphp
 <div class="form-group col-sm-12">
-    {{ var_export($val, true) }}
+    <livewire:input.status.select.single :model="$_panel->row" :options="$_panel->getStatusesList()" />
 </div>
