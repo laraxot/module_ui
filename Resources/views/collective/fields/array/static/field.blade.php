@@ -1,5 +1,5 @@
 @php
-    $val = Form::getValueAttribute($name);
+    $val = Form::getValueAttribute($name) ?? [];
 @endphp
 <table class="table table-bordered">
     @foreach ($val as $k => $v)
