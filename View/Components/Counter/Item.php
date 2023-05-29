@@ -11,8 +11,7 @@ use Modules\Cms\Actions\GetViewAction;
 /**
  * Class Item.
  */
-class Item extends Component
-{
+class Item extends Component {
     public ?string $number;
     public ?string $title;
     public string $tpl;
@@ -22,8 +21,7 @@ class Item extends Component
      *
      * @return void
      */
-    public function __construct(?string $number = '197', ?string $title = 'Title', string $tpl = 'v1')
-    {
+    public function __construct(?string $number = '197', ?string $title = 'Title', string $tpl = 'v1') {
         $this->number = $number;
         $this->title = $title;
         $this->tpl = $tpl;
@@ -32,8 +30,7 @@ class Item extends Component
     /**
      * Undocumented function.
      */
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */
@@ -45,6 +42,6 @@ class Item extends Component
             'view' => $view,
         ];
 
-        return view()->make($view, $view_params);
+        return view($view, $view_params);
     }
 }

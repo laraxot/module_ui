@@ -1029,7 +1029,7 @@ class ThemeService {
             throw new \Exception('$view_work is null');
         }
 
-        return view()->make($view_work, $view_params);
+        return view($view_work, $view_params);
         // return view($view_work)->with($vars)->with($params_tpl); // quale delle 2 ?
         // return (string)\View::make($view_work, $params_tpl, $vars)->render();
     }
@@ -1047,7 +1047,7 @@ class ThemeService {
             dddx($views);
         }
 
-        return view()->make($view_first)->with($vars)->with($params_tpl); // quale delle 2 ?
+        return view($view_first)->with($vars)->with($params_tpl); // quale delle 2 ?
                 // return (string)\View::make($view_check, $params_tpl, $vars)->render();
     }
     */
