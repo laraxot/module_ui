@@ -1,1 +1,1 @@
-<img src="{{ asset($value) }}" style="height:100px"/>
+<img src="{{ asset($value) }}" style="height:100px" />
