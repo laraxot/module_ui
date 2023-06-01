@@ -1,9 +1,9 @@
-@props(['name', 'options' => [], 'value' => null, 'wireignore' => 'true'])
+@props(['name', 'options' => [], 'value' => null, 'defaultOption' => '---', 'wireignore' => 'true'])
 
 
 <select {{ $attributes->merge($attrs) }} @if ($wireignore == true) wire:ignore @endif>
     @if ($attributes['remove_first_empty_option'] !== 'true')
-        <option value="">---</option>
+        <option value="">{{ $defaultOption }}</option>
     @endif
     @if (isset($options))
         @foreach ($options as $k => $v)
