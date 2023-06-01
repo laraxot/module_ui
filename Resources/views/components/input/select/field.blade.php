@@ -1,6 +1,7 @@
-@props(['name', 'options' => [], 'value' => null])
+@props(['name', 'options' => [], 'value' => null, 'wireignore' => 'true'])
 
-<select {{ $attributes->merge($attrs) }} wire:ignore>
+
+<select {{ $attributes->merge($attrs) }} @if ($wireignore == true) wire:ignore @endif>
     @if ($attributes['remove_first_empty_option'] !== 'true')
         <option value="">---</option>
     @endif

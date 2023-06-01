@@ -23,11 +23,12 @@ class Input extends Component
     // public string $tpl;
     public string $collective_view;
     public string $tradKey;
+    public string $wireignore;
 
     /**
      * ---.
      */
-    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = [])
+    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = [], ?string $wireignore = 'true')
     {
         $this->name = $name;
         $this->collective_view = app(GetCollectiveViewByType::class)->execute($type); // ui::collective.fields.string.field
@@ -56,6 +57,8 @@ class Input extends Component
         if (is_array($attributes) && count($attributes) > 0) {
             $this->attrs = array_merge($this->attrs, $attributes);
         }
+
+        $this->wireignore = $wireignore;
 
         switch ($this->type) {
             case 'checkbox.arr':
