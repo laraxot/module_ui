@@ -29,7 +29,7 @@ class Input extends Component
     /**
      * ---.
      */
-    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = [], ?string $defaultOption = 'true', ?string $wireignore = 'true')
+    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = [], ?string $defaultOption = '---', ?string $wireignore = 'true')
     {
         $this->name = $name;
         $this->collective_view = app(GetCollectiveViewByType::class)->execute($type); // ui::collective.fields.string.field
