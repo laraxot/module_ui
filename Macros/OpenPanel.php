@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\UI\Macros;
 
 use Collective\Html\FormFacade as Form;
-use Illuminate\Support\Str;
 
 /**
  * Class OpenPanel.
@@ -36,16 +35,16 @@ class OpenPanel
                     $method = 'POST';
                     break;
             }
+
             if (isset($params['method'])) {
                 $method = $params['method'];
             }
+
             $form_name = 'form_'.$act;
             if (isset($params['form_name'])) {
                 $form_name = $params['form_name'];
             }
-            // $func = Str::camel($act).'Url';
 
-            // $url = $panel->$func();
             $url = $panel->url($act);
 
             return Form::model(
