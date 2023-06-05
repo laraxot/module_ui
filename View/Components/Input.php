@@ -24,12 +24,12 @@ class Input extends Component
     public string $collective_view;
     public string $tradKey;
     public string $wireignore;
-    public string $defaultOption;
+    public string $defaultValue;
 
     /**
      * ---.
      */
-    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = [], ?string $defaultOption = '---', ?string $wireignore = 'true')
+    public function __construct(string $name, string $type, ?array $options = [], ?array $attributes = [], ?string $defaultValue = '---', ?string $wireignore = 'true')
     {
         $this->name = $name;
         $this->collective_view = app(GetCollectiveViewByType::class)->execute($type); // ui::collective.fields.string.field
@@ -59,7 +59,7 @@ class Input extends Component
             $this->attrs = array_merge($this->attrs, $attributes);
         }
 
-        $this->defaultOption = $defaultOption;
+        $this->defaultValue = $defaultValue;
         $this->wireignore = $wireignore;
 
         switch ($this->type) {
