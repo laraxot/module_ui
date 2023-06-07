@@ -12,7 +12,7 @@ class GetCollectiveViewByType
 
     public function execute(string $type): string
     {
-        // $json=__DIR__.'/_components.json';
+       
 
         // date.datetime.range
         // bsDateDatetimeRange
