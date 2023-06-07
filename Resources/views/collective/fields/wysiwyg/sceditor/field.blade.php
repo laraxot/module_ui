@@ -1,11 +1,11 @@
 @php
     // https://github.com/samclarke/SCEditor
     // https://www.sceditor.com/
-
+    
     Theme::add('https://cdn.jsdelivr.net/npm/sceditor@3/minified/themes/default.min.css');
     Theme::add('https://cdn.jsdelivr.net/npm/sceditor@3/minified/sceditor.min.js');
     Theme::add('https://cdn.jsdelivr.net/npm/sceditor@3/minified/formats/xhtml.min.js');
-
+    
     $field = transFields(get_defined_vars());
     $field->attributes['style'] = 'height:300px;width:100%;';
     $field->attributes['id'] = $name;
