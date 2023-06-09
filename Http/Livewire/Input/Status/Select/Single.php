@@ -14,7 +14,8 @@ use Modules\Xot\Contracts\ModelWithStatusContract;
  * Class Single.
  * https://github.com/spatie/laravel-model-status.
  */
-class Single extends Component {
+class Single extends Component
+{
     public string $modelClass;
     public mixed $modelId;
     public array $options;
@@ -27,7 +28,8 @@ class Single extends Component {
      *
      * @return void
      */
-    public function mount(ModelWithStatusContract $model, array $options) {
+    public function mount(ModelWithStatusContract $model, array $options)
+    {
         $this->model = $model;
 
         $this->modelClass = \get_class($model);
@@ -35,12 +37,16 @@ class Single extends Component {
 
         $this->options = $options;
 
-        if (isset($model->status)) {
-            $this->status = $model->status;
+        try {
+            if (isset($model->status)) {
+                $this->status = $model->status;
+            }
+        } catch (\Exception $e) {
         }
     }
 
-    public function changeStatus(): void {
+    public function changeStatus(): void
+    {
         if ('' !== $this->status) {
             if (null !== $this->model->status()) {
                 $this->model->status()->delete();
@@ -61,7 +67,8 @@ class Single extends Component {
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */
