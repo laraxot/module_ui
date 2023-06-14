@@ -78,23 +78,21 @@ class UIServiceProvider extends XotBaseServiceProvider
         app(RegisterCollectiveMacros::class)->execute($this->module_dir.'/../Macros');
     }
 
-    /**
+    /*
      * Undocumented function.
      *
      * @return void
-     */
+     --- move to cms module
     public function bootThemeProvider(string $theme_type)
     {
-        // $xot = $this->getXot();
-
         $theme = $this->xot->{$theme_type};
-        /*
-        if (! File::exists(base_path('Themes/'.$theme))) {
-            $xot[$theme_type] = ThemeService::firstThemeName($theme_type);
-            TenantService::saveConfig('xra', $xot );
-            throw new \Exception('['.base_path('Themes/'.$theme).' not exists]['.__LINE__.']['.class_basename(__CLASS__).']');
-        }
-        */
+        
+        //if (! File::exists(base_path('Themes/'.$theme))) {
+        //    $xot[$theme_type] = ThemeService::firstThemeName($theme_type);
+        //    TenantService::saveConfig('xra', $xot );
+        //    throw new \Exception('['.base_path('Themes/'.$theme).' not exists]['.__LINE__.']['.class_basename(__CLASS__).']');
+        //}
+        
         $provider = 'Themes\\'.$theme.'\Providers\\'.$theme.'ServiceProvider';
         if (! class_exists($provider)) {
             throw new \Exception('class not exists ['.$provider.']['.__LINE__.']['.basename(__FILE__).']');
@@ -106,7 +104,7 @@ class UIServiceProvider extends XotBaseServiceProvider
             $provider->bootCallback();
         }
     }
-
+    */
     /**
      * Undocumented function.
      *
