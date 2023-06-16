@@ -7,7 +7,7 @@ namespace Modules\UI\Http\Wizard;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
 use Modules\Cms\Actions\GetViewAction;
-use Modules\UI\Datas\FieldData;
+use Modules\ExtraField\Datas\FieldData;
 use Spatie\LivewireWizard\Components\StepComponent;
 
 abstract class BaseStep extends StepComponent

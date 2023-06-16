@@ -8,12 +8,13 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\Component;
 use Modules\Cms\Actions\GetViewAction;
-use Modules\UI\Datas\FieldData;
+use Modules\ExtraField\Datas\FieldData;
 
 /**
  * WIP WIP WIP.
  */
-class FieldArr extends Component {
+class FieldArr extends Component
+{
     public FieldData $field;
     public ?Model $row = null;
     public string $tpl;
@@ -25,7 +26,8 @@ class FieldArr extends Component {
     /**
      * Undocumented function.
      */
-    public function __construct(array $field, ?Model $row = null, string $tpl = 'v1') {
+    public function __construct(array $field, ?Model $row = null, string $tpl = 'v1')
+    {
         $this->field = FieldData::from($field);
         $this->row = $row;
         $this->tpl = $tpl;
@@ -34,7 +36,8 @@ class FieldArr extends Component {
     /**
      * Get the view / contents that represents the component.
      */
-    public function render(): Renderable {
+    public function render(): Renderable
+    {
         /**
          * @phpstan-var view-string
          */

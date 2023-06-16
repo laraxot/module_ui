@@ -16,8 +16,8 @@ use Illuminate\Database\Eloquent\Relations\MorphPivot;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Str;
+use Modules\ExtraField\Datas\FieldData;
 use Modules\UI\Actions\GetCollectiveComponents;
-use Modules\UI\Datas\FieldData;
 
 /**
  * Class FormService.

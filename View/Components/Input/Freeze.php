@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Modules\Cms\Actions\GetViewAction;
-use Modules\UI\Datas\FieldData;
+use Modules\ExtraField\Datas\FieldData;
 use Spatie\ModelStates\State;
 
 /**

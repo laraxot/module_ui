@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
 use Modules\Cms\Actions\GetViewAction;
-use Modules\UI\Datas\FieldData;
+use Modules\ExtraField\Datas\FieldData;
 
 class Field extends Component
 {
