@@ -16,14 +16,13 @@ use Illuminate\Database\Eloquent\Relations\MorphPivot;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Str;
-use Modules\ExtraField\Datas\FieldData;
 use Modules\UI\Actions\GetCollectiveComponents;
+use Modules\UI\Datas\FieldData;
 
 /**
  * Class FormService.
  */
-class FormService
-{
+class FormService {
     /**
      * ora selectRelationshipOne
      * da select/field_relationship_one.blade.php
@@ -41,8 +40,7 @@ class FormService
     /**
      * @param BelongsTo|HasManyThrough|HasOneOrMany|BelongsToMany|MorphOneOrMany|MorphPivot|MorphTo|MorphToMany $rows
      */
-    public static function fieldsExcludeRows($rows): array
-    {
+    public static function fieldsExcludeRows($rows): array {
         $fields_exclude = [];
 
         $fields_exclude[] = 'id';
@@ -64,8 +62,7 @@ class FormService
         return $fields_exclude;
     }
 
-    public static function getCollectiveComponents(): array
-    {
+    public static function getCollectiveComponents(): array {
         $view_path = __DIR__.'/../Resources/views/collective/fields';
         $prefix = 'ui::';
 
@@ -77,8 +74,7 @@ class FormService
      *
      * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Support\HtmlString
      */
-    public static function inputHtml(FieldData $field, Model $row)
-    {
+    public static function inputHtml(FieldData $field, Model $row) {
         $input_type = 'bs'.Str::studly($field->type);
         if (isset($field->sub_type)) {
             $input_type .= Str::studly($field->sub_type);

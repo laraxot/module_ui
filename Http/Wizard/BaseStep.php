@@ -7,11 +7,10 @@ namespace Modules\UI\Http\Wizard;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Support\Str;
 use Modules\Cms\Actions\GetViewAction;
-use Modules\ExtraField\Datas\FieldData;
+use Modules\UI\Datas\FieldData;
 use Spatie\LivewireWizard\Components\StepComponent;
 
-abstract class BaseStep extends StepComponent
-{
+abstract class BaseStep extends StepComponent {
     public array $form_data = [];
     public string $tpl = '';
     public ?string $view = null;
@@ -42,8 +41,7 @@ abstract class BaseStep extends StepComponent
     }
     */
 
-    public function render(): Renderable
-    {
+    public function render(): Renderable {
         /**
          * @phpstan-var view-string
          */
@@ -56,8 +54,7 @@ abstract class BaseStep extends StepComponent
         return view($view, $view_params);
     }
 
-    public function getView(): string
-    {
+    public function getView(): string {
         if (null != $this->view) {
             return $this->view;
         }
@@ -78,8 +75,7 @@ abstract class BaseStep extends StepComponent
         return $this->view;
     }
 
-    public function stepInfo(): array
-    {
+    public function stepInfo(): array {
         $trans_key = str_replace('::livewire.', '::', $this->getView());
 
         return [
@@ -88,14 +84,12 @@ abstract class BaseStep extends StepComponent
         ];
     }
 
-    public function goNextStep(): void
-    {
+    public function goNextStep(): void {
         $this->validate();
         $this->nextStep();
     }
 
-    public function toData(array $data): FieldData
-    {
+    public function toData(array $data): FieldData {
         return FieldData::from($data);
     }
 }

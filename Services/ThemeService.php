@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 use Modules\Cms\Contracts\PanelContract;
 use Modules\Cms\Services\PanelService;
 use Modules\Cms\Services\RouteService;
-use Modules\ExtraField\Datas\FieldData;
+use Modules\UI\Datas\FieldData;
 use Modules\Xot\Services\ArtisanService;
 use Modules\Xot\Services\FileService;
 use Modules\Xot\Services\StubService;
@@ -29,8 +29,7 @@ use Modules\Xot\Traits\Getter;
 /**
  * Class ThemeService.
  */
-class ThemeService
-{
+class ThemeService {
     use Getter;
 
     protected static string $config_name = 'metatag';
@@ -43,8 +42,7 @@ class ThemeService
 
     public static array $classes;
 
-    public static function getInstance(): self
-    {
+    public static function getInstance(): self {
         if (null === self::$instance) {
             self::$instance = new self();
         }
@@ -52,31 +50,26 @@ class ThemeService
         return self::$instance;
     }
 
-    public static function make(): self
-    {
+    public static function make(): self {
         return static::getInstance();
     }
 
     /**
      * get_url.
      */
-    public static function get_url(array $params): string
-    {
+    public static function get_url(array $params): string {
         return url('/');
     }
 
-    public static function get_tags(array $params): array
-    {
+    public static function get_tags(array $params): array {
         return [];
     }
 
-    public static function get_styles(array $params): array
-    {
+    public static function get_styles(array $params): array {
         return [];
     }
 
-    public static function get_scripts(array $params): array
-    {
+    public static function get_scripts(array $params): array {
         return [];
     }
 
@@ -92,23 +85,19 @@ class ThemeService
     }
     */
 
-    public static function get_scripts_pos(array $params): array
-    {
+    public static function get_scripts_pos(array $params): array {
         return [];
     }
 
-    public static function get_styles_pos(array $params): array
-    {
+    public static function get_styles_pos(array $params): array {
         return [];
     }
 
-    public static function get_view_params(array $params): array
-    {
+    public static function get_view_params(array $params): array {
         return [];
     }
 
-    public static function get_language(array $params): string
-    {
+    public static function get_language(array $params): string {
         $lang = app()->getLocale();
         /**
          * @var array
@@ -118,8 +107,7 @@ class ThemeService
         return $locale['regional'];
     }
 
-    public static function add(string $file, ?int $position = null): void
-    {
+    public static function add(string $file, ?int $position = null): void {
         $path_parts = pathinfo($file);
 
         if (! isset($path_parts['extension'])) {
@@ -149,8 +137,7 @@ class ThemeService
         // return;
     }
 
-    public static function addStyle(string $style, ?int $position = null): void
-    {
+    public static function addStyle(string $style, ?int $position = null): void {
         if (null === $position) {
             /**
              * @var array
@@ -162,8 +149,7 @@ class ThemeService
         $styles = self::__merge('styles', [$style]);
     }
 
-    public static function addScript(string $script, ?int $position = null): void
-    {
+    public static function addScript(string $script, ?int $position = null): void {
         if (null === $position) {
             /**
              * @var array
@@ -262,8 +248,7 @@ class ThemeService
      *
      * @return bool|mixed|string
      */
-    public static function img_src($src)
-    {
+    public static function img_src($src) {
         // /$srcz = self::viewNamespaceToUrl([$src]);
         // $src = $srcz[0];
         return self::asset($src);
@@ -272,8 +257,7 @@ class ThemeService
     /**
      * @return string
      */
-    public static function logo_html()
-    {
+    public static function logo_html() {
         /**
          * @var string
          */
@@ -297,8 +281,7 @@ class ThemeService
      *
      * @return string
      */
-    public static function showImg($src, $attrs = [], $only_url = false)
-    {
+    public static function showImg($src, $attrs = [], $only_url = false) {
         $srcz = FileService::viewNamespaceToUrl([$src]);
         $src = $srcz[0];
         $newsrc = FileService::getFileUrl($src);
@@ -318,8 +301,7 @@ class ThemeService
      *
      * @return bool|string
      */
-    public static function getNameSpace($path)
-    {
+    public static function getNameSpace($path) {
         $pos = mb_strpos($path, '::');
         if (false === $pos) {
             return false;
@@ -328,8 +310,7 @@ class ThemeService
         return mb_substr($path, 0, $pos);
     }
 
-    public static function asset(?string $path): string
-    {
+    public static function asset(?string $path): string {
         if (null === $path) {
             return '';
         }
@@ -337,8 +318,7 @@ class ThemeService
         return FileService::asset($path);
     }
 
-    public static function showScripts(): Renderable
-    {
+    public static function showScripts(): Renderable {
         /**
          * @var array
          */
@@ -386,8 +366,7 @@ class ThemeService
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public static function showStyles($compress_css = true)
-    {
+    public static function showStyles($compress_css = true) {
         /**
          * @var array
          */
@@ -422,8 +401,7 @@ class ThemeService
     /**
      * @return string
      */
-    public static function metatags()
-    {
+    public static function metatags() {
         /**
          * @phpstan-var view-string
          */
@@ -437,8 +415,7 @@ class ThemeService
      *
      * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
      */
-    public static function metatag($index)
-    {
+    public static function metatag($index) {
         $ris = self::__getStatic($index);
         // echo '<br/>['.$index.']['.$ris.']';
         if ('' === $ris || null === $ris) {
@@ -452,8 +429,7 @@ class ThemeService
     /**
      * SetMetatags function.
      */
-    public static function setMetatags(Model $row): void
-    {
+    public static function setMetatags(Model $row): void {
         // dddx($row);
         $params = getRouteParameters();
         foreach ($params as $v) {
@@ -505,8 +481,7 @@ class ThemeService
     /**
      * ---.
      */
-    public static function getArea(): ?string
-    {
+    public static function getArea(): ?string {
         $params = getRouteParameters();
         if (isset($params['module'])) {
             return $params['module'];
@@ -526,8 +501,7 @@ class ThemeService
     /**
      * ---.
      */
-    public static function getModels(array $params): ?array
-    {
+    public static function getModels(array $params): ?array {
         extract($params);
         if (! isset($module)) {
             dddx(['err' => 'module is missing']);
@@ -583,8 +557,7 @@ class ThemeService
      *
      * @return mixed
      */
-    public static function route(array $params = [])
-    {
+    public static function route(array $params = []) {
         $params = array_merge(getRouteParameters(), $params);
         $routename = Route::currentRouteName();
         if (null === $routename) {
@@ -941,8 +914,7 @@ class ThemeService
      *
      * @return mixed|string
      */
-    public static function cache(/* ViewContract $vc, */ $view, $data = [], $mergeData = [])
-    {
+    public static function cache(/* ViewContract $vc, */ $view, $data = [], $mergeData = []) {
         // scopiazzato da spatie partialcache
         $lang = app()->getLocale();
         $data['lang'] = $lang;
@@ -975,8 +947,7 @@ class ThemeService
     /**
      * @return bool|mixed|string|void
      */
-    public static function imageSrc(array $params)
-    {
+    public static function imageSrc(array $params) {
         // DA RIFARE
         extract($params);
         if (! isset($path)) {
@@ -1104,8 +1075,7 @@ class ThemeService
     // *
      // * Undocumented function.
      // DEPRECATED
-    public static function panelModel(Model $model): PanelContract
-    {
+    public static function panelModel(Model $model): PanelContract {
         $class = StubService::make()->setModelAndName($model, 'panel')->get();
         $panel = app($class)->setRow($model);
 
@@ -1124,13 +1094,11 @@ class ThemeService
      *
      * @return \Illuminate\Contracts\Support\Renderable|\Illuminate\Support\HtmlString
      */
-    public static function inputHtml(FieldData $field, Model $row)
-    {
+    public static function inputHtml(FieldData $field, Model $row) {
         return FormService::inputHtml($field, $row);
     }
 
-    public static function getAdminJsonMenu(): void
-    {
+    public static function getAdminJsonMenu(): void {
         $route_params = getRouteParameters();
         extract($route_params);
         if (! isset($module)) {
@@ -1163,8 +1131,7 @@ class ThemeService
     /**
      * @return array|mixed
      */
-    public static function getXmlMenu()
-    {
+    public static function getXmlMenu() {
         $route_params = getRouteParameters();
         extract($route_params);
         if (! isset($module)) {
@@ -1194,8 +1161,7 @@ class ThemeService
     /**
      * @return string
      */
-    public static function getPath()
-    {
+    public static function getPath() {
         // da jigsaw
         return 'to do';
     }
@@ -1205,8 +1171,7 @@ class ThemeService
      * @param string $name
      * @param mixed  $value
      */
-    public static function addAttr($scope, $name, $value): void
-    {
+    public static function addAttr($scope, $name, $value): void {
         self::$attrs[$scope][$name] = $value;
     }
 
@@ -1214,16 +1179,14 @@ class ThemeService
      * @param string $scope
      * @param string $class
      */
-    public static function addClass($scope, $class): void
-    {
+    public static function addClass($scope, $class): void {
         self::$classes[$scope][] = $class;
     }
 
     /**
      * @param string $scope
      */
-    public static function printAttrs($scope): void
-    {
+    public static function printAttrs($scope): void {
         $attrs = [];
 
         if (isset(self::$attrs[$scope]) && ! empty(self::$attrs[$scope])) {
@@ -1239,8 +1202,7 @@ class ThemeService
      * @param string $scope
      * @param bool   $full
      */
-    public static function printClasses($scope, $full = true): void
-    {
+    public static function printClasses($scope, $full = true): void {
         if ('body' === $scope) {
             self::$classes[$scope][] = 'page-loading';
         }
@@ -1260,8 +1222,7 @@ class ThemeService
     /**
      * Prints Google Fonts.
      */
-    public static function getGoogleFontsInclude(): void
-    {
+    public static function getGoogleFontsInclude(): void {
         if (config('layout.resources.fonts.google.families')) {
             $fonts = config('layout.resources.fonts.google.families');
             if (! \is_array($fonts)) {
@@ -1277,8 +1238,7 @@ class ThemeService
      *
      * @return array
      */
-    public static function arrayWalkCallback(array &$array, callable $callback)
-    {
+    public static function arrayWalkCallback(array &$array, callable $callback) {
         foreach ($array as $k => &$v) {
             if (\is_array($v)) {
                 $callback($k, $v, $array);
@@ -1296,8 +1256,7 @@ class ThemeService
      *
      * @return string|string[]
      */
-    public static function rtlCssPath($css_path)
-    {
+    public static function rtlCssPath($css_path) {
         $css_path = substr_replace($css_path, '.rtl.css', -4);
 
         return $css_path;
@@ -1334,8 +1293,7 @@ class ThemeService
     /**
      * @return \Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed
      */
-    public static function tenantConfig(string $config)
-    {
+    public static function tenantConfig(string $config) {
         return config($config);
     }
 
@@ -1346,8 +1304,7 @@ class ThemeService
      *
      * @return string|void
      */
-    public static function renderVerMenu($item, $parent = null, $rec = 0, bool $singleItem = false)
-    {
+    public static function renderVerMenu($item, $parent = null, $rec = 0, bool $singleItem = false) {
         return MenuService::renderVerMenu($item, $parent, $rec, $singleItem);
     }
 
@@ -1358,14 +1315,12 @@ class ThemeService
      *
      * @return string|void
      */
-    public static function renderHorMenu($item, $parent = null, $rec = 0, bool $singleItem = false)
-    {
+    public static function renderHorMenu($item, $parent = null, $rec = 0, bool $singleItem = false) {
         return MenuService::renderHorMenu($item, $parent, $rec); // ??, $singleItem
     }
 
     // Render icon or bullet
-    public static function renderIcon(?string $icon = ''): string
-    {
+    public static function renderIcon(?string $icon = ''): string {
         if (null === $icon) {
             // throw new \Exception('icon not exists in config icons file ['.__LINE__.']['.__FILE__.']');
             return '<i class="menu-icon"></i>';
@@ -1380,8 +1335,7 @@ class ThemeService
     /**
      * Undocumented function.
      */
-    public static function renderIconName(string $icon_name): string
-    {
+    public static function renderIconName(string $icon_name): string {
         $icon_key = 'icons.'.$icon_name;
         $icon = config($icon_key);
         if (! \is_string($icon)) {
@@ -1399,13 +1353,11 @@ class ThemeService
     /**
      * Undocumented function.
      */
-    public static function getSVG(string $filepath = '', string $class = ''): string
-    {
+    public static function getSVG(string $filepath = '', string $class = ''): string {
         return (string) SvgService::getSVG($filepath, $class);
     }
 
-    public static function getThemeType(string $theme_type): string
-    {
+    public static function getThemeType(string $theme_type): string {
         $xot = config('xra');
         if (! \is_array($xot)) {
             // throw new Exception('['.__LINE__.']['.class_basename(__CLASS__).']');
@@ -1421,8 +1373,7 @@ class ThemeService
         return $theme;
     }
 
-    public static function getThemes(): Collection
-    {
+    public static function getThemes(): Collection {
         $themes_dir = base_path('Themes');
         if (! File::exists($themes_dir)) {
             // throw new \Exception('Themes directory do not exits ['.$themes_dir.']['.__LINE__.']['.__FILE__.']');
@@ -1473,8 +1424,7 @@ class ThemeService
         return $themes;
     }
 
-    public static function themeScreenshot(string $name): string
-    {
+    public static function themeScreenshot(string $name): string {
         $img = 'Themes\\'.$name.'\screenshot.jpg';
         $img_low = strtolower($img);
         $from = base_path($img);
@@ -1491,8 +1441,7 @@ class ThemeService
         return $asset;
     }
 
-    public static function firstThemeName(string $theme_type): string
-    {
+    public static function firstThemeName(string $theme_type): string {
         if (app()->runningInConsole()) {
             return 'One';
         }

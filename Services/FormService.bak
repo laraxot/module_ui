@@ -25,7 +25,7 @@ use Illuminate\Support\Str;
 use Modules\Cms\Services\RouteService;
 use Modules\UI\Actions\GetCollectiveComponents;
 use Modules\UI\Contracts\FieldContract;
-use Modules\ExtraField\Datas\FieldData;
+use Modules\UI\Datas\FieldData;
 use Modules\Xot\Services\PolicyService;
 
 /**
