@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 use Modules\Cms\Actions\GetViewAction;
-use Modules\LU\Services\ProfileService;
+use Modules\User\Services\ProfileService;
 use Modules\Notify\Models\Contact;
 use Modules\Notify\Notifications\SmsNotification;
 use Modules\Wire\Concerns\InteractsWithConfirmationModal;

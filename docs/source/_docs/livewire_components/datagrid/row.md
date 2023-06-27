@@ -31,7 +31,7 @@ Esempio:
 
 ```php
 @php
-$user = \App\Models\User::make();
+$user = \Modules\User\Models\User::make();
 @endphp
 
 <livewire:datagrid-editable.row :row="$user" index=0 />

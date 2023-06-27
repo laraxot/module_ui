@@ -6,7 +6,7 @@ namespace Modules\UI\View\Components\Dashboard\Item;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\View\Component;
-use Modules\LU\Models\Area as ModelArea;
+use Modules\User\Models\Area as ModelArea;
 use Modules\Xot\Services\FileService;
 
 // use Nwidart\Modules\Facades\Module;

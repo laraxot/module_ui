@@ -93,7 +93,7 @@ array $options
 Esempio:
 
 ```php
-$user = \App\Models\User::first();
+$user = \Modules\User\Models\User::first();
 @endphp
 <livewire:input.status.select.single :model="$user" :options="['uomo','donna','non specificato']" />
 ```

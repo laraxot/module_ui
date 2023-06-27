@@ -10,21 +10,21 @@ namespace Modules\UI\Contracts;
 interface HasLikeContract
 {
     /**
-     * @param \Modules\LU\Models\User|null $user
+     * @param \Modules\User\Models\User|null $user
      *
      * @return bool
      */
     public function isLikedBy($user);
 
     /**
-     * @param \Modules\LU\Models\User|null $user
+     * @param \Modules\User\Models\User|null $user
      *
      * @return void
      */
     public function likedBy($user);
 
     /**
-     * @param \Modules\LU\Models\User|null $user
+     * @param \Modules\User\Models\User|null $user
      *
      * @return void
      */
