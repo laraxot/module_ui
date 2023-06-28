@@ -1,0 +1,36 @@
+Tables\Filters\SelectFilter::make('anno')
+    ->options([
+        '2021' => '2021',
+        '2022' => '2022',
+        '2023' => '2023',
+    ])->query(function (Builder $query, array $data): Builder {
+        if (null == $data['value']) {
+            return $query->where('id', 0);
+        }
+
+        return $query->where('anno', $data['value']);
+    }),
+
+-----------------------------------------------------------------
+
+Filter::make('data_pubblicazione')
+        ->form([
+            Forms\Components\DatePicker::make('publish_from')->label('Data Pubblicazione Da:'),
+            Forms\Components\DatePicker::make('publish_until')->label('Data Pubblicazione A:'),
+            ])
+            ->query(function (Builder $query, array $data): Builder {
+                return $query
+                    ->when(
+                        $data['publish_from'],
+                        fn (Builder $query, $date): Builder => $query->whereDate('data_pubblicazione', '>=', $date),
+                        )
+                    ->when(
+                        $data['publish_until'],
+                        fn (Builder $query, $date): Builder => $query->whereDate('data_pubblicazione', '<=', $date),
+                    );
+                }
+            ),
+---------------------------------------------------------------------------------
+
+
+
