@@ -96,12 +96,11 @@
                         </div> --}}
                     </div>
                     <div class="btn-group">
+                       
                         @foreach ($_panel->getActions('container') as $action)
                             <x-button.action :action="$action"></x-button.action>
-                            {{--
-                            <x-button.link :link="$action->getLinkData()" />
-                            --}}
                         @endforeach
+                        
                     </div>
                 </div>
                 <!-- Table -->
@@ -109,9 +108,9 @@
                     <div class="card-header border-bottom d-flex align-items-center">
                         <h5 class="me-auto">{{ $_panel_name }}</h5>
                     </div>
-
+                    
                     <x-panel.crud :panel="$_panel" :rows="$rows" />
-
+                
                 </div>
             </div>
         </div>
