@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="Input Arr">
+    <meta name="description" content="Input Group Arr">
 
     <meta property="og:site_name" content="Modulo UI" />
-    <meta property="og:title" content="Input Arr | Modulo UI" />
-    <meta property="og:description" content="Input Arr" />
+    <meta property="og:title" content="Input Group Arr | Modulo UI" />
+    <meta property="og:description" content="Input Group Arr" />
     <meta property="og:url" content="https://laraxot.github.io/module_theme/docs/arr" />
     <meta property="og:image" content="https://laraxot.github.io/module_theme/assets/img/logo.png" />
     <meta property="og:type" content="website" />
@@ -18,7 +18,7 @@
     <meta name="twitter:card" content="summary_large_image">
 
     
-    <title>Modulo UI | Input Arr</title>
+    <title>Modulo UI | Input Group Arr</title>
 
     <link rel="home" href="https://laraxot.github.io/module_theme">
     <link rel="icon" href="/favicon.ico">
@@ -338,7 +338,7 @@
     <a href="https://laraxot.github.io/module_theme/docs/arr"
         class="lvl1 active font-semibold text-blue-500 nav-menu__item hover:text-blue-500"
         >
-        Input Arr
+        Input Group Arr
     </a>
     <ul class="my-0">
     </ul>
@@ -518,7 +518,7 @@
     <a href="https://laraxot.github.io/module_theme/docs/v2"
         class="lvl1  nav-menu__item hover:text-blue-500"
         >
-        
+        Calendar V2
     </a>
     <ul class="my-0">
     </ul>
@@ -574,59 +574,41 @@
         </nav>
 
         <div class="DocSearch-content w-full lg:w-3/5 break-words pb-16 lg:pl-4" v-pre>
-            <h1 id="input-arr">Input Arr</h1>
+            <p>Crea una lista di campi raggruppati.</p>
 
-<p>Crea un "input" di tipo array, cioè una lista di campi dove inserire i dati, in base ai parametri passati.
-Per aggiornare al volo i form, bisogna che esista un componente livewire nella stessa pagina
-con questo listener:</p>
+<p>La prima volta chiede il gruppo nel quale raggruppare gli altri campi
+e poi crea per ogni gruppo dei sotto-campi, sempre utilizzando il bottone +.</p>
 
-<pre><code class="language-php">'updatedFormDataEvent' =&gt; 'updateFormData',
-</code></pre>
-
-<p>Se questo listener non ci fosse in nessun componente, allora potrebbe passare i dati tramite url o post
-in base ai metodi del form.</p>
+<h1 id="input-group-arr">Input Group Arr</h1>
 
 <p>Nome Componente:</p>
 
-<pre><code class="language-php">livewire:input.arr
-</code></pre>
-
-<p>Listeners</p>
-
-<pre><code class="language-php">//serve per aggiungere campi input al volo come array
-//ad esempio se hai una lista di email da aggiungere al volo, puoi fare + per aggiungere un input alla lista
-protected $listeners = ['addArr' =&gt; 'addArr'];
+<pre><code class="language-php">livewire:input.group.arr
 </code></pre>
 
 <p>Parametri</p>
 
-<pre><code class="language-php">//tipo di input (deve corrispondere alle view in theme::livewire/input/arr/)
+<pre><code class="language-php">//tipo di input (per ora c'è solo text)
 string $type
 //attributo name dell'input
 string $name
-//label dell'input
-?string $label
-//array di valori di partenza dell'input
-?array $value
-
-//id del modello di partenza. 
-
-//se nella richiesta dell'url passo dei dati, e inserisco un model-id,
-//i dati dell'url vengono "uniti" a quelli del parametro value, se value è un array,
-//e poi viene creata una variabile $data['rows'][$modelId] con i dati appena letti
-//all'interno del componente. 
-
-//Data poi viene messo in form_data ovvero nei dati di partenza del form
-//Quindi poi andrò a salvare i dati del form nel modello con l'id corrispondente
-
-//Per funzionare necessita che nella pagina esista un componente livewire con questo listener:
-//'updatedFormDataRowsEvent' =&gt; 'updatedFormDataRowsEvent',
-?int $modelId = null
 </code></pre>
 
 <p>Esempio:</p>
 
-<pre><code class="language-php">&lt;livewire:input.arr type="text" name="nome" :value="[]" label="Il tuo nome" /&gt;
+<pre><code class="language-php">&lt;livewire:input.group.arr type="text" name="email" /&gt;
+</code></pre>
+
+<p>Esempio Risultato</p>
+
+<pre><code class="language-php">Lista Email 1
+    davide@davide.it
+    marco@marco.it
+
+Lista Email 2
+    mario@mario.it
+    gianni@gianni.it
+    lucia@lucia.it
 </code></pre>
         </div>
     </div>
