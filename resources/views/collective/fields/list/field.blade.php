@@ -45,7 +45,7 @@
         $(document).ready(function() {
             let values = $('input[name="{{ $name }}"]').val().split(',');
 
-            values.foreach(
+            values.forEach(
                 function(v) {
                     $('.list_checkbox_{{ $name }} input[name="' + v + '"]').prop('checked', true);
                 });
