@@ -70,12 +70,14 @@ class UIServiceProvider extends XotBaseServiceProvider
 
     public function registerCollective(): void
     {
-        app(RegisterCollectiveComponents::class)->execute(
-            $this->module_dir.'/../Resources/views/collective/fields',
-            $this->module_name.'::'
-        );
+        if(class_exists(\Collective\Html\FormFacade::class)) {
+            app(RegisterCollectiveComponents::class)->execute(
+                $this->module_dir.'/../Resources/views/collective/fields',
+                $this->module_name.'::'
+            );
 
-        app(RegisterCollectiveMacros::class)->execute($this->module_dir.'/../Macros');
+            app(RegisterCollectiveMacros::class)->execute($this->module_dir.'/../Macros');
+        }
     }
 
     /*
@@ -86,13 +88,13 @@ class UIServiceProvider extends XotBaseServiceProvider
     public function bootThemeProvider(string $theme_type)
     {
         $theme = $this->xot->{$theme_type};
-        
+
         //if (! File::exists(base_path('Themes/'.$theme))) {
         //    $xot[$theme_type] = ThemeService::firstThemeName($theme_type);
         //    TenantService::saveConfig('xra', $xot );
         //    throw new \Exception('['.base_path('Themes/'.$theme).' not exists]['.__LINE__.']['.class_basename(__CLASS__).']');
         //}
-        
+
         $provider = 'Themes\\'.$theme.'\Providers\\'.$theme.'ServiceProvider';
         if (! class_exists($provider)) {
             throw new \Exception('class not exists ['.$provider.']['.__LINE__.']['.basename(__FILE__).']');
