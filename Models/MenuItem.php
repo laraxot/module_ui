@@ -46,8 +46,9 @@ use Sushi\Sushi;
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereParent($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereRoleId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereSort($value)
- * @mixin \Eloquent
  * @mixin IdeHelperMenuItem
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereRoles($value)
+ * @mixin \Eloquent
  */
 class MenuItem extends Model
 {
