@@ -7,6 +7,7 @@ namespace Modules\UI\Actions;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Concerns\ValidatesAttributes;
 use Spatie\QueueableAction\QueueableAction;
+use function Safe\preg_replace;
 
 class GetRulesWithParamsAction
 {

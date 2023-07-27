@@ -8,6 +8,7 @@ use Collective\Html\FormFacade as Form;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\QueueableAction\QueueableAction;
+use function Safe\glob;
 
 class RegisterCollectiveMacros
 {

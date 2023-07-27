@@ -9,6 +9,10 @@ use Modules\UI\Datas\ServerMemoryUsageData;
 use Modules\Xot\Services\FileService;
 use Spatie\QueueableAction\QueueableAction;
 
+use function Safe\exec;
+use function Safe\preg_match;
+use function Safe\file_get_contents;
+
 class GetServerMemoryUsage
 {
     use QueueableAction;

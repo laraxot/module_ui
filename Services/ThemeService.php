@@ -24,7 +24,9 @@ use Modules\Xot\Services\FileService;
 use Modules\Xot\Services\StubService;
 use Modules\Xot\Traits\Getter;
 
-// ---------CSS------------
+use function Safe\json_encode;
+
+
 
 /**
  * Class ThemeService.

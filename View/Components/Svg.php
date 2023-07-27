@@ -9,6 +9,10 @@ use Illuminate\View\Component;
 use Modules\Cms\Actions\GetViewAction;
 use Modules\Xot\Services\FileService;
 use Symfony\Component\DomCrawler\Crawler;
+use function Safe\preg_match;
+use function Safe\simplexml_load_string;
+use function Safe\json_encode;
+use function Safe\json_decode;
 
 /**
  * Class Test.

@@ -37,12 +37,10 @@ class Single extends Component
 
         $this->options = $options;
 
-        try {
             if (isset($model->status)) {
                 $this->status = $model->status;
             }
-        } catch (\Exception $e) {
-        }
+        
     }
 
     public function changeStatus(): void

@@ -23,8 +23,8 @@ class Input extends Component
     // public string $tpl;
     public string $collective_view;
     public string $tradKey;
-    public string $wireignore;
-    public string $defaultValue;
+    public ?string $wireignore;
+    public ?string $defaultValue;
 
     /**
      * ---.

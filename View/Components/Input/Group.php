@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
 use Modules\Cms\Actions\GetViewAction;
+use function Safe\json_encode;
 
 /**
  * Undocumented class.

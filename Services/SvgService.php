@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace Modules\UI\Services;
 
 use Throwable;
+use function Safe\file_get_contents;
+use function Safe\preg_replace;
 
-// ----- Models -----
-
-// ---- xot extend -----
-// ----- services --
-
-// ---------CSS------------
 
 /**
  * Class SvgService.
