@@ -22,9 +22,9 @@ class RegisterCollectiveMacros
     {
         $files = glob($macros_dir.'/*.php');
         // dddx(['dir'=>$macros_dir,'files'=>$files]);
-        if (false === $files) {
-            $files = [];
-        }
+        //if (false === $files) {
+        //    $files = [];
+        //}
         Collection::make($files)
             ->mapWithKeys(
                 function ($path) {

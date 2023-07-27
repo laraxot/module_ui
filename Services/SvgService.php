@@ -49,9 +49,9 @@ class SvgService
 
         $dom = new \DOMDocument();
 
-        if (false === $svg_content) {
-            return '';
-        }
+        //if (false === $svg_content) {
+        //    return '';
+        //}
         $dom->loadXML($svg_content);
 
         // remove unwanted comments

@@ -12,6 +12,7 @@ use Illuminate\View\Component;
 use Illuminate\View\ComponentAttributeBag;
 use Modules\Cms\Actions\GetViewAction;
 use Modules\UI\Datas\FieldData;
+use function Safe\json_encode;
 
 class Field extends Component {
     public FieldData $field;

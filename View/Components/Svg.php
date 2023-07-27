@@ -78,9 +78,9 @@ class Svg extends Component {
             throw new \Exception('simplexml_load_string ['.$svg_path.']['.__LINE__.']['.class_basename(__FILE__).']');
         }
         $str = @json_encode($xml->attributes());
-        if (false === $str) {
-            throw new \Exception('simplexml_load_string ['.$svg_path.']['.__LINE__.']['.class_basename(__FILE__).']');
-        }
+        //if (false === $str) {
+        //    throw new \Exception('simplexml_load_string ['.$svg_path.']['.__LINE__.']['.class_basename(__FILE__).']');
+        //}
         $tmp = @json_decode($str, true);
         if (\is_array($tmp)) {
             $this->attrs = $tmp['@attributes'];
