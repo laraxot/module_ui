@@ -10,7 +10,7 @@ use Illuminate\Pagination\Paginator;
 // --- services ---
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
-use Modules\UI\Actions\RegisterCollectiveComponents;
+
 use Modules\UI\Actions\RegisterCollectiveMacros;
 use Modules\UI\Services\ThemeService;
 use Modules\Xot\Datas\XotData;
@@ -45,11 +45,6 @@ class UIServiceProvider extends XotBaseServiceProvider
     public function bootCallback(): void
     {
         if ($this->app->runningInConsole()) {
-            /*
-            $this->publishes([
-                __DIR__ . '/../Config/xra.php' => config_path('xra.php'),
-            ], 'config');
-            */
             $this->mergeConfigFrom(__DIR__.'/../Config/xra.php', 'xra');
         }
 
@@ -62,8 +57,9 @@ class UIServiceProvider extends XotBaseServiceProvider
         );
 
         // BladeService::registerComponents($this->module_dir.'/../View/Components', 'Modules\\UI');
-
-        $this->registerCollective();
+        if($this->xot->register_collective) {
+            $this->registerCollective();
+        }
 
         Paginator::useBootstrap();
     }
@@ -71,7 +67,7 @@ class UIServiceProvider extends XotBaseServiceProvider
     public function registerCollective(): void
     {
         if(class_exists(\Collective\Html\FormFacade::class)) {
-            app(RegisterCollectiveComponents::class)->execute(
+            app(\Modules\UI\Actions\RegisterCollectiveComponents::class)->execute(
                 $this->module_dir.'/../Resources/views/collective/fields',
                 $this->module_name.'::'
             );
