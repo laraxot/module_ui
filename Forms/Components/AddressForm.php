@@ -10,7 +10,7 @@ class AddressForm extends Forms\Components\Field
 {
     protected string $view = 'filament-forms::components.group';
 
-    public $relationship = null;
+    public string|callable $relationship = null;
 
     public function relationship(string | callable $relationship): static
     {
@@ -33,7 +33,7 @@ class AddressForm extends Forms\Components\Field
             $relationship->updateOrCreate($state);
         }
 
-        $record->touch();
+        $record?->touch();
     }
 
     public function getChildComponents(): array
