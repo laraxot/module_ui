@@ -10,9 +10,9 @@ class AddressForm extends Forms\Components\Field
 {
     protected string $view = 'filament-forms::components.group';
 
-    public string|callable $relationship = null;
+    public string|callable $relationship;
 
-    public function relationship(string | callable $relationship): static
+    public function relationship(string|callable $relationship): static
     {
         $this->relationship = $relationship;
 
