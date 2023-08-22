@@ -8,7 +8,6 @@
         }
     ],
     "require": {
-        "laravelcollective/html": "^6.3",
         "laraxot/module_xot": "dev-master",
         "spatie/laravel-model-states": "^2.4",
         "illuminate/contracts": "^10.0"
