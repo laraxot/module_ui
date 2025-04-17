@@ -1,0 +1,16 @@
+modal login + modal examples
+https://bootstrapbay.com/blog/day-14-bootstrap-4-modals-tutorial-and-examples/
+
+https://bootstrapcreative.com/pattern/modal-video-autoplay-stop-closed/
+
+lunar-template
+https://designmodo.com/bootstrap-modal/
+
+form input
+https://www.vuemastery.com/courses/next-level-vue/mixins/
+
+vue filter
+https://blog.logrocket.com/mixins-and-custom-functions-to-enhance-your-vue-applications-693caa7ae76a/
+
+rating modal 
+https://codepen.io/j-francisco/pen/ZWOKXx

@@ -1,0 +1,11 @@
+https://www.contentful.com/blog/extremely-picky-developers-take-php-static-site-generators-part-2-jigsaw/
+
+
+  <img wire:lazyload.image="actual_image.jpg" src="placeholder.jpg" />
+
+
+  <img src="image.png" loading="lazy" alt="…" width="200" height="200">
+
+  
+</div>
+

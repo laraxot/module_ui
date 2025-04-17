@@ -1,0 +1,188 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Modules\UI\Models;
+
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\File;
+use Modules\Xot\Traits\SushiConfigCrud;
+use Nwidart\Modules\Facades\Module;
+use Sushi\Sushi;
+
+/**
+ * Modules\UI\Models\MenuItem.
+ *
+ * @property int                          $id
+ * @property string|null                  $label
+ * @property string|null                  $link
+ * @property string                       $roles
+ * @property string                       $icon
+ * @property bool                         $active
+ * @property int|null                     $menu
+ * @property int|null                     $sort
+ * @property int|null                     $parent
+ * @property string|null                  $class
+ * @property int|null                     $depth
+ * @property int|null                     $role_id
+ * @property string                       $roles
+ * @property bool                         $active
+ * @property string                       $icon
+ * @property Collection<int, MenuItem>    $child
+ * @property int|null                     $child_count
+ * @property \Modules\UI\Models\Menu|null $parent_menu
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem query()
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereClass($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereDepth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereLabel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereMenu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereParent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereRoleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereSort($value)
+ * @mixin IdeHelperMenuItem
+ * @method static \Illuminate\Database\Eloquent\Builder|MenuItem whereRoles($value)
+ * @mixin \Eloquent
+ */
+class MenuItem extends Model
+{
+    use Sushi;
+    use SushiConfigCrud;
+
+    protected string $config_name = 'menu_builder_item';
+
+    // protected $table = null;
+    /**
+     * Undocumented variable.
+     *
+     * @var array<string>
+     */
+    protected $fillable = [
+        'id',
+        'label',
+        'link',
+        'parent',
+        'sort',
+        'class',
+        'menu',
+        'depth',
+        'role_id',
+        // 'allowed_roles',
+        'roles',
+        'active',
+        'icon',
+    ];
+
+    /**
+     * Undocumented variable.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'id' => 'int',
+        'label' => 'string',
+        'link' => 'string',
+        'parent' => 'int',
+        'sort' => 'int',
+        'class' => 'string',
+        'menu' => 'int',
+        'depth' => 'int',
+        'role_id' => 'int',
+        // 'allowed_roles' => 'string',
+        'roles' => 'string',
+        'active' => 'bool',
+        'icon' => 'string',
+    ];
+    /*
+    public function __construct(array $attributes = [])
+    {
+        //parent::construct( $attributes );
+        $this->table = config('menu.table_prefix') . config('menu.table_name_items');
+    }
+    */
+
+    public function getRows(): array
+    {
+        $route_params = getRouteParameters();
+        $rows = null;
+        if (inAdmin() && isset($route_params['module'])) {
+            $menu_path = Module::getModulePath($route_params['module']).'Resources/menu/'.$this->getTable().'.php';
+
+            if (File::exists($menu_path)) {
+                $rows = File::getRequire($menu_path);
+                if (! is_array($rows)) {
+                    throw new \Exception('['.__LINE__.']['.__FILE__.']');
+                }
+                $rows = array_values($rows);
+            // dddx($this->config_name);
+            } else {
+                // dddx($menu_path);
+            }
+        } else {
+            $rows = config($this->config_name);
+        }
+
+        if (! \is_array($rows)) {
+            return [
+                [
+                    'id' => 1,
+                    'label' => '',
+                    'link' => '',
+                    'parent' => 0,
+                    'sort' => 1,
+                    'class' => '',
+                    'menu' => 0,
+                    'depth' => 0,
+                    'role_id' => 0,
+                    // 'allowed_roles' => '',
+                    'roles' => '',
+                ],
+            ];
+        }
+
+        return $rows;
+    }
+
+    /*
+    public function getDepthAttribute(?int $value):int{
+        return 0;
+    }
+    */
+
+    public function getsons(int $id): Collection
+    {
+        return $this->where('parent', $id)->get();
+    }
+
+    public function getall(int $id): Collection
+    {
+        return $this->where('menu', $id)
+            ->orderBy('sort', 'asc')
+            ->get();
+    }
+
+    public static function getNextSortRoot(int $menu): int
+    {
+        // return (int) self::where('menu', $menu)->max('sort') + 1;
+        $max_sort = self::where('menu', $menu)->max('sort');
+
+        return $max_sort + 1;
+    }
+
+    public function parent_menu(): BelongsTo
+    {
+        return $this->belongsTo(Menu::class, 'menu');
+    }
+
+    public function child(): HasMany
+    {
+        return $this->hasMany(self::class, 'parent')
+            ->orderBy('sort', 'ASC');
+    }
+}

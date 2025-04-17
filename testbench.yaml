@@ -1,0 +1,2 @@
+providers:
+  - Modules\UI\Providers\UIServiceProvider

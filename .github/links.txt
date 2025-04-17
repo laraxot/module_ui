@@ -1,0 +1,12 @@
+https://dev.to/jcs224/deploying-a-jigsaw-static-site-to-github-pages-using-github-actions-2ejd
+
+https://james.brooks.page/blog/jigsaw-github-actions
+
+https://maxkostinevich.com/blog/deploy-jigsaw-using-github-actions/
+
+https://imacrayon.com/words/hosting-a-jigsaw-site-on-github-pages/
+
+https://gist.github.com/maxkostinevich/2b3ddc50df73dd3979f92498edc6d3bc
+
+https://roshangautam.com/how-to-create-personal-blog-jigsaw-github-pages/
+

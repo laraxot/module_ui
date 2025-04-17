@@ -1,0 +1,1 @@
+location on pub_theme::layouts.default.edit.item

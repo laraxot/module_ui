@@ -1,0 +1,97 @@
+@php	
+$cuisineCats=$row->cuisineCats;
+if($cuisineCats->count()==0){
+$bg='generic.jpg';
+}else{
+$c=$cuisineCats->count();
+$r=rand(0,$c-1);
+$bg=$cuisineCats[$r]->guid;
+$bg.='.jpg';
+}
+//http://placehold.it/1670x480
+@endphp
+<section class="inner-page-hero bg-image" data-image-src="{{ Theme::url('/theme/pub/images/cuisineCats/'.$bg) }}">
+	<div class="profile">
+		<div class="container">
+			<div class="row"  >
+				
+				<div class="col-xs-12 col-sm-12  col-md-4 col-lg-4 profile-img">
+					<div class="image-wrap">
+						<figure>
+							{{--
+							{!! $row->image_html(['width'=>240,'height'=>140]) !!}
+							--}}
+							{!! Form::bsOpen($row,'update') !!}
+							{!! Form::bsInPlaceHtml5UploadImg('image_src') !!}
+							{!! Form::close() !!}
+						</figure>
+					</div>
+				</div>
+				{{--
+					style=""
+					--}}
+				<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 profile-desc darker" >
+					{!! Form::bsOpen($row,'update') !!}
+					<div class="pull-left right-text white-txt">
+						<h1 class="white-txt">
+							{!! Form::bsInPlaceText('title') !!}
+						</h1>
+						{{--
+						--}}
+						<br style="clear:both" />
+						
+
+						{{--  <a class="btn btn-small btn-green">Open</a> --}}
+						{!! Form::bsInPlaceText('subtitle') !!}
+						<br/><br/>
+						{{-- spostato nel body
+						{!! Form::bsInPlaceText('txt') !!}
+						--}}
+						<ul class="nav nav-inline">
+							{{--
+							<li class="nav-item"> <a class="nav-link active" href="#"><i class="fa fa-check"></i> Min $ 10,00</a> </li>
+							<li class="nav-item"> <a class="nav-link" href="#"><i class="fa fa-motorcycle"></i> 30 min</a> </li>
+							<li class="nav-item ratings">
+								<a class="nav-link" href="#"> 
+								<span>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star-o"></i>
+								</span> 
+								</a>
+							</li>
+							--}}
+						</ul>
+					</div>
+				
+					{!! Form::close() !!}
+					<div class="font-white">
+						<i class="fa fa-cutlery" aria-hidden="true"></i>
+						@foreach($cuisineCats as $cuisineCat)
+						<span itemprop="servesCuisine" class="font-white">{{ $cuisineCat->title }}</span>
+						
+						{!! Form::bsBtnDetach(['row'=>$cuisineCat]) !!}
+						
+						@if(count($cuisineCats)>1),@endif
+						@endforeach
+						@include($view_default.'.item.add.cuisine_cat')
+						{{--  
+						<a href="{{ route('containers.index',array_merge($params,['container1'=>'cuisineCat'])) }}">
+							<i class="fa fa-wrench"></i>
+						</a>
+						--}}
+						<br/>
+						{!! Form::bsOpen($row,'update') !!}
+						{!! Form::bsInPlaceAddress('formatted_address') !!}
+						{!! Form::close() !!}
+
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

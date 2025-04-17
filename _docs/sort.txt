@@ -1,0 +1,2 @@
+https://meritocracy.is/blog/2020/04/17/laravel-using-pagination-sorting-and-filtering-with-your-tables/
+
